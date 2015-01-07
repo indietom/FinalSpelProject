@@ -19,7 +19,11 @@ namespace FinalSpelProject
         public Rectangle HitBox {get; set;}
 
         public short CurrentFrame { get; set; }
+        public short MaxFrame { get; set; }
+        public short MinFrame { get; set; }
+
         public short AnimationCount { get; set; }
+        public short MaxAnimationCount { get; set; }
         public short AnimationActive { get; set; }
 
         public short Imx { get; set; }
@@ -65,6 +69,16 @@ namespace FinalSpelProject
         public float DistanceTo(Vector2 pos2)
         {
             return (float)Math.Sqrt((Pos.X - pos2.X) * (Pos.X - pos2.X) + (Pos.Y - pos2.Y) * (Pos.X - pos2.Y));
+        }
+
+        public void Animate()
+        {
+            if(AnimationCount >= MaxAnimationCount)
+            {
+                CurrentFrame += 1;
+                AnimationCount = 0;
+            }
+            if (CurrentFrame >= MaxFrame) CurrentFrame = MinFrame;
         }
 
         public void setSpriteCoords(short imx2, short imy2)

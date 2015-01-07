@@ -71,6 +71,11 @@ namespace FinalSpelProject
             return (float)Math.Sqrt((Pos.X - pos2.X) * (Pos.X - pos2.X) + (Pos.Y - pos2.Y) * (Pos.X - pos2.Y));
         }
 
+        public float lerp(float s, float e, float t)
+        {
+            return s + t * (e - s);
+        }
+
         public void Animate()
         {
             if(AnimationCount >= MaxAnimationCount)

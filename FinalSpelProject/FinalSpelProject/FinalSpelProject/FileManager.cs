@@ -13,7 +13,11 @@ namespace FinalSpelProject
             string returnValue = "";
             StreamReader sr = new StreamReader(path);
             for (int i = 0; i < 1000; i++)
-                if (i == line) returnValue = sr.ReadLine();
+                if (i == line)
+                {
+                    returnValue = sr.ReadLine();
+                    break;
+                }
             sr.Close();
             return returnValue;
         }
@@ -21,7 +25,11 @@ namespace FinalSpelProject
         {
             StreamWriter sw = new StreamWriter(path, overwrite);
             for (int i = 0; i < 1000; i++)
-                if (i == line) sw.WriteLine(text); 
+                if (i == line)
+                {
+                    sw.WriteLine(text);
+                    break;
+                }
             sw.Close();
         }
     }

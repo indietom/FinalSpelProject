@@ -24,7 +24,8 @@ namespace FinalSpelProject
 
         public short AnimationCount { get; set; }
         public short MaxAnimationCount { get; set; }
-        public short AnimationActive { get; set; }
+        
+        public bool AnimationActive { get; set; }
 
         public short Imx { get; set; }
         public short Imy {get; set;}
@@ -71,7 +72,7 @@ namespace FinalSpelProject
             return (float)Math.Sqrt((Pos.X - pos2.X) * (Pos.X - pos2.X) + (Pos.Y - pos2.Y) * (Pos.X - pos2.Y));
         }
 
-        public float lerp(float s, float e, float t)
+        public float Lerp(float s, float e, float t)
         {
             return s + t * (e - s);
         }
@@ -86,17 +87,17 @@ namespace FinalSpelProject
             if (CurrentFrame >= MaxFrame) CurrentFrame = MinFrame;
         }
 
-        public void setSpriteCoords(short imx2, short imy2)
+        public void SetSpriteCoords(short imx2, short imy2)
         {
             Imx = imx2;
             Imy = imy2;
         }
-        public void setSize(short w2, short h2)
+        public void SetSize(short w2, short h2)
         {
             Width = w2;
             Height = h2;
         }
-        public void setSize(short size)
+        public void SetSize(short size)
         {
             Width = size;
             Height = size;

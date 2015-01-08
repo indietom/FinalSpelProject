@@ -10,12 +10,22 @@ namespace FinalSpelProject
     class Player : GameObject 
     {
         int score;
-        
+
+        public int GetScore() 
+        { 
+            return score; 
+        }
+
         sbyte lives;
-        
+
         byte gunType;
+        byte fireRate;
+        byte maxFireRate;
 
         short respawnCount;
+        short maxRespawnCount;
+
+        byte flashingCount;
 
         bool dead;
         bool inputActive;
@@ -41,6 +51,18 @@ namespace FinalSpelProject
             right = Keys.Right;
             down = Keys.Down;
             up = Keys.Up;
+        }
+        public void Input()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
+        public void livesUpdate()
+        {
+
         }
     }
 }

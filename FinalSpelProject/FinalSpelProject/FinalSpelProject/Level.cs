@@ -7,6 +7,6 @@ namespace FinalSpelProject
 {
     class Level
     {
-
+        
     }
 }

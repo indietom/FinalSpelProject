@@ -8,11 +8,41 @@ namespace FinalSpelProject
 {
     class FileManager
     {
+        public int[,] loadLevel(string name)
+        {
+            int[,] map;
+            string mapData = name;
+            int width = 0;
+            int height = File.ReadLines(mapData).Count();
+
+            StreamReader sReader = new StreamReader(mapData);
+            string line = sReader.ReadLine();
+            string[] tileNo = line.Split(',');
+
+            width = tileNo.Count();
+
+
+            map = new int[height, width];
+            sReader = new StreamReader(mapData);
+
+            for (int y = 0; y < height; y++)
+            {
+                line = sReader.ReadLine();
+                tileNo = line.Split(',');
+
+                for (int x = 0; x < width; x++)
+                {
+                    map[y, x] = Convert.ToInt32(tileNo[x]);
+                }
+            }
+            sReader.Close();
+            return map;
+        }
         public string loadLine(int line, string path)
         {
             string returnValue = "";
             StreamReader sr = new StreamReader(path);
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < File.ReadLines(path).Count(); i++)
                 if (i == line)
                 {
                     returnValue = sr.ReadLine();
@@ -24,7 +54,7 @@ namespace FinalSpelProject
         public void saveLine(int line, string path, string text, bool overwrite)
         {
             StreamWriter sw = new StreamWriter(path, overwrite);
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < File.ReadLines(path).Count(); i++)
                 if (i == line)
                 {
                     sw.WriteLine(text);

@@ -11,7 +11,7 @@ namespace FinalSpelProject
         public int[,] loadLevel(string name)
         {
             int[,] map;
-            string mapData = name;
+            string mapData = name + ".txt";
             int width = 0;
             int height = File.ReadLines(mapData).Count();
 
@@ -20,7 +20,6 @@ namespace FinalSpelProject
             string[] tileNo = line.Split(',');
 
             width = tileNo.Count();
-
 
             map = new int[height, width];
             sReader = new StreamReader(mapData);
@@ -36,6 +35,7 @@ namespace FinalSpelProject
                 }
             }
             sReader.Close();
+
             return map;
         }
         public string loadLine(int line, string path)

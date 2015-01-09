@@ -4,3 +4,4 @@ C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelP
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\FinalSpelProject.pdb
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.exe
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.pdb
+C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\Content\spritesheet.xnb

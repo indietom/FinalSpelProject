@@ -22,13 +22,19 @@ namespace FinalSpelProject
             Content.RootDirectory = "Content";
         }
 
+        List<Player> player = new List<Player>();
+
         protected override void Initialize()
         {
+            player.Add(new Player());
             base.Initialize();
         }
 
+        Texture2D spritesheet;
+
         protected override void LoadContent()
         {
+            spritesheet = Content.Load<Texture2D>("spritesheet");
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -42,12 +48,23 @@ namespace FinalSpelProject
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            foreach(Player p in player)
+            {
+                p.Update();
+                p.Input();
+                p.livesUpdate();
+            }
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin();
+            foreach (Player p in player) { p.DrawSprite(spriteBatch, spritesheet); }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

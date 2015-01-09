@@ -54,11 +54,25 @@ namespace FinalSpelProject
         }
         public void Input()
         {
+            if(inputActive)
+            {
 
+            }
         }
         public void Update()
         {
-
+            if(VelX >= 0.3 || VelX <= -0.3)
+            {
+                Pos += new Vector2(VelX, 0);
+                if (VelX >= 0.3f) VelX -= 0.1f;
+                if (VelX <= -0.3f) VelX += 0.1f;
+            }
+            if (VelY >= 0.3 || VelY <= -0.3)
+            {
+                Pos += new Vector2(0, VelY);
+                if (VelY >= 0.3f) VelY -= 0.1f;
+                if (VelY <= -0.3f) VelY += 0.1f;
+            }
         }
         public void livesUpdate()
         {

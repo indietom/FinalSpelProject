@@ -77,6 +77,11 @@ namespace FinalSpelProject
             return s + t * (e - s);
         }
 
+        /*
+         * Must set minFrame(the first frame in an animation) and maxFrame(lastFrame+1 of animation) 
+         * Must set MaxAnimationCount is the amount of datacycels that has to pass for the animation to update 
+         * imx = frameX(currentFrame) for horizntel animatios, Imy = frameY(currentFrame) for vertical
+        */
         public void Animate()
         {
             if(AnimationCount >= MaxAnimationCount)

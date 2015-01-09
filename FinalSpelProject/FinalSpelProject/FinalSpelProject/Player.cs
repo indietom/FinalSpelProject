@@ -40,7 +40,7 @@ namespace FinalSpelProject
         {
             Pos = new Vector2(320, 240);
             SetSpriteCoords(1, 1);
-            SetSize(32, 32);
+            SetSize(32);
 
             inputActive = true;
             AnimationActive = true;

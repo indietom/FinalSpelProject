@@ -1,7 +1,7 @@
-C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.csprojResolveAssemblyReference.cache
-C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\Content\spritesheet.xnb
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\FinalSpelProject.exe
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\FinalSpelProject.pdb
+C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.csprojResolveAssemblyReference.cache
+C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.exe
 C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\obj\x86\Debug\FinalSpelProject.pdb
-C:\Users\sul13atom\Documents\GitHub\FinalSpelProject\FinalSpelProject\FinalSpelProject\FinalSpelProject\bin\x86\Debug\Content\spritesheet.xnb

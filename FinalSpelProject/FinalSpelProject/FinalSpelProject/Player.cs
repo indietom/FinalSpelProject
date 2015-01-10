@@ -22,6 +22,8 @@ namespace FinalSpelProject
         byte fireRate;
         byte maxFireRate;
 
+        short comboCount;
+        short currentCombo;
         short respawnCount;
         short maxRespawnCount;
 
@@ -59,6 +61,8 @@ namespace FinalSpelProject
 
             maxVel = 4;
             Speed = 0.7f;
+
+            maxRespawnCount = 230;
 
             left = Keys.Left;
             right = Keys.Right;
@@ -117,9 +121,30 @@ namespace FinalSpelProject
                 velDown -= 0.2f;
             }
         }
-        public void livesUpdate()
+        public void LivesUpdate()
         {
-
+            if(dead && respawnCount <= 0)
+            {
+                inputActive = false;
+                velDown += 0.5f;
+                if (Pos.Y >= 480)
+                {
+                    lives -= 1;
+                    respawnCount = 1;
+                    Pos = new Vector2(800 / 2 - 16, 550);
+                }
+            }
+            if(respawnCount >= 1)
+            {
+                Pos -= new Vector2(0, 3);
+                respawnCount += 1;
+                if(respawnCount >= maxRespawnCount)
+                {
+                    inputActive = true;
+                    dead = false;
+                    respawnCount = 0;
+                }
+            }
         }
     }
 }

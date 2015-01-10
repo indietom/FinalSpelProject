@@ -56,7 +56,7 @@ namespace FinalSpelProject
             {
                 p.Update();
                 p.Input(projectiles);
-                p.livesUpdate();
+                p.LivesUpdate();
             }
             foreach(Enemy e in enemies)
             {

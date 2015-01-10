@@ -62,9 +62,9 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            dead = true;
+            dead = true; 
 
-            maxRespawnCount = 230;
+            maxRespawnCount = 130;
 
             left = Keys.Left;
             right = Keys.Right;
@@ -145,7 +145,8 @@ namespace FinalSpelProject
             }
             if(respawnCount >= 1)
             {
-                Pos -= new Vector2(0, 3);
+                //Pos -= new Vector2(0, 3);
+                Pos = new Vector2(Pos.X, Lerp(Pos.Y, 240, 0.04f));
                 respawnCount += 1;
                 flashCount += 1;
                 if(respawnCount >= maxRespawnCount)

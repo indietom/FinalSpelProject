@@ -76,6 +76,18 @@ namespace FinalSpelProject
                     break;
             }
         }
+        public void Collision(List<Player> player, List<Enemy> enemy)
+        {
+            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+            foreach (Player p in player)
+            {
+                if (p.HitBox.Intersects(HitBox)) 
+                {
+                    Destroy = true;
+                    p.dead = true;
+                }
+            }
+        }
 
     }
 }

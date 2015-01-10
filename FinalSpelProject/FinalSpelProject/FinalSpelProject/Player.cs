@@ -28,7 +28,7 @@ namespace FinalSpelProject
         short respawnCount;
         short maxRespawnCount;
 
-        bool dead;
+        public bool dead;
         bool inputActive;
         public bool Flash { get; set; }
 
@@ -100,6 +100,7 @@ namespace FinalSpelProject
         }
         public void Update()
         {
+            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             if(velLeft <= -0.3f)
             {
                 Pos += new Vector2(velLeft, 0);

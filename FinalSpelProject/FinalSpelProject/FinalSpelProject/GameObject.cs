@@ -33,6 +33,8 @@ namespace FinalSpelProject
         public short Width { get; set; }
         public short Height { get; set; }
 
+        public float Rotation { get; set; }
+
         public float Angle { get; set; }
         public float Angle2 { get; set; }
         public float VelX { get; set; }
@@ -116,6 +118,12 @@ namespace FinalSpelProject
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
             spriteBatch.Draw(spritesheet, Pos, srcRect, color);
+        }
+        public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet, bool rad)
+        {
+            Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
+            if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, Rotation, new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, (Rotation*180/(float)Math.PI), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
         }
     }
 }

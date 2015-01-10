@@ -23,12 +23,13 @@ namespace FinalSpelProject
         }
 
         List<Player> player = new List<Player>();
-        List<Enemy> enemy = new List<Enemy>();
+        List<Enemy> enemies = new List<Enemy>();
+        List<Projectile> projectiles = new List<Projectile>();
 
         protected override void Initialize()
         {
             player.Add(new Player());
-            enemy.Add(new Enemy(13));
+            //enemies.Add(new Enemy(13));
             
             base.Initialize();
         }
@@ -50,16 +51,29 @@ namespace FinalSpelProject
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
+            
             foreach(Player p in player)
             {
                 p.Update();
-                p.Input();
+                p.Input(projectiles);
                 p.livesUpdate();
             }
-            foreach(Enemy e in enemy)
+            foreach(Enemy e in enemies)
             {
                 e.Update(player);
+            }
+            foreach(Projectile p in projectiles)
+            {
+                p.Update();
+            }
+
+            for (int i = 0; i < enemies.Count();i++)
+            {
+                if (enemies[i].Destroy) enemies.RemoveAt(i);
+            }
+            for (int i = 0; i < projectiles.Count(); i++)
+            {
+                if (projectiles[i].Destroy) projectiles.RemoveAt(i);
             }
 
             base.Update(gameTime);
@@ -71,7 +85,8 @@ namespace FinalSpelProject
 
             spriteBatch.Begin();
             foreach (Player p in player) { p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Enemy e in enemy) { e.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Enemy e in enemies) { e.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 
             base.Draw(gameTime);

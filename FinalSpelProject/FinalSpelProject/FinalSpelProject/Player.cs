@@ -66,7 +66,7 @@ namespace FinalSpelProject
             up = Keys.Up;
             fire = Keys.X;
         }
-        public void Input()
+        public void Input(List<Projectile> projectiles)
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
@@ -87,6 +87,10 @@ namespace FinalSpelProject
                 if (keyboard.IsKeyDown(down) && velDown <= maxVel)
                 {
                     velDown += Speed;
+                }
+                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 0)
+                {
+                    projectiles.Add(new Projectile(new Vector2(Pos.X+16-3, Pos.Y+16-3), -90, 9, 0, 0));
                 }
             }
         }

@@ -43,6 +43,8 @@ namespace FinalSpelProject
         public float ScaleY { get; set; }
         public float Speed { get; set; }
 
+        public bool Destroy { get; set; }
+
         public void AngleMath(bool rad)
         {
             if(!rad) Angle2 = (Angle * (float)Math.PI / 180);

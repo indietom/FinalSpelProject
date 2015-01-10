@@ -29,7 +29,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            //enemies.Add(new Enemy(13));
+            enemies.Add(new Enemy(new Vector2(),13));
             
             base.Initialize();
         }

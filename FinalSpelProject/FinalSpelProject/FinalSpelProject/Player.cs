@@ -30,11 +30,21 @@ namespace FinalSpelProject
         bool dead;
         bool inputActive;
 
+        float velLeft;
+        float velRight;
+        float velUp;
+        float velDown;
+
+        float maxVel;
+
         Keys left;
         Keys right;
         Keys down;
         Keys up;
         Keys fire;
+
+        KeyboardState keyboard;
+        KeyboardState prevKeyboard;
 
         public Player()
         {
@@ -47,31 +57,60 @@ namespace FinalSpelProject
 
             lives = 3;
 
+            maxVel = 4;
+            Speed = 0.7f;
+
             left = Keys.Left;
             right = Keys.Right;
             down = Keys.Down;
             up = Keys.Up;
+            fire = Keys.X;
         }
         public void Input()
         {
+            prevKeyboard = keyboard;
+            keyboard = Keyboard.GetState();
             if(inputActive)
             {
-
+                if(keyboard.IsKeyDown(left) && velLeft >= -maxVel)
+                {
+                    velLeft -= Speed;
+                }
+                if (keyboard.IsKeyDown(right) && velRight <= maxVel)
+                {
+                    velRight += Speed;
+                }
+                if (keyboard.IsKeyDown(up) && velUp >= -maxVel)
+                {
+                    velUp -= Speed;
+                }
+                if (keyboard.IsKeyDown(down) && velDown <= maxVel)
+                {
+                    velDown += Speed;
+                }
             }
         }
         public void Update()
         {
-            if(VelX >= 0.3 || VelX <= -0.3)
+            if(velLeft <= -0.3f)
             {
-                Pos += new Vector2(VelX, 0);
-                if (VelX >= 0.3f) VelX -= 0.1f;
-                if (VelX <= -0.3f) VelX += 0.1f;
+                Pos += new Vector2(velLeft, 0);
+                velLeft += 0.2f;
             }
-            if (VelY >= 0.3 || VelY <= -0.3)
+            if (velRight >= 0.3f)
             {
-                Pos += new Vector2(0, VelY);
-                if (VelY >= 0.3f) VelY -= 0.1f;
-                if (VelY <= -0.3f) VelY += 0.1f;
+                Pos += new Vector2(velRight, 0);
+                velRight -= 0.2f;
+            }
+            if (velUp <= -0.3f)
+            {
+                Pos += new Vector2(0, velUp);
+                velUp += 0.2f;
+            }
+            if (velDown >= 0.3f)
+            {
+                Pos += new Vector2(0, velDown);
+                velDown -= 0.2f;
             }
         }
         public void livesUpdate()

@@ -75,6 +75,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chunk.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Level.cs" />

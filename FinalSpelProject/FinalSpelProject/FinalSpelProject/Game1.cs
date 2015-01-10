@@ -42,7 +42,7 @@ namespace FinalSpelProject
         {
 
         }
-        int[,] map;
+
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))

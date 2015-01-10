@@ -18,6 +18,7 @@ namespace FinalSpelProject
 
         sbyte lives;
 
+        byte flashCount;
         byte gunType;
         byte fireRate;
         byte maxFireRate;
@@ -27,10 +28,9 @@ namespace FinalSpelProject
         short respawnCount;
         short maxRespawnCount;
 
-        byte flashingCount;
-
         bool dead;
         bool inputActive;
+        public bool Flash { get; set; }
 
         float velLeft;
         float velRight;
@@ -61,6 +61,8 @@ namespace FinalSpelProject
 
             maxVel = 4;
             Speed = 0.7f;
+
+            dead = true;
 
             maxRespawnCount = 230;
 
@@ -134,14 +136,24 @@ namespace FinalSpelProject
                     Pos = new Vector2(800 / 2 - 16, 550);
                 }
             }
+            if(flashCount >= 8)
+            {
+                if (Flash) Flash = false;
+                    else Flash = true;
+                Console.WriteLine(Flash);
+                flashCount = 0;
+            }
             if(respawnCount >= 1)
             {
                 Pos -= new Vector2(0, 3);
                 respawnCount += 1;
+                flashCount += 1;
                 if(respawnCount >= maxRespawnCount)
                 {
                     inputActive = true;
                     dead = false;
+                    Flash = false;
+                    flashCount = 0;
                     respawnCount = 0;
                 }
             }

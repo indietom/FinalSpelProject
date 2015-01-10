@@ -84,7 +84,7 @@ namespace FinalSpelProject
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach (Player p in player) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { e.DrawSprite(spriteBatch, spritesheet); }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();

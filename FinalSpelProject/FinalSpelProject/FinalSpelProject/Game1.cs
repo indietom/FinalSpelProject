@@ -23,10 +23,13 @@ namespace FinalSpelProject
         }
 
         List<Player> player = new List<Player>();
+        List<Enemy> enemy = new List<Enemy>();
 
         protected override void Initialize()
         {
             player.Add(new Player());
+            enemy.Add(new Enemy(13));
+            
             base.Initialize();
         }
 
@@ -54,6 +57,10 @@ namespace FinalSpelProject
                 p.Input();
                 p.livesUpdate();
             }
+            foreach(Enemy e in enemy)
+            {
+                e.Update(player);
+            }
 
             base.Update(gameTime);
         }
@@ -64,6 +71,7 @@ namespace FinalSpelProject
 
             spriteBatch.Begin();
             foreach (Player p in player) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Enemy e in enemy) { e.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 
             base.Draw(gameTime);

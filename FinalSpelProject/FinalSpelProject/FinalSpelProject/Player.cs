@@ -60,9 +60,7 @@ namespace FinalSpelProject
             lives = 3;
 
             maxVel = 4;
-            Speed = 0.7f;
-
-            dead = true; 
+            Speed = 0.7f; 
 
             maxRespawnCount = 130;
 

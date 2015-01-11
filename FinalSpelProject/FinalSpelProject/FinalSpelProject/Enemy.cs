@@ -22,8 +22,12 @@ namespace FinalSpelProject
                 //Examples, no real purpose but to test.
                 // case 11 idicates enemyType 1 on lvl 1.
                 case 11:
+                    SetSpriteCoords(1, 1);
+                    SetSize(32);
+                    AnimationActive = true;
                     health = 2;
                     fireRate = 30;
+                    Speed = 1;
                     break;
 
                 case 12:
@@ -50,14 +54,28 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Player> player)
+        public void Update(List<Player> player, List<Projectile> projectile)
         {
             switch (type)
             {
                     //Examples, no real purpose but to test.
                     // case 11 idicates enemyType 1 on lvl 1.
                 case 11:
-
+                    foreach (Player p in player)
+                    {
+                        AngleMath(true);
+                        Angle = AimAt(p.Pos);
+                        Pos += new Vector2(VelX, 0.1f);
+                    }
+                    if (fireRate != 0)
+                    {
+                        fireRate -= 1;
+                    }
+                    if (fireRate == 0)
+                    {
+                        fireRate = 30;
+                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 1, true));
+                    }
                     break;
                 case 12:
 
@@ -76,7 +94,7 @@ namespace FinalSpelProject
                     break;
             }
         }
-        public void Collision(List<Player> player, List<Enemy> enemy)
+        public void Collision(List<Player> player, List<Enemy> enemy, List<Projectile> projectiles)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
             foreach (Player p in player)
@@ -85,6 +103,13 @@ namespace FinalSpelProject
                 {
                     Destroy = true;
                     p.Dead = true;
+                }
+            }
+            foreach (Projectile p in projectiles)
+            {
+                if (p.HitBox.Intersects(HitBox) && p.enemyShot == false)
+                {
+                    p.Destroy = true;
                 }
             }
         }

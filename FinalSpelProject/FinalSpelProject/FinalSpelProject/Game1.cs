@@ -33,6 +33,7 @@ namespace FinalSpelProject
         {
             player.Add(new Player());
             enemies.Add(new Enemy(new Vector2(),13));
+            enemies.Add(new Enemy(new Vector2(100, 20),11));
             
             base.Initialize();
         }
@@ -63,8 +64,8 @@ namespace FinalSpelProject
             }
             foreach(Enemy e in enemies)
             {
-                e.Update(player);
-                e.Collision(player, enemies);
+                e.Update(player, projectiles);
+                e.Collision(player, enemies, projectiles);
             }
             foreach(Projectile p in projectiles)
             {

@@ -14,7 +14,7 @@ namespace FinalSpelProject
         byte spriteType;
         byte movmentType;
 
-        bool enemyShot;
+        public bool enemyShot;
 
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2)
         {
@@ -37,17 +37,28 @@ namespace FinalSpelProject
         }
         public void Update()
         {
+            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
             switch(movmentType)
             {
                 case 0:
                     AngleMath(false);
                     Pos += new Vector2(VelX, VelY);
                     break;
+                case 1:
+                    AngleMath(false);
+                    Pos -= new Vector2(VelX, VelY);
+                    break;
             }
         }
         public void AssignEnemySprite()
         {
-
+            switch (spriteType)
+            {
+                case 0:
+                    SetSize(7, 11);
+                    SetSpriteCoords(133, 1);
+                    break;
+            }
         }
         public void AssignSprite()
         {

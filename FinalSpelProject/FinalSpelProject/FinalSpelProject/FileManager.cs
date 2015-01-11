@@ -8,7 +8,7 @@ namespace FinalSpelProject
 {
     class FileManager
     {
-        public int[,] loadLevel(string name)
+        public int[,] LoadLevel(string name)
         {
             int[,] map;
             string mapData = name + ".txt";
@@ -38,7 +38,7 @@ namespace FinalSpelProject
 
             return map;
         }
-        public string loadLine(int line, string path)
+        public string LoadLine(int line, string path)
         {
             string returnValue = "";
             StreamReader sr = new StreamReader(path);
@@ -51,7 +51,7 @@ namespace FinalSpelProject
             sr.Close();
             return returnValue;
         }
-        public void saveLine(int line, string path, string text, bool overwrite)
+        public void SaveLine(int line, string path, string text, bool overwrite)
         {
             StreamWriter sw = new StreamWriter(path, overwrite);
             for (int i = 0; i < File.ReadLines(path).Count(); i++)

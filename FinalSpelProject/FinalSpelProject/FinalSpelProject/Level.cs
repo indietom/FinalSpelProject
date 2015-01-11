@@ -7,6 +7,6 @@ namespace FinalSpelProject
 {
     class Level
     {
-        
+        public byte CurrentLevel { get; set; }
     }
 }

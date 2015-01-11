@@ -96,7 +96,7 @@ namespace FinalSpelProject
             foreach (Player p in player)
             {
                 if (p.Dead)
-                    fireRate = 0;
+                    fireRate = 30;
             }
             if (health <= 0)
             {

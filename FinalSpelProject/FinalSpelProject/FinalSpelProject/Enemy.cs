@@ -93,6 +93,11 @@ namespace FinalSpelProject
 
                     break;
             }
+            foreach (Player p in player)
+            {
+                if (p.Dead)
+                    fireRate = 0;
+            }
             if (health <= 0)
             {
                 Destroy = true;

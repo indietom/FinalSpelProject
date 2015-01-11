@@ -22,6 +22,7 @@ namespace FinalSpelProject
         byte gunType;
         byte fireRate;
         byte maxFireRate;
+        byte invisibleCount;
 
         short comboCount;
         short currentCombo;
@@ -31,6 +32,7 @@ namespace FinalSpelProject
         public bool Dead {get; set;}
         bool inputActive;
         public bool Flash { get; set; }
+        public bool Invisible { get; set; }
 
         float velLeft;
         float velRight;
@@ -123,15 +125,30 @@ namespace FinalSpelProject
                 Pos += new Vector2(0, velDown);
                 velDown -= 0.2f;
             }
+            if(invisibleCount >= 1)
+            {
+                Invisible = true;
+                flashCount += 1;
+                invisibleCount += 1;
+                if(invisibleCount >= 64)
+                {
+                    Invisible = false;
+                    flashCount = 0;
+                    Flash = false;
+                }
+            }
             foreach (Projectile p in projectiles)
             {
-                if (p.HitBox.Intersects(HitBox) && p.enemyShot == true)
+                if (p.HitBox.Intersects(HitBox) && p.enemyShot == true && !Invisible)
                 {
                     p.Destroy = true;
                     if (gunType == 0)
                         Dead = true;
                     if (gunType >= 1)
+                    {
                         gunType = 0;
+                        invisibleCount = 1;
+                    }
                 }
             }
         }
@@ -152,7 +169,6 @@ namespace FinalSpelProject
             {
                 if (Flash) Flash = false;
                     else Flash = true;
-                Console.WriteLine(Flash);
                 flashCount = 0;
             }
             if(respawnCount >= 1)
@@ -160,6 +176,7 @@ namespace FinalSpelProject
                 Pos = new Vector2(Pos.X, Lerp(Pos.Y, 240, 0.04f));
                 respawnCount += 1;
                 flashCount += 1;
+                Invisible = true;
                 if(respawnCount >= maxRespawnCount)
                 {
                     inputActive = true;
@@ -167,6 +184,7 @@ namespace FinalSpelProject
                     Flash = false;
                     flashCount = 0;
                     respawnCount = 0;
+                    Invisible = false;
                 }
             }
         }

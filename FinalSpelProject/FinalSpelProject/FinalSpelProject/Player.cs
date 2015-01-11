@@ -144,7 +144,6 @@ namespace FinalSpelProject
             }
             if(respawnCount >= 1)
             {
-                //Pos -= new Vector2(0, 3);
                 Pos = new Vector2(Pos.X, Lerp(Pos.Y, 240, 0.04f));
                 respawnCount += 1;
                 flashCount += 1;

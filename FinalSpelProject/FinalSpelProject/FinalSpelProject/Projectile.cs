@@ -25,7 +25,7 @@ namespace FinalSpelProject
             spriteType = spriteType2;
             AssignSprite();
         }
-        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool enemyShot)
+        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool enemyShot2)
         {
             Pos = pos2;
             Angle = ang;

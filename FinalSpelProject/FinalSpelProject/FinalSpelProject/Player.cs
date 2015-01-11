@@ -132,7 +132,7 @@ namespace FinalSpelProject
                 {
                     lives -= 1;
                     respawnCount = 1;
-                    Pos = new Vector2(800 / 2 - 16, 550);
+                    Pos = new Vector2(640 / 2 - 16, 550);
                 }
             }
             if(flashCount >= 8)

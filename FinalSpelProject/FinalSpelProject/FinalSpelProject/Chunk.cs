@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FinalSpelProject
 {
-    class Chunk
+    class Chunk : GameObject
     {
         bool active;
 
@@ -16,6 +16,8 @@ namespace FinalSpelProject
 
         public Chunk(Vector2 pos2, string path)
         {
+            Pos = pos2;
+
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
         }

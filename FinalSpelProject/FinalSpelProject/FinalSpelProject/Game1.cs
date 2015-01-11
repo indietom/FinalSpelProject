@@ -16,9 +16,12 @@ namespace FinalSpelProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static float worldSpeed;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 640;
             Content.RootDirectory = "Content";
         }
 

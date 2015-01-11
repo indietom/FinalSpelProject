@@ -28,7 +28,7 @@ namespace FinalSpelProject
         short respawnCount;
         short maxRespawnCount;
 
-        public bool dead;
+        public bool Dead {get; set;}
         bool inputActive;
         public bool Flash { get; set; }
 
@@ -124,7 +124,7 @@ namespace FinalSpelProject
         }
         public void LivesUpdate()
         {
-            if(dead && respawnCount <= 0)
+            if(Dead && respawnCount <= 0)
             {
                 inputActive = false;
                 velDown += 0.5f;
@@ -151,7 +151,7 @@ namespace FinalSpelProject
                 if(respawnCount >= maxRespawnCount)
                 {
                     inputActive = true;
-                    dead = false;
+                    Dead = false;
                     Flash = false;
                     flashCount = 0;
                     respawnCount = 0;

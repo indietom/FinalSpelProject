@@ -84,7 +84,7 @@ namespace FinalSpelProject
                 if (p.HitBox.Intersects(HitBox)) 
                 {
                     Destroy = true;
-                    p.dead = true;
+                    p.Dead = true;
                 }
             }
         }

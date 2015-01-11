@@ -110,6 +110,7 @@ namespace FinalSpelProject
                 if (p.HitBox.Intersects(HitBox) && p.enemyShot == false)
                 {
                     p.Destroy = true;
+                    Destroy = true;
                 }
             }
         }

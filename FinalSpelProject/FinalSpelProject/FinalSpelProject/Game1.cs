@@ -58,7 +58,7 @@ namespace FinalSpelProject
             
             foreach(Player p in player)
             {
-                p.Update();
+                p.Update(projectiles);
                 p.Input(projectiles);
                 p.LivesUpdate();
             }

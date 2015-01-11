@@ -98,7 +98,7 @@ namespace FinalSpelProject
                 }
             }
         }
-        public void Update()
+        public void Update(List<Projectile> projectiles)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             if(velLeft <= -0.3f)
@@ -120,6 +120,14 @@ namespace FinalSpelProject
             {
                 Pos += new Vector2(0, velDown);
                 velDown -= 0.2f;
+            }
+            foreach (Projectile p in projectiles)
+            {
+                if (p.HitBox.Intersects(HitBox) && p.enemyShot == true)
+                {
+                    p.Destroy = true;
+                    Dead = true;
+                }
             }
         }
         public void LivesUpdate()

@@ -93,6 +93,10 @@ namespace FinalSpelProject
 
                     break;
             }
+            if (health <= 0)
+            {
+                Destroy = true;
+            }
         }
         public void Collision(List<Player> player, List<Enemy> enemy, List<Projectile> projectiles)
         {
@@ -109,8 +113,8 @@ namespace FinalSpelProject
             {
                 if (p.HitBox.Intersects(HitBox) && p.enemyShot == false)
                 {
+                    health -= p.Dm;
                     p.Destroy = true;
-                    Destroy = true;
                 }
             }
         }

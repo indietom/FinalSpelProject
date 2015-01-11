@@ -14,6 +14,8 @@ namespace FinalSpelProject
         byte spriteType;
         byte movmentType;
 
+        public byte Dm { get; set; }
+
         public bool enemyShot;
 
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2)
@@ -67,6 +69,7 @@ namespace FinalSpelProject
                 case 0:
                     SetSize(7, 11);
                     SetSpriteCoords(133, 1);
+                    Dm = 1;
                     break;
             }
         }

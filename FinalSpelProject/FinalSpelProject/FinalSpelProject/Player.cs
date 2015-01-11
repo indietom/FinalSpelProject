@@ -60,7 +60,9 @@ namespace FinalSpelProject
             lives = 3;
 
             maxVel = 4;
-            Speed = 0.7f; 
+            Speed = 0.7f;
+
+            gunType = 2;
 
             maxRespawnCount = 130;
 
@@ -126,7 +128,10 @@ namespace FinalSpelProject
                 if (p.HitBox.Intersects(HitBox) && p.enemyShot == true)
                 {
                     p.Destroy = true;
-                    Dead = true;
+                    if (gunType == 0)
+                        Dead = true;
+                    if (gunType >= 1)
+                        gunType = 0;
                 }
             }
         }

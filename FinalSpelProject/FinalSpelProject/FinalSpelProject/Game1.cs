@@ -87,6 +87,10 @@ namespace FinalSpelProject
             {
                 if (projectiles[i].Destroy) projectiles.RemoveAt(i);
             }
+            for (int i = 0; i < chunks.Count; i++)
+            {
+                if (chunks[i].Destroy) chunks.RemoveAt(i);
+            }
 
             base.Update(gameTime);
         }

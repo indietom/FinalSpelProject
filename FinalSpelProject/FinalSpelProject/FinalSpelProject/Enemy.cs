@@ -120,7 +120,7 @@ namespace FinalSpelProject
             }
             foreach (Projectile p in projectiles)
             {
-                if (p.HitBox.Intersects(HitBox) && p.enemyShot == false)
+                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
                 {
                     health -= p.Dm;
                     p.Destroy = true;

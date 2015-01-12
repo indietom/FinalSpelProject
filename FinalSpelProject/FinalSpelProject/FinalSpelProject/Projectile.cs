@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace FinalSpelProject
 {
@@ -16,8 +17,11 @@ namespace FinalSpelProject
 
         public byte Dm { get; set; }
 
-        public bool enemyShot;
+        public bool EnemyShot { get; set; }
         bool rad;
+
+        float wantedAngle;
+        float rotateSpeed;
 
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2)
         {
@@ -38,7 +42,7 @@ namespace FinalSpelProject
             movmentType = movmentType2;
             spriteType = spriteType2;
             AssignEnemySprite();
-            enemyShot = true;
+            EnemyShot = true;
         }
         public void Update()
         {
@@ -48,6 +52,11 @@ namespace FinalSpelProject
                 case 0:
                     AngleMath(rad);
                     Pos += new Vector2(VelX, VelY);
+                    break;
+                case 1:
+                    AngleMath(rad);
+                    Pos += new Vector2(VelX, VelY);
+                    Speed += 0.2f;
                     break;
             }
         }

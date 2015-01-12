@@ -64,7 +64,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 2;
+            gunType = 3;
 
             maxRespawnCount = 130;
 
@@ -111,6 +111,11 @@ namespace FinalSpelProject
                         projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -65-i*25, 9, 0, 0, false));
                     fireRate = 1;
                 }
+                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 3 && fireRate <= 0)
+                {
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, -2, 0, 1, false));
+                    fireRate = 1;
+                }
             }
         }
         public void Update(List<Projectile> projectiles)
@@ -123,6 +128,9 @@ namespace FinalSpelProject
                     break;
                 case 2:
                     maxFireRate = 64;
+                    break;
+                case 3:
+                    maxFireRate = 64 * 2;
                     break;
             }
             if(gunType == 1 && fireRate >= 1)
@@ -170,7 +178,7 @@ namespace FinalSpelProject
             }
             foreach (Projectile p in projectiles)
             {
-                if (p.HitBox.Intersects(HitBox) && p.enemyShot == true && !Invisible)
+                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == true && !Invisible)
                 {
                     p.Destroy = true;
                     if (gunType == 0)

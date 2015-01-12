@@ -17,9 +17,11 @@ namespace FinalSpelProject
         public byte Dm { get; set; }
 
         public bool enemyShot;
+        bool rad;
 
-        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2)
+        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2)
         {
+            rad = rad2;
             Pos = pos2;
             Angle = ang;
             Speed = spe;
@@ -27,8 +29,9 @@ namespace FinalSpelProject
             spriteType = spriteType2;
             AssignSprite();
         }
-        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool enemyShot2)
+        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2, bool enemyShot2)
         {
+            rad = rad2;
             Pos = pos2;
             Angle = ang;
             Speed = spe;
@@ -43,12 +46,8 @@ namespace FinalSpelProject
             switch(movmentType)
             {
                 case 0:
-                    AngleMath(false);
+                    AngleMath(rad);
                     Pos += new Vector2(VelX, VelY);
-                    break;
-                case 1:
-                    AngleMath(false);
-                    Pos -= new Vector2(VelX, VelY);
                     break;
             }
         }

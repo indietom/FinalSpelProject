@@ -29,6 +29,7 @@ namespace FinalSpelProject
         public void Update()
         {
             Pos += new Vector2(0, Game1.worldSpeed);
+            //Pos += new Vector2(0, 1);
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D tilesheet)
@@ -39,7 +40,7 @@ namespace FinalSpelProject
                 {
                     for (int y = 0; y < map.GetLength(0); y++)
                     {
-                        spriteBatch.Draw(tilesheet, new Vector2(x * 16, y * 16), new Rectangle(map[y,x]*16, 0, 16, 16), Color.White);
+                        spriteBatch.Draw(tilesheet, new Vector2((x * 16)+Pos.X, (y * 16)+Pos.Y), new Rectangle(map[y,x]*16, 0, 16, 16), Color.White);
                     }
                 }
             }

@@ -13,10 +13,13 @@ namespace FinalSpelProject
         short armor; 
         float fireRate;
 
+        bool scroll;
+
         public Enemy(Vector2 pos2, sbyte type2)
         {
             Pos = pos2;
             type = type2;
+            scroll = true;
             switch (type)
             {
                 //Examples, no real purpose but to test.
@@ -93,6 +96,7 @@ namespace FinalSpelProject
 
                     break;
             }
+            if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
             foreach (Player p in player)
             {
                 if (p.Dead)

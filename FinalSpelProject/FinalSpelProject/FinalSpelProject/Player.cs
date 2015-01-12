@@ -64,7 +64,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 2;
+            gunType = 1;
 
             maxRespawnCount = 130;
 
@@ -100,11 +100,22 @@ namespace FinalSpelProject
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X+16-3, Pos.Y+16-3), -90, 9, 0, 0));
                 }
+                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 1 && fireRate <= 0)
+                {
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 0));
+                    fireRate = 1;
+                }
             }
         }
         public void Update(List<Projectile> projectiles)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
+            if(gunType == 1 && fireRate >= 1)
+            {
+                fireRate += 1;
+                if(fireRate == 8 || fireRate == 16 || fireRate == 24 ) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 0));
+                if (fireRate >= 64) fireRate = 0;
+            }
             if(velLeft <= -0.3f)
             {
                 Pos += new Vector2(velLeft, 0);

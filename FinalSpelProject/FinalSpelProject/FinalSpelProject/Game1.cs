@@ -35,7 +35,7 @@ namespace FinalSpelProject
             player.Add(new Player());
             //enemies.Add(new Enemy(new Vector2(),13));
             enemies.Add(new Enemy(new Vector2(100, 20),11));
-            
+            chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
             base.Initialize();
         }
 
@@ -73,7 +73,10 @@ namespace FinalSpelProject
                 p.Update();
             }
 
-
+            foreach(Chunk c in chunks)
+            {
+                c.Update();
+            }
 
             for (int i = 0; i < enemies.Count();i++)
             {
@@ -92,6 +95,7 @@ namespace FinalSpelProject
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
+            foreach (Chunk c in chunks) { c.Draw(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { e.DrawSprite(spriteBatch, spritesheet); }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }

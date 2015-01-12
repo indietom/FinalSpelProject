@@ -35,11 +35,11 @@ namespace FinalSpelProject
         {
             if (active)
             {
-                for (int y = 0; y < map.GetLength(0); y++)
+                for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    for (int x = 0; x < map.GetLength(1); x++)
+                    for (int y = 0; y < map.GetLength(0); y++)
                     {
-                        spriteBatch.Draw(tilesheet, new Vector2(x * 16, y * 16), new Rectangle(map[x, y] * 16, 0, 16, 16), Color.White);
+                        spriteBatch.Draw(tilesheet, new Vector2(x * 16, y * 16), new Rectangle(map[y,x]*16, 0, 16, 16), Color.White);
                     }
                 }
             }

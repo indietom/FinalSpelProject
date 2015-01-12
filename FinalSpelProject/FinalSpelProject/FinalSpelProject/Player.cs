@@ -133,6 +133,7 @@ namespace FinalSpelProject
                 if(invisibleCount >= 64)
                 {
                     Invisible = false;
+                    invisibleCount = 0;
                     flashCount = 0;
                     Flash = false;
                 }
@@ -143,7 +144,9 @@ namespace FinalSpelProject
                 {
                     p.Destroy = true;
                     if (gunType == 0)
+                    {
                         Dead = true;
+                    }
                     if (gunType >= 1)
                     {
                         gunType = 0;
@@ -185,6 +188,7 @@ namespace FinalSpelProject
                     flashCount = 0;
                     respawnCount = 0;
                     Invisible = false;
+                    invisibleCount = 0;
                 }
             }
         }

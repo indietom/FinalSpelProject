@@ -28,6 +28,7 @@ namespace FinalSpelProject
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
         List<Projectile> projectiles = new List<Projectile>();
+        List<Chunk> chunks = new List<Chunk>();
 
         protected override void Initialize()
         {
@@ -71,6 +72,8 @@ namespace FinalSpelProject
             {
                 p.Update();
             }
+
+
 
             for (int i = 0; i < enemies.Count();i++)
             {

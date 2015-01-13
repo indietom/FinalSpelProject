@@ -57,7 +57,7 @@ namespace FinalSpelProject
                     AngleMath(rad);
                     Pos += new Vector2(VelX, VelY);
                     Speed += 0.2f;
-                    if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 0, 0));
+                    if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
             }
         }

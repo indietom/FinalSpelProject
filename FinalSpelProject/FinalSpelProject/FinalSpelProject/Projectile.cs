@@ -44,7 +44,7 @@ namespace FinalSpelProject
             AssignEnemySprite();
             EnemyShot = true;
         }
-        public void Update()
+        public void Update(List<Particle> particles)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
             switch(movmentType)
@@ -57,6 +57,7 @@ namespace FinalSpelProject
                     AngleMath(rad);
                     Pos += new Vector2(VelX, VelY);
                     Speed += 0.2f;
+                    if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 0, 0));
                     break;
             }
         }

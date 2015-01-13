@@ -29,6 +29,7 @@ namespace FinalSpelProject
         List<Enemy> enemies = new List<Enemy>();
         List<Projectile> projectiles = new List<Projectile>();
         List<Chunk> chunks = new List<Chunk>();
+        List<Particle> particles = new List<Particle>();
 
         protected override void Initialize()
         {
@@ -64,19 +65,31 @@ namespace FinalSpelProject
                 p.Input(projectiles);
                 p.LivesUpdate();
             }
+
             foreach(Enemy e in enemies)
             {
                 e.Update(player, projectiles);
                 e.Collision(player, enemies, projectiles);
             }
+
             foreach(Projectile p in projectiles)
             {
-                p.Update();
+                p.Update(particles);
             }
 
             foreach(Chunk c in chunks)
             {
                 c.Update();
+            }
+            
+            foreach(Particle p in particles)
+            {
+                p.Update();
+            }
+
+            if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                particles.Add(new Particle(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0,  0));
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -91,7 +104,10 @@ namespace FinalSpelProject
             {
                 if (chunks[i].Destroy) chunks.RemoveAt(i);
             }
-
+            for (int i = 0; i < particles.Count; i++)
+            {
+                if (particles[i].Destroy) particles.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -103,6 +119,7 @@ namespace FinalSpelProject
             foreach (Chunk c in chunks) { c.Draw(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { e.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 

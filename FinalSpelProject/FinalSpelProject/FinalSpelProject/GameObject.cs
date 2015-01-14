@@ -76,6 +76,11 @@ namespace FinalSpelProject
             return (float)Math.Sqrt((Pos.X - pos2.X) * (Pos.X - pos2.X) + (Pos.Y - pos2.Y) * (Pos.X - pos2.Y));
         }
 
+        public float SimpleDistanceTo(Vector2 pos2)
+        {
+            return (float)Math.Abs(Pos.Y - pos2.Y);
+        }
+
         public float Lerp(float s, float e, float t)
         {
             return s + t * (e - s);

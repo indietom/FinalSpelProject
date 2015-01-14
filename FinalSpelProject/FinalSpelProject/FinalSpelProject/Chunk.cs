@@ -29,7 +29,10 @@ namespace FinalSpelProject
         public void Update()
         {
             Pos += new Vector2(0, Game1.worldSpeed);
-            //Pos += new Vector2(0, 1);
+            if(Pos.Y >= -(60*16))
+            {
+                active = true;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D tilesheet)

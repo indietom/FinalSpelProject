@@ -64,7 +64,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 3;
+            gunType = 1;
 
             maxRespawnCount = 130;
 
@@ -121,6 +121,7 @@ namespace FinalSpelProject
         public void Update(List<Projectile> projectiles)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
+            Random random = new Random();
             switch(gunType)
             {
                 case 1:
@@ -135,7 +136,7 @@ namespace FinalSpelProject
             }
             if(gunType == 1 && fireRate >= 1)
             {
-                if(fireRate == 8 || fireRate == 16 || fireRate == 24 ) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 0, false));
+                if(fireRate == 8 || fireRate == 16 || fireRate == 24 ) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90+random.Next(-5, 5), 9, 0, 0, false));
             }
             if (fireRate >= 1)
                 fireRate += 1;

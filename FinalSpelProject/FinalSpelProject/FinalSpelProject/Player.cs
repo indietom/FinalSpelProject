@@ -15,6 +15,10 @@ namespace FinalSpelProject
         { 
             return score; 
         }
+        public void RaiseScore(int value)
+        {
+            score += value;
+        }
 
         sbyte lives;
 
@@ -125,6 +129,7 @@ namespace FinalSpelProject
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             Random random = new Random();
+
             switch(gunType)
             {
                 case 1:

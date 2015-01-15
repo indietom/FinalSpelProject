@@ -10,7 +10,8 @@ namespace FinalSpelProject
     {
         sbyte type; 
         short health;
-        short armor; 
+        short armor;
+        short worth;
         float fireRate;
 
         bool scroll;
@@ -99,6 +100,7 @@ namespace FinalSpelProject
                     //Rotate the sprite towards the player
 
                     //fires toward player(s)
+                    worth = 100;
                     if (fireRate != 0)
                     {
                         fireRate -= 1;
@@ -113,6 +115,10 @@ namespace FinalSpelProject
             if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
             foreach (Player p in player)
             {
+                if(health <= 0)
+                {
+                    p.RaiseScore(worth);
+                }
                 if (p.Dead)
                     fireRate = 30;
             }

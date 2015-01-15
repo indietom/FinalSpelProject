@@ -35,9 +35,10 @@ namespace FinalSpelProject
         {
             player.Add(new Player());
             //enemies.Add(new Enemy(new Vector2(),13));
-            enemies.Add(new Enemy(new Vector2(100, 20),11));
+            //enemies.Add(new Enemy(new Vector2(100, 20),11));
+            enemies.Add(new Enemy(new Vector2(200,10), 14));
             chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
-            worldSpeed = 1;
+            worldSpeed = 0.1f;
             base.Initialize();
         }
 

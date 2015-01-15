@@ -50,9 +50,12 @@ namespace FinalSpelProject
                     break;
 
                 case 14:
+                    SetSpriteCoords(1, 1);
+                    SetSize(32);
+                    AnimationActive = true;
                     health = 10;
                     armor = 10;
-                    fireRate = 60;
+                    fireRate = 100;
                     break;
             }
         }
@@ -93,7 +96,18 @@ namespace FinalSpelProject
                    
                     break;
                 case 14:
+                    //Rotate the sprite towards the player
 
+                    //fires toward player(s)
+                    if (fireRate != 0)
+                    {
+                        fireRate -= 1;
+                    }
+                    if (fireRate == 0)
+                    {
+                        fireRate = 100;
+                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].Pos), 10, 0, 0, true, true));
+                    }
                     break;
             }
             if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
@@ -109,22 +123,76 @@ namespace FinalSpelProject
         }
         public void Collision(List<Player> player, List<Enemy> enemy, List<Projectile> projectiles)
         {
-            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
-            foreach (Player p in player)
+            switch (type)
             {
-                if (p.HitBox.Intersects(HitBox)) 
-                {
-                    Destroy = true;
-                    p.Dead = true;
-                }
-            }
-            foreach (Projectile p in projectiles)
-            {
-                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-                {
-                    health -= p.Dm;
-                    p.Destroy = true;
-                }
+                case 11:
+                    HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+                    foreach (Player p in player)
+                    {
+                        if (p.HitBox.Intersects(HitBox))
+                        {
+                            Destroy = true;
+                            p.Dead = true;
+                        }
+                    }
+                    foreach (Projectile p in projectiles)
+                    {
+                        if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                        {
+                            health -= p.Dm;
+                            p.Destroy = true;
+                        }
+                    }
+                    break;
+                case 12:
+                    HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+                    foreach (Player p in player)
+                    {
+                        if (p.HitBox.Intersects(HitBox))
+                        {
+                            Destroy = true;
+                            p.Dead = true;
+                        }
+                    }
+                    foreach (Projectile p in projectiles)
+                    {
+                        if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                        {
+                            health -= p.Dm;
+                            p.Destroy = true;
+                        }
+                    }
+                    break;
+                case 13:
+                    HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+                    foreach (Player p in player)
+                    {
+                        if (p.HitBox.Intersects(HitBox))
+                        {
+                            Destroy = true;
+                            p.Dead = true;
+                        }
+                    }
+                    foreach (Projectile p in projectiles)
+                    {
+                        if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                        {
+                            health -= p.Dm;
+                            p.Destroy = true;
+                        }
+                    }
+                    break;
+                case 14:
+                    HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+                    foreach (Projectile p in projectiles)
+                    {
+                        if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                        {
+                            health -= p.Dm;
+                            p.Destroy = true;
+                        }
+                    }
+                    break;
             }
         }
 

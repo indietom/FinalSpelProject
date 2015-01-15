@@ -13,8 +13,12 @@ namespace FinalSpelProject
     class Chunk : GameObject
     {
         bool active;
+        bool hasSpawnedEnemies;
+
+        byte currentLevel;
 
         int[,] map;
+        int[,] mapE;
 
         public Chunk(Vector2 pos2, string path)
         {
@@ -24,6 +28,7 @@ namespace FinalSpelProject
 
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
+            mapE = fileManager.LoadLevel(path+"E"); 
         }
 
         public void Update()
@@ -33,6 +38,22 @@ namespace FinalSpelProject
             {
                 active = true;
             }
+        }
+
+        public void SpawnEnemies()
+        {
+            if (active && !hasSpawnedEnemies)
+            {
+                for (int x = 0; x < mapE.GetLength(1); x++)
+                {
+                    for (int y = 0; y < mapE.GetLength(0); y++)
+                    {
+                        string enemyToSpawnString = (currentLevel+1) + map[y, x].ToString();
+                        byte enemyTypeByte = byte.Parse(enemyToSpawnString);  
+                    }
+                }
+            }
+            hasSpawnedEnemies = true;
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D tilesheet)

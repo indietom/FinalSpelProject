@@ -121,7 +121,7 @@ namespace FinalSpelProject
                 Destroy = true;
             }
         }
-        public void Collision(List<Player> player, List<Enemy> enemy, List<Projectile> projectiles)
+        public void Collision(List<Player> player, List<Projectile> projectiles)
         {
             switch (type)
             {

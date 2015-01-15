@@ -33,6 +33,7 @@ namespace FinalSpelProject
         bool inputActive;
         public bool Flash { get; set; }
         public bool Invisible { get; set; }
+        public bool RasieCombo { get; set; }
 
         float velLeft;
         float velRight;
@@ -60,6 +61,8 @@ namespace FinalSpelProject
             AnimationActive = true;
 
             lives = 3;
+
+            currentCombo = 5;
 
             maxVel = 4;
             Speed = 0.7f;
@@ -144,7 +147,31 @@ namespace FinalSpelProject
             {
                 fireRate = 0;
             }
-            if(velLeft <= -0.3f)
+
+            Movment();
+            UpdateInvisiblity();
+            UpdateCombo();
+
+            foreach (Projectile p in projectiles)
+            {
+                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == true && !Invisible)
+                {
+                    p.Destroy = true;
+                    if (gunType == 0)
+                    {
+                        Dead = true;
+                    }
+                    if (gunType >= 1)
+                    {
+                        gunType = 0;
+                        invisibleCount = 1;
+                    }
+                }
+            }
+        }
+        public void Movment()
+        {
+            if (velLeft <= -0.3f)
             {
                 Pos += new Vector2(velLeft, 0);
                 velLeft += 0.2f;
@@ -164,12 +191,15 @@ namespace FinalSpelProject
                 Pos += new Vector2(0, velDown);
                 velDown -= 0.2f;
             }
-            if(invisibleCount >= 1)
+        }
+        public void UpdateInvisiblity()
+        {
+            if (invisibleCount >= 1)
             {
                 Invisible = true;
                 flashCount += 1;
                 invisibleCount += 1;
-                if(invisibleCount >= 64)
+                if (invisibleCount >= 64)
                 {
                     Invisible = false;
                     invisibleCount = 0;
@@ -177,22 +207,23 @@ namespace FinalSpelProject
                     Flash = false;
                 }
             }
-            foreach (Projectile p in projectiles)
+        }
+        public void UpdateCombo()
+        {
+            if(RasieCombo)
             {
-                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == true && !Invisible)
-                {
-                    p.Destroy = true;
-                    if (gunType == 0)
-                    {
-                        Dead = true;
-                    }
-                    if (gunType >= 1)
-                    {
-                        gunType = 0;
-                        invisibleCount = 1;
-                    }
-                }
+                comboCount = 0;
+                currentCombo += 1;
+                RasieCombo = false;
             }
+            if(comboCount >= 64)
+            {
+                currentCombo = 0;
+                comboCount = 0;
+            }
+            if (currentCombo >= 1)
+                comboCount += 1;
+            comboCount = (short)((currentCombo > 0) ? comboCount + 1 : comboCount = 0);
         }
         public void LivesUpdate()
         {

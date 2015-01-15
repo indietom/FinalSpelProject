@@ -117,7 +117,7 @@ namespace FinalSpelProject
             {
                 if(health <= 0)
                 {
-                    p.RaiseScore(worth);
+                    p.Score += worth;
                 }
                 if (p.Dead)
                     fireRate = 30;

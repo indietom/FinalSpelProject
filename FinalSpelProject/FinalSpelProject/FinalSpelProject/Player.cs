@@ -9,16 +9,7 @@ namespace FinalSpelProject
 {
     class Player : GameObject 
     {
-        int score;
-
-        public int GetScore() 
-        { 
-            return score; 
-        }
-        public void RaiseScore(int value)
-        {
-            score += value;
-        }
+        public int Score { get; set; }
 
         sbyte lives;
 

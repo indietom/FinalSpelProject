@@ -110,7 +110,7 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 100;
-                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                        projectile.Add(new Projectile(Pos, AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;
             }

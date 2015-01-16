@@ -118,7 +118,7 @@ namespace FinalSpelProject
             spriteBatch.Begin();
             foreach (Chunk c in chunks) { c.Draw(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Enemy e in enemies) { e.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Enemy e in enemies) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();

@@ -51,12 +51,14 @@ namespace FinalSpelProject
                     break;
 
                 case 14:
-                    SetSpriteCoords(1, 1);
+                    SetSpriteCoords(33, 1);
                     SetSize(32);
                     AnimationActive = true;
                     health = 10;
                     armor = 10;
                     fireRate = 100;
+                    Rotated = true;
+                    RoateOnRad = true;
                     break;
             }
         }
@@ -98,7 +100,7 @@ namespace FinalSpelProject
                     break;
                 case 14:
                     //Rotate the sprite towards the player
-
+                    Rotation = AimAt(player[0].GetCenter);
                     //fires toward player(s)
                     worth = 100;
                     if (fireRate != 0)
@@ -108,7 +110,7 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 100;
-                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].Pos), 10, 0, 0, true, true));
+                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;
             }

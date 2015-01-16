@@ -16,6 +16,8 @@ namespace FinalSpelProject
     {
         public Vector2 Pos { get; set; }
 
+        public Vector2 GetCenter { get { return new Vector2(Pos.X + Width / 2, Pos.Y + Height / 2); } }
+
         public Rectangle HitBox {get; set;}
 
         public short CurrentFrame { get; set; }
@@ -26,6 +28,8 @@ namespace FinalSpelProject
         public short MaxAnimationCount { get; set; }
         
         public bool AnimationActive { get; set; }
+        public bool Rotated { get; set; }
+        public bool RoateOnRad { get; set; }
 
         public short Imx { get; set; }
         public short Imy {get; set;}

@@ -136,7 +136,7 @@ namespace FinalSpelProject
                   else HitBox = FullHitBoxMiddle;
             foreach (Player p in player)
             {
-                if (p.HitBox.Intersects(HitBox))
+                if (p.HitBox.Intersects(HitBox) && type != 14)
                 {
                     Destroy = true;
                     p.Dead = true;

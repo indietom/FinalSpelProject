@@ -167,19 +167,19 @@ namespace FinalSpelProject
         }
         public void Movment()
         {
-            if(Pos.X <= -velLeft)
+            if(Pos.X <= -velLeft && !Dead)
             {
                 velLeft = 0;
             }
-            if (Pos.X >= Game1.screenW-Width-velRight)
+            if (Pos.X >= Game1.screenW - Width - velRight && !Dead)
             {
                 velRight = 0;
             }
-            if (Pos.Y <= -velUp)
+            if (Pos.Y <= -velUp && !Dead)
             {
                 velUp = 0;
             }
-            if (Pos.Y >= Game1.screenH - Height - velDown)
+            if (Pos.Y >= Game1.screenH - Height - velDown && !Dead)
             {
                 velDown = 0;
             }
@@ -270,7 +270,7 @@ namespace FinalSpelProject
                     flashCount = 0;
                     respawnCount = 0;
                     Invisible = false;
-                    invisibleCount = 0;
+                    invisibleCount = 1;
                 }
             }
         }

@@ -31,16 +31,17 @@ namespace FinalSpelProject
             mapE = fileManager.LoadLevel(path+"E"); 
         }
 
-        public void Update()
+        public void Update(List<Enemy> enemies)
         {
             Pos += new Vector2(0, Game1.worldSpeed);
             if(Pos.Y >= -(60*16))
             {
                 active = true;
             }
+            SpawnEnemies(enemies);
         }
 
-        public void SpawnEnemies()
+        public void SpawnEnemies(List<Enemy> enemies)
         {
             if (active && !hasSpawnedEnemies)
             {
@@ -49,7 +50,8 @@ namespace FinalSpelProject
                     for (int y = 0; y < mapE.GetLength(0); y++)
                     {
                         string enemyToSpawnString = (currentLevel+1) + map[y, x].ToString();
-                        byte enemyTypeByte = byte.Parse(enemyToSpawnString);  
+                        byte enemyTypeByte = byte.Parse(enemyToSpawnString); 
+                        
                     }
                 }
             }

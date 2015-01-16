@@ -13,8 +13,9 @@ namespace FinalSpelProject
 
         string levelPath;
 
-        public Level(List<Chunk> chunks, byte currentLevel2)
+        public Level(List<Chunk> chunks, byte currentLevel2, byte amountOfChunks2)
         {
+            amountOfChunks = amountOfChunks2;
             CurrentLevel = currentLevel2;
             levelPath = CurrentLevel + "\\";
             for(int i = 0; i < amountOfChunks; i++)

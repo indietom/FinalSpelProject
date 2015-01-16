@@ -70,7 +70,6 @@ namespace FinalSpelProject
             foreach(Enemy e in enemies)
             {
                 e.Update(player, projectiles);
-                e.Collision(player, projectiles);
             }
 
             foreach(Projectile p in projectiles)
@@ -80,7 +79,7 @@ namespace FinalSpelProject
 
             foreach(Chunk c in chunks)
             {
-                c.Update();
+                c.Update(enemies);
             }
             
             foreach(Particle p in particles)

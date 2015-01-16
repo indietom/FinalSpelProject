@@ -24,8 +24,6 @@ namespace FinalSpelProject
         {
             Pos = pos2;
 
-            active = true;
-
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
             mapE = fileManager.LoadLevel(path+"E"); 
@@ -49,9 +47,9 @@ namespace FinalSpelProject
                 {
                     for (int y = 0; y < mapE.GetLength(0); y++)
                     {
-                        string enemyToSpawnString = (currentLevel+1) + map[y, x].ToString();
-                        byte enemyTypeByte = byte.Parse(enemyToSpawnString); 
-                        
+                        string enemyToSpawnString = (currentLevel+1) + mapE[y, x].ToString();
+                        byte enemyTypeByte = byte.Parse(enemyToSpawnString);
+                        if(enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(x * 16, y * 16), enemyTypeByte)); 
                     }
                 }
             }

@@ -8,7 +8,7 @@ namespace FinalSpelProject
 {
     class Enemy : GameObject
     {
-        sbyte type; 
+        byte type; 
         short health;
         short armor;
         short worth;
@@ -16,7 +16,7 @@ namespace FinalSpelProject
 
         bool scroll;
 
-        public Enemy(Vector2 pos2, sbyte type2)
+        public Enemy(Vector2 pos2, byte type2)
         {
             Pos = pos2;
             type = type2;

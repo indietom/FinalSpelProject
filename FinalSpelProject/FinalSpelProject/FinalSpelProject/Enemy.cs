@@ -132,7 +132,8 @@ namespace FinalSpelProject
         }
         public void Collision(List<Player> player, List<Projectile> projectiles)
         {
-            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+            if(!Rotated) HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+                 else HitBox = new Rectangle((int)Pos.X-Width/2, (int)Pos.Y-Height/2, Width, Height);
             foreach (Player p in player)
             {
                 if (p.HitBox.Intersects(HitBox))

@@ -167,6 +167,22 @@ namespace FinalSpelProject
         }
         public void Movment()
         {
+            if(Pos.X <= -velLeft)
+            {
+                velLeft = 0;
+            }
+            if (Pos.X >= Game1.screenW-Width-velRight)
+            {
+                velRight = 0;
+            }
+            if (Pos.Y <= -velUp)
+            {
+                velUp = 0;
+            }
+            if (Pos.Y >= Game1.screenH - Height - velDown)
+            {
+                velDown = 0;
+            }
             if (velLeft <= -0.3f)
             {
                 Pos += new Vector2(velLeft, 0);

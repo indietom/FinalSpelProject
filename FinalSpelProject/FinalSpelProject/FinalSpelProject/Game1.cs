@@ -18,6 +18,9 @@ namespace FinalSpelProject
 
         public static float worldSpeed;
 
+        public static int screenW;
+        public static int screenH;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +39,8 @@ namespace FinalSpelProject
             player.Add(new Player());
             //enemies.Add(new Enemy(new Vector2(),13));
             //enemies.Add(new Enemy(new Vector2(100, 20),11));
+            screenH = graphics.PreferredBackBufferHeight;
+            screenW = graphics.PreferredBackBufferWidth;
             enemies.Add(new Enemy(new Vector2(200,10), 14));
             chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
             worldSpeed = 0.1f;

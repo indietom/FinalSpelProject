@@ -62,7 +62,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 1;
+            gunType = 3;
 
             maxRespawnCount = 130;
 

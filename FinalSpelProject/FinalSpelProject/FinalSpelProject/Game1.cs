@@ -33,6 +33,7 @@ namespace FinalSpelProject
         List<Projectile> projectiles = new List<Projectile>();
         List<Chunk> chunks = new List<Chunk>();
         List<Particle> particles = new List<Particle>();
+        List<Explosion> explosions = new List<Explosion>();
 
         protected override void Initialize()
         {
@@ -92,9 +93,14 @@ namespace FinalSpelProject
                 p.Update();
             }
 
+            foreach(Explosion e in explosions)
+            {
+                e.Update();
+            }
+
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                particles.Add(new Particle(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0,  0));
+                explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 32));
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -113,6 +119,10 @@ namespace FinalSpelProject
             {
                 if (particles[i].Destroy) particles.RemoveAt(i);
             }
+            for (int i = 0; i < explosions.Count; i++)
+            {
+                if (explosions[i].Destroy) explosions.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -125,6 +135,7 @@ namespace FinalSpelProject
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 

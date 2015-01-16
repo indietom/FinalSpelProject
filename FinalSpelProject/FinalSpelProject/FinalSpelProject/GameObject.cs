@@ -20,6 +20,9 @@ namespace FinalSpelProject
 
         public Rectangle HitBox {get; set;}
 
+        public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height); } }
+        public Rectangle FullHitBoxMiddle { get { return new Rectangle((int)Pos.X-Width/2, (int)Pos.Y-Height/2, Width, Height); } }
+
         public short CurrentFrame { get; set; }
         public short MaxFrame { get; set; }
         public short MinFrame { get; set; }

@@ -62,7 +62,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 3;
+            gunType = 1;
 
             maxRespawnCount = 130;
 
@@ -135,7 +135,7 @@ namespace FinalSpelProject
             }
             if(gunType == 1 && fireRate >= 1)
             {
-                if(fireRate == 8 || fireRate == 16 || fireRate == 24 ) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90+random.Next(-5, 5), 9, 0, 0, false));
+                if (fireRate == 8 || fireRate == 16 || fireRate == 24) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
             }
             if (fireRate >= 1)
                 fireRate += 1;
@@ -147,6 +147,8 @@ namespace FinalSpelProject
             Movment();
             UpdateInvisiblity();
             UpdateCombo();
+            LivesUpdate();
+            Input(projectiles);
 
             foreach (Projectile p in projectiles)
             {

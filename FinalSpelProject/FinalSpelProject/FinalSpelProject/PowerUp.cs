@@ -9,10 +9,13 @@ namespace FinalSpelProject
     class PowerUp : GameObject
     {
         byte type;
+        byte movmentPattern;
+
         float cosCount;
 
-        public PowerUp(Vector2 pos2, byte type2)
+        public PowerUp(Vector2 pos2, byte type2, byte movmentPattern2)
         {
+            movmentPattern = movmentPattern2;
             Pos = pos2;
             type = type2;
             SetSize(16);
@@ -22,7 +25,15 @@ namespace FinalSpelProject
         public void Update(List<Player> players)
         {
             cosCount += 0.01f;
-            Pos += new Vector2((float)Math.Cos((2*(float)Math.PI*1.2f)*cosCount), Speed);
+            switch (movmentPattern)
+            {
+                case 0:
+                    Pos += new Vector2((float)Math.Cos((2 * (float)Math.PI * 1.2f) * cosCount), Speed);
+                    break;
+                case 1:
+                    Pos += new Vector2(0, Game1.worldSpeed);
+                    break;
+            }
             HitBox = FullHitBox;
             foreach(Player p in players)
             {

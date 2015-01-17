@@ -135,7 +135,8 @@ namespace FinalSpelProject
             }
             if(gunType == 1 && fireRate >= 1)
             {
-                if (fireRate == 8 || fireRate == 16 || fireRate == 24) projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
+                if (fireRate == 8 || fireRate == 16 || fireRate == 24) 
+                       projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
             }
             if (fireRate >= 1)
                 fireRate += 1;
@@ -275,6 +276,10 @@ namespace FinalSpelProject
                     invisibleCount = 1;
                 }
             }
+        }
+        public void SetGunType(byte type)
+        {
+            gunType = type;
         }
     }
 }

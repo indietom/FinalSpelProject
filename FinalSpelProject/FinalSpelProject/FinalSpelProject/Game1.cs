@@ -34,6 +34,7 @@ namespace FinalSpelProject
         List<Chunk> chunks = new List<Chunk>();
         List<Particle> particles = new List<Particle>();
         List<Explosion> explosions = new List<Explosion>();
+        List<PowerUp> powerUps = new List<PowerUp>();
 
         protected override void Initialize()
         {
@@ -96,9 +97,14 @@ namespace FinalSpelProject
                 e.Update();
             }
 
+            foreach(PowerUp p in powerUps)
+            {
+                p.Update(player);
+            }
+
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 32));
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -121,6 +127,10 @@ namespace FinalSpelProject
             {
                 if (explosions[i].Destroy) explosions.RemoveAt(i);
             }
+            for (int i = 0; i < powerUps.Count; i++)
+            {
+                if (powerUps[i].Destroy) powerUps.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -135,6 +145,7 @@ namespace FinalSpelProject
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (PowerUp p in powerUps) { p.DrawSprite(spriteBatch, spritesheet); }
             spriteBatch.End();
 
             base.Draw(gameTime);

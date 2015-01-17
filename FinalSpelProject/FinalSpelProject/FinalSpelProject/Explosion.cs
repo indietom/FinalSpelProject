@@ -19,8 +19,7 @@ namespace FinalSpelProject
             MinFrame = 4;
             MaxFrame = 13;
             CurrentFrame = MinFrame;
-            Imx = FrameX(CurrentFrame);
-            Imy = AssignSprite();
+            SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
             MaxAnimationCount = 4;
             AnimationActive = true;
         }

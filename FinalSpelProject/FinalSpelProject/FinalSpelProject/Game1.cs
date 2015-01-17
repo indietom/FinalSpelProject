@@ -45,7 +45,7 @@ namespace FinalSpelProject
             screenW = graphics.PreferredBackBufferWidth;
             enemies.Add(new Enemy(new Vector2(200,10), 14));
             chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
-            worldSpeed = 0.1f;
+            worldSpeed = 0.71f;
             base.Initialize();
         }
 
@@ -74,7 +74,7 @@ namespace FinalSpelProject
 
             foreach(Enemy e in enemies)
             {
-                e.Update(player, projectiles);
+                e.Update(player, projectiles, explosions);
             }
 
             foreach(Projectile p in projectiles)

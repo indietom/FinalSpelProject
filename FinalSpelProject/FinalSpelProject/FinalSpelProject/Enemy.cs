@@ -54,7 +54,7 @@ namespace FinalSpelProject
                     SetSpriteCoords(33, 1);
                     SetSize(32);
                     AnimationActive = true;
-                    health = 10;
+                    health = 3;
                     armor = 10;
                     fireRate = 100;
                     Rotated = true;
@@ -63,7 +63,7 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Player> player, List<Projectile> projectile)
+        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions)
         {
             switch (type)
             {
@@ -126,6 +126,8 @@ namespace FinalSpelProject
             }
             if (health <= 0)
             {
+                if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width));
+                    else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width));
                 Destroy = true;
             }
             Collision(player, projectile);

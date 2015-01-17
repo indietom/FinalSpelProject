@@ -20,7 +20,7 @@ namespace FinalSpelProject
             MaxFrame = 13;
             CurrentFrame = MinFrame;
             SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
-            MaxAnimationCount = 4;
+            MaxAnimationCount = 2;
             AnimationActive = true;
         }
         public void Update()

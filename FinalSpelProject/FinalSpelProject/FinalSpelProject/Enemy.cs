@@ -23,22 +23,25 @@ namespace FinalSpelProject
             scroll = true;
             switch (type)
             {
-                //Examples, no real purpose but to test.
-                // case 11 idicates enemyType 1 on lvl 1.
+                //Follows Player.X and shoots
                 case 11:
                     SetSpriteCoords(1, 1);
                     SetSize(32);
                     AnimationActive = true;
                     health = 2;
                     fireRate = 30;
-                    Speed = 1;
+                    Speed = 5;
                     break;
-
+                //Flies straight down and shoots toward players
                 case 12:
-                    health = 4;
+                    SetSpriteCoords(1, 1);
+                    SetSize(32);
+                    AnimationActive = true;
+                    health = 2;
                     fireRate = 30;
+                    Speed = 5;
                     break;
-                //13 spawns and starts going towards the player, kamikaze style.
+                //Kamikaze enemy
                 case 13:
                     SetSpriteCoords(1, 1);
                     SetSize(32);
@@ -49,7 +52,7 @@ namespace FinalSpelProject
                     VelY = 5;
                     Speed = 2.5f;
                     break;
-
+                //Stationary Turret
                 case 14:
                     SetSpriteCoords(33, 1);
                     SetSize(32);
@@ -67,8 +70,6 @@ namespace FinalSpelProject
         {
             switch (type)
             {
-                    //Examples, no real purpose but to test.
-                    // case 11 idicates enemyType 1 on lvl 1.
                 case 11:
                     foreach (Player p in player)
                     {
@@ -87,7 +88,16 @@ namespace FinalSpelProject
                     }
                     break;
                 case 12:
-
+                    Pos += new Vector2(0, 1f);    
+                    if (fireRate != 0)
+                    {
+                        fireRate -= 1;
+                    }
+                    if (fireRate == 0)
+                    {
+                        fireRate = 80;
+                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                    }
                     break;
                 case 13:
                     foreach (Player p in player)
@@ -138,7 +148,7 @@ namespace FinalSpelProject
                   else HitBox = FullHitBoxMiddle;
             foreach (Player p in player)
             {
-                if (p.HitBox.Intersects(HitBox) && type != 14)
+                if (p.HitBox.Intersects(HitBox) && type != 14 && player[0].Dead == false)
                 {
                     Destroy = true;
                     p.Dead = true;

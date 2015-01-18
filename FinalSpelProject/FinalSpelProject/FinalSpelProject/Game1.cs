@@ -42,11 +42,8 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            //enemies.Add(new Enemy(new Vector2(),13));
-            //enemies.Add(new Enemy(new Vector2(100, 20),11));
             screenH = graphics.PreferredBackBufferHeight;
             screenW = graphics.PreferredBackBufferWidth;
-            enemies.Add(new Enemy(new Vector2(200,10), 14));
             chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
             worldSpeed = 0.71f;
             base.Initialize();

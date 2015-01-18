@@ -11,15 +11,19 @@ namespace FinalSpelProject
         byte type;
         byte movmentPattern;
 
+        bool special;
+
         float cosCount;
 
-        public PowerUp(Vector2 pos2, byte type2, byte movmentPattern2)
+        public PowerUp(Vector2 pos2, byte type2, byte movmentPattern2, bool special2)
         {
+            special = special2;
             movmentPattern = movmentPattern2;
             Pos = pos2;
             type = type2;
             SetSize(16);
-            SetSpriteCoords(FrameX(type), 32 * 4 + 5);
+            if(!special) SetSpriteCoords(FrameX(type), Frame(4));
+                 else SetSpriteCoords(FrameX(type), Frame(5));
             Speed = 4f;
         }
         public void Update(List<Player> players)
@@ -39,7 +43,7 @@ namespace FinalSpelProject
             {
                 if(HitBox.Intersects(p.HitBox))
                 {
-                    p.SetGunType(type);
+                    p.SetGunType(type, false);
                     Destroy = true;
                 }
             }

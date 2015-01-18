@@ -8,7 +8,7 @@ namespace FinalSpelProject
 {
     class Explosion:GameObject
     {
-        // 8 = 8x8, 128 = 128x128  
+        // 16 = 16x16, 128 = 128x128  
         byte size;
 
         public Explosion(Vector2 pos2, byte size2)

@@ -62,6 +62,11 @@ namespace FinalSpelProject
             VelY = (ScaleY * Speed);
         }
 
+        public short Frame(short frame)
+        {
+            if (frame < 0) frame = 0;
+            return (short)(frame * 32 + 1 + frame);
+        }
         public short FrameX(short frame)
         {
             if(frame < 0) frame = 0;

@@ -32,7 +32,6 @@ namespace FinalSpelProject
         public void Update(List<Enemy> enemies)
         {
             Pos += new Vector2(0, Game1.worldSpeed);
-            Console.WriteLine((mapE.GetLength(0) * 16));
             if (Pos.Y >= -(mapE.GetLength(0) * 16) && Pos.Y <= 480)
                 active = true;
             if(Pos.Y >= 480)

@@ -18,6 +18,8 @@ namespace FinalSpelProject
         byte fireRate;
         byte maxFireRate;
         byte invisibleCount;
+        byte specialAmmo;
+        byte specialGunType;
 
         short comboCount;
         short currentCombo;
@@ -42,6 +44,7 @@ namespace FinalSpelProject
         Keys down;
         Keys up;
         Keys fire;
+        Keys specialFire;
 
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
@@ -71,6 +74,7 @@ namespace FinalSpelProject
             down = Keys.Down;
             up = Keys.Up;
             fire = Keys.X;
+            specialFire = Keys.Z;
         }
         public void Input(List<Projectile> projectiles)
         {
@@ -277,9 +281,10 @@ namespace FinalSpelProject
                 }
             }
         }
-        public void SetGunType(byte type)
+        public void SetGunType(byte gunType2, bool special2)
         {
-            gunType = type;
+            if (!special2) gunType = gunType2;
+                 else specialGunType = gunType2;
         }
     }
 }

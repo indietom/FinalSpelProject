@@ -68,6 +68,10 @@ namespace FinalSpelProject
 
         public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions)
         {
+            if (Pos.Y >= 480)
+            {
+                Destroy = true;
+            }
             switch (type)
             {
                 case 11:

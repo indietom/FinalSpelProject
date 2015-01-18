@@ -17,6 +17,8 @@ namespace FinalSpelProject
         byte gunType;
         byte fireRate;
         byte maxFireRate;
+        byte specialFireRate;
+        byte specialMaxFireRate;
         byte invisibleCount;
         byte specialAmmo;
         byte specialGunType;
@@ -31,6 +33,7 @@ namespace FinalSpelProject
         public bool Flash { get; set; }
         public bool Invisible { get; set; }
         public bool RasieCombo { get; set; }
+        public bool NukeDropped { get; set; }
 
         float velLeft;
         float velRight;
@@ -66,6 +69,8 @@ namespace FinalSpelProject
             Speed = 0.7f;
 
             gunType = 1;
+            specialGunType = 1;
+            specialAmmo = 10;
 
             maxRespawnCount = 130;
 
@@ -118,9 +123,15 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, -2, 0, 1, false));
                     fireRate = 1;
                 }
+                if(keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) && specialGunType == 1 && specialFireRate <= 0)
+                {
+                    NukeDropped = true;
+                    specialAmmo -= 1;
+                    specialFireRate = 1;
+                }
             }
         }
-        public void Update(List<Projectile> projectiles)
+        public void Update(List<Projectile> projectiles, List<Enemy> enemies)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             Random random = new Random();
@@ -137,17 +148,25 @@ namespace FinalSpelProject
                     maxFireRate = 64 * 2;
                     break;
             }
+            switch(specialGunType)
+            {
+                case 1:
+                    specialMaxFireRate = 64*2;
+                    break;
+            }
             if(gunType == 1 && fireRate >= 1)
             {
                 if (fireRate == 8 || fireRate == 16 || fireRate == 24) 
                        projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
             }
+            if (specialFireRate >= 1)
+                specialFireRate += 1;
+            if (specialFireRate >= specialMaxFireRate)
+                specialFireRate = 0;
             if (fireRate >= 1)
                 fireRate += 1;
             if(fireRate >= maxFireRate)
-            {
                 fireRate = 0;
-            }
 
             Movment();
             UpdateInvisiblity();
@@ -170,6 +189,16 @@ namespace FinalSpelProject
                         invisibleCount = 1;
                     }
                 }
+            }
+            if(NukeDropped)
+            {
+                foreach(Enemy e in enemies)
+                {
+                    if (e.Pos.Y >= -e.Height)
+                        e.Destroy = true;
+                }
+                Game1.flashScreenCount = 1;
+                NukeDropped = false;
             }
         }
         public void Movment()

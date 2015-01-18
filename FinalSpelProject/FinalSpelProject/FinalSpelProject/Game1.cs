@@ -21,6 +21,9 @@ namespace FinalSpelProject
         public static int screenW;
         public static int screenH;
 
+        public static bool flashScreen;
+        public static byte flashScreenCount;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -62,21 +65,29 @@ namespace FinalSpelProject
 
         }
 
+        public void UpdateScreenFlash()
+        {
+            if(flashScreenCount >= 1)
+            {
+                spriteBatch.Draw(spritesheet, new Rectangle(0, 0, screenW, screenH), new Rectangle(1, 562, 32, 32), Color.White);
+                // lite kod > läslighet amrite
+                flashScreenCount = (flashScreenCount >= 32) ? flashScreenCount = 0 : flashScreenCount = (byte)(flashScreenCount + 1);
+            }
+        }
+
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            
-            foreach(Player p in player)
-            {
-                p.Update(projectiles);
-            }
 
             foreach(Enemy e in enemies)
             {
                 e.Update(player, projectiles, explosions);
             }
-
+            foreach (Player p in player)
+            {
+                p.Update(projectiles, enemies);
+            }
             foreach(Projectile p in projectiles)
             {
                 p.Update(particles);
@@ -105,6 +116,7 @@ namespace FinalSpelProject
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
+                flashScreenCount = 1;
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -146,6 +158,7 @@ namespace FinalSpelProject
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (PowerUp p in powerUps) { p.DrawSprite(spriteBatch, spritesheet); }
+            UpdateScreenFlash();
             spriteBatch.End();
 
             base.Draw(gameTime);

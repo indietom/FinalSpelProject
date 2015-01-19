@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-// Chunk size should be 20*60 tiles
+// Chunk size should be 40*30 tiles
 
 namespace FinalSpelProject
 {

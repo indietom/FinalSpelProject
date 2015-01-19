@@ -68,7 +68,7 @@ namespace FinalSpelProject
 
         public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions)
         {
-            if (Pos.Y >= 480)
+            if (Pos.Y >= 480 + Height)
             {
                 Destroy = true;
             }
@@ -166,78 +166,6 @@ namespace FinalSpelProject
                     p.Destroy = true;
                 }
             }
-            //switch (type)
-            //{
-            //    case 11:
-            //        HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
-            //        foreach (Player p in player)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox))
-            //            {
-            //                Destroy = true;
-            //                p.Dead = true;
-            //            }
-            //        }
-            //        foreach (Projectile p in projectiles)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-            //            {
-            //                health -= p.Dm;
-            //                p.Destroy = true;
-            //            }
-            //        }
-            //        break;
-            //    case 12:
-            //        HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
-            //        foreach (Player p in player)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox))
-            //            {
-            //                Destroy = true;
-            //                p.Dead = true;
-            //            }
-            //        }
-            //        foreach (Projectile p in projectiles)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-            //            {
-            //                health -= p.Dm;
-            //                p.Destroy = true;
-            //            }
-            //        }
-            //        break;
-            //    case 13:
-            //        HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
-            //        foreach (Player p in player)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox))
-            //            {
-            //                Destroy = true;
-            //                p.Dead = true;
-            //            }
-            //        }
-            //        foreach (Projectile p in projectiles)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-            //            {
-            //                health -= p.Dm;
-            //                p.Destroy = true;
-            //            }
-            //        }
-            //        break;
-            //    case 14:
-            //        HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
-            //        foreach (Projectile p in projectiles)
-            //        {
-            //            if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-            //            {
-            //                health -= p.Dm;
-            //                p.Destroy = true;
-            //            }
-            //        }
-            //        break;
-            //}
         }
-
     }
 }

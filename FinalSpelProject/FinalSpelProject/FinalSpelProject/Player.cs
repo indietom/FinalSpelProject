@@ -28,6 +28,9 @@ namespace FinalSpelProject
         short respawnCount;
         short maxRespawnCount;
 
+        public short GetCurrentCombo() { return currentCombo; }
+        public short GetComboCount() { return comboCount; }
+
         public bool Dead {get; set;}
         bool inputActive;
         public bool Flash { get; set; }

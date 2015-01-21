@@ -11,33 +11,6 @@ using Microsoft.Xna.Framework.Media;
 
 namespace FinalSpelProject
 {
-    struct ComboCounter
-    {
-        Vector2 pos;
-        Color color;
-
-        float size;
-
-        public ComboCounter(Vector2 pos2)
-        {
-            pos = pos2;
-            size = 0;
-        }
-
-        public void Update(List<Player> players)
-        {
-            foreach (Player p in players)
-            {
-                color = new Color(p.GetCurrentCombo() * 5, p.GetCurrentCombo() * 2, 0);
-                size = 1 + p.GetCurrentCombo() * 0.01f;
-            }
-        }
-
-        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
-        {
-            spriteBatch.DrawString(font, "COMBO: ", pos, color, 0, new Vector2(0, 0), size, SpriteEffects.None, 1.0f);
-        }
-    }
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;

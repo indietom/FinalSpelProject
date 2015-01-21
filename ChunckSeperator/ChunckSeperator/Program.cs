@@ -13,25 +13,36 @@ namespace ChunckSeperator
         {
             string returnValue = "";
             StreamReader sr = new StreamReader(path);
-            for (int i = 0; i < File.ReadLines(path).Count(); i++)
+            for (int i = 0; i < 1000; i++)
+            {
+                sr.ReadLine();
                 if (i == line)
                 {
                     returnValue = sr.ReadLine();
-                    break;
                 }
-            sr.Close();
+            }
+            sr.Dispose();
             return returnValue;
         }
         static public void SaveLine(int line, string path, string text, bool overwrite)
         {
             StreamWriter sw = new StreamWriter(path, overwrite);
-            for (int i = 0; i < File.ReadLines(path).Count(); i++)
+            for (int i = 0; i < 1000; i++)
+            {
+                sw.WriteLine(" ");
                 if (i == line)
                 {
                     sw.WriteLine(text);
                     break;
                 }
-            sw.Close();
+            }
+            sw.Dispose();
+        }
+        static public void SaveLine(string path, string text, bool overwrite)
+        {
+            StreamWriter sw = new StreamWriter(path, overwrite);
+            sw.WriteLine(text);
+            sw.Dispose();
         }
         static void Main(string[] args)
         {
@@ -45,11 +56,29 @@ namespace ChunckSeperator
             string orgMapPath = "";
             string[] chunksToSavePath;
             string[] chunksInfo;
-            string loadedChunk = "";
 
             while(running)
             {
-               // There used to be spagetti here, but it's gone now
+                chunksInfo = new string[5];
+               
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 15; j++)
+                    {
+                        chunksInfo[i] += LoadLine(j + (i * 15), "map.txt") + "\n";
+                        //Console.WriteLine(chunksInfo[i]);
+                        //SaveLine("assåwat" + i +".txt", chunksInfo[i], true);
+                    }
+                }
+                
+                for (int i = 0; i < chunksInfo.Count(); i++)
+                {
+                    Console.WriteLine(chunksInfo[i]);
+                    SaveLine("assåwat" + i + ".txt", chunksInfo[i], true);
+                    //SaveLine(1, "assåwat.txt", chunksInfo[0], false);
+                }
+                
+                Console.ReadLine();
             }
         }
     }

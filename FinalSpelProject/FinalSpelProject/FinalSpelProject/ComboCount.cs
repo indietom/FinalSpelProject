@@ -26,7 +26,7 @@ namespace FinalSpelProject
         {
             foreach (Player p in players)
             {
-                color = new Color(p.GetCurrentCombo() * 5, p.GetCurrentCombo() * 2, 0);
+                color = new Color(p.GetCurrentCombo() * 12, 255, 255);
                 size = 1 + p.GetCurrentCombo() * 0.01f;
             }
         }

@@ -65,7 +65,7 @@ namespace ChunckSeperator
                 {
                     for (int j = 0; j < 15; j++)
                     {
-                        chunksInfo[i] += LoadLine(j + (i * 15), "map.txt") + "\n";
+                        chunksInfo[i] += LoadLine(j + (i * 15), "map.txt") + Environment.NewLine;
                         //Console.WriteLine(chunksInfo[i]);
                         //SaveLine("assåwat" + i +".txt", chunksInfo[i], true);
                     }

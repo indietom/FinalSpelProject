@@ -14,11 +14,13 @@ namespace FinalSpelProject
 
         byte spriteType;
         byte movmentType;
+        public byte ExplosionSize { get; set; }
 
         public byte Dm { get; set; }
 
         public bool EnemyShot { get; set; }
         bool rad;
+        public bool Explosive { get; set; }
 
         float wantedAngle;
         float rotateSpeed;
@@ -32,6 +34,7 @@ namespace FinalSpelProject
             movmentType = movmentType2;
             spriteType = spriteType2;
             AssignSprite();
+            AssignMovmentValues();
         }
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2, bool enemyShot2)
         {
@@ -43,6 +46,7 @@ namespace FinalSpelProject
             spriteType = spriteType2;
             AssignEnemySprite();
             EnemyShot = true;
+            AssignMovmentValues();
         }
         public void Update(List<Particle> particles)
         {
@@ -58,6 +62,16 @@ namespace FinalSpelProject
                     Pos += new Vector2(VelX, VelY);
                     Speed += 0.2f;
                     if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
+                    break;
+            }
+        }
+        public void AssignMovmentValues()
+        {
+            switch(movmentType)
+            {
+                case 1:
+                    Explosive = true;
+                    ExplosionSize = 32;
                     break;
             }
         }

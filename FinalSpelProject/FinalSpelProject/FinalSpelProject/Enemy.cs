@@ -144,9 +144,9 @@ namespace FinalSpelProject
                     else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width));
                 Destroy = true;
             }
-            Collision(player, projectile);
+            Collision(player, projectile, explosions);
         }
-        public void Collision(List<Player> player, List<Projectile> projectiles)
+        public void Collision(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
         {
             if (!Rotated) HitBox = FullHitBox;
                   else HitBox = FullHitBoxMiddle;
@@ -162,6 +162,8 @@ namespace FinalSpelProject
             {
                 if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
                 {
+                    if (p.Explosive)
+                        explosions.Add(new Explosion(Pos, p.ExplosionSize));
                     health -= p.Dm;
                     p.Destroy = true;
                 }

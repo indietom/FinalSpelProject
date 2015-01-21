@@ -51,7 +51,7 @@ namespace ChunckSeperator
             byte chunkHeight = 0;
             byte amountOfChunks = 0;
 
-            byte levelTag = 1;
+            byte levelTag = 0;
 
             string orgMapPath = "";
             string[] chunksToSavePath;
@@ -60,22 +60,31 @@ namespace ChunckSeperator
             while(running)
             {
                 chunksInfo = new string[5];
-               
-                for (int i = 0; i < 5; i++)
+
+                Console.Write("LEVEL TAG: ");
+                levelTag = byte.Parse(Console.ReadLine());
+
+                Console.Write("MAP FILE NAME: ");
+                orgMapPath = Console.ReadLine() + ".txt";
+
+                Console.Write("AMOUNT OF CHUNKS: ");
+                amountOfChunks = byte.Parse(Console.ReadLine());
+
+                Console.Write("CHUNCK HEIGHT: ");
+                chunkHeight = byte.Parse(Console.ReadLine());
+
+
+                for (int i = 0; i < amountOfChunks; i++)
                 {
-                    for (int j = 0; j < 15; j++)
+                    for (int j = 0; j < chunkHeight; j++)
                     {
-                        chunksInfo[i] += LoadLine(j + (i * 15), "map.txt") + Environment.NewLine;
-                        //Console.WriteLine(chunksInfo[i]);
-                        //SaveLine("assåwat" + i +".txt", chunksInfo[i], true);
+                        chunksInfo[i] += LoadLine(j + (i * 15), orgMapPath) + Environment.NewLine;
                     }
                 }
                 
                 for (int i = 0; i < chunksInfo.Count(); i++)
                 {
-                    Console.WriteLine(chunksInfo[i]);
-                    SaveLine("assåwat" + i + ".txt", chunksInfo[i], true);
-                    //SaveLine(1, "assåwat.txt", chunksInfo[0], false);
+                    SaveLine("level" + levelTag + "\\chunk" + i + ".txt", chunksInfo[i], true);
                 }
                 
                 Console.ReadLine();

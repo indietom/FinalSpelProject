@@ -73,6 +73,10 @@ namespace ChunckSeperator
                 Console.Write("CHUNCK HEIGHT: ");
                 chunkHeight = byte.Parse(Console.ReadLine());
 
+                DirectoryInfo dirInfo = new DirectoryInfo(@"level"+levelTag.ToString());
+
+                if (!dirInfo.Exists)
+                    dirInfo.Create();
 
                 for (int i = 0; i < amountOfChunks; i++)
                 {

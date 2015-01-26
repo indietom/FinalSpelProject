@@ -41,6 +41,7 @@ namespace FinalSpelProject
 
         public void SpawnEnemies(List<Enemy> enemies)
         {
+            Random r = new Random();
             if (active && !hasSpawnedEnemies)
             {
                 for (int x = 0; x < mapE.GetLength(1); x++)
@@ -49,7 +50,7 @@ namespace FinalSpelProject
                     {
                         string enemyToSpawnString = (currentLevel+1) + mapE[y, x].ToString();
                         byte enemyTypeByte = byte.Parse(enemyToSpawnString);
-                        if(enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(x * 16, y * 16), enemyTypeByte)); 
+                        if(enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(x * 16, y * 16), enemyTypeByte, r)); 
                     }
                 }
             }

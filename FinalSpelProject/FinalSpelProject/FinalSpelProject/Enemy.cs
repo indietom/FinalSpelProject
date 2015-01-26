@@ -13,10 +13,12 @@ namespace FinalSpelProject
         short armor;
         short worth;
         float fireRate;
+        bool sideChosen;
+        int rSide;
 
         bool scroll;
 
-        public Enemy(Vector2 pos2, byte type2)
+        public Enemy(Vector2 pos2, byte type2, Random r)
         {
             Pos = pos2;
             type = type2;
@@ -63,6 +65,24 @@ namespace FinalSpelProject
                     Rotated = true;
                     RoateOnRad = true;
                     break;
+                //Sideways Dude yo
+                case 15:
+                    RoateOnRad = false;
+                    Rotated = true;
+                    SetSpriteCoords(33, 1);
+                    SetSize(32);
+                    AnimationActive = true;
+                    health = 1;
+                    armor = 0;
+                    fireRate = 30;
+                    Speed = 5;
+                    rSide = r.Next(0,2);
+                    if (rSide == 0)
+                    {
+                        Pos = new Vector2(-32, Pos.Y);
+                    }
+                    else Pos = new Vector2(640 + 32, Pos.Y);
+                    break;
             }
         }
 
@@ -73,7 +93,7 @@ namespace FinalSpelProject
                 Destroy = true;
             }
             switch (type)
-            {
+            {                                       
                 case 11:
                     foreach (Player p in player)
                     {
@@ -124,6 +144,28 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 100;
+                        projectile.Add(new Projectile(Pos, AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                    }
+                    break;
+                case 15:
+                    
+                    if (rSide == 0)
+                    {
+                        Pos += new Vector2(Speed, 0);
+                        Rotation = 0;
+                    }
+                    else 
+                    {
+                        Pos += new Vector2(-Speed, 0);
+                        Rotation = 180;
+                    }
+                    if (fireRate != 0)
+                    {
+                        fireRate -= 1;
+                    }
+                    if (fireRate == 0)
+                    {
+                        fireRate = 30;
                         projectile.Add(new Projectile(Pos, AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;

@@ -90,7 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="TextEffects.cs" />
+    <Compile Include="TextEffect.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>

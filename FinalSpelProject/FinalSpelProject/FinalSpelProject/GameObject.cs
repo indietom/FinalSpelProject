@@ -18,6 +18,8 @@ namespace FinalSpelProject
 
         public Vector2 GetCenter { get { return new Vector2(Pos.X + Width / 2, Pos.Y + Height / 2); } }
 
+        public Vector2 Vel { get { return new Vector2(VelX, VelY); } }
+
         public Rectangle HitBox {get; set;}
 
         public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height); } }

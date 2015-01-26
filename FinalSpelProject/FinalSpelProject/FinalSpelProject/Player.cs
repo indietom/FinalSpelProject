@@ -73,7 +73,7 @@ namespace FinalSpelProject
 
             gunType = 3;
             specialGunType = 1;
-            specialAmmo = 10;
+            specialAmmo = 1;
 
             maxRespawnCount = 130;
 
@@ -138,6 +138,9 @@ namespace FinalSpelProject
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             Random random = new Random();
+
+            if (specialAmmo <= 0)
+                specialGunType = 0;
 
             switch(gunType)
             {

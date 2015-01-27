@@ -32,6 +32,7 @@ namespace FinalSpelProject
 
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
+        public short GetMaxComboCount() { return maxComboCount; }
 
         public bool Dead {get; set;}
         bool inputActive;

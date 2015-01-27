@@ -30,7 +30,6 @@ namespace FinalSpelProject
             {
                 color = new Color(p.GetCurrentCombo() * 12, 255, 255);
                 size = 1 + p.GetCurrentCombo() * 0.01f;
-                barLength = p.GetComboCount()/100;
             }
         }
 

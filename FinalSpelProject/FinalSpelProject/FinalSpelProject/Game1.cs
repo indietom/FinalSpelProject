@@ -149,7 +149,7 @@ namespace FinalSpelProject
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach (Chunk c in chunks) { c.Draw(spriteBatch, spritesheet); }
+            foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[0]); }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }

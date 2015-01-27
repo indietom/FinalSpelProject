@@ -23,8 +23,10 @@ namespace FinalSpelProject
         byte specialAmmo;
         byte specialGunType;
 
+        short comboDecc;
         short comboCount;
         short currentCombo;
+        short maxComboCount;
         short respawnCount;
         short maxRespawnCount;
 
@@ -141,6 +143,21 @@ namespace FinalSpelProject
 
             if (specialAmmo <= 0)
                 specialGunType = 0;
+
+            maxComboCount = (short)(currentCombo * 2);
+            if (currentCombo >= 1)
+            {
+                comboDecc += 1;
+                if(comboDecc >= 8)
+                {
+                    comboCount -= 1;
+                    comboDecc = 0;
+                }
+                if(comboCount <= -1)
+                {
+                    currentCombo -= 1;
+                }
+            }
 
             switch(gunType)
             {

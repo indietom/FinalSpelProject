@@ -54,6 +54,7 @@ namespace FinalSpelProject
         protected override void LoadContent()
         {
             spritesheet = Content.Load<Texture2D>("spritesheet");
+            TilesheetManager.Load(Content);
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 

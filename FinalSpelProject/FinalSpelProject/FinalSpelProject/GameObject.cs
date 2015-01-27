@@ -149,7 +149,7 @@ namespace FinalSpelProject
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
             if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, Rotation, new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
-            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, (Rotation*(float)Math.PI/180), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, (Rotation*((float)Math.PI/180)), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
         }
     }
 }

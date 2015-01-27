@@ -10,6 +10,15 @@ namespace FinalSpelProject
 {
     class TilesheetManager
     {
-        public static Texture2D[] tileSheets;
+        public static Texture2D[] TileSheets;
+
+        public static void Load(ContentManager contet)
+        {
+            TileSheets = new Texture2D[1];
+            for(int i = 0; i < TileSheets.Count(); i++)
+            {
+                TileSheets[i] = contet.Load<Texture2D>("tilesheet" + i);
+            }
+        }
     }
 }

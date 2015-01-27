@@ -114,7 +114,9 @@ namespace FinalSpelProject
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
-                flashScreenCount = 1;
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+100, Mouse.GetState().Y), 2, 0, false));
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+300, Mouse.GetState().Y), 3, 0, false));
+                //flashScreenCount = 1;
             }
 
             for (int i = 0; i < enemies.Count();i++)

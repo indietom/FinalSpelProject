@@ -22,7 +22,7 @@ namespace FinalSpelProject
             Pos = pos2;
             type = type2;
             SetSize(16);
-            if(!special) SetSpriteCoords(FrameX(type), Frame(4));
+            if(!special) SetSpriteCoords((short)(462+FrameX(type)), 1);
                  else SetSpriteCoords(FrameX(type), Frame(5));
             Speed = 4f;
         }

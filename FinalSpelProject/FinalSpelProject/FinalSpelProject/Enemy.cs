@@ -27,7 +27,7 @@ namespace FinalSpelProject
             {
                 //Follows Player.X and shoots
                 case 11:
-                    SetSpriteCoords(1, 1);
+                    SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
                     health = 2;
@@ -36,7 +36,7 @@ namespace FinalSpelProject
                     break;
                 //Flies straight down and shoots toward players
                 case 12:
-                    SetSpriteCoords(1, 1);
+                    SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
                     health = 2;
@@ -45,7 +45,7 @@ namespace FinalSpelProject
                     break;
                 //Kamikaze enemy
                 case 13:
-                    SetSpriteCoords(1, 1);
+                    SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
                     health = 5;
@@ -69,7 +69,7 @@ namespace FinalSpelProject
                 case 15:
                     RoateOnRad = false;
                     Rotated = true;
-                    SetSpriteCoords(33, 1);
+                    SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
                     health = 1;

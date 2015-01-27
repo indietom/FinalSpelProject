@@ -72,6 +72,7 @@ namespace FinalSpelProject
                 case 1:
                     Explosive = true;
                     ExplosionSize = 32;
+                    Dm = 3;
                     break;
             }
         }
@@ -92,7 +93,7 @@ namespace FinalSpelProject
                 case 0:
                     SetSize(7, 11);
                     SetSpriteCoords(133, 1);
-                    Dm = 1;
+                    
                     break;
             }
         }

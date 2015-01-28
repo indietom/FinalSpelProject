@@ -23,6 +23,14 @@ namespace FinalSpelProject
         byte specialAmmo;
         byte specialGunType;
 
+        public byte GetGunType() { return gunType; }
+
+        public void SetGunType(byte gunType2, bool special2)
+        {
+            if (!special2) gunType = gunType2;
+            else specialGunType = gunType2;
+        }
+
         short comboDecc;
         short comboCount;
         short currentCombo;
@@ -333,11 +341,6 @@ namespace FinalSpelProject
                     invisibleCount = 1;
                 }
             }
-        }
-        public void SetGunType(byte gunType2, bool special2)
-        {
-            if (!special2) gunType = gunType2;
-                 else specialGunType = gunType2;
         }
     }
 }

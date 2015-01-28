@@ -15,7 +15,9 @@ namespace FinalSpelProject
 
         Color color;
 
-        public TextEffect(Vector2 pos2, float size2, Color color2, float ang, float speed2, short lifeTime2, short maxLifeTime2)
+        byte tag;
+
+        public TextEffect(Vector2 pos2, float size2, Color color2, float ang, float speed2, short lifeTime2, short maxLifeTime2, byte tag2)
         {
             Pos = pos2;
             color = color2;
@@ -24,11 +26,24 @@ namespace FinalSpelProject
             Speed = speed2;
             lifeTime = lifeTime2;
             maxLifeTime = maxLifeTime2;
+            tag = tag2;
         }
         public void Update()
         {
             AngleMath(false);
             Pos += Vel;
+        }
+        public void FlashColor(Color color2)
+        {
+
+        }
+        public void Flash()
+        {
+
+        }
+        public void Bounce()
+        {
+
         }
     }
 }

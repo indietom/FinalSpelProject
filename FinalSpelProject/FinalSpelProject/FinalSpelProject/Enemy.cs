@@ -91,7 +91,7 @@ namespace FinalSpelProject
                     AnimationActive = true;
                     health = 1;
                     armor = 0;
-                    fireRate = 80;
+                    fireRate = 2;
                     Speed = 5;
                     rSide = r.Next(0,2);
                     if (rSide == 0)
@@ -198,7 +198,7 @@ namespace FinalSpelProject
                     if (rSide == 0)
                     {
                         Pos += new Vector2(Speed, Speed);
-                        Rotation = 0;
+                        Rotation = -270 - 45;
                         if (Pos.X > 672)
                         {
                             Destroy = true;
@@ -207,11 +207,20 @@ namespace FinalSpelProject
                     else
                     {
                         Pos += new Vector2(-Speed, Speed);
-                        Rotation = 180;
+                        Rotation = -270 + 45;
                         if (Pos.X < -32)
                         {
                             Destroy = true;
                         }
+                    }
+                    if (fireRate != 0)
+                    {
+                        fireRate -= 1;
+                    }
+                    if (fireRate == 0)
+                    {
+                        fireRate = -1;
+                        projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 1f, 0, 2, true, true));
                     }
                     break;
             }

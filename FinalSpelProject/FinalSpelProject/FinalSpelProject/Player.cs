@@ -77,8 +77,6 @@ namespace FinalSpelProject
 
             lives = 1;
 
-            currentCombo = 5;
-
             maxVel = 4;
             Speed = 0.7f;
 
@@ -99,6 +97,10 @@ namespace FinalSpelProject
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Keys.Space))
+            {
+                comboCount += 10;
+            }
             if(inputActive)
             {
                 if(keyboard.IsKeyDown(left) && velLeft >= -maxVel)
@@ -152,21 +154,6 @@ namespace FinalSpelProject
 
             if (specialAmmo <= 0)
                 specialGunType = 0;
-
-            maxComboCount = (short)(currentCombo * 2);
-            if (currentCombo >= 1)
-            {
-                comboDecc += 1;
-                if(comboDecc >= 8)
-                {
-                    comboCount -= 1;
-                    comboDecc = 0;
-                }
-                if(comboCount <= -1)
-                {
-                    currentCombo -= 1;
-                }
-            }
 
             switch(gunType)
             {
@@ -290,20 +277,40 @@ namespace FinalSpelProject
         }
         public void UpdateCombo()
         {
-            if(RasieCombo)
+
+            maxComboCount = (short)(currentCombo * 2);
+            if (comboCount >= maxComboCount)
             {
-                comboCount = 0;
                 currentCombo += 1;
-                RasieCombo = false;
-            }
-            if(comboCount >= 64)
-            {
-                currentCombo = 0;
-                comboCount = 0;
+                comboCount = 1;
             }
             if (currentCombo >= 1)
-                comboCount += 1;
-            comboCount = (short)((currentCombo > 0) ? comboCount + 1 : comboCount = 0);
+            {
+                comboDecc += 1;
+                if (comboDecc >= 8)
+                {
+                    comboCount -= 1;
+                    comboDecc = 0;
+                }
+                if (comboCount <= -1)
+                {
+                    currentCombo -= 1;
+                }
+            }
+            //if(RasieCombo)
+            //{
+            //    comboCount = 0;
+            //    currentCombo += 1;
+            //    RasieCombo = false;
+            //}
+            //if(comboCount >= 64)
+            //{
+            //    currentCombo = 0;
+            //    comboCount = 0;
+            //}
+            //if (currentCombo >= 1)
+            //    comboCount += 1;
+            //comboCount = (short)((currentCombo > 0) ? comboCount + 1 : comboCount = 0);
         }
         public void LivesUpdate()
         {

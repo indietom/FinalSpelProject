@@ -20,7 +20,7 @@ namespace FinalSpelProject
 
         public Ui()
         {
-            comboCounter = new ComboCounter(new Vector2(120, 10));
+            comboCounter = new ComboCounter(new Vector2(220, 10));
         }
 
         public void Update(List<Player> player)
@@ -48,6 +48,7 @@ namespace FinalSpelProject
                 spriteBatch.Draw(spritesheet, new Vector2(10, 10), new Rectangle(529, 34, 16, 16), Color.White);
                 spriteBatch.DrawString(font, "x" + amountOfLives.ToString(), new Vector2(30, 7), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
             }
+            comboCounter.Draw(spriteBatch, font, spritesheet);
         }
     }
 }

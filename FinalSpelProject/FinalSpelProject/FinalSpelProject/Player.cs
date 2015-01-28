@@ -11,8 +11,7 @@ namespace FinalSpelProject
     {
         public int Score { get; set; }
 
-        sbyte lives;
-
+        byte lives;
         byte flashCount;
         byte gunType;
         byte fireRate;
@@ -23,6 +22,7 @@ namespace FinalSpelProject
         byte specialAmmo;
         byte specialGunType;
 
+        public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
 
         public void SetGunType(byte gunType2, bool special2)
@@ -75,7 +75,7 @@ namespace FinalSpelProject
             inputActive = true;
             AnimationActive = true;
 
-            lives = 3;
+            lives = 1;
 
             currentCombo = 5;
 
@@ -313,7 +313,7 @@ namespace FinalSpelProject
                 velDown += 0.5f;
                 if (Pos.Y >= 480)
                 {
-                    lives -= 1;
+                    if(lives != 0) lives -= 1;
                     respawnCount = 1;
                     Pos = new Vector2(640 / 2 - 16, 550);
                 }

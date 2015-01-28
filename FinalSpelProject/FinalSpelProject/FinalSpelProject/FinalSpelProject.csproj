@@ -93,6 +93,7 @@
     <Compile Include="TextEffect.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TilesheetManager.cs" />
+    <Compile Include="Ui.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

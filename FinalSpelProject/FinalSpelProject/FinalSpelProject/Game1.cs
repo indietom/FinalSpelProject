@@ -31,6 +31,8 @@ namespace FinalSpelProject
             Content.RootDirectory = "Content";
         }
 
+        Ui ui = new Ui();
+
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
         List<Projectile> projectiles = new List<Projectile>();
@@ -50,11 +52,13 @@ namespace FinalSpelProject
         }
 
         Texture2D spritesheet;
+        SpriteFont font;
 
         protected override void LoadContent()
         {
             spritesheet = Content.Load<Texture2D>("spritesheet");
             TilesheetManager.Load(Content);
+            font = Content.Load<SpriteFont>("font");
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -77,6 +81,8 @@ namespace FinalSpelProject
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            ui.Update(player);
 
             foreach(Enemy e in enemies)
             {
@@ -159,6 +165,7 @@ namespace FinalSpelProject
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
             UpdateScreenFlash();
+            ui.Draw(spriteBatch, spritesheet, font);
             spriteBatch.End();
 
             base.Draw(gameTime);

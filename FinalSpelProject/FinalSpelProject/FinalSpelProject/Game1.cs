@@ -157,7 +157,7 @@ namespace FinalSpelProject
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (PowerUp p in powerUps) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
             UpdateScreenFlash();
             spriteBatch.End();
 

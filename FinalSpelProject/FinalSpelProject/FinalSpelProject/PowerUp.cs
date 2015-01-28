@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace FinalSpelProject
 {
@@ -26,6 +28,7 @@ namespace FinalSpelProject
                  else SetSpriteCoords(FrameX(type), Frame(5));
             Speed = 4f;
         }
+
         public void Update(List<Player> players)
         {
             cosCount += 0.01f;
@@ -47,6 +50,11 @@ namespace FinalSpelProject
                     Destroy = true;
                 }
             }
+        }
+        public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
+        {
+            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(496, 34, 32, 32), Color.White);
+            DrawSprite(spriteBatch, spritesheet);
         }
     }
 }

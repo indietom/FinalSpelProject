@@ -11,6 +11,10 @@ namespace FinalSpelProject
         // 16 = 16x16, 128 = 128x128  
         byte size;
 
+        bool cinematic;
+
+        public bool GetCinematic() { return cinematic; }
+
         public Explosion(Vector2 pos2, byte size2)
         {
             Pos = pos2;
@@ -22,6 +26,10 @@ namespace FinalSpelProject
             SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
             MaxAnimationCount = 2;
             AnimationActive = true;
+        }
+        public Explosion()
+        {
+
         }
         public void Update()
         {

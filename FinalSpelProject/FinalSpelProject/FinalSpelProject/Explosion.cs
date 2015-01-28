@@ -26,6 +26,7 @@ namespace FinalSpelProject
             SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
             MaxAnimationCount = 2;
             AnimationActive = true;
+            cinematic = true;
         }
         public Explosion(Vector2 pos2, byte size2, bool cinematic2)
         {
@@ -42,6 +43,7 @@ namespace FinalSpelProject
         }
         public void Update()
         {
+            HitBox = (!cinematic) ? HitBox = FullHitBox : HitBox = HitBox;
             Imx = FrameX(CurrentFrame);
             Destroy = (CurrentFrame >= MaxFrame-1) ? Destroy = true : Destroy = false;
             Animate();

@@ -75,6 +75,9 @@ namespace FinalSpelProject
         {
             switch(movmentType)
             {
+                case 0:
+                    Dm = 1;
+                    break;
                 case 1:
                     Explosive = true;
                     ExplosionSize = 32;
@@ -99,7 +102,6 @@ namespace FinalSpelProject
                 case 0:
                     SetSize(7, 11);
                     SetSpriteCoords(133, 1);
-                    
                     break;
             }
         }

@@ -15,8 +15,10 @@ namespace FinalSpelProject
         float fireRate;
         bool sideChosen;
         int rSide;
+        byte explosionHurtDelay;
 
         bool scroll;
+        bool hurtByExplosion;
 
         public Enemy(Vector2 pos2, byte type2, Random r)
         {
@@ -109,6 +111,8 @@ namespace FinalSpelProject
             {
                 Destroy = true;
             }
+            explosionHurtDelay = (explosionHurtDelay >= 1) ? explosionHurtDelay = (byte)(explosionHurtDelay + 1) : explosionHurtDelay;
+            explosionHurtDelay = (explosionHurtDelay >= 32) ? explosionHurtDelay = 0 : explosionHurtDelay;
             switch (type)
             {                                       
                 case 11:
@@ -246,6 +250,14 @@ namespace FinalSpelProject
         {
             if (!Rotated) HitBox = FullHitBox;
                   else HitBox = FullHitBoxMiddle;
+            foreach(Explosion ex in explosions)
+            {
+                if (!ex.GetCinematic() && ex.HitBox.Intersects(HitBox) && explosionHurtDelay <= 0)
+                {
+                    health -= 1;
+                    explosionHurtDelay = 1;
+                }
+            }
             foreach (Player p in player)
             {
                 if (p.HitBox.Intersects(HitBox) && type != 14 && player[0].Dead == false)
@@ -259,7 +271,7 @@ namespace FinalSpelProject
                 if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
                 {
                     if (p.Explosive)
-                        explosions.Add(new Explosion(Pos, p.ExplosionSize));
+                        explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     health -= p.Dm;
                     p.Destroy = true;
                 }

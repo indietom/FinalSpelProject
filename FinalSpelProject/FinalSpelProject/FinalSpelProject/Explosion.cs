@@ -27,9 +27,18 @@ namespace FinalSpelProject
             MaxAnimationCount = 2;
             AnimationActive = true;
         }
-        public Explosion()
+        public Explosion(Vector2 pos2, byte size2, bool cinematic2)
         {
-
+            Pos = pos2;
+            size = size2;
+            SetSize(size);
+            MinFrame = 4;
+            MaxFrame = 13;
+            CurrentFrame = MinFrame;
+            SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
+            MaxAnimationCount = 2;
+            AnimationActive = true;
+            cinematic = cinematic2;
         }
         public void Update()
         {

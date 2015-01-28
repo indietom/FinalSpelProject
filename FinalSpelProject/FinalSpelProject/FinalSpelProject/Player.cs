@@ -60,7 +60,7 @@ namespace FinalSpelProject
 
         public Player()
         {
-            Pos = new Vector2(320, 240);
+            Pos = new Vector2(320-16, 240);
             SetSpriteCoords(1, 1);
             SetSize(32);
 

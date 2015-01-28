@@ -83,6 +83,23 @@ namespace FinalSpelProject
                     }
                     else Pos = new Vector2(640 + 32, Pos.Y);
                     break;
+                case 16:
+                    RoateOnRad = false;
+                    Rotated = true;
+                    SetSpriteCoords(1, Frame(4));
+                    SetSize(32);
+                    AnimationActive = true;
+                    health = 1;
+                    armor = 0;
+                    fireRate = 80;
+                    Speed = 5;
+                    rSide = r.Next(0,2);
+                    if (rSide == 0)
+                    {
+                        Pos = new Vector2(-10, -32);
+                    }
+                    else Pos = new Vector2(Game1.screenW + 10, -32);
+                    break;
             }
         }
 
@@ -175,6 +192,26 @@ namespace FinalSpelProject
                     {
                         fireRate = -1;
                         projectile.Add(new Projectile(Pos, AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                    }
+                    break;
+                case 16:
+                    if (rSide == 0)
+                    {
+                        Pos += new Vector2(Speed, Speed);
+                        Rotation = 0;
+                        if (Pos.X > 672)
+                        {
+                            Destroy = true;
+                        }
+                    }
+                    else
+                    {
+                        Pos += new Vector2(-Speed, Speed);
+                        Rotation = 180;
+                        if (Pos.X < -32)
+                        {
+                            Destroy = true;
+                        }
                     }
                     break;
             }

@@ -45,7 +45,7 @@ namespace FinalSpelProject
             screenH = graphics.PreferredBackBufferHeight;
             screenW = graphics.PreferredBackBufferWidth;
             chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
-            worldSpeed = 1f;
+            worldSpeed = 0f;
             base.Initialize();
         }
 

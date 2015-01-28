@@ -63,6 +63,12 @@ namespace FinalSpelProject
                     Speed += 0.2f;
                     if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
+                case 2:
+                    AngleMath(rad);
+                    Pos += Vel;
+                    //Speed += 0.2f;
+                    if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
+                    break;
             }
         }
         public void AssignMovmentValues()

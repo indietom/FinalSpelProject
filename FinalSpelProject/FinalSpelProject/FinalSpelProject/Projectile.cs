@@ -48,7 +48,7 @@ namespace FinalSpelProject
             EnemyShot = true;
             AssignMovmentValues();
         }
-        public void Update(List<Particle> particles)
+        public void Update(List<Particle> particles, Player player)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
             switch(movmentType)
@@ -64,9 +64,9 @@ namespace FinalSpelProject
                     if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
                 case 2:
+                    Angle = AimAt(player.GetCenter);
                     AngleMath(rad);
                     Pos += Vel;
-                    //Speed += 0.2f;
                     if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
             }

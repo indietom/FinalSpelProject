@@ -88,7 +88,7 @@ namespace FinalSpelProject
             }
             foreach(Projectile p in projectiles)
             {
-                p.Update(particles);
+                p.Update(particles, player[0]);
             }
 
             foreach(Chunk c in chunks)

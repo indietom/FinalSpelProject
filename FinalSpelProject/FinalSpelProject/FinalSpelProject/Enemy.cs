@@ -234,6 +234,7 @@ namespace FinalSpelProject
                 if(health <= 0)
                 {
                     p.Score += worth;
+                    p.RaiseCurrentCombo();
                 }
                 if (p.Dead)
                     fireRate = 30;

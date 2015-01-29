@@ -275,26 +275,33 @@ namespace FinalSpelProject
                 }
             }
         }
+        public void RaiseCurrentCombo()
+        {
+            currentCombo += 1;
+            comboCount = (short)(maxComboCount-1);
+        }
         public void UpdateCombo()
         {
-
-            maxComboCount = (short)(currentCombo * 2);
+            Console.WriteLine(maxComboCount);
+            maxComboCount = (short)(10 + currentCombo * 5);
             if (comboCount >= maxComboCount)
             {
                 currentCombo += 1;
-                comboCount = 1;
+                comboCount = 8;
             }
             if (currentCombo >= 1)
             {
                 comboDecc += 1;
-                if (comboDecc >= 8)
+                if (comboDecc >= 8*2)
                 {
                     comboCount -= 1;
                     comboDecc = 0;
                 }
                 if (comboCount <= -1)
                 {
+                    Console.WriteLine("LEL");
                     currentCombo -= 1;
+                    //comboCount = (short)(maxComboCount - 2);
                 }
             }
             //if(RasieCombo)

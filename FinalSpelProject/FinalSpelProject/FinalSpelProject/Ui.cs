@@ -12,6 +12,8 @@ namespace FinalSpelProject
     {
         ComboCounter comboCounter;
 
+        string scoreText;
+
         short powerUpFrame;
 
         byte amountOfLives;
@@ -30,6 +32,7 @@ namespace FinalSpelProject
             {
                 amountOfLives = p.GetLives();
                 powerUpFrame = (short)(462 + Frame(p.GetGunType(), 16));
+                scoreText = "SCORE: " + p.Score.ToString().PadLeft(8, '0');
             }
             printLives = (amountOfLives <= 3) ? false : true;
         }
@@ -49,6 +52,7 @@ namespace FinalSpelProject
                 spriteBatch.DrawString(font, "x" + amountOfLives.ToString(), new Vector2(30, 7), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
             }
             comboCounter.Draw(spriteBatch, font, spritesheet);
+            spriteBatch.DrawString(font, scoreText, new Vector2(10, 32+8+20), Color.White);
         }
     }
 }

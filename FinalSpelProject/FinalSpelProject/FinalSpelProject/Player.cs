@@ -292,7 +292,7 @@ namespace FinalSpelProject
             if (currentCombo >= 1)
             {
                 comboDecc += 1;
-                if (comboDecc >= 8*2)
+                if (comboDecc >= 2)
                 {
                     comboCount -= 1;
                     comboDecc = 0;
@@ -301,7 +301,7 @@ namespace FinalSpelProject
                 {
                     Console.WriteLine("LEL");
                     currentCombo -= 1;
-                    //comboCount = (short)(maxComboCount - 2);
+                    comboCount = (short)(maxComboCount/2);
                 }
             }
             //if(RasieCombo)

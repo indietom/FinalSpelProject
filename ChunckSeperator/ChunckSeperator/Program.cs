@@ -93,6 +93,7 @@ namespace ChunckSeperator
                 {
                     for (int j = 0; j < chunkHeight; j++)
                     {
+                        //40 + (14 * 40) = 600
                         chunksInfo[i] += LoadLine(j + (i * chunkHeight), orgMapPath) + Environment.NewLine;
                     }
                 }

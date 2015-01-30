@@ -17,11 +17,13 @@ namespace FinalSpelProject
 
             StreamReader sReader = new StreamReader(mapData);
             string line = sReader.ReadLine();
-            string[] tileNo = line.Split(',');
+            string[] tileNo;
+            tileNo = line.Split(',');
 
             width = tileNo.Count();
 
             map = new int[height, width];
+
             sReader = new StreamReader(mapData);
 
             for (int y = 0; y < height; y++)

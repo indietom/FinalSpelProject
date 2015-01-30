@@ -21,6 +21,7 @@ namespace FinalSpelProject
         byte invisibleCount;
         byte specialAmmo;
         byte specialGunType;
+        byte explosionDelay;
 
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
@@ -147,7 +148,7 @@ namespace FinalSpelProject
                 }
             }
         }
-        public void Update(List<Projectile> projectiles, List<Enemy> enemies)
+        public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions)
         {
             HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
             Random random = new Random();
@@ -190,7 +191,7 @@ namespace FinalSpelProject
             Movment();
             UpdateInvisiblity();
             UpdateCombo();
-            LivesUpdate();
+            LivesUpdate(explosions);
             Input(projectiles);
 
             foreach (Projectile p in projectiles)
@@ -299,30 +300,18 @@ namespace FinalSpelProject
                 }
                 if (comboCount <= -1)
                 {
-                    Console.WriteLine("LEL");
                     currentCombo -= 1;
                     comboCount = (short)(maxComboCount/2);
                 }
             }
-            //if(RasieCombo)
-            //{
-            //    comboCount = 0;
-            //    currentCombo += 1;
-            //    RasieCombo = false;
-            //}
-            //if(comboCount >= 64)
-            //{
-            //    currentCombo = 0;
-            //    comboCount = 0;
-            //}
-            //if (currentCombo >= 1)
-            //    comboCount += 1;
-            //comboCount = (short)((currentCombo > 0) ? comboCount + 1 : comboCount = 0);
         }
-        public void LivesUpdate()
+        public void LivesUpdate(List<Explosion> explosions)
         {
+            Random random = new Random();
             if(Dead && respawnCount <= 0)
             {
+                explosionDelay = (explosionDelay >= 4) ? (byte)0 : (byte)(explosionDelay + 1);
+                if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32));
                 inputActive = false;
                 velDown += 0.5f;
                 if (Pos.Y >= 480)

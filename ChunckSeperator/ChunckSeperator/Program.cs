@@ -9,6 +9,19 @@ namespace ChunckSeperator
 {
     class Program
     {
+        static string replaceIndex(short index, char letter, string strMod)
+        {
+            string str = "";
+
+            for (int i = 0; i < strMod.Length; i++)
+            {
+                if (i != index)
+                    str += strMod[i];
+                else
+                    str += letter;
+            }
+            return str;
+        }
         static public string LoadLine(int line, string path)
         {
             string returnValue = "";
@@ -48,8 +61,8 @@ namespace ChunckSeperator
         {
             bool running = true;
 
-            byte chunkHeight = 0;
-            byte amountOfChunks = 0;
+            int chunkHeight = 0;
+            int amountOfChunks = 0;
 
             byte levelTag = 0;
 
@@ -57,21 +70,19 @@ namespace ChunckSeperator
             string[] chunksToSavePath;
             string[] chunksInfo;
 
+            Console.Write("LEVEL TAG: ");
+            levelTag = byte.Parse(Console.ReadLine());
+
             while(running)
             {
-                chunksInfo = new string[5];
-
-                Console.Write("LEVEL TAG: ");
-                levelTag = byte.Parse(Console.ReadLine());
-
                 Console.Write("MAP FILE NAME: ");
                 orgMapPath = Console.ReadLine() + ".txt";
 
                 Console.Write("AMOUNT OF CHUNKS: ");
-                amountOfChunks = byte.Parse(Console.ReadLine());
-
+                amountOfChunks = int.Parse(Console.ReadLine());
+                chunksInfo = new string[amountOfChunks];
                 Console.Write("CHUNCK HEIGHT: ");
-                chunkHeight = byte.Parse(Console.ReadLine());
+                chunkHeight = int.Parse(Console.ReadLine());
 
                 DirectoryInfo dirInfo = new DirectoryInfo(@"level"+levelTag.ToString());
 
@@ -82,7 +93,7 @@ namespace ChunckSeperator
                 {
                     for (int j = 0; j < chunkHeight; j++)
                     {
-                        chunksInfo[i] += LoadLine(j + (i * 15), orgMapPath) + Environment.NewLine;
+                        chunksInfo[i] += LoadLine(j + (i * chunkHeight), orgMapPath) + Environment.NewLine;
                     }
                 }
                 

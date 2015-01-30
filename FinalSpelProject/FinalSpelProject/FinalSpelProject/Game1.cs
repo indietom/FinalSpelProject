@@ -46,8 +46,8 @@ namespace FinalSpelProject
             player.Add(new Player());
             screenH = graphics.PreferredBackBufferHeight;
             screenW = graphics.PreferredBackBufferWidth;
-            chunks.Add(new Chunk(new Vector2(0, 0), @"map"));
-            worldSpeed = 0f;
+            chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
+            worldSpeed = 1f;
             base.Initialize();
         }
 
@@ -90,7 +90,7 @@ namespace FinalSpelProject
             }
             foreach (Player p in player)
             {
-                p.Update(projectiles, enemies);
+                p.Update(projectiles, enemies, explosions);
             }
             foreach(Projectile p in projectiles)
             {
@@ -119,9 +119,10 @@ namespace FinalSpelProject
 
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+100, Mouse.GetState().Y), 2, 0, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+300, Mouse.GetState().Y), 3, 0, false));
+                explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 64));
+                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
+                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+100, Mouse.GetState().Y), 2, 0, false));
+                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X+300, Mouse.GetState().Y), 3, 0, false));
                 //flashScreenCount = 1;
             }
 

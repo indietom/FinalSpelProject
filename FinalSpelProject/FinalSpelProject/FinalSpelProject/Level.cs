@@ -17,7 +17,7 @@ namespace FinalSpelProject
         {
             amountOfChunks = amountOfChunks2;
             CurrentLevel = currentLevel2;
-            levelPath = "level"+CurrentLevel + "\\";
+            levelPath = "Content\\level"+CurrentLevel + "\\";
             for(int i = 0; i < amountOfChunks; i++)
             {
                 chunks.Add(new Chunk(new Vector2(0, -(40*16)*i), levelPath+"chunk" + i));

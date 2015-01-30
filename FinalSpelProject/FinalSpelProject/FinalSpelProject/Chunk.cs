@@ -23,7 +23,6 @@ namespace FinalSpelProject
         public Chunk(Vector2 pos2, string path)
         {
             Pos = pos2;
-
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
             mapE = fileManager.LoadLevel(path+"E"); 
@@ -32,7 +31,7 @@ namespace FinalSpelProject
         public void Update(List<Enemy> enemies)
         {
             Pos += new Vector2(0, Game1.worldSpeed);
-            if (Pos.Y >= -(mapE.GetLength(0) * 16) && Pos.Y <= 480)
+            if (Pos.Y >= -(map.GetLength(0) * 16) && Pos.Y <= 480)
                 active = true;
             if(Pos.Y >= 480)
                 active = false;

@@ -81,7 +81,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 3;
+            gunType = 1;
             specialGunType = 1;
             specialAmmo = 1;
 
@@ -283,7 +283,6 @@ namespace FinalSpelProject
         }
         public void UpdateCombo()
         {
-            Console.WriteLine(maxComboCount);
             maxComboCount = (short)(10 + currentCombo * 5);
             if (comboCount >= maxComboCount)
             {

@@ -41,12 +41,15 @@ namespace FinalSpelProject
         List<Explosion> explosions = new List<Explosion>();
         List<PowerUp> powerUps = new List<PowerUp>();
 
+        Level level;
+
         protected override void Initialize()
         {
             player.Add(new Player());
             screenH = graphics.PreferredBackBufferHeight;
             screenW = graphics.PreferredBackBufferWidth;
-            chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
+            //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
+            level = new Level(chunks, 0, 14);
             worldSpeed = 1f;
             base.Initialize();
         }

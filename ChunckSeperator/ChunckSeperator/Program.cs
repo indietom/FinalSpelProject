@@ -66,6 +66,8 @@ namespace ChunckSeperator
 
             byte levelTag = 0;
 
+            bool enemyLayer;
+
             string orgMapPath = "";
             string[] chunksToSavePath;
             string[] chunksInfo;
@@ -78,6 +80,9 @@ namespace ChunckSeperator
                 Console.Write("MAP FILE NAME: ");
                 orgMapPath = Console.ReadLine() + ".txt";
 
+                Console.Write("ENEMY LAYER: ");
+                enemyLayer = bool.Parse(Console.ReadLine().ToLower());
+
                 Console.Write("AMOUNT OF CHUNKS: ");
                 amountOfChunks = int.Parse(Console.ReadLine());
                 chunksInfo = new string[amountOfChunks];
@@ -88,21 +93,25 @@ namespace ChunckSeperator
 
                 if (!dirInfo.Exists)
                     dirInfo.Create();
-
+                // 
                 for (int i = 0; i < amountOfChunks; i++)
                 {
                     for (int j = 0; j < chunkHeight; j++)
                     {
-                        //40 + (14 * 40) = 600
                         chunksInfo[i] += LoadLine(j + (i * chunkHeight), orgMapPath) + Environment.NewLine;
                     }
                 }
                 
                 for (int i = 0; i < chunksInfo.Count(); i++)
                 {
-                    SaveLine("level" + levelTag + "\\chunk" + i + ".txt", chunksInfo[i], true);
+                    if(!enemyLayer) SaveLine("level" + levelTag + "\\chunk" + i + ".txt", chunksInfo[i], true);
+                    else SaveLine("level" + levelTag + "\\chunk" + i + "E.txt", chunksInfo[i], true);
                 }
-                
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("DONE!");
+                Console.ResetColor();
+
                 Console.ReadLine();
             }
         }

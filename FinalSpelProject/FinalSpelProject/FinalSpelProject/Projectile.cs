@@ -14,6 +14,7 @@ namespace FinalSpelProject
 
         byte spriteType;
         byte movmentType;
+        byte stopFollowingCount;
         public byte ExplosionSize { get; set; }
 
         public byte Dm { get; set; }
@@ -64,7 +65,14 @@ namespace FinalSpelProject
                     if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
                 case 2:
-                    Angle = AimAt(player.GetCenter);
+                    if (stopFollowingCount <= 64*2)
+                    {
+                        if (EnemyShot) Angle = AimAt(player.GetCenter);
+                    }
+                    else
+                    {
+                        stopFollowingCount += 1;
+                    }
                     AngleMath(rad);
                     Pos += Vel;
                     if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));

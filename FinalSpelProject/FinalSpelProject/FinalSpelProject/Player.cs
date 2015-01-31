@@ -292,7 +292,7 @@ namespace FinalSpelProject
             if (currentCombo >= 1)
             {
                 comboDecc += 1;
-                if (comboDecc >= 2)
+                if (comboDecc >= 1)
                 {
                     comboCount -= 1;
                     comboDecc = 0;

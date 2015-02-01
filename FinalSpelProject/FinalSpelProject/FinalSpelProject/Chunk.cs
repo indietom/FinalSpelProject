@@ -20,12 +20,16 @@ namespace FinalSpelProject
         int[,] map;
         int[,] mapE;
 
+        string tmp;
+
         public Chunk(Vector2 pos2, string path)
         {
             Pos = pos2;
+            hasSpawnedEnemies = false;
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
-            mapE = fileManager.LoadLevel(path+"E"); 
+            mapE = fileManager.LoadLevel(path+"E");
+            tmp = path+"E";
         }
 
         public void Update(List<Enemy> enemies)
@@ -33,9 +37,11 @@ namespace FinalSpelProject
             Pos += new Vector2(0, Game1.worldSpeed);
             if (Pos.Y >= -(map.GetLength(0) * 16) && Pos.Y <= 480)
                 active = true;
-            if(Pos.Y >= 480)
-                active = false;
-            SpawnEnemies(enemies);
+            if (Pos.Y >= 480)
+            {
+                Destroy = true;
+            }
+            if(active) SpawnEnemies(enemies);
         }
 
         public void SpawnEnemies(List<Enemy> enemies)
@@ -43,13 +49,14 @@ namespace FinalSpelProject
             Random r = new Random();
             if (active && !hasSpawnedEnemies)
             {
+                //Console.WriteLine(tmp);
                 for (int x = 0; x < mapE.GetLength(1); x++)
                 {
                     for (int y = 0; y < mapE.GetLength(0); y++)
                     {
                         string enemyToSpawnString = (currentLevel+1) + mapE[y, x].ToString();
                         byte enemyTypeByte = byte.Parse(enemyToSpawnString);
-                        if(enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(x * 16, y * 16), enemyTypeByte, r)); 
+                        if (enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(Pos.X + (x * 16), Pos.Y + (y * 16)), enemyTypeByte, r));
                     }
                 }
             }

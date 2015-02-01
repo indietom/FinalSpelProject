@@ -8,9 +8,48 @@ using Microsoft.Xna.Framework.Content;
 
 namespace FinalSpelProject
 {
-    class Boss
+    class Boss : GameObject
     {
+        byte hp;
+        byte type;
+        byte amountOfGuns;
+        byte amountOfParts;
 
+        short[] fireRates;
+        short[] maxFireRates;
+
+        short invisibleCount;
+        short maxInvisibleCount;
+
+        BossPart[] bossParts;
+
+        public Boss()
+        {
+
+        }
+
+        public void Update(List<Player> player, List<Projectile> projectiles)
+        {
+
+        }
+
+        public void Attack(List<Projectile> projectiles)
+        {
+
+        }
+
+        public void CheckHealth()
+        {
+
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
+        {
+            DrawSprite(spriteBatch, spritesheet);
+            if (bossParts.Count() != 0)
+                for (int i = 0; i < bossParts.Count(); i++)
+                    bossParts[i].Draw(spriteBatch, spritesheet);
+        }
     }
     struct BossPart
     {
@@ -54,6 +93,12 @@ namespace FinalSpelProject
                         hp -= p.Dm;
                     p.Destroy = true;
                 }
+            }
+            switch(type)
+            {
+                case 0:
+                    imx = (hp <= 0) ? (short)430 : (short)397;
+                    break;
             }
         }
 

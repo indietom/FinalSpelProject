@@ -51,7 +51,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Particle> particles, Player player)
         {
-            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height);
+            HitBox = FullHitBox;
             switch(movmentType)
             {
                 case 0:

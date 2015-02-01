@@ -50,7 +50,7 @@ namespace FinalSpelProject
             screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
             level = new Level(chunks, 0, 14);
-            worldSpeed = 1f;
+            worldSpeed = 1.5f;
             base.Initialize();
         }
 
@@ -89,7 +89,7 @@ namespace FinalSpelProject
 
             foreach(Enemy e in enemies)
             {
-                e.Update(player, projectiles, explosions);
+                e.Update(player, projectiles, explosions, powerUps);
             }
             foreach (Player p in player)
             {
@@ -158,8 +158,9 @@ namespace FinalSpelProject
 
             spriteBatch.Begin();
             foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]); }
+            foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Enemy e in enemies) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); }
+            foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }

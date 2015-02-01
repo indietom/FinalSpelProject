@@ -81,7 +81,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 1;
+            gunType = 2;
             specialGunType = 1;
             specialAmmo = 1;
 
@@ -132,7 +132,7 @@ namespace FinalSpelProject
                 if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 2 && fireRate <= 0)
                 {
                     for (int i = 0; i < 3; i++ )
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -65-i*25, 9, 0, 0, false));
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -80-i*10, 9, 0, 0, false));
                     fireRate = 1;
                 }
                 if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 3 && fireRate <= 0)
@@ -159,13 +159,13 @@ namespace FinalSpelProject
             switch(gunType)
             {
                 case 1:
-                    maxFireRate = 64;
+                    maxFireRate = 64-16;
                     break;
                 case 2:
-                    maxFireRate = 64;
+                    maxFireRate = 32;
                     break;
                 case 3:
-                    maxFireRate = 64 * 2;
+                    maxFireRate = 64;
                     break;
             }
             switch(specialGunType)

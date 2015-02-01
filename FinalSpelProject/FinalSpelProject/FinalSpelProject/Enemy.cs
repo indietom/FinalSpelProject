@@ -17,8 +17,11 @@ namespace FinalSpelProject
         int rSide;
         byte explosionHurtDelay;
 
+        byte chanceOfPowerUp;
+
         bool scroll;
         bool hurtByExplosion;
+        public bool OnGround { get; set; }
 
         public Enemy(Vector2 pos2, byte type2, Random r)
         {
@@ -29,6 +32,7 @@ namespace FinalSpelProject
             {
                 //Follows Player.X and shoots
                 case 11:
+                    worth = 900;
                     SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
@@ -38,6 +42,7 @@ namespace FinalSpelProject
                     break;
                 //Flies straight down and shoots toward players
                 case 12:
+                    worth = 500;
                     SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
@@ -47,10 +52,11 @@ namespace FinalSpelProject
                     break;
                 //Kamikaze enemy
                 case 13:
+                    worth = 1800;
                     SetSpriteCoords(1, Frame(4));
                     SetSize(32);
                     AnimationActive = true;
-                    health = 5;
+                    health = 1;
                     armor = 5;
                     VelX = 5;
                     VelY = 5;
@@ -58,17 +64,20 @@ namespace FinalSpelProject
                     break;
                 //Stationary Turret
                 case 14:
+                    worth = 1700;
                     SetSpriteCoords(1, Frame(3));
                     SetSize(32);
                     AnimationActive = true;
                     health = 3;
                     armor = 10;
-                    fireRate = 100;
+                    fireRate = 50;
                     Rotated = true;
                     RoateOnRad = true;
+                    OnGround = true;
                     break;
                 //Sideways Dude yo
                 case 15:
+                    worth = 1500;
                     RoateOnRad = false;
                     Rotated = true;
                     SetSpriteCoords(1, Frame(4));
@@ -86,6 +95,7 @@ namespace FinalSpelProject
                     else Pos = new Vector2(640 + 32, Pos.Y);
                     break;
                 case 16:
+                    worth = 500;
                     RoateOnRad = false;
                     Rotated = true;
                     SetSpriteCoords(1, Frame(4));
@@ -105,8 +115,9 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions)
+        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps)
         {
+            Random random = new Random();
             if (Pos.Y >= 480 + Height)
             {
                 Destroy = true;
@@ -133,6 +144,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 12:
+
                     Pos += new Vector2(0, 1f);    
                     if (fireRate != 0)
                     {
@@ -140,11 +152,12 @@ namespace FinalSpelProject
                     }
                     if (fireRate == 0)
                     {
-                        fireRate = 80;
+                        fireRate = 50;
                         projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;
                 case 13:
+
                     foreach (Player p in player)
                     {
                         AngleMath(true);
@@ -157,14 +170,14 @@ namespace FinalSpelProject
                     //Rotate the sprite towards the player
                     Rotation = AimAt(player[0].GetCenter);
                     //fires toward player(s)
-                    worth = 100;
+          
                     if (fireRate != 0)
                     {
                         fireRate -= 1;
                     }
                     if (fireRate == 0)
                     {
-                        fireRate = 100;
+                        fireRate = 50+random.Next(100);
                         projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;
@@ -228,6 +241,8 @@ namespace FinalSpelProject
                     }
                     break;
             }
+            if (Pos.Y < -Height)
+                fireRate = 30;
             if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
             foreach (Player p in player)
             {
@@ -237,10 +252,12 @@ namespace FinalSpelProject
                     p.RaiseCurrentCombo();
                 }
                 if (p.Dead)
-                    fireRate = 30;
+                    fireRate = 230;
             }
             if (health <= 0)
             {
+                chanceOfPowerUp = (byte)random.Next(1, 4);
+                if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 4), 1, false));
                 if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width));
                     else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width));
                 Destroy = true;
@@ -261,9 +278,9 @@ namespace FinalSpelProject
             }
             foreach (Player p in player)
             {
-                if (p.HitBox.Intersects(HitBox) && type != 14 && player[0].Dead == false)
+                if (p.HitBox.Intersects(HitBox) && !OnGround)
                 {
-                    Destroy = true;
+                    health = 0;
                     p.Dead = true;
                 }
             }

@@ -20,8 +20,6 @@ namespace FinalSpelProject
         int[,] map;
         int[,] mapE;
 
-        string tmp;
-
         public Chunk(Vector2 pos2, string path)
         {
             Pos = pos2;
@@ -29,7 +27,6 @@ namespace FinalSpelProject
             FileManager fileManager = new FileManager();
             map = fileManager.LoadLevel(path);
             mapE = fileManager.LoadLevel(path+"E");
-            tmp = path+"E";
         }
 
         public void Update(List<Enemy> enemies)
@@ -49,7 +46,6 @@ namespace FinalSpelProject
             Random r = new Random();
             if (active && !hasSpawnedEnemies)
             {
-                //Console.WriteLine(tmp);
                 for (int x = 0; x < mapE.GetLength(1); x++)
                 {
                     for (int y = 0; y < mapE.GetLength(0); y++)

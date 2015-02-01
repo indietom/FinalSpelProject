@@ -47,7 +47,8 @@ namespace FinalSpelProject
             {
                 if(HitBox.Intersects(p.HitBox))
                 {
-                    p.SetGunType(type, false);
+                    if (p.GetGunType() != type) p.SetGunType(type, special);
+                    else p.Score += 5000;
                     Destroy = true;
                 }
             }

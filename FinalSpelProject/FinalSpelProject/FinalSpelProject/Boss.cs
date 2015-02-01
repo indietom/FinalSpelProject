@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace FinalSpelProject
 {
@@ -12,7 +14,7 @@ namespace FinalSpelProject
     }
     struct BossPart
     {
-        Vector2 Pos { get; set; }
+        Vector2 pos;
 
         byte type;
         byte hp;
@@ -22,19 +24,42 @@ namespace FinalSpelProject
         public byte GetHp() { return hp; }
         public byte GetType() { return type; }
 
-        public short imx;
-        public short imy;
+        short imx;
+        short imy;
 
-        public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, width, height); } }
+        Rectangle hitBox;
 
-        public void Update()
+        public BossPart(Vector2 pos2, byte type2, short imx2, short imy2, byte width2, byte height2, byte hp2)
         {
-
+            pos = pos2;
+            type = type2;
+            width = width2;
+            height = height2;
+            imx = imx2;
+            imy = imy2;
+            hp = hp2;
+            hitBox = new Rectangle();
         }
 
-        public void Draw()
+        public void Update(List<Projectile> projectiles)
         {
+            hitBox = new Rectangle((int)pos.X, (int)pos.Y, width, height);
+            foreach(Projectile p in projectiles)
+            {
+                if(p.EnemyShot && hitBox.Intersects(p.HitBox))
+                {
+                    if (hp - p.Dm < 0)
+                        hp = 0;
+                    else
+                        hp -= p.Dm;
+                    p.Destroy = true;
+                }
+            }
+        }
 
+        public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
+        {
+            spriteBatch.Draw(spritesheet, pos, new Rectangle(imx, imy, width, height), Color.White);
         }
     }
 }

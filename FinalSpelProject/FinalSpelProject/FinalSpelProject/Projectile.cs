@@ -52,6 +52,7 @@ namespace FinalSpelProject
         public void Update(List<Particle> particles, Player player)
         {
             HitBox = FullHitBox;
+            Destroy = (Pos.Y < -Height) ? true : Destroy;
             switch(movmentType)
             {
                 case 0:

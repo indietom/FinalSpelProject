@@ -25,6 +25,8 @@ namespace FinalSpelProject
 
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
+        public byte GetSpecialGunType() { return specialGunType; }
+        public byte GetSpecialAmmo() { return specialAmmo; } 
 
         public void SetGunType(byte gunType2, bool special2)
         {
@@ -76,14 +78,14 @@ namespace FinalSpelProject
             inputActive = true;
             AnimationActive = true;
 
-            lives = 1;
+            lives = 5;
 
             maxVel = 4;
             Speed = 0.7f;
 
             gunType = 2;
             specialGunType = 1;
-            specialAmmo = 1;
+            specialAmmo = 2;
 
             maxRespawnCount = 130;
 
@@ -154,7 +156,9 @@ namespace FinalSpelProject
             Random random = new Random();
 
             if (specialAmmo <= 0)
+            {
                 specialGunType = 0;
+            }
 
             switch(gunType)
             {

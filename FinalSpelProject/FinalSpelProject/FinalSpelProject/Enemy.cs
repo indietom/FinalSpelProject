@@ -28,6 +28,7 @@ namespace FinalSpelProject
             Pos = pos2;
             type = type2;
             scroll = true;
+            AnimationActive = true;
             switch (type)
             {
                 //Follows Player.X and shoots
@@ -39,6 +40,8 @@ namespace FinalSpelProject
                     health = 2;
                     fireRate = 30;
                     Speed = 5;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
                 //Flies straight down and shoots toward players
                 case 12:
@@ -49,6 +52,8 @@ namespace FinalSpelProject
                     health = 2;
                     fireRate = 30;
                     Speed = 5;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
                 //Kamikaze enemy
                 case 13:
@@ -61,6 +66,8 @@ namespace FinalSpelProject
                     VelX = 5;
                     VelY = 5;
                     Speed = 2.5f;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
                 //Stationary Turret
                 case 14:
@@ -80,7 +87,7 @@ namespace FinalSpelProject
                     worth = 1500;
                     RoateOnRad = false;
                     Rotated = true;
-                    SetSpriteCoords(1, Frame(4));
+                    SetSpriteCoords(1, Frame(5));
                     SetSize(32);
                     AnimationActive = true;
                     health = 1;
@@ -93,12 +100,14 @@ namespace FinalSpelProject
                         Pos = new Vector2(-32, Pos.Y);
                     }
                     else Pos = new Vector2(640 + 32, Pos.Y);
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
                 case 16:
                     worth = 500;
                     RoateOnRad = false;
                     Rotated = true;
-                    SetSpriteCoords(1, Frame(4));
+                    SetSpriteCoords(1, Frame(5));
                     SetSize(32);
                     AnimationActive = true;
                     health = 1;
@@ -111,6 +120,8 @@ namespace FinalSpelProject
                         Pos = new Vector2(-10, -32);
                     }
                     else Pos = new Vector2(Game1.screenW + 10, -32);
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
                 case 17:
                     worth = 1800;
@@ -123,6 +134,8 @@ namespace FinalSpelProject
                     VelY = 5;
                     Speed = 10;
                     scroll = false;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
                     break;
             }
         }
@@ -133,6 +146,12 @@ namespace FinalSpelProject
             if (Pos.Y >= 480 + Height)
             {
                 Destroy = true;
+            }
+            if(MaxFrame > 0 && AnimationActive)
+            {
+                Animate();
+                AnimationCount += 1;
+                Imx = FrameX(CurrentFrame);
             }
             explosionHurtDelay = (explosionHurtDelay >= 1) ? explosionHurtDelay = (byte)(explosionHurtDelay + 1) : explosionHurtDelay;
             explosionHurtDelay = (explosionHurtDelay >= 32) ? explosionHurtDelay = 0 : explosionHurtDelay;

@@ -112,6 +112,10 @@ namespace FinalSpelProject
                     SetSize(7, 11);
                     SetSpriteCoords(133, 1);
                     break;
+                case 1:
+                    SetSize(8, 12);
+                    SetSpriteCoords(Frame(5), 1);
+                    break;
             }
         }
     }

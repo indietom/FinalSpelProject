@@ -112,6 +112,18 @@ namespace FinalSpelProject
                     }
                     else Pos = new Vector2(Game1.screenW + 10, -32);
                     break;
+                case 17:
+                    worth = 1800;
+                    SetSpriteCoords(1, Frame(4));
+                    SetSize(32);
+                    AnimationActive = true;
+                    health = 4;
+                    armor = 5;
+                    VelX = 5;
+                    VelY = 5;
+                    Speed = 10;
+                    scroll = false;
+                    break;
             }
         }
 
@@ -240,6 +252,27 @@ namespace FinalSpelProject
                         projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 3f, 0, 2, true, true));
                     }
                     break;
+                    
+                case 17:
+                    Pos += new Vector2(0,Speed);
+                    
+                    if (Speed > 0)  
+                    {
+                        Speed -= 1;
+                    }
+                    
+                    if (health <= 2)
+                    {
+                        Speed = 5;
+                        foreach (Player p in player)
+                        {
+                            AngleMath(true);
+                            Angle = AimAt(p.Pos);
+                            Pos += new Vector2(VelX, VelY);
+                        }
+                    }
+                    break;
+                    
             }
             if (Pos.Y < -Height)
                 fireRate = 30;
@@ -255,7 +288,7 @@ namespace FinalSpelProject
                     fireRate = 230;
             }
             if (health <= 0)
-            {
+               {
                 chanceOfPowerUp = (byte)random.Next(1, 4);
                 if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 4), 1, false));
                 if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width));

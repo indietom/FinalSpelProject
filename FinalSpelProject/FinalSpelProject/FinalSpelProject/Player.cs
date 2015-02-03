@@ -287,12 +287,12 @@ namespace FinalSpelProject
         public void RaiseCurrentCombo()
         {
             currentCombo += 1;
-            comboCount = (short)(maxComboCount-1);
+            comboCount = (short)(maxComboCount);
         }
         public void UpdateCombo()
         {
-            maxComboCount = (short)(10 + currentCombo * 5);
-            if (comboCount >= maxComboCount)
+            maxComboCount = (short)(200 - currentCombo * 5);
+            if (comboCount > maxComboCount)
             {
                 currentCombo += 1;
                 comboCount = 8;

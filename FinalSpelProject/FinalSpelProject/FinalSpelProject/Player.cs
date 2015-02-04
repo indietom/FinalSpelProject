@@ -318,7 +318,7 @@ namespace FinalSpelProject
             if(Dead && respawnCount <= 0)
             {
                 explosionDelay = (explosionDelay >= 4) ? (byte)0 : (byte)(explosionDelay + 1);
-                if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32));
+                if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32, false));
                 inputActive = false;
                 velDown += 0.5f;
                 if (Pos.Y >= 480)

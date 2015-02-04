@@ -310,8 +310,8 @@ namespace FinalSpelProject
                {
                 chanceOfPowerUp = (byte)random.Next(1, 4);
                 if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 4), 1, false));
-                if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width));
-                    else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width));
+                if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
+                    else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width, false));
                 Destroy = true;
             }
             Collision(player, projectile, explosions);

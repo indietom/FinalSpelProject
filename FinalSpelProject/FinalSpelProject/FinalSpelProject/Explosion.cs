@@ -15,19 +15,6 @@ namespace FinalSpelProject
 
         public bool GetCinematic() { return cinematic; }
 
-        public Explosion(Vector2 pos2, byte size2)
-        {
-            Pos = pos2;
-            size = size2;
-            SetSize(size);
-            MinFrame = 4;
-            MaxFrame = 13;
-            CurrentFrame = MinFrame;
-            SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
-            MaxAnimationCount = 2;
-            AnimationActive = true;
-            cinematic = true;
-        }
         public Explosion(Vector2 pos2, byte size2, bool cinematic2)
         {
             Pos = pos2;
@@ -39,7 +26,7 @@ namespace FinalSpelProject
             SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
             MaxAnimationCount = 2;
             AnimationActive = true;
-            cinematic = cinematic2;
+            cinematic = true;
         }
         public void Update()
         {

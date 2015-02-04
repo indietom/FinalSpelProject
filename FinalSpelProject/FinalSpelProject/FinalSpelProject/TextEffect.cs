@@ -14,6 +14,9 @@ namespace FinalSpelProject
         short maxLifeTime;
 
         float size;
+        float r;
+        float g;
+        float b;
 
         Color color;
 
@@ -48,7 +51,9 @@ namespace FinalSpelProject
                     break;
                 case 1:
                     Pos = new Vector2(Pos.X, Lerp(Pos.Y, 240, 0.1f));
-                    color = new Color(Lerp(color.R, 255, 0.001f), Lerp(color.G, 255, 0.001f), 0);
+                    color = new Color(r, g, b);
+                    r = Lerp(r, 255, 0.0001f);
+                    g = Lerp(g, 255, 0.0001f);
                     break;
             }
         }

@@ -84,6 +84,15 @@ namespace FinalSpelProject
                         break;
                 }
             }
+            else
+            {
+                switch (type)
+                {
+                    case 0:
+                        tmpString = "NUKE";
+                        break;
+                }
+            }
 
             return tmpString;
         }

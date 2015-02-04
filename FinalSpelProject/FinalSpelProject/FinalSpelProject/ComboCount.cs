@@ -18,12 +18,15 @@ namespace FinalSpelProject
 
         short currentCombo;
 
+        bool drawCounter;
+
         public ComboCounter(Vector2 pos2)
         {
             pos = pos2;
             size = 0;
             barLength = 0;
             currentCombo = 0;
+            drawCounter = false;
             color = Color.White;
         }
 

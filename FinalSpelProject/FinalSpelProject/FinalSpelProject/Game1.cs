@@ -40,6 +40,7 @@ namespace FinalSpelProject
         List<Particle> particles = new List<Particle>();
         List<Explosion> explosions = new List<Explosion>();
         List<PowerUp> powerUps = new List<PowerUp>();
+        List<TextEffect> textEffects = new List<TextEffect>();
 
         Level level;
 
@@ -117,12 +118,17 @@ namespace FinalSpelProject
 
             foreach(PowerUp p in powerUps)
             {
-                p.Update(player);
+                p.Update(player, textEffects);
+            }
+
+            foreach(TextEffect te in textEffects)
+            {
+                te.Update();
             }
 
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 64));
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -149,6 +155,10 @@ namespace FinalSpelProject
             {
                 if (powerUps[i].Destroy) powerUps.RemoveAt(i);
             }
+            for (int i = 0; i < textEffects.Count; i++)
+            {
+                if (textEffects[i].Destroy) textEffects.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -167,6 +177,7 @@ namespace FinalSpelProject
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
             UpdateScreenFlash();
             ui.Draw(spriteBatch, spritesheet, font);
+            foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
             spriteBatch.End();
 
             base.Draw(gameTime);

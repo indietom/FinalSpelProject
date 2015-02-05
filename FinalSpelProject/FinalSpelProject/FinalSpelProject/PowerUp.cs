@@ -64,37 +64,20 @@ namespace FinalSpelProject
         }
         public string GetName()
         {
-            string tmpString = "NO NAME LOADED";
+            string[] names = new string[4];
+            string[] specialNames = new string[4];
+
+            names[0] = "PISTOL - HOW DID YOU GET THIS?";
+            names[1] = "SUB-MACHINEGUN";
+            names[2] = "SPREADGUN";
+            names[3] = "ROCKETLAUNCHER";
+
+            specialNames[0] = "NUKE";
 
             if (!special)
-            {
-                switch (type)
-                {
-                    case 0:
-                        tmpString = "PISTOL";
-                        break;
-                    case 1:
-                        tmpString = "MACHINE-GUN";
-                        break;
-                    case 2:
-                        tmpString = "SPREADGUN";
-                        break;
-                    case 4:
-                        tmpString = "ROCKET-LAUNCHER";
-                        break;
-                }
-            }
+                return names[type];
             else
-            {
-                switch (type)
-                {
-                    case 0:
-                        tmpString = "NUKE";
-                        break;
-                }
-            }
-
-            return tmpString;
+                return specialNames[type];
         }
     }
 }

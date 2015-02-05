@@ -50,6 +50,11 @@ namespace FinalSpelProject
                 for (int i = 0; i < bossParts.Count(); i++)
                     bossParts[i].Draw(spriteBatch, spritesheet);
         }
+
+        public void AssignnValues()
+        {
+
+        }
     }
     struct BossPart
     {

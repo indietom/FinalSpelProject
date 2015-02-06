@@ -37,6 +37,18 @@ namespace FinalSpelProject
             AssignSprite();
             AssignMovmentValues();
         }
+        public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2, short maxLifeTime2)
+        {
+            maxLifeTime = maxLifeTime2;
+            rad = rad2;
+            Pos = pos2;
+            Angle = ang;
+            Speed = spe;
+            movmentType = movmentType2;
+            spriteType = spriteType2;
+            AssignSprite();
+            AssignMovmentValues();
+        }
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2, bool enemyShot2)
         {
             rad = rad2;
@@ -53,6 +65,12 @@ namespace FinalSpelProject
         {
             HitBox = FullHitBox;
             Destroy = (Pos.Y < -Height) ? true : Destroy;
+            if(maxLifeTime != 0)
+            {
+                lifeTime += 1;
+                if (lifeTime >= maxLifeTime)
+                    Destroy = true;
+            }
             switch(movmentType)
             {
                 case 0:
@@ -115,6 +133,10 @@ namespace FinalSpelProject
                 case 1:
                     SetSize(8, 12);
                     SetSpriteCoords(Frame(5), 1);
+                    break;
+                case 2:
+                    SetSize(16, 2);
+                    SetSpriteCoords(199, 1);
                     break;
             }
         }

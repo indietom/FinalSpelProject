@@ -40,6 +40,10 @@ namespace FinalSpelProject
         short maxComboCount;
         short respawnCount;
         short maxRespawnCount;
+        short currentLaserHeigt;
+        short maxLaserHeight;
+        short rasieLaserCount;
+        short maxRaiseLaserCount;
 
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
@@ -51,6 +55,7 @@ namespace FinalSpelProject
         public bool Invisible { get; set; }
         public bool RasieCombo { get; set; }
         public bool NukeDropped { get; set; }
+        bool reverseLaser;
 
         float velLeft;
         float velRight;
@@ -83,11 +88,14 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 1;
+            gunType = 0;
             specialGunType = 1;
             specialAmmo = 2;
 
             maxRespawnCount = 130;
+
+            maxRaiseLaserCount = 1;
+            maxLaserHeight = 200;
 
             left = Keys.Left;
             right = Keys.Right;
@@ -143,6 +151,19 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, -2, 1, 1, false));
                     fireRate = 1;
                 }
+                if(keyboard.IsKeyDown(fire) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
+                {
+                    rasieLaserCount += 1;
+                    if(rasieLaserCount >= maxRaiseLaserCount)
+                    {
+                        currentLaserHeigt += 1;
+                        rasieLaserCount = 0;
+                    }
+                }
+                if (!keyboard.IsKeyDown(fire) && gunType == 4 && currentLaserHeigt > 10 && !reverseLaser)
+                {
+                    currentLaserHeigt -= 1;
+                }
                 if(keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) && specialGunType == 1 && specialFireRate <= 0)
                 {
                     NukeDropped = true;
@@ -186,6 +207,23 @@ namespace FinalSpelProject
             {
                 if (fireRate == 8 || fireRate == 16 || fireRate == 24) 
                        projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
+            }
+            if(gunType == 4)
+            {
+                if(currentLaserHeigt >= maxLaserHeight)
+                    reverseLaser = true;
+                if (currentLaserHeigt <= 10)
+                    reverseLaser = false;
+                if (reverseLaser)
+                {
+                    currentLaserHeigt -= 1;
+                }
+                
+                maxLaserHeight = (reverseLaser) ? (short)10 : (short)200;
+                for(int i = 0; i < currentLaserHeigt; i++)
+                {
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + 8, Pos.Y-i), 0, 0, 2, 0, false, 1));
+                }
             }
             if (specialFireRate >= 1)
                 specialFireRate += 1;

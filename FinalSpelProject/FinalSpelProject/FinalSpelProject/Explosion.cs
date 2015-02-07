@@ -11,6 +11,8 @@ namespace FinalSpelProject
         // 16 = 16x16, 128 = 128x128  
         byte size;
 
+        short startOffset;
+
         bool cinematic;
 
         public bool GetCinematic() { return cinematic; }
@@ -20,31 +22,40 @@ namespace FinalSpelProject
             Pos = pos2;
             size = size2;
             SetSize(size);
-            MinFrame = 4;
-            MaxFrame = 13;
-            CurrentFrame = MinFrame;
-            SetSpriteCoords(FrameX(CurrentFrame), AssignSprite());
             MaxAnimationCount = 2;
             AnimationActive = true;
             cinematic = true;
+            AssignSprite();
         }
         public void Update()
         {
             HitBox = (!cinematic) ? HitBox = FullHitBox : HitBox = HitBox;
-            Imx = FrameX(CurrentFrame);
+            Imx = (short)(FrameX(CurrentFrame) + startOffset);
             Destroy = (CurrentFrame >= MaxFrame-1) ? Destroy = true : Destroy = false;
             Animate();
             AnimationCount += 1;
         }
-        public short AssignSprite()
+        public void AssignSprite()
         {
-            switch(size)
+            switch (size)
             {
                 case 32:
-                    return FrameY(1);
+                    MinFrame = 4;
+                    MaxFrame = 13;
+                    CurrentFrame = MinFrame;
+                    SetSpriteCoords(FrameX(CurrentFrame), FrameY(1));
+                    break;
+                case 16:
+                    SetSpriteCoords(133, 133);
+                    MaxFrame = 7;
+                    startOffset = 133;
+                    break;
+                case 64:
+                    SetSpriteCoords(133, 67);
+                    MaxFrame = 8;
+                    startOffset = 133;
                     break;
             }
-            return 0;
         }
     }
 }

@@ -18,6 +18,9 @@ namespace FinalSpelProject
         byte explosionHurtDelay;
 
         byte chanceOfPowerUp;
+        byte hitFlashDelay;
+
+        Color orginalColor;
 
         bool scroll;
         bool hurtByExplosion;
@@ -29,6 +32,7 @@ namespace FinalSpelProject
             type = type2;
             scroll = true;
             AnimationActive = true;
+            orginalColor = color;
             switch (type)
             {
                 //Follows Player.X and shoots
@@ -296,6 +300,16 @@ namespace FinalSpelProject
             if (Pos.Y < -Height)
                 fireRate = 30;
             if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
+            if(hitFlashDelay >= 1)
+            {
+                hitFlashDelay += 1;
+                color = Color.Red;
+                if(hitFlashDelay >= 8)
+                {
+                    color = orginalColor;
+                    hitFlashDelay = 0;
+                }
+            }
             foreach (Player p in player)
             {
                 if(health <= 0)
@@ -307,11 +321,11 @@ namespace FinalSpelProject
                     fireRate = 230;
             }
             if (health <= 0)
-               {
+            {
                 chanceOfPowerUp = (byte)random.Next(1, 4);
                 if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 4), 1, false));
-                if(!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
-                    else explosions.Add(new Explosion(new Vector2(Pos.X-Width/2, Pos.Y-Height/2), (byte)Width, false));
+                if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
+                else explosions.Add(new Explosion(new Vector2(Pos.X - Width / 2, Pos.Y - Height / 2), (byte)Width, false));
                 Destroy = true;
             }
             Collision(player, projectile, explosions);
@@ -324,6 +338,7 @@ namespace FinalSpelProject
             {
                 if (!ex.GetCinematic() && ex.HitBox.Intersects(HitBox) && explosionHurtDelay <= 0)
                 {
+                    hitFlashDelay = 1;
                     health -= 1;
                     explosionHurtDelay = 1;
                 }
@@ -343,6 +358,7 @@ namespace FinalSpelProject
                     if (p.Explosive)
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     health -= p.Dm;
+                    hitFlashDelay = 1;
                     p.Destroy = true;
                 }
             }

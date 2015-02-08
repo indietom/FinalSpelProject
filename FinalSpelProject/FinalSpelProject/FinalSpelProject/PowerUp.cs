@@ -50,9 +50,16 @@ namespace FinalSpelProject
             {
                 if(HitBox.Intersects(p.HitBox))
                 {
-                    textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 100, 1, 1));
-                    if (p.GetGunType() != type) p.SetGunType(type, special);
-                    else p.Score += 5000;
+                    if (p.GetGunType() != type)
+                    {
+                        textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 100, 1, 1));
+                        p.SetGunType(type, special);
+                    }
+                    else
+                    {
+                        textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 100, 1, 1));
+                        p.Score += 5000;
+                    }
                     Destroy = true;
                 }
             }

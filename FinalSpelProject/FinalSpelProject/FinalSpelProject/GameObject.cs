@@ -25,6 +25,8 @@ namespace FinalSpelProject
         public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height); } }
         public Rectangle FullHitBoxMiddle { get { return new Rectangle((int)Pos.X-Width/2, (int)Pos.Y-Height/2, Width, Height); } }
 
+        public Color color = Color.White;
+
         public short CurrentFrame { get; set; }
         public short MaxFrame { get; set; }
         public short MinFrame { get; set; }
@@ -144,18 +146,14 @@ namespace FinalSpelProject
         public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
-            spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White);
-        }
-        public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet, Color color)
-        {
-            Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
             spriteBatch.Draw(spritesheet, Pos, srcRect, color);
         }
+
         public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet, bool rad)
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
-            if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, Rotation, new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
-            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, Color.White, (Rotation*((float)Math.PI/180)), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, Rotation, new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, (Rotation*((float)Math.PI/180)), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
         }
     }
 }

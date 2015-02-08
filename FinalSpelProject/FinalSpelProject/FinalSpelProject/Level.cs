@@ -13,6 +13,8 @@ namespace FinalSpelProject
 
         string levelPath;
 
+        bool looping;
+
         public Level(List<Chunk> chunks, byte currentLevel2, byte amountOfChunks2)
         {
             amountOfChunks = amountOfChunks2;

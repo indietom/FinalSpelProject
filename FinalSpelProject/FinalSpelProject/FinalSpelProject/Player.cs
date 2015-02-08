@@ -263,6 +263,11 @@ namespace FinalSpelProject
                     if (e.Pos.Y >= -e.Height)
                         e.Destroy = true;
                 }
+                foreach(Projectile p in projectiles)
+                {
+                    if (p.Pos.Y >= -p.Height && p.EnemyShot)
+                        p.Destroy = true;
+                }
                 Game1.flashScreenCount = 1;
                 NukeDropped = false;
             }

@@ -95,7 +95,7 @@ namespace FinalSpelProject
             maxVel = 4;
             Speed = 0.7f;
 
-            gunType = 0;
+            gunType = 4;
             specialGunType = 1;
             specialAmmo = 2;
 
@@ -189,7 +189,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions)
         {
-            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y,Width,Height);
+            HitBox = FullHitBox;
             Random random = new Random();
 
             if (specialAmmo <= 0)

@@ -66,7 +66,7 @@ namespace FinalSpelProject
         }
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
-            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(496, 34, 32, 32), Color.White);
+            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(1, 463, 32, 32), Color.White);
             DrawSprite(spriteBatch, spritesheet);
         }
         public string GetName()

@@ -62,6 +62,8 @@ namespace FinalSpelProject
         float velUp;
         float velDown;
 
+        float thumbStickMax;
+
         float maxVel;
 
         Keys left;
@@ -70,6 +72,11 @@ namespace FinalSpelProject
         Keys up;
         Keys fire;
         Keys specialFire;
+
+        PlayerIndex playerIndex;
+
+        GamePadState gamePad;
+        GamePadState prevGamePad;
 
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
@@ -97,6 +104,10 @@ namespace FinalSpelProject
             maxRaiseLaserCount = 1;
             maxLaserHeight = 200;
 
+            playerIndex = PlayerIndex.One;
+
+            thumbStickMax = 0.1f;
+
             left = Keys.Left;
             right = Keys.Right;
             down = Keys.Down;
@@ -108,50 +119,54 @@ namespace FinalSpelProject
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
+
+            prevGamePad = gamePad;
+            gamePad = GamePad.GetState(playerIndex);
+
             if (keyboard.IsKeyDown(Keys.Space))
             {
                 comboCount += 10;
             }
             if(inputActive)
             {
-                if(keyboard.IsKeyDown(left) && velLeft >= -maxVel)
+                if((keyboard.IsKeyDown(left) || gamePad.ThumbSticks.Left.X <= -thumbStickMax) && velLeft >= -maxVel)
                 {
                     velLeft -= Speed;
                 }
-                if (keyboard.IsKeyDown(right) && velRight <= maxVel)
+                if ((keyboard.IsKeyDown(right) || gamePad.ThumbSticks.Left.X >= thumbStickMax) && velRight <= maxVel)
                 {
                     velRight += Speed;
                 }
-                if (keyboard.IsKeyDown(up) && velUp >= -maxVel)
+                if ((keyboard.IsKeyDown(up) || gamePad.ThumbSticks.Left.Y >= thumbStickMax) && velUp >= -maxVel)
                 {
                     velUp -= Speed;
                 }
-                if (keyboard.IsKeyDown(down) && velDown <= maxVel)
+                if ((keyboard.IsKeyDown(down) || gamePad.ThumbSticks.Left.Y <= -thumbStickMax) && velDown <= maxVel)
                 {
                     velDown += Speed;
                 }
-                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 0 && fireRate <= 0)
+                if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 0 && fireRate <= 0)
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X+16-3, Pos.Y+16-3), -90, 9, 0, 0, false));
                     fireRate = 1;
                 }
-                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 1 && fireRate <= 0)
+                if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 1 && fireRate <= 0)
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 0,false));
                     fireRate = 1;
                 }
-                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 2 && fireRate <= 0)
+                if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 2 && fireRate <= 0)
                 {
                     for (int i = 0; i < 3; i++ )
                         projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -80-i*10, 9, 0, 0, false));
                     fireRate = 1;
                 }
-                if (keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) && gunType == 3 && fireRate <= 0)
+                if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 3 && fireRate <= 0)
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, -2, 1, 1, false));
                     fireRate = 1;
                 }
-                if(keyboard.IsKeyDown(fire) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
+                if((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
                 {
                     rasieLaserCount += 1;
                     if(rasieLaserCount >= maxRaiseLaserCount)
@@ -160,11 +175,11 @@ namespace FinalSpelProject
                         rasieLaserCount = 0;
                     }
                 }
-                if (!keyboard.IsKeyDown(fire) && gunType == 4 && currentLaserHeigt > 10 && !reverseLaser)
+                if (!keyboard.IsKeyDown(fire) && gamePad.IsButtonUp(Buttons.X) && gunType == 4 && currentLaserHeigt > 10 && !reverseLaser)
                 {
                     currentLaserHeigt -= 1;
                 }
-                if(keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) && specialGunType == 1 && specialFireRate <= 0)
+                if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 1 && specialFireRate <= 0)
                 {
                     NukeDropped = true;
                     specialAmmo -= 1;
@@ -225,6 +240,7 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + 8, Pos.Y-i), 0, 0, 2, 0, false, 1));
                 }
             }
+
             if (specialFireRate >= 1)
                 specialFireRate += 1;
             if (specialFireRate >= specialMaxFireRate)

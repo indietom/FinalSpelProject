@@ -12,8 +12,6 @@ namespace FinalSpelProject
     {
         byte hp;
         byte type;
-        byte amountOfGuns;
-        byte amountOfParts;
 
         short[] fireRates;
         short[] maxFireRates;
@@ -23,9 +21,12 @@ namespace FinalSpelProject
 
         BossPart[] bossParts;
 
-        public Boss()
+        public Boss(Vector2 pos2, byte type2)
         {
-
+            Pos = pos2;
+            type = type2;
+            maxInvisibleCount = 8;
+            OrginalColor = color;
         }
 
         public void Update(List<Player> player, List<Projectile> projectiles)
@@ -35,12 +36,29 @@ namespace FinalSpelProject
 
         public void Attack(List<Projectile> projectiles)
         {
-
+            switch (type)
+            {
+                case 0:
+                    if(fireRates[0] >= maxFireRates[0])
+                    {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + 5, Pos.Y + 88), 0, 4, 1, 2, true));
+                        fireRates[0] = 0;
+                    }
+                    break;
+            }
         }
 
         public void CheckHealth()
         {
-
+            if(invisibleCount >= 1)
+            {
+                color = Color.Red;
+                if(invisibleCount >= maxInvisibleCount)
+                {
+                    color = OrginalColor;
+                    invisibleCount = 0;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
@@ -53,7 +71,17 @@ namespace FinalSpelProject
 
         public void AssignnValues()
         {
-
+            switch (type)
+            {
+                case 0:
+                    bossParts = new BossPart[3];
+                    fireRates = new short[2];
+                    maxFireRates = new short[2];
+                    maxFireRates[0] = 64;
+                    maxFireRates[1] = 32;
+                    hp = 20;
+                    break;
+            }
         }
     }
     struct BossPart

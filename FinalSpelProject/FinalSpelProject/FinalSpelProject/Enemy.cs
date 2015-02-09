@@ -20,8 +20,6 @@ namespace FinalSpelProject
         byte chanceOfPowerUp;
         byte hitFlashDelay;
 
-        Color orginalColor;
-
         bool scroll;
         bool hurtByExplosion;
         public bool OnGround { get; set; }
@@ -32,7 +30,7 @@ namespace FinalSpelProject
             type = type2;
             scroll = true;
             AnimationActive = true;
-            orginalColor = color;
+            OrginalColor = color;
             switch (type)
             {
                 //Follows Player.X and shoots
@@ -79,7 +77,7 @@ namespace FinalSpelProject
                     SetSpriteCoords(1, Frame(3));
                     SetSize(32);
                     AnimationActive = true;
-                    health = 3;
+                    health = 2;
                     armor = 10;
                     fireRate = 50;
                     Rotated = true;
@@ -306,7 +304,7 @@ namespace FinalSpelProject
                 color = Color.Red;
                 if(hitFlashDelay >= 8)
                 {
-                    color = orginalColor;
+                    color = OrginalColor;
                     hitFlashDelay = 0;
                 }
             }

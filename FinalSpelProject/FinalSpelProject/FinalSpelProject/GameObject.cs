@@ -26,6 +26,7 @@ namespace FinalSpelProject
         public Rectangle FullHitBoxMiddle { get { return new Rectangle((int)Pos.X-Width/2, (int)Pos.Y-Height/2, Width, Height); } }
 
         public Color color = Color.White;
+        public Color OrginalColor { get; set; }
 
         public short CurrentFrame { get; set; }
         public short MaxFrame { get; set; }

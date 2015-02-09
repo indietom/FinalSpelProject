@@ -29,6 +29,10 @@ namespace FinalSpelProject
             if(!special) SetSpriteCoords((short)(462+FrameX(type)), 1);
                  else SetSpriteCoords(FrameX(type), Frame(5));
             Speed = 4f;
+            AnimationActive = true;
+            MinFrame = 0;
+            MaxFrame = 5;
+            MaxAnimationCount = 2;
             name = GetName();
         }
 
@@ -45,6 +49,8 @@ namespace FinalSpelProject
                     Pos += new Vector2(0, Game1.worldSpeed);
                     break;
             }
+            AnimationCount += 1;
+            Animate();
             HitBox = FullHitBox;
             foreach(Player p in players)
             {
@@ -66,7 +72,7 @@ namespace FinalSpelProject
         }
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
-            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(1, 463, 32, 32), Color.White);
+            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(Frame(CurrentFrame), 463, 32, 32), Color.White);
             DrawSprite(spriteBatch, spritesheet);
         }
         public string GetName()

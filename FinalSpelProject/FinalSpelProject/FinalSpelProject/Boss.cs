@@ -41,7 +41,7 @@ namespace FinalSpelProject
                 case 0:
                     if(fireRates[0] >= maxFireRates[0])
                     {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + 5, Pos.Y + 88), 0, 4, 1, 2, true));
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + 5, Pos.Y + 88), 0, 5, 1, 2, true));
                         fireRates[0] = 0;
                     }
                     break;
@@ -57,6 +57,15 @@ namespace FinalSpelProject
                 {
                     color = OrginalColor;
                     invisibleCount = 0;
+                }
+            }
+            if(hp <= 0)
+            {
+                switch(type)
+                {
+                    case 0:
+                        // TODO: boss slowlyfalls of screen 
+                        break;
                 }
             }
         }

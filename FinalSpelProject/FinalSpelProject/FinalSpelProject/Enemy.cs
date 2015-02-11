@@ -138,6 +138,7 @@ namespace FinalSpelProject
                     scroll = false;
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
+                    Pos = new Vector2(Pos.X, -32);
                     break;
             }
         }
@@ -275,22 +276,43 @@ namespace FinalSpelProject
                     break;
                     
                 case 17:
-                    Pos += new Vector2(0,Speed);
-                    
-                    if (Speed > 0)  
-                    {
-                        Speed -= 1;
-                    }
-                    
-                    if (health <= 2)
-                    {
-                        Speed = 5;
-                        foreach (Player p in player)
-                        {
-                            AngleMath(true);
-                            Angle = AimAt(p.Pos);
-                            Pos += new Vector2(VelX, VelY);
-                        }
+                     //Pos += new Vector2(0,Speed);
+
+                     if (Speed > 0)
+                     {
+                         if (health > 2)
+                         {
+                             
+                             if (Speed != 0)
+                             {
+                                 Pos = new Vector2(Pos.X, Lerp(Pos.Y, 60, 0.02f));
+                             }
+                             
+                         }
+                     }
+                         
+                         if (health <= 2)
+                         {
+                             Speed = 1;
+                             foreach (Player p in player)
+                             {
+                                 AngleMath(true);
+                                 Angle = AimAt(p.GetCenter);
+                                 Pos += new Vector2(VelX, VelY);
+                                 if (Pos.Y < p.Pos.Y)
+                                 {
+                                     AngleMath(true);
+                                     Angle = AimAt(p.GetCenter);
+                                     Pos += new Vector2(VelX, VelY);
+                                 }
+                                 else
+                                 {
+                                     
+                                     Pos += new Vector2(VelX, VelY);
+                                 }
+
+                             
+                         }
                     }
                     break;
                     

@@ -376,6 +376,8 @@ namespace FinalSpelProject
             Random random = new Random();
             if(Dead && respawnCount <= 0)
             {
+                currentCombo = 0;
+                gunType = 0;
                 explosionDelay = (explosionDelay >= 4) ? (byte)0 : (byte)(explosionDelay + 1);
                 if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32, false));
                 inputActive = false;

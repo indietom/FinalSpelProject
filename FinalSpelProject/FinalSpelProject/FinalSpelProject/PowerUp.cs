@@ -82,9 +82,9 @@ namespace FinalSpelProject
             if (!special)
             {
                 names[0] = "PISTOL - HOW DID YOU GET THIS?";
-                names[1] = "SUB-MACHINEGUN";
+                names[1] = ".40 MM CANNON";
                 names[2] = "SPREADGUN";
-                names[3] = "ROCKETLAUNCHER";
+                names[3] = "MISSILE";
                 names[4] = "LAZER BEAM";
             }
             else

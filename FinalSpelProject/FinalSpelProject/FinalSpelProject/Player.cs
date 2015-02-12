@@ -149,23 +149,23 @@ namespace FinalSpelProject
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 0 && fireRate <= 0)
                 {
-                    projectiles.Add(new Projectile(new Vector2(Pos.X+16-3, Pos.Y+16-3), -90, 9, 0, 0, false));
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, 9, 0, 0, false));
                     fireRate = 1;
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 1 && fireRate <= 0)
                 {
-                    projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, 9, 0, 0,false));
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, 9, 0, 0, false));
                     fireRate = 1;
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 2 && fireRate <= 0)
                 {
                     for (int i = 0; i < 3; i++ )
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -80-i*10, 9, 0, 0, false));
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -80 - i * 10, 9, 0, 0, false));
                     fireRate = 1;
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 3 && fireRate <= 0)
                 {
-                    projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90, -2, 1, 1, false));
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, -2, 1, 1, false));
                     fireRate = 1;
                 }
                 if((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
@@ -173,7 +173,7 @@ namespace FinalSpelProject
                     rasieLaserCount += 1;
                     if(rasieLaserCount >= maxRaiseLaserCount)
                     {
-                        currentLaserHeigt += 1;
+                        currentLaserHeigt += 3;
                         rasieLaserCount = 0;
                     }
                 }
@@ -222,8 +222,8 @@ namespace FinalSpelProject
             }
             if(gunType == 1 && fireRate >= 1)
             {
-                if (fireRate == 8 || fireRate == 16 || fireRate == 24) 
-                       projectiles.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
+                if (fireRate == 8 || fireRate == 16 || fireRate == 24)
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
             }
             if(gunType == 4)
             {
@@ -239,7 +239,7 @@ namespace FinalSpelProject
                 maxLaserHeight = (reverseLaser) ? (short)10 : (short)200;
                 for(int i = 0; i < currentLaserHeigt; i++)
                 {
-                    projectiles.Add(new Projectile(new Vector2(Pos.X + 8, Pos.Y-i), 0, 0, 2, 0, false, 1));
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 8, Pos.Y - i), 0, 0, 2, 0, false, 1));
                 }
             }
 
@@ -381,14 +381,14 @@ namespace FinalSpelProject
                 currentCombo = 0;
                 gunType = 0;
                 explosionDelay = (explosionDelay >= 4) ? (byte)0 : (byte)(explosionDelay + 1);
-                if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32, false));
+                if (explosionDelay % 2 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, Width), random.Next(-16, Height)), 32, false));
                 inputActive = false;
                 velDown += 0.5f;
-                if (Pos.Y >= Game1.screenH)
+                if (Pos.Y >= Game1.screenH+Height*3)
                 {
                     if(lives != 0) lives -= 1;
                     respawnCount = 1;
-                    Pos = new Vector2(640 / 2 - 16, 550);
+                    Pos = new Vector2(Game1.screenW / 2 - Width / 2, Game1.screenH + Height * 3);
                 }
             }
             if(flashCount >= 8)
@@ -399,7 +399,7 @@ namespace FinalSpelProject
             }
             if(respawnCount >= 1)
             {
-                Pos = new Vector2(Pos.X, Lerp(Pos.Y, 240, 0.04f));
+                Pos = new Vector2(Pos.X, Lerp(Pos.Y, Game1.screenH/2-Height/2, 0.04f));
                 respawnCount += 1;
                 flashCount += 1;
                 Invisible = true;

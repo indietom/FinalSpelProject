@@ -147,7 +147,7 @@ namespace FinalSpelProject
         {
             Random random = new Random();
            
-            if (Pos.Y >= 480 + Height)
+            if (Pos.Y >= Game1.screenH + Height)
             {
                 Destroy = true;
             }
@@ -175,7 +175,7 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 80;
-                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), 90, 9, 0, 0, false, true));
+                        projectile.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), 90, 9, 0, 0, false, true));
                     }
                     break;
                 case 12:
@@ -188,7 +188,7 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 50;
-                        projectile.Add(new Projectile(new Vector2(Pos.X + 16 - 3, Pos.Y + 16 - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                        projectile.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
                     break;
                 case 13:

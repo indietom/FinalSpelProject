@@ -32,9 +32,9 @@ namespace FinalSpelProject
         public void Update(List<Enemy> enemies)
         {
             Pos += new Vector2(0, Game1.worldSpeed);
-            if (Pos.Y >= -(map.GetLength(0) * 16) && Pos.Y <= 480)
+            if (Pos.Y >= -(map.GetLength(0) * 16) && Pos.Y <= Game1.screenH)
                 active = true;
-            if (Pos.Y >= 480)
+            if (Pos.Y >= Game1.screenH)
             {
                 Destroy = true;
             }

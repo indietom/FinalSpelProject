@@ -146,6 +146,7 @@ namespace FinalSpelProject
         public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps)
         {
             Random random = new Random();
+           
             if (Pos.Y >= 480 + Height)
             {
                 Destroy = true;

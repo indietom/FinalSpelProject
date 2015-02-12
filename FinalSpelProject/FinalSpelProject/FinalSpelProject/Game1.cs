@@ -27,7 +27,8 @@ namespace FinalSpelProject
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 640;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 640;
             Content.RootDirectory = "Content";
         }
 

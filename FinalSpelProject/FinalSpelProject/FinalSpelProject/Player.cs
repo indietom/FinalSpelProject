@@ -65,6 +65,7 @@ namespace FinalSpelProject
         float thumbStickMax;
 
         float maxVel;
+        float deccelerate;
 
         Keys left;
         Keys right;
@@ -85,15 +86,16 @@ namespace FinalSpelProject
         {
             Pos = new Vector2(320-16, 240);
             SetSpriteCoords(1, 1);
-            SetSize(32);
+            SetSize(64);
 
             inputActive = true;
             AnimationActive = true;
 
             lives = 5;
 
-            maxVel = 4;
-            Speed = 0.7f;
+            maxVel = 5;
+            Speed = 1f;
+            deccelerate = 0.4f;
 
             gunType = 4;
             specialGunType = 1;
@@ -309,22 +311,22 @@ namespace FinalSpelProject
             if (velLeft <= -0.3f)
             {
                 Pos += new Vector2(velLeft, 0);
-                velLeft += 0.2f;
+                velLeft += deccelerate;
             }
             if (velRight >= 0.3f)
             {
                 Pos += new Vector2(velRight, 0);
-                velRight -= 0.2f;
+                velRight -= deccelerate;
             }
             if (velUp <= -0.3f)
             {
                 Pos += new Vector2(0, velUp);
-                velUp += 0.2f;
+                velUp += deccelerate;
             }
             if (velDown >= 0.3f)
             {
                 Pos += new Vector2(0, velDown);
-                velDown -= 0.2f;
+                velDown -= deccelerate;
             }
         }
         public void UpdateInvisiblity()
@@ -382,7 +384,7 @@ namespace FinalSpelProject
                 if (explosionDelay % 4 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, 16), random.Next(-16, 16)), 32, false));
                 inputActive = false;
                 velDown += 0.5f;
-                if (Pos.Y >= 480)
+                if (Pos.Y >= Game1.screenH)
                 {
                     if(lives != 0) lives -= 1;
                     respawnCount = 1;

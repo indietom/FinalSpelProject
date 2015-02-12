@@ -129,7 +129,7 @@ namespace FinalSpelProject
 
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                //explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 64, false));
+                //if(explosions.Count == 0) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
                 powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
             }
 

@@ -57,7 +57,7 @@ namespace FinalSpelProject
             switch(spriteType)
             {
                 case 0:
-                    SetSpriteCoords(1, 67);
+                    SetSpriteCoords(1, 131);
                     SetSize(8);
                     MaxAnimationCount = 4;
                     MaxFrame = 5;

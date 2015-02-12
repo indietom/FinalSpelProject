@@ -118,7 +118,7 @@ namespace FinalSpelProject
             {
                 case 0:
                     SetSize(7, 11);
-                    SetSpriteCoords(133, 1);
+                    SetSpriteCoords(326, 1);
                     break;
             }
         }
@@ -128,15 +128,15 @@ namespace FinalSpelProject
             {
                 case 0:
                     SetSize(7, 11);
-                    SetSpriteCoords(133, 1);
+                    SetSpriteCoords(326, 1);
                     break;
                 case 1:
-                    SetSize(8, 12);
-                    SetSpriteCoords(Frame(5), 1);
+                    SetSize(8, 14);
+                    SetSpriteCoords(359, 1);
                     break;
                 case 2:
                     SetSize(16, 2);
-                    SetSpriteCoords(199, 1);
+                    SetSpriteCoords(392, 1);
                     break;
             }
         }

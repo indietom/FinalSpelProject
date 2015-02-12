@@ -34,9 +34,9 @@ namespace FinalSpelProject
             foreach(Player p in player)
             {
                 amountOfLives = p.GetLives();
-                powerUpFrame = (short)(462 + Frame(p.GetGunType(), 16));
-                specialPowerUpFrame = (short)(462 + Frame((short)(p.GetSpecialGunType()-1), 16));
-                scoreText = "SCORE: " + p.Score.ToString().PadLeft(8, '0');
+                powerUpFrame = (short)(781 + Frame(p.GetGunType(), 16));
+                specialPowerUpFrame = (short)(781 + Frame((short)(p.GetSpecialGunType()-1), 16));
+                scoreText = "SCORE: " + p.Score.ToString().PadLeft(9, '0');
                 amountOfSpecialAmmo = p.GetSpecialAmmo();
                 specialGunType = p.GetSpecialGunType();
             }
@@ -45,19 +45,19 @@ namespace FinalSpelProject
 
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet, SpriteFont font)
         {
-            spriteBatch.Draw(spritesheet, new Vector2(10, 32), new Rectangle(463, 34, 32, 32), Color.White);
-            spriteBatch.Draw(spritesheet, new Vector2(47, 32), new Rectangle(463, 34, 32, 32), Color.White);
-            spriteBatch.Draw(spritesheet, new Vector2(10+8, 32+8), new Rectangle(powerUpFrame, 1, 16, 16), Color.White);
+            spriteBatch.Draw(spritesheet, new Vector2(10, 32), new Rectangle(781, 1, 32, 32), Color.White);
+            spriteBatch.Draw(spritesheet, new Vector2(47, 32), new Rectangle(781, 1, 32, 32), Color.White);
+            spriteBatch.Draw(spritesheet, new Vector2(10+8, 32+8), new Rectangle(powerUpFrame, 34, 16, 16), Color.White);
             if(amountOfSpecialAmmo > 1) spriteBatch.DrawString(font, "x" + amountOfSpecialAmmo.ToString(), new Vector2(47 + 38, 32), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
-            if(specialGunType != 0) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 17, 16, 16), Color.White);
+            if(specialGunType != 0) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 50, 16, 16), Color.White);
             if(!printLives)
             {
                 for(int i = 0; i < amountOfLives; i++)
-                    spriteBatch.Draw(spritesheet, new Vector2(10 + i * 24, 10), new Rectangle(529, 34, 16, 16), Color.White);
+                    spriteBatch.Draw(spritesheet, new Vector2(10 + i * 24, 10), new Rectangle(847, 1, 16, 16), Color.White);
             }
             else
             {
-                spriteBatch.Draw(spritesheet, new Vector2(10, 10), new Rectangle(529, 34, 16, 16), Color.White);
+                spriteBatch.Draw(spritesheet, new Vector2(10, 10), new Rectangle(847, 1, 16, 16), Color.White);
                 spriteBatch.DrawString(font, "x" + amountOfLives.ToString(), new Vector2(30, 7), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
             }
             comboCounter.Draw(spriteBatch, font, spritesheet);

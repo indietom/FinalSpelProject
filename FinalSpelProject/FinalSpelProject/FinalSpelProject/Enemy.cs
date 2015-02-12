@@ -36,8 +36,8 @@ namespace FinalSpelProject
                 //Follows Player.X and shoots
                 case 11:
                     worth = 900;
-                    SetSpriteCoords(1, Frame(4));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 2;
                     fireRate = 30;
@@ -48,8 +48,8 @@ namespace FinalSpelProject
                 //Flies straight down and shoots toward players
                 case 12:
                     worth = 500;
-                    SetSpriteCoords(1, Frame(4));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 2;
                     fireRate = 30;
@@ -60,8 +60,8 @@ namespace FinalSpelProject
                 //Kamikaze enemy
                 case 13:
                     worth = 1800;
-                    SetSpriteCoords(1, Frame(4));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 1;
                     armor = 5;
@@ -74,7 +74,7 @@ namespace FinalSpelProject
                 //Stationary Turret
                 case 14:
                     worth = 1700;
-                    SetSpriteCoords(1, Frame(3));
+                    SetSpriteCoords(1, 261);
                     SetSize(32);
                     AnimationActive = true;
                     health = 2;
@@ -89,8 +89,8 @@ namespace FinalSpelProject
                     worth = 1500;
                     RoateOnRad = false;
                     Rotated = true;
-                    SetSpriteCoords(1, Frame(5));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(7));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 1;
                     armor = 0;
@@ -109,8 +109,8 @@ namespace FinalSpelProject
                     worth = 500;
                     RoateOnRad = false;
                     Rotated = true;
-                    SetSpriteCoords(1, Frame(5));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(7));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 1;
                     armor = 0;
@@ -127,8 +127,8 @@ namespace FinalSpelProject
                     break;
                 case 17:
                     worth = 1800;
-                    SetSpriteCoords(1, Frame(4));
-                    SetSize(32);
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
                     AnimationActive = true;
                     health = 4;
                     armor = 5;

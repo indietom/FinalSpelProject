@@ -26,8 +26,8 @@ namespace FinalSpelProject
             Pos = pos2;
             type = type2;
             SetSize(16);
-            if(!special) SetSpriteCoords((short)(462+FrameX(type)), 1);
-                 else SetSpriteCoords(FrameX(type), Frame(5));
+            if(!special) SetSpriteCoords((short)(780+FrameX(type)), 34);
+                 else SetSpriteCoords((short)(780+FrameX(type)), 50);
             Speed = 4f;
             AnimationActive = true;
             MinFrame = 0;
@@ -72,7 +72,7 @@ namespace FinalSpelProject
         }
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
-            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(Frame(CurrentFrame), 463, 32, 32), Color.White);
+            spriteBatch.Draw(spritesheet, Pos - new Vector2(8, 8), new Rectangle(Frame(CurrentFrame, 32), 911, 32, 32), Color.White);
             DrawSprite(spriteBatch, spritesheet);
         }
         public string GetName()

@@ -40,20 +40,20 @@ namespace FinalSpelProject
             switch (size)
             {
                 case 32:
-                    MinFrame = 4;
-                    MaxFrame = 13;
+                    MaxFrame = 9;
                     CurrentFrame = MinFrame;
-                    SetSpriteCoords(FrameX(CurrentFrame), FrameY(1));
+                    SetSpriteCoords(326, 98);
+                    startOffset = 326;
                     break;
                 case 16:
-                    SetSpriteCoords(133, 133);
+                    SetSpriteCoords(326, 196);
                     MaxFrame = 7;
-                    startOffset = 133;
+                    startOffset = 326;
                     break;
                 case 64:
-                    SetSpriteCoords(133, 67);
-                    MaxFrame = 8;
-                    startOffset = 133;
+                    SetSpriteCoords(326, 131);
+                    MaxFrame = 7;
+                    startOffset = 326;
                     break;
             }
         }

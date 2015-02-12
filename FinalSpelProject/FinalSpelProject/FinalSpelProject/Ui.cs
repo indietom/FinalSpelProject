@@ -34,8 +34,8 @@ namespace FinalSpelProject
             foreach(Player p in player)
             {
                 amountOfLives = p.GetLives();
-                powerUpFrame = (short)(781 + Frame(p.GetGunType(), 16));
-                specialPowerUpFrame = (short)(781 + Frame((short)(p.GetSpecialGunType()-1), 16));
+                powerUpFrame = (short)(780 + Frame(p.GetGunType(), 16));
+                specialPowerUpFrame = (short)(780 + Frame((short)(p.GetSpecialGunType()-1), 16));
                 scoreText = "SCORE: " + p.Score.ToString().PadLeft(9, '0');
                 amountOfSpecialAmmo = p.GetSpecialAmmo();
                 specialGunType = p.GetSpecialGunType();

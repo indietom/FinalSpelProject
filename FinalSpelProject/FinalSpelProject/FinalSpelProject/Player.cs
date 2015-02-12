@@ -229,14 +229,14 @@ namespace FinalSpelProject
             {
                 if(currentLaserHeigt >= maxLaserHeight)
                     reverseLaser = true;
-                if (currentLaserHeigt <= 10)
+                if (currentLaserHeigt <= 100)
                     reverseLaser = false;
                 if (reverseLaser)
                 {
                     currentLaserHeigt -= 1;
                 }
                 
-                maxLaserHeight = (reverseLaser) ? (short)10 : (short)200;
+                maxLaserHeight = (reverseLaser) ? (short)100 : (short)200;
                 for(int i = 0; i < currentLaserHeigt; i++)
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 8, Pos.Y - i), 0, 0, 2, 0, false, 1));

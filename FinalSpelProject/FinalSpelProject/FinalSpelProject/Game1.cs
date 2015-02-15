@@ -76,7 +76,7 @@ namespace FinalSpelProject
         {
             if(flashScreenCount >= 1)
             {
-                spriteBatch.Draw(spritesheet, new Rectangle(0, 0, screenW, screenH), new Rectangle(1, 562, 32, 32), Color.White);
+                spriteBatch.Draw(spritesheet, new Rectangle(0, 0, screenW, screenH), new Rectangle(1, 1496, 64, 64), Color.White);
                 // lite kod > läslighet amrite
                 flashScreenCount = (flashScreenCount >= 32) ? flashScreenCount = 0 : flashScreenCount = (byte)(flashScreenCount + 1);
             }

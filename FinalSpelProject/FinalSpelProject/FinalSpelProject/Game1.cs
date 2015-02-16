@@ -42,6 +42,7 @@ namespace FinalSpelProject
         List<Explosion> explosions = new List<Explosion>();
         List<PowerUp> powerUps = new List<PowerUp>();
         List<TextEffect> textEffects = new List<TextEffect>();
+        List<Gib> gibs = new List<Gib>();
 
         Level level;
 
@@ -87,7 +88,14 @@ namespace FinalSpelProject
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            Random random = new Random();
+
             ui.Update(player);
+
+            foreach(Gib g in gibs)
+            {
+                g.Update();
+            }
 
             foreach(Enemy e in enemies)
             {
@@ -130,7 +138,8 @@ namespace FinalSpelProject
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 //if(explosions.Count == 0) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
+                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
+                gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(2, 7), random.Next(360)));   
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -161,6 +170,10 @@ namespace FinalSpelProject
             {
                 if (textEffects[i].Destroy) textEffects.RemoveAt(i);
             }
+            for (int i = 0; i < gibs.Count; i++)
+            {
+                if (gibs[i].Destroy) gibs.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -171,6 +184,7 @@ namespace FinalSpelProject
             spriteBatch.Begin();
             foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]); }
             foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
+            foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
             foreach (Player p in player) { if(!p.Flash) p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }

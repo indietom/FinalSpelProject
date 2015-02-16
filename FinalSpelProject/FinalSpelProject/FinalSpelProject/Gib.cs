@@ -10,6 +10,7 @@ namespace FinalSpelProject
     {
         public Gib(Vector2 pos2, short frame2, short imy2, float spe, float ang)
         {
+            Pos = pos2;
             SetSize(16);
             SetSpriteCoords(Frame(frame2, 16), imy2);
             Speed = spe;
@@ -21,7 +22,7 @@ namespace FinalSpelProject
         {
             AngleMath(false);
             Pos += Vel;
-            Rotation += Speed / 10;
+            Rotation += Speed;
         }
     }
 }

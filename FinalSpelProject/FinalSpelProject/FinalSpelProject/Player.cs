@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FinalSpelProject 
 {
@@ -22,6 +24,7 @@ namespace FinalSpelProject
         byte specialAmmo;
         byte specialGunType;
         byte explosionDelay;
+        byte muzzleFlashCount;
 
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
@@ -44,6 +47,7 @@ namespace FinalSpelProject
         short maxLaserHeight;
         short rasieLaserCount;
         short maxRaiseLaserCount;
+        short muzzleFlashFrame;
 
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
@@ -194,6 +198,8 @@ namespace FinalSpelProject
             HitBox = FullHitBox;
             Random random = new Random();
 
+            UpdateMuzzeflash();
+
             if (specialAmmo <= 0)
             {
                 specialGunType = 0;
@@ -223,7 +229,10 @@ namespace FinalSpelProject
             if(gunType == 1 && fireRate >= 1)
             {
                 if (fireRate == 8 || fireRate == 16 || fireRate == 24)
+                {
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
+                    muzzleFlashCount = 1;
+                }
             }
             if(gunType == 4)
             {
@@ -288,6 +297,24 @@ namespace FinalSpelProject
                 }
                 Game1.flashScreenCount = 1;
                 NukeDropped = false;
+            }
+        }
+        public void UpdateMuzzeflash()
+        {
+            muzzleFlashCount = (fireRate == 1) ? muzzleFlashCount = 1 : muzzleFlashCount;
+            muzzleFlashCount = (muzzleFlashCount >= 1) ? (byte)(muzzleFlashCount + 1) : muzzleFlashCount;
+            if(muzzleFlashCount <= 1 || muzzleFlashCount >= 16 || muzzleFlashFrame > 3)
+            {
+                muzzleFlashFrame = 0;
+            }
+            if(muzzleFlashCount >= 16)
+            {
+                muzzleFlashCount = 0;
+            }
+
+            if (muzzleFlashCount % 4 == 0 && muzzleFlashCount != 0)
+            {
+                muzzleFlashFrame += 1;
             }
         }
         public void Movment()
@@ -414,6 +441,14 @@ namespace FinalSpelProject
                     invisibleCount = 1;
                 }
             }
+        }
+        public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
+        {
+            if(muzzleFlashCount > 0)
+            {
+                spriteBatch.Draw(spritesheet, new Vector2(Pos.X + 19, Pos.Y), new Rectangle(66+Frame(muzzleFlashFrame, 24), 1, 24, 9), Color.White);
+            }
+            DrawSprite(spriteBatch, spritesheet);
         }
     }
 }

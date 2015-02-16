@@ -16,7 +16,7 @@ namespace FinalSpelProject
         bool sideChosen;
         int rSide;
         byte explosionHurtDelay;
-        string material = "organic alien";
+        string material;
 
         byte chanceOfPowerUp;
         byte hitFlashDelay;

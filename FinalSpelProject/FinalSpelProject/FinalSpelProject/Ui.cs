@@ -23,6 +23,11 @@ namespace FinalSpelProject
 
         bool printLives;
 
+        public bool hideGameHud;
+
+        public bool GetGameHud() { return hideGameHud; }
+        public void SetGameHud(bool gameHud2) { hideGameHud = gameHud2; }
+
         public Ui()
         {
             comboCounter = new ComboCounter(new Vector2(220, 10));
@@ -45,23 +50,30 @@ namespace FinalSpelProject
 
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet, SpriteFont font)
         {
-            spriteBatch.Draw(spritesheet, new Vector2(10, 32), new Rectangle(781, 1, 32, 32), Color.White);
-            spriteBatch.Draw(spritesheet, new Vector2(47, 32), new Rectangle(781, 1, 32, 32), Color.White);
-            spriteBatch.Draw(spritesheet, new Vector2(10+8, 32+8), new Rectangle(powerUpFrame, 34, 16, 16), Color.White);
-            if(amountOfSpecialAmmo > 1) spriteBatch.DrawString(font, "x" + amountOfSpecialAmmo.ToString(), new Vector2(47 + 38, 32), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
-            if(specialGunType != 0) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 50, 16, 16), Color.White);
-            if(!printLives)
+            if (!hideGameHud)
             {
-                for(int i = 0; i < amountOfLives; i++)
-                    spriteBatch.Draw(spritesheet, new Vector2(10 + i * 24, 10), new Rectangle(847, 1, 16, 16), Color.White);
+                spriteBatch.Draw(spritesheet, new Vector2(10, 32), new Rectangle(781, 1, 32, 32), Color.White);
+                spriteBatch.Draw(spritesheet, new Vector2(47, 32), new Rectangle(781, 1, 32, 32), Color.White);
+                spriteBatch.Draw(spritesheet, new Vector2(10 + 8, 32 + 8), new Rectangle(powerUpFrame, 34, 16, 16), Color.White);
+                if (amountOfSpecialAmmo > 1) spriteBatch.DrawString(font, "x" + amountOfSpecialAmmo.ToString(), new Vector2(47 + 38, 32), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
+                if (specialGunType != 0) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 50, 16, 16), Color.White);
+                if (!printLives)
+                {
+                    for (int i = 0; i < amountOfLives; i++)
+                        spriteBatch.Draw(spritesheet, new Vector2(10 + i * 24, 10), new Rectangle(847, 1, 16, 16), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(spritesheet, new Vector2(10, 10), new Rectangle(847, 1, 16, 16), Color.White);
+                    spriteBatch.DrawString(font, "x" + amountOfLives.ToString(), new Vector2(30, 7), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
+                }
+                comboCounter.Draw(spriteBatch, font, spritesheet);
+                spriteBatch.DrawString(font, scoreText, new Vector2(10, 32 + 8 + 20), Color.White);
             }
             else
             {
-                spriteBatch.Draw(spritesheet, new Vector2(10, 10), new Rectangle(847, 1, 16, 16), Color.White);
-                spriteBatch.DrawString(font, "x" + amountOfLives.ToString(), new Vector2(30, 7), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
+
             }
-            comboCounter.Draw(spriteBatch, font, spritesheet);
-            spriteBatch.DrawString(font, scoreText, new Vector2(10, 32+8+20), Color.White);
         }
     }
 }

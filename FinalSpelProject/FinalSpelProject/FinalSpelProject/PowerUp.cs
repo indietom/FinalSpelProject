@@ -38,7 +38,6 @@ namespace FinalSpelProject
 
         public void Update(List<Player> players, List<TextEffect> textEffects)
         {
-            // TODO: Make it flash to attract the player's attention
             cosCount += 0.01f;
             switch (movmentPattern)
             {

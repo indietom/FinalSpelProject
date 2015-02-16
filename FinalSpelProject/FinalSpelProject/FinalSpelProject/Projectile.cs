@@ -94,6 +94,7 @@ namespace FinalSpelProject
                     }
                     AngleMath(rad);
                     Pos += Vel;
+                    Rotation = Angle;
                     if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
                     break;
             }
@@ -109,6 +110,12 @@ namespace FinalSpelProject
                     Explosive = true;
                     ExplosionSize = 32;
                     Dm = 3;
+                    break;
+                case 2:
+                    Explosive = true;
+                    ExplosionSize = 32;
+                    Dm = 3;
+                    Rotated = true;
                     break;
             }
         }

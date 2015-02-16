@@ -16,6 +16,7 @@ namespace FinalSpelProject
         bool sideChosen;
         int rSide;
         byte explosionHurtDelay;
+        string material = "organic alien";
 
         byte chanceOfPowerUp;
         byte hitFlashDelay;
@@ -35,6 +36,7 @@ namespace FinalSpelProject
             {
                 //Follows Player.X and shoots
                 case 11:
+                    material = "organic alien";
                     worth = 900;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -47,6 +49,7 @@ namespace FinalSpelProject
                     break;
                 //Flies straight down and shoots toward players
                 case 12:
+                    material = "organic alien";
                     worth = 500;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -59,6 +62,7 @@ namespace FinalSpelProject
                     break;
                 //Kamikaze enemy
                 case 13:
+                    material = "organic alien";
                     worth = 1800;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -86,6 +90,7 @@ namespace FinalSpelProject
                     break;
                 //Sideways Dude yo
                 case 15:
+                    material = "organic alien";
                     worth = 1500;
                     RoateOnRad = false;
                     Rotated = true;
@@ -106,6 +111,7 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     break;
                 case 16:
+                    material = "organic alien";
                     worth = 500;
                     RoateOnRad = false;
                     Rotated = true;
@@ -126,6 +132,7 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     break;
                 case 17:
+                    material = "organic alien";
                     worth = 1800;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -143,7 +150,7 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps)
+        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps, List<Gib> gibs)
         {
             Random random = new Random();
            
@@ -343,6 +350,13 @@ namespace FinalSpelProject
             }
             if (health <= 0)
             {
+                switch(material)
+                {
+                    case "organic alien":
+                        for (int i = 0; i < 10; i++ )
+                            gibs.Add(new Gib(GetCenter, (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
+                        break;
+                }
                 chanceOfPowerUp = (byte)random.Next(1, 4);
                 if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 5), 1, false));
                 if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));

@@ -99,7 +99,7 @@ namespace FinalSpelProject
 
             foreach(Enemy e in enemies)
             {
-                e.Update(player, projectiles, explosions, powerUps);
+                e.Update(player, projectiles, explosions, powerUps, gibs);
             }
             foreach (Player p in player)
             {
@@ -139,7 +139,7 @@ namespace FinalSpelProject
             {
                 //if(explosions.Count == 0) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
                 //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
-                gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(2, 7), random.Next(360)));   
+                gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 
             for (int i = 0; i < enemies.Count();i++)

@@ -8,8 +8,15 @@ namespace FinalSpelProject
 {
     class SpawnManager
     {
-        short[] spawnEnemyTimers = new short[Globals.AmountOfEnemyTypes];
-        short[] MaxSpawnEnemyTimers = new short[Globals.AmountOfEnemyTypes];
+        byte amountOfEnemySpawners = 3;
+
+        short[] spawnEnemyTimers = new short[amountOfEnemySpawners];
+        short[] MaxSpawnEnemyTimers = new short[amountOfEnemySpawners];
+
+        public SpawnManager()
+        {
+
+        }
 
         public void Update()
         {

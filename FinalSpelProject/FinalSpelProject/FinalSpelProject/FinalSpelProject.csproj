@@ -84,6 +84,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Gib.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="Player.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="SpawnManager.cs" />
     <Compile Include="TextEffect.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TilesheetManager.cs" />

@@ -39,11 +39,7 @@ namespace FinalSpelProject
             switch (type)
             {
                 case 0:
-                    if(fireRates[0] >= maxFireRates[0])
-                    {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + 5, Pos.Y + 88), 0, 5, 1, 2, true));
-                        fireRates[0] = 0;
-                    }
+
                     break;
             }
         }
@@ -83,12 +79,7 @@ namespace FinalSpelProject
             switch (type)
             {
                 case 0:
-                    bossParts = new BossPart[3];
-                    fireRates = new short[2];
-                    maxFireRates = new short[2];
-                    maxFireRates[0] = 64;
-                    maxFireRates[1] = 32;
-                    hp = 20;
+     
                     break;
             }
         }
@@ -127,7 +118,7 @@ namespace FinalSpelProject
             hitBox = new Rectangle((int)pos.X, (int)pos.Y, width, height);
             foreach(Projectile p in projectiles)
             {
-                if(p.EnemyShot && hitBox.Intersects(p.HitBox))
+                if(!p.EnemyShot && hitBox.Intersects(p.HitBox))
                 {
                     if (hp - p.Dm < 0)
                         hp = 0;
@@ -138,9 +129,7 @@ namespace FinalSpelProject
             }
             switch(type)
             {
-                case 0:
-                    imx = (hp <= 0) ? (short)430 : (short)397;
-                    break;
+
             }
         }
 

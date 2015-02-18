@@ -23,6 +23,7 @@ namespace FinalSpelProject
 
         bool scroll;
         bool hurtByExplosion;
+        bool carryingPowerUp;
         public bool OnGround { get; set; }
 
         public Enemy(Vector2 pos2, byte type2, Random r)
@@ -32,6 +33,22 @@ namespace FinalSpelProject
             scroll = true;
             AnimationActive = true;
             OrginalColor = color;
+            AssignType(r);   
+        }
+
+        public Enemy(Vector2 pos2, byte type2, Random r, bool carryingPowerUp2)
+        {
+            Pos = pos2;
+            type = type2;
+            scroll = true;
+            AnimationActive = true;
+            OrginalColor = color;
+            carryingPowerUp = true;
+            AssignType(r);
+        }
+
+        public void AssignType(Random r)
+        {
             switch (type)
             {
                 //Follows Player.X and shoots
@@ -101,7 +118,7 @@ namespace FinalSpelProject
                     armor = 0;
                     fireRate = 80;
                     Speed = 5;
-                    rSide = r.Next(0,2);
+                    rSide = r.Next(0, 2);
                     if (rSide == 0)
                     {
                         Pos = new Vector2(-32, Pos.Y);
@@ -122,7 +139,7 @@ namespace FinalSpelProject
                     armor = 0;
                     fireRate = 2;
                     Speed = 5;
-                    rSide = r.Next(0,2);
+                    rSide = r.Next(0, 2);
                     if (rSide == 0)
                     {
                         Pos = new Vector2(-10, -32);

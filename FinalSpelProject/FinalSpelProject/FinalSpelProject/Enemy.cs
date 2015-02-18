@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace FinalSpelProject
 {
+    enum Material { OrganicAlien }
     class Enemy : GameObject
     {
         byte type; 
@@ -16,7 +17,8 @@ namespace FinalSpelProject
         bool sideChosen;
         int rSide;
         byte explosionHurtDelay;
-        string material;
+
+        Material material;
 
         byte chanceOfPowerUp;
         byte hitFlashDelay;
@@ -53,7 +55,7 @@ namespace FinalSpelProject
             {
                 //Follows Player.X and shoots
                 case 11:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 900;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -66,7 +68,7 @@ namespace FinalSpelProject
                     break;
                 //Flies straight down and shoots toward players
                 case 12:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 500;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -79,7 +81,7 @@ namespace FinalSpelProject
                     break;
                 //Kamikaze enemy
                 case 13:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 1800;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -107,7 +109,7 @@ namespace FinalSpelProject
                     break;
                 //Sideways Dude yo
                 case 15:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 1500;
                     RoateOnRad = false;
                     Rotated = true;
@@ -128,7 +130,7 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     break;
                 case 16:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 500;
                     RoateOnRad = false;
                     Rotated = true;
@@ -149,7 +151,7 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     break;
                 case 17:
-                    material = "organic alien";
+                    material = Material.OrganicAlien;
                     worth = 1800;
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
@@ -369,7 +371,7 @@ namespace FinalSpelProject
             {
                 switch(material)
                 {
-                    case "organic alien":
+                    case Material.OrganicAlien:
                         for (int i = 0; i < 10; i++ )
                             gibs.Add(new Gib(GetCenter, (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
                         break;

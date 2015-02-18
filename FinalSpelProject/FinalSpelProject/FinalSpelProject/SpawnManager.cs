@@ -8,14 +8,16 @@ namespace FinalSpelProject
 {
     class SpawnManager
     {
-        byte amountOfEnemySpawners = 3;
+        byte amountOfEnemySpawners;
 
-        short[] spawnEnemyTimers = new short[amountOfEnemySpawners];
-        short[] MaxSpawnEnemyTimers = new short[amountOfEnemySpawners];
+        short[] spawnEnemyTimers;
+        short[] MaxSpawnEnemyTimers;
 
         public SpawnManager()
         {
-
+            amountOfEnemySpawners = 3;
+            spawnEnemyTimers = new short[amountOfEnemySpawners];
+            MaxSpawnEnemyTimers = new short[amountOfEnemySpawners];
         }
 
         public void Update()
@@ -33,12 +35,21 @@ namespace FinalSpelProject
  
         }
 
-        public void SpawnEnemiesLine(Vector2 pos2, byte height, byte type, List<Enemy> enemies)
+        public void SpawnEnemiesLine(Vector2 pos2, byte height, byte type, byte enemySize, List<Enemy> enemies)
         {
-
+            Random random = new Random();
+            for(int i = 0; i < height; i++)
+            {
+                if(i != 0) enemies.Add(new Enemy(new Vector2(pos2.X, pos2.Y+i*(enemySize+3)), type, random));
+                else enemies.Add(new Enemy(new Vector2(pos2.X, pos2.Y + i * (enemySize + 3)), type, random, true));
+            }
         }
 
-        public void SpawnEnemiesTriangle(Vector2 pos2, byte width, byte height, byte type, byte enemySize, List<Enemy> enemies)
+        public void SpawnEnemiesLine(Vector2 pos2, byte height, byte type, List<Enemy> enemies)
+        {
+            SpawnEnemiesLine(pos2, height, type, enemies);
+        }
+        public void SpawnEnemiesTriangle(Vector2 pos2, byte height, byte type, byte enemySize, List<Enemy> enemies)
         {
             Random random = new Random();
             for (int i = 0; i < height; i++ )
@@ -47,9 +58,9 @@ namespace FinalSpelProject
                 enemies.Add(new Enemy(new Vector2(pos2.X - (i - 1) * enemySize, pos2.Y - i * enemySize), type, random));
             }
         }
-        public void SpawnEnemiesTriangle(Vector2 pos2, byte width, byte height, byte type, List<Enemy> enemies)
+        public void SpawnEnemiesTriangle(Vector2 pos2, byte height, byte type, List<Enemy> enemies)
         {
-            SpawnEnemiesTriangle(pos2, width, height, type, 64, enemies);
+            SpawnEnemiesTriangle(pos2, height, type, 64, enemies);
         }
     }
 }

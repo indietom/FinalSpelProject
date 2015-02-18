@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace FinalSpelProject
 {
-    enum Material { OrganicAlien }
+    enum Material { None, OrganicAlien }
     class Enemy : GameObject
     {
         byte type; 
@@ -372,8 +372,10 @@ namespace FinalSpelProject
                 switch(material)
                 {
                     case Material.OrganicAlien:
-                        for (int i = 0; i < 10; i++ )
-                            gibs.Add(new Gib(GetCenter, (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
+                        for (int i = 0; i < 20; i++ )
+                        {
+                            gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
+                        }
                         break;
                 }
                 chanceOfPowerUp = (byte)random.Next(1, 4);

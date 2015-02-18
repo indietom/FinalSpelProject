@@ -23,6 +23,8 @@ namespace FinalSpelProject
             AngleMath(false);
             Pos += Vel;
             Rotation += Speed;
+            if (Pos.X < -Width || Pos.X > Game1.screenW || Pos.Y < -Height || Pos.Y >= Game1.screenH)
+                Destroy = true;
         }
     }
 }

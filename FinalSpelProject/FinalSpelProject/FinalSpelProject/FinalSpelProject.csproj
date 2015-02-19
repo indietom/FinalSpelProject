@@ -89,6 +89,7 @@
     <Compile Include="Particle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PowerUp.cs" />
+    <Compile Include="ProceduralGenerationManager.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

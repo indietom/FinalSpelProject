@@ -7,6 +7,21 @@ namespace FinalSpelProject
 {
     class Globals
     {
-        public static short AmountOfEnemyTypes = 7;
+        public static short AmountOfEnemyTypes;
+
+        public static float worldSpeed;
+
+        public static int screenW;
+        public static int screenH;
+
+        public static void Load()
+        {
+            screenW = 800;
+            screenH = 640;
+
+            worldSpeed = 1.5f;
+
+            AmountOfEnemyTypes = 7;
+        }
     }
 }

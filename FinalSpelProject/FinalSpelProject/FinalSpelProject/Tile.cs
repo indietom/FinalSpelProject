@@ -12,20 +12,28 @@ namespace FinalSpelProject
         byte type;
         byte currentLevel;
 
-        bool solid;
+        bool active;
 
-        public Tile(Vector2 pos2, byte type2, bool solid2)
+        public bool GetActive() { return active; }
+
+        public Tile(Vector2 pos2, byte type2)
         {
+            Pos = SetCoordsToCell((int)pos2.X, (int)pos2.Y);
+            type = type2;
             AssignSprite();
         }
+
         public void Update()
         {
-
+            Pos += new Vector2(0, Globals.worldSpeed);
+            active = (Pos.Y >= -Height) ? true : false;
+            Destroy = (Pos.Y >= Globals.screenH) ? true : Destroy;
         }
         
         public void AssignSprite()
         {
             Imx = (byte)(16 * type);
+            SetSize(16);
         }
     }
 }

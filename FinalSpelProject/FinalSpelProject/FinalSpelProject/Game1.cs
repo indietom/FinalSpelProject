@@ -16,17 +16,13 @@ namespace FinalSpelProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public static float worldSpeed;
-
-        public static int screenW;
-        public static int screenH;
-
         public static bool flashScreen;
         public static byte flashScreenCount;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            Globals.Load();
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 640;
             Content.RootDirectory = "Content";
@@ -49,11 +45,11 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            screenH = graphics.PreferredBackBufferHeight;
-            screenW = graphics.PreferredBackBufferWidth;
+            Globals.screenH = graphics.PreferredBackBufferHeight;
+            Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
             level = new Level(chunks, 0, 14);
-            worldSpeed = 1.5f;
+            Globals.worldSpeed = 1.5f;
             base.Initialize();
         }
 
@@ -77,7 +73,7 @@ namespace FinalSpelProject
         {
             if(flashScreenCount >= 1)
             {
-                spriteBatch.Draw(spritesheet, new Rectangle(0, 0, screenW, screenH), new Rectangle(1, 1496, 64, 64), Color.White);
+                spriteBatch.Draw(spritesheet, new Rectangle(0, 0, Globals.screenW, Globals.screenH), new Rectangle(1, 1496, 64, 64), Color.White);
                 // lite kod > läslighet amrite
                 flashScreenCount = (flashScreenCount >= 32) ? flashScreenCount = 0 : flashScreenCount = (byte)(flashScreenCount + 1);
             }

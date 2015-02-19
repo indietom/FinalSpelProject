@@ -323,7 +323,7 @@ namespace FinalSpelProject
             {
                 velLeft = 0;
             }
-            if (Pos.X >= Game1.screenW - Width - velRight && !Dead)
+            if (Pos.X >= Globals.screenW - Width - velRight && !Dead)
             {
                 velRight = 0;
             }
@@ -331,7 +331,7 @@ namespace FinalSpelProject
             {
                 velUp = 0;
             }
-            if (Pos.Y >= Game1.screenH - Height - velDown && !Dead)
+            if (Pos.Y >= Globals.screenH - Height - velDown && !Dead)
             {
                 velDown = 0;
             }
@@ -411,11 +411,11 @@ namespace FinalSpelProject
                 if (explosionDelay % 2 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, Width), random.Next(-16, Height)), 32, false));
                 inputActive = false;
                 velDown += 0.5f;
-                if (Pos.Y >= Game1.screenH+Height*3)
+                if (Pos.Y >= Globals.screenH + Height * 3)
                 {
                     if(lives != 0) lives -= 1;
                     respawnCount = 1;
-                    Pos = new Vector2(Game1.screenW / 2 - Width / 2, Game1.screenH + Height * 3);
+                    Pos = new Vector2(Globals.screenW / 2 - Width / 2, Globals.screenH + Height * 3);
                 }
             }
             if(flashCount >= 8)
@@ -426,7 +426,7 @@ namespace FinalSpelProject
             }
             if(respawnCount >= 1)
             {
-                Pos = new Vector2(Pos.X, Lerp(Pos.Y, Game1.screenH/2-Height/2, 0.04f));
+                Pos = new Vector2(Pos.X, Lerp(Pos.Y, Globals.screenH / 2 - Height / 2, 0.04f));
                 respawnCount += 1;
                 flashCount += 1;
                 Invisible = true;

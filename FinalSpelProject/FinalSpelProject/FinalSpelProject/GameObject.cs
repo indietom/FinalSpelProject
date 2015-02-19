@@ -89,6 +89,8 @@ namespace FinalSpelProject
             return (short)(frame * Height + 1 + frame);
         }
 
+        public Vector2 SetCoordsToCell(int x, int y) { return new Vector2(x * 16, y * 16); }
+
         public float AimAt(Vector2 pos2)
         {
             return (float)Math.Atan2(pos2.Y - Pos.Y, pos2.X - Pos.X);

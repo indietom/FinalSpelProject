@@ -146,7 +146,7 @@ namespace FinalSpelProject
                     {
                         Pos = new Vector2(-10, -32);
                     }
-                    else Pos = new Vector2(Game1.screenW + 10, -32);
+                    else Pos = new Vector2(Globals.screenW + 10, -32);
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
                     break;
@@ -173,7 +173,7 @@ namespace FinalSpelProject
         {
             Random random = new Random();
            
-            if (Pos.Y >= Game1.screenH + Height)
+            if (Pos.Y >= Globals.screenH + Height)
             {
                 Destroy = true;
             }
@@ -346,7 +346,7 @@ namespace FinalSpelProject
             }
             if (Pos.Y < -Height)
                 fireRate = 30;
-            if(scroll) Pos += new Vector2(0, Game1.worldSpeed);
+            if(scroll) Pos += new Vector2(0, Globals.worldSpeed);
             if(hitFlashDelay >= 1)
             {
                 hitFlashDelay += 1;

@@ -30,17 +30,30 @@ namespace FinalSpelProject
 
         }
         
-        public void SpawnRoad()
-        {
-
-        }
-
-        public void SpawnLakes()
+        public void SpawnLevelOne()
         {
 
         }
 
         // hopefully this will make the actual procedural-generation algorithm more readable 
+        public void SpawnLake(Vector2 pos2, byte radius, List<Tile> tiles)
+        {
+            for(int y = -radius; y < radius; y++)
+            {
+                for(int x = -radius; x < radius; x++)
+                {
+                    if(x*x+y*y <= radius*radius)
+                    {
+                        tiles.Add(new Tile(new Vector2(pos2.X+x*16,pos2.Y+x*16), 6));
+                    }
+                }
+            }
+            for(int i = 0; i < 360; i++)
+            {
+
+            }
+        }
+
         public void RoadTurn(Vector2 pos2, bool left, List<Tile> tiles)
         {
             Point turnTile = new Point(0, 0);

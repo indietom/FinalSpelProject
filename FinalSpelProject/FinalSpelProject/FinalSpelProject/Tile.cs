@@ -18,7 +18,7 @@ namespace FinalSpelProject
 
         public Tile(Vector2 pos2, byte type2)
         {
-            Pos = SetCoordsToCell((int)pos2.X, (int)pos2.Y);
+            Pos = pos2;
             type = type2;
             AssignSprite();
         }

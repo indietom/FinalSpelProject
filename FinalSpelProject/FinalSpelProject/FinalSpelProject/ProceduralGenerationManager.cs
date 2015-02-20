@@ -44,13 +44,13 @@ namespace FinalSpelProject
                 {
                     if(x*x+y*y <= radius*radius)
                     {
-                        tiles.Add(new Tile(new Vector2(pos2.X+x*16,pos2.Y+x*16), 6));
+                        tiles.Add(new Tile(new Vector2(pos2.X+x*16,pos2.Y+y*16), 6));
                     }
                 }
             }
             for(int i = 0; i < 360; i++)
             {
-
+                tiles.Add(new Tile(new Vector2((float)Math.Cos(pos2.X), (float)Math.Sin(pos2.Y)), 9));
             }
         }
 

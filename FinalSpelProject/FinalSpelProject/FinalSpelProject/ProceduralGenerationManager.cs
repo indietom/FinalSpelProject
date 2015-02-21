@@ -71,6 +71,7 @@ namespace FinalSpelProject
 
             if(changeRoadDirectionCount >= maxChangeRoadDirectionCount)
             {
+                roadDirection = random.Next(1, 3);
                 roadDirectionChange = true;
                 changeRoadDirectionCount = 0;
                 if(maxChangeRoadDirectionCount >= 16*5) maxChangeRoadDirectionCount += (byte)random.Next(-16, 16);
@@ -97,24 +98,32 @@ namespace FinalSpelProject
             }
         }
 
-        public void RoadTurn(Vector2 pos2, bool left, List<Tile> tiles)
+        public void SpawnRoadTurn(Vector2 pos2, bool left, bool up, List<Tile> tiles)
         {
             Point turnTile = new Point(0, 0);
+            Point enteryTile = new Point(0, 0);
+
+            if(up)
+                enteryTile = new Point(1, 2);
+            else
+                enteryTile = new Point(1, 0);
+
             if (left)
                 turnTile = new Point(0, 1);
             else
                 turnTile = new Point(2, 1);
+
             for(int y = 0; y < 3; y++)
             {
                 for(int x = 0; x < 3; x++)
                 {
-                    if (new Point(x, y) != turnTile && new Point(1, 1) != new Point(x, y) && new Point(1, 2) != new Point(x, y))
+                    if (new Point(x, y) != turnTile && new Point(1, 1) != new Point(x, y) && enteryTile != new Point(x, y))
                         tiles.Add(new Tile(pos2 + new Vector2(x * 16, y * 16), 2));
                     if (new Point(x, y) == turnTile)
                         tiles.Add(new Tile(pos2 + new Vector2(x * 16, y * 16), 4));
                     if (new Point(1, 1) == new Point(x, y))
                         tiles.Add(new Tile(pos2 + new Vector2(x * 16, y * 16), 5));
-                    if (new Point(1, 2) == new Point(x, y))
+                    if (enteryTile == new Point(x, y))
                         tiles.Add(new Tile(pos2 + new Vector2(x * 16, y * 16), 3));
                 }
             }

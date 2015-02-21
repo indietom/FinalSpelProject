@@ -71,7 +71,7 @@ namespace FinalSpelProject
 
             if(changeRoadDirectionCount >= maxChangeRoadDirectionCount)
             {
-                roadDirection = random.Next(1, 3);
+                roadDirection = (byte)random.Next(1, 3);
                 roadDirectionChange = true;
                 changeRoadDirectionCount = 0;
                 if(maxChangeRoadDirectionCount >= 16*5) maxChangeRoadDirectionCount += (byte)random.Next(-16, 16);

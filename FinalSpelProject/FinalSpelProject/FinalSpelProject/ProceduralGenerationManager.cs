@@ -11,6 +11,8 @@ namespace FinalSpelProject
         byte roadDirection;
         byte roadSpawnCount;
         byte maxRoadSpawnCount;
+        byte turnDuration;
+        byte maxTurnDuration;
         
         short lakeSpawnCount;
         short maxLakeSpawnCount;
@@ -21,6 +23,7 @@ namespace FinalSpelProject
         bool spawningRoads;
         bool spawningLakes;
         bool canSpawnLake;
+        bool verticalRoads;
 
         byte lakeRadius;
 
@@ -64,6 +67,7 @@ namespace FinalSpelProject
                 else
                 {
                     // whatever direction road peice 
+                    maxTurnDuration = (byte)random.Next(16 * 5, 16 * 8);
                     roadDirectionChange = false;
                 }
                 roadSpawnCount = 0;

@@ -90,7 +90,7 @@ namespace FinalSpelProject
 
             ui.Update(player);
 
-            level.Update(tiles, proceduralGenerationManager);
+            level.Update(tiles, chunks, proceduralGenerationManager);
 
             foreach(Gib g in gibs)
             {

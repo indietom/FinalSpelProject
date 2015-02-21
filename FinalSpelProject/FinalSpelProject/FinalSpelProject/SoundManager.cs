@@ -12,14 +12,11 @@ namespace FinalSpelProject
     {
         public static bool SoundOff;
 
+        public static float Volume;
+
         public static SoundEffect
             NormalShot,
             Explosion;
-
-        public static void PlaySound(SoundEffect soundEffect)
-        {
-            if (!SoundOff) soundEffect.Play(); 
-        }
 
         public static void Load(ContentManager content)
         {

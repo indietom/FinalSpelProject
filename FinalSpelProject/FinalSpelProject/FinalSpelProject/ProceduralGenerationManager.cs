@@ -43,6 +43,7 @@ namespace FinalSpelProject
             maxGrassSpawnCount = 16;
             maxLakeSpawnCount = 128 * 3;
             maxTreeSpawnCount = 64 * 3;
+            grassSpawnCount = 16;
         }
 
         public void Update()

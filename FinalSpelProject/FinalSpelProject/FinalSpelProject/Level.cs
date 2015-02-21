@@ -26,8 +26,12 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Tile> tiles, ProceduralGenerationManager pgm)
+        public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm)
         {
+            if(chunks.Count == 1)
+            {
+                looping = true;
+            }
             if(looping && CurrentLevel == 0)
             {
                 pgm.SpawnLevelOne(tiles);

@@ -19,7 +19,7 @@ namespace FinalSpelProject
             screenW = 800;
             screenH = 640;
 
-            worldSpeed = 1.5f;
+            worldSpeed = 1f;
 
             AmountOfEnemyTypes = 7;
         }

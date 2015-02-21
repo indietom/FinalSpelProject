@@ -13,26 +13,36 @@ namespace FinalSpelProject
         byte maxRoadSpawnCount;
         byte turnDuration;
         byte maxTurnDuration;
+        byte grassSpawnCount;
+        byte maxGrassSpawnCount;
         
         short lakeSpawnCount;
         short maxLakeSpawnCount;
         short changeRoadDirectionCount;
         short maxChangeRoadDirectionCount;
+        short treeSpawnCount;
+        short maxTreeSpawnCount;
 
         bool roadDirectionChange;
         bool spawningRoads;
         bool spawningLakes;
         bool canSpawnLake;
         bool verticalRoads;
+        bool canSpawnTree;
 
         byte lakeRadius;
 
         Vector2 roadCoords;
         Vector2 lakeCoords;
+        Vector2 treeCoords;
 
         public ProceduralGenerationManager()
         {
             roadCoords = new Vector2(25 * 16, -16);
+            maxRoadSpawnCount = 16;
+            maxGrassSpawnCount = 16;
+            maxLakeSpawnCount = 128 * 3;
+            maxTreeSpawnCount = 64 * 3;
         }
 
         public void Update()
@@ -40,22 +50,57 @@ namespace FinalSpelProject
 
         }
         
-        public void SpawnLevelOne()
+        public void SpawnLevelOne(List<Tile> tiles)
         {
             Random random = new Random();
-            
-            if(lakeSpawnCount >= maxLakeSpawnCount)
+
+            grassSpawnCount += 1;
+            if(grassSpawnCount >= maxGrassSpawnCount)
             {
-                lakeRadius = (byte)random.Next(8, 16);
-                lakeCoords = new Vector2(random.Next(Globals.screenW - (16 * 2), Globals.screenH - (16 * 2)));
-                canSpawnLake = (DistanceTo(roadCoords, lakeCoords) >= lakeRadius + 16 * 3) ? true : false;
+                for(int i = 0; i < Globals.screenW/16; i++)
+                {
+                    tiles.Add(new Tile(new Vector2(i * 16, -16), 1));
+                }
+                grassSpawnCount = 0;
+            }
+
+            lakeSpawnCount += 1;
+
+            if (lakeSpawnCount >= maxLakeSpawnCount)
+            {
+                lakeRadius = (byte)random.Next(4, 17);
+                lakeCoords = new Vector2(random.Next(Globals.screenW - (16 * 2)), (16*-lakeRadius)-16*2);
+                canSpawnLake = (DistanceTo(treeCoords, lakeCoords) >= lakeRadius + 16*3) ? true : false;
                 if (canSpawnLake)
                 {
-                    // add lake
+                    SpawnLake(lakeCoords, lakeRadius, tiles);
                 }
                 lakeSpawnCount = 0;
-                if(maxLakeSpawnCount >= 128*2) maxLakeSpawnCount += (byte)random.Next(-16, 128);
-                else maxLakeSpawnCount += (byte)random.Next(32, 128);
+                if (maxLakeSpawnCount >= 128 * 2) maxLakeSpawnCount += (byte)random.Next(-16, 128*2);
+                else maxLakeSpawnCount += (byte)random.Next(128, 128*2);
+            }
+
+            treeSpawnCount += 1;
+
+            if (treeSpawnCount >= maxTreeSpawnCount)
+            {
+                treeCoords = new Vector2(random.Next(Globals.screenW - 32), random.Next(-Globals.screenH, 0));
+                canSpawnTree = (DistanceTo(treeCoords, lakeCoords) >= lakeRadius + 16*3) ? true : false;
+                if(canSpawnTree)
+                {
+                    SpawnTree(treeCoords, (byte)random.Next(1, 3), tiles);
+                }
+                maxTreeSpawnCount = (short)random.Next(64, 128 * 2);
+                treeSpawnCount = 0;    
+            }
+            
+            if(!verticalRoads)
+            {
+                roadCoords = new Vector2(Pos.X, -16);
+            }
+            else
+            {
+                roadCoords = new Vector2(Pos.X, -16*3);
             }
 
             if(roadSpawnCount >= maxRoadSpawnCount)
@@ -63,10 +108,15 @@ namespace FinalSpelProject
                 if (!roadDirectionChange)
                 {
                     // add road
+                    if(verticalRoads)
+                    {
+                        roadCoords += new Vector2(16*(-1*roadDirection), 0);
+                    }
                 }
                 else
                 {
                     // whatever direction road peice 
+                    verticalRoads = true;
                     maxTurnDuration = (byte)random.Next(16 * 5, 16 * 8);
                     roadDirectionChange = false;
                 }
@@ -75,7 +125,7 @@ namespace FinalSpelProject
 
             if(changeRoadDirectionCount >= maxChangeRoadDirectionCount)
             {
-                roadDirection = (byte)random.Next(1, 3);
+                roadDirection = (byte)random.Next(0, 2);
                 roadDirectionChange = true;
                 changeRoadDirectionCount = 0;
                 if(maxChangeRoadDirectionCount >= 16*5) maxChangeRoadDirectionCount += (byte)random.Next(-16, 16);
@@ -84,6 +134,24 @@ namespace FinalSpelProject
         }
 
         // hopefully this will make the actual procedural-generation algorithm more readable 
+        public void SpawnTree(Vector2 pos2, byte height, List<Tile> tiles)
+        {
+            for (int i = 0; i < height + 2; i++ )
+            {
+                if (i == 0)
+                    tiles.Add(new Tile(new Vector2(pos2.X, pos2.Y), 14));
+                if (i != (height + 2) - 1 && i != 0)
+                    tiles.Add(new Tile(new Vector2(pos2.X, pos2.Y - i * 16), 15));
+                if (i == (height + 2) - 1)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        tiles.Add(new Tile(new Vector2((pos2.X - 16) + 16 * j, (pos2.Y - i * 16)), (short)(16 + j)));
+                        tiles.Add(new Tile(new Vector2((pos2.X - 8) + 8 * j, (pos2.Y - i * 16) - 6), 19));
+                    }
+                }
+            }
+        }
         public void SpawnLake(Vector2 pos2, byte radius, List<Tile> tiles)
         {
             for(int y = -radius; y < radius; y++)
@@ -96,9 +164,9 @@ namespace FinalSpelProject
                     }
                 }
             }
-            for(int i = 0; i < 360; i++)
+            for (int i = 0; i < 360; i++)
             {
-                tiles.Add(new Tile(new Vector2((float)Math.Cos(pos2.X), (float)Math.Sin(pos2.Y)), 9));
+                //tiles.Add(new Tile(new Vector2(pos2.X + ((float)Math.Cos(i) * 16) * radius, pos2.Y + ((float)Math.Sin(i)) * 16 * radius), 9));
             }
         }
 

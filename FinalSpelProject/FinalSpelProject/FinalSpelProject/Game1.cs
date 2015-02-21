@@ -39,8 +39,11 @@ namespace FinalSpelProject
         List<PowerUp> powerUps = new List<PowerUp>();
         List<TextEffect> textEffects = new List<TextEffect>();
         List<Gib> gibs = new List<Gib>();
+        List<Tile> tiles = new List<Tile>();
 
         Level level;
+
+        ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
 
         protected override void Initialize()
         {
@@ -49,7 +52,6 @@ namespace FinalSpelProject
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
             level = new Level(chunks, 0, 14);
-            Globals.worldSpeed = 1.5f;
             base.Initialize();
         }
 
@@ -88,6 +90,8 @@ namespace FinalSpelProject
 
             ui.Update(player);
 
+            level.Update(tiles, proceduralGenerationManager);
+
             foreach(Gib g in gibs)
             {
                 g.Update();
@@ -97,10 +101,12 @@ namespace FinalSpelProject
             {
                 e.Update(player, projectiles, explosions, powerUps, gibs);
             }
+
             foreach (Player p in player)
             {
                 p.Update(projectiles, enemies, explosions);
             }
+
             foreach(Projectile p in projectiles)
             {
                 p.Update(particles, player[0]);
@@ -131,11 +137,19 @@ namespace FinalSpelProject
                 te.Update();
             }
 
+            foreach(Tile t in tiles)
+            {
+                t.Update();
+            }
+
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
+                proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
+                //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
+                //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                 //if(explosions.Count == 0) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
                 //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
-                gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
+                //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 
             for (int i = 0; i < enemies.Count();i++)
@@ -170,6 +184,10 @@ namespace FinalSpelProject
             {
                 if (gibs[i].Destroy) gibs.RemoveAt(i);
             }
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (tiles[i].Destroy) tiles.RemoveAt(i);
+            }
             base.Update(gameTime);
         }
 
@@ -179,6 +197,16 @@ namespace FinalSpelProject
 
             spriteBatch.Begin();
             foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]); }
+            foreach(Tile t in tiles)
+            {
+                if (t.GetType() == 1)
+                    t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+            }
+            foreach(Tile t in tiles)
+            {
+                if (t.GetType() != 1)
+                    t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+            }
             foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }

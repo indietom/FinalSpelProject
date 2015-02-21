@@ -6,23 +6,30 @@ using Microsoft.Xna.Framework;
 
 namespace FinalSpelProject
 {
-    class ProceduralGenerationManager
+    class ProceduralGenerationManager:GameObject
     {
         byte roadDirection;
-        byte lakeSize;
-
-        short roadSpawnCount;
-        short maxRoadSpawnCount;
+        byte roadSpawnCount;
+        byte maxRoadSpawnCount;
+        
         short lakeSpawnCount;
         short maxLakeSpawnCount;
+        short changeRoadDirectionCount;
+        short maxChangeRoadDirectionCount;
 
         bool roadDirectionChange;
         bool spawningRoads;
         bool spawningLakes;
+        bool canSpawnLake;
+
+        byte lakeRadius;
+
+        Vector2 roadCoords;
+        Vector2 lakeCoords;
 
         public ProceduralGenerationManager()
         {
-
+            roadCoords = new Vector2(25 * 16, -16);
         }
 
         public void Update()
@@ -32,7 +39,43 @@ namespace FinalSpelProject
         
         public void SpawnLevelOne()
         {
+            Random random = new Random();
+            
+            if(lakeSpawnCount >= maxLakeSpawnCount)
+            {
+                lakeRadius = (byte)random.Next(8, 16);
+                lakeCoords = new Vector2(random.Next(Globals.screenW - (16 * 2), Globals.screenH - (16 * 2)));
+                canSpawnLake = (DistanceTo(roadCoords, lakeCoords) >= lakeRadius + 16 * 3) ? true : false;
+                if (canSpawnLake)
+                {
+                    // add lake
+                }
+                lakeSpawnCount = 0;
+                if(maxLakeSpawnCount >= 128*2) maxLakeSpawnCount += (byte)random.Next(-16, 128);
+                else maxLakeSpawnCount += (byte)random.Next(32, 128);
+            }
 
+            if(roadSpawnCount >= maxRoadSpawnCount)
+            {
+                if (!roadDirectionChange)
+                {
+                    // add road
+                }
+                else
+                {
+                    // whatever direction road peice 
+                    roadDirectionChange = false;
+                }
+                roadSpawnCount = 0;
+            }
+
+            if(changeRoadDirectionCount >= maxChangeRoadDirectionCount)
+            {
+                roadDirectionChange = true;
+                changeRoadDirectionCount = 0;
+                if(maxChangeRoadDirectionCount >= 16*5) maxChangeRoadDirectionCount += (byte)random.Next(-16, 16);
+                else maxChangeRoadDirectionCount += (byte)random.Next(8, 16);
+            }
         }
 
         // hopefully this will make the actual procedural-generation algorithm more readable 

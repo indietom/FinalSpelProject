@@ -442,6 +442,10 @@ namespace FinalSpelProject
                 }
             }
         }
+        public void UpdateSounds()
+        {
+
+        }
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
             if(muzzleFlashCount > 0)

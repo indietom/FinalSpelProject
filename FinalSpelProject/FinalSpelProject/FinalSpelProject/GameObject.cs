@@ -101,6 +101,11 @@ namespace FinalSpelProject
             return (float)Math.Sqrt((Pos.X - pos2.X) * (Pos.X - pos2.X) + (Pos.Y - pos2.Y) * (Pos.X - pos2.Y));
         }
 
+        public float DistanceTo(Vector2 pos, Vector2 pos2)
+        {
+            return (float)Math.Sqrt((pos.X - pos2.X) * (pos.X - pos2.X) + (pos.Y - pos2.Y) * (pos.X - pos2.Y));
+        }
+
         public float SimpleDistanceTo(Vector2 pos2)
         {
             return (float)Math.Abs(Pos.Y - pos2.Y);

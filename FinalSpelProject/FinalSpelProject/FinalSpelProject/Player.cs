@@ -29,7 +29,8 @@ namespace FinalSpelProject
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
         public byte GetSpecialGunType() { return specialGunType; }
-        public byte GetSpecialAmmo() { return specialAmmo; } 
+        public byte GetSpecialAmmo() { return specialAmmo; }
+        public byte GetFireRate() { return fireRate; }
 
         public void SetGunType(byte gunType2, bool special2)
         {

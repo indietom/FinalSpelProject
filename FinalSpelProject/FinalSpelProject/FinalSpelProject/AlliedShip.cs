@@ -24,6 +24,7 @@ namespace FinalSpelProject
             SetSpriteCoords(1, 66);
             maxDistance = random.Next(64+24, 64+(24*4));
             maxLifeTime = 128 * 10;
+            Speed = 0.02f;
         }
 
         public void Update(List<Player> players, List<Projectile> projectiles)
@@ -31,13 +32,16 @@ namespace FinalSpelProject
             // TODO: Should these ships emitt a sound effect when shooting? Might get to messy
             Random random = new Random();
 
+            lifeTime += 1;
+
             foreach(Player p in players)
             {
                 gunType = p.GetGunType();
                 fireRate = p.GetFireRate();
-                if(p.DistanceTo(Pos) > maxDistance)
+                Console.WriteLine(DistanceTo(GetCenter));
+                if(DistanceTo(p.Pos) > maxDistance)
                 {
-                    Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, 0.01f), Lerp(Pos.Y, p.Pos.Y, 0.05f));
+                    Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, Speed), Lerp(Pos.Y, p.GetCenter.Y, Speed));
                 }
             }
 

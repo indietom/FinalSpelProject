@@ -27,7 +27,7 @@ namespace FinalSpelProject
             Speed = 0.02f;
         }
 
-        public void Update(List<Player> players, List<Projectile> projectiles)
+        public void Update(List<Player> players, List<Projectile> projectiles, List<Explosion> explosions)
         {
             // TODO: Should these ships emitt a sound effect when shooting? Might get too messy
             Random random = new Random();
@@ -38,7 +38,7 @@ namespace FinalSpelProject
             {
                 gunType = p.GetGunType();
                 fireRate = p.GetFireRate();
-                Console.WriteLine(DistanceTo(GetCenter));
+                lifeTime = (p.Dead) ? maxLifeTime : lifeTime;
                 if(DistanceTo(p.Pos) > maxDistance)
                 {
                     Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, Speed), Lerp(Pos.Y, p.GetCenter.Y, Speed));
@@ -69,7 +69,12 @@ namespace FinalSpelProject
                 }
             }
 
-            Destroy = (lifeTime >= maxLifeTime) ? true : Destroy;
+            if(lifeTime >= maxLifeTime)
+            {
+                for (int i = 0; i < 5; i++ )
+                    explosions.Add(new Explosion(Pos+new Vector2(random.Next(17), random.Next(17)), 16, false));
+                Destroy = true;
+            }
         }
     }
 }

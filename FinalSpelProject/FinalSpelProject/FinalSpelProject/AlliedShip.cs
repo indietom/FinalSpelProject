@@ -39,7 +39,7 @@ namespace FinalSpelProject
                 gunType = p.GetGunType();
                 fireRate = p.GetFireRate();
                 lifeTime = (p.Dead) ? maxLifeTime : lifeTime;
-                if(DistanceTo(p.Pos) > maxDistance)
+                if(DistanceTo(p.Pos) > maxDistance && !p.Dead)
                 {
                     Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, Speed), Lerp(Pos.Y, p.GetCenter.Y, Speed));
                 }
@@ -72,7 +72,7 @@ namespace FinalSpelProject
             if(lifeTime >= maxLifeTime)
             {
                 explosions.Add(new Explosion(Pos+new Vector2(random.Next(17), random.Next(17)), 16, false));
-                VelY += 0.3f;
+                VelY += 0.2f;
                 Pos += Vel;
                 Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
             }

@@ -40,6 +40,7 @@ namespace FinalSpelProject
         List<TextEffect> textEffects = new List<TextEffect>();
         List<Gib> gibs = new List<Gib>();
         List<Tile> tiles = new List<Tile>();
+        List<AlliedShip> alliedShips = new List<AlliedShip>();
 
         Level level;
 
@@ -97,6 +98,11 @@ namespace FinalSpelProject
                 g.Update();
             }
 
+            foreach (AlliedShip a in alliedShips)
+            {
+                a.Update(player, projectiles);
+            }
+
             foreach(Enemy e in enemies)
             {
                 e.Update(player, projectiles, explosions, powerUps, gibs);
@@ -144,7 +150,8 @@ namespace FinalSpelProject
 
             if(Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
+                if(alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                 //if(explosions.Count == 0) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
@@ -188,6 +195,11 @@ namespace FinalSpelProject
             {
                 if (tiles[i].Destroy) tiles.RemoveAt(i);
             }
+            for (int i = 0; i < alliedShips.Count; i++)
+            {
+                if (alliedShips[i].Destroy) alliedShips.RemoveAt(i);
+            }
+
             base.Update(gameTime);
         }
 
@@ -212,6 +224,7 @@ namespace FinalSpelProject
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.Draw(spriteBatch, spritesheet); }
+            foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }

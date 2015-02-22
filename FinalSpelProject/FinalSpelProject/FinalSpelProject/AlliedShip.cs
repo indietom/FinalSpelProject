@@ -22,7 +22,7 @@ namespace FinalSpelProject
             Pos = pos2;
             SetSize(24);
             SetSpriteCoords(1, 66);
-            maxDistance = random.Next(74, 128 + 32);
+            maxDistance = random.Next(64+24, 64+(24*4));
             maxLifeTime = 128 * 10;
         }
 
@@ -37,7 +37,7 @@ namespace FinalSpelProject
                 fireRate = p.GetFireRate();
                 if(p.DistanceTo(Pos) > maxDistance)
                 {
-                    Pos = new Vector2(Lerp(Pos.X, p.Pos.X, 0.06f), Lerp(Pos.Y, p.Pos.Y, 0.06f));
+                    Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, 0.01f), Lerp(Pos.Y, p.Pos.Y, 0.05f));
                 }
             }
 

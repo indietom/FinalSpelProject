@@ -102,7 +102,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 4;
+            gunType = 1;
             specialGunType = 1;
             specialAmmo = 2;
 
@@ -196,7 +196,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions)
         {
-            HitBox = FullHitBox;
+            //HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();

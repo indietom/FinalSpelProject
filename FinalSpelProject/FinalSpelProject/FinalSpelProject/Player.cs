@@ -196,7 +196,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions)
         {
-            //HitBox = FullHitBox;
+            HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();

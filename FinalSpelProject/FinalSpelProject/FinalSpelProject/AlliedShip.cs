@@ -29,7 +29,7 @@ namespace FinalSpelProject
 
         public void Update(List<Player> players, List<Projectile> projectiles)
         {
-            // TODO: Should these ships emitt a sound effect when shooting? Might get to messy
+            // TODO: Should these ships emitt a sound effect when shooting? Might get too messy
             Random random = new Random();
 
             lifeTime += 1;

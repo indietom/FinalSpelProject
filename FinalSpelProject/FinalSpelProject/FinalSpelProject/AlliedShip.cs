@@ -16,6 +16,11 @@ namespace FinalSpelProject
 
         float maxDistance;
 
+        short currentLaserHeigt;
+        short maxLaserHeight;
+        short rasieLaserCount;
+        short maxRaiseLaserCount;
+
         public AlliedShip(Vector2 pos2)
         {
             Random random = new Random();
@@ -42,6 +47,10 @@ namespace FinalSpelProject
                 if(DistanceTo(p.Pos) > maxDistance && !p.Dead)
                 {
                     Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, Speed), Lerp(Pos.Y, p.GetCenter.Y, Speed));
+                }
+                if(DistanceTo(p.Pos) < maxDistance-5 && !p.Dead)
+                {
+                    Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, -Speed), Lerp(Pos.Y, p.GetCenter.Y, -Speed));
                 }
             }
 

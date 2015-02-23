@@ -53,6 +53,7 @@ namespace FinalSpelProject
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
         public short GetMaxComboCount() { return maxComboCount; }
+        public short GetCurrentLaserHeigt() { return currentLaserHeigt; }
 
         public bool Dead {get; set;}
         bool inputActive;
@@ -102,7 +103,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 1;
+            gunType = 2;
             specialGunType = 1;
             specialAmmo = 2;
 

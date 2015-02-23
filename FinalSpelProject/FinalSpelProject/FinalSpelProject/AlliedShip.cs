@@ -16,11 +16,6 @@ namespace FinalSpelProject
 
         float maxDistance;
 
-        short currentLaserHeigt;
-        short maxLaserHeight;
-        short rasieLaserCount;
-        short maxRaiseLaserCount;
-
         public AlliedShip(Vector2 pos2)
         {
             Random random = new Random();
@@ -44,6 +39,13 @@ namespace FinalSpelProject
                 gunType = p.GetGunType();
                 fireRate = p.GetFireRate();
                 lifeTime = (p.Dead) ? maxLifeTime : lifeTime;
+                if(gunType == 4)
+                {
+                    for (int i = 0; i < p.GetCurrentLaserHeigt(); i++)
+                    {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 8, Pos.Y - i), 0, 0, 2, 0, false, 1));
+                    }
+                }
                 if(DistanceTo(p.Pos) > maxDistance && !p.Dead)
                 {
                     Pos = new Vector2(Lerp(Pos.X, p.GetCenter.X, Speed), Lerp(Pos.Y, p.GetCenter.Y, Speed));

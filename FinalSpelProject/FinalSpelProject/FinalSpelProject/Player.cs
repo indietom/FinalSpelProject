@@ -62,6 +62,7 @@ namespace FinalSpelProject
         public bool RasieCombo { get; set; }
         public bool NukeDropped { get; set; }
         bool reverseLaser;
+        bool spawnedGetReadyText;
 
         float velLeft;
         float velRight;
@@ -195,7 +196,7 @@ namespace FinalSpelProject
                 }
             }
         }
-        public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions)
+        public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
             HitBox = FullHitBox;
             Random random = new Random();
@@ -266,7 +267,7 @@ namespace FinalSpelProject
             Movment();
             UpdateInvisiblity();
             UpdateCombo();
-            LivesUpdate(explosions);
+            LivesUpdate(explosions, textEffects);
             Input(projectiles);
 
             foreach (Projectile p in projectiles)
@@ -402,9 +403,15 @@ namespace FinalSpelProject
                 }
             }
         }
-        public void LivesUpdate(List<Explosion> explosions)
+        public void LivesUpdate(List<Explosion> explosions, List<TextEffect> textEffects)
         {
             Random random = new Random();
+            if(!spawnedGetReadyText && Dead)
+            {
+                Console.WriteLine("LE");
+                textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Bisque, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount+200), 2, 1));
+                textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Bisque, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+            }
             if(Dead && respawnCount <= 0)
             {
                 currentCombo = 0;
@@ -413,6 +420,7 @@ namespace FinalSpelProject
                 if (explosionDelay % 2 == 0) explosions.Add(new Explosion(Pos + new Vector2(random.Next(-16, Width), random.Next(-16, Height)), 32, false));
                 inputActive = false;
                 velDown += 0.5f;
+                spawnedGetReadyText = true;
                 if (Pos.Y >= Globals.screenH + Height * 3)
                 {
                     if(lives != 0) lives -= 1;
@@ -436,6 +444,7 @@ namespace FinalSpelProject
                 {
                     inputActive = true;
                     Dead = false;
+                    spawnedGetReadyText = false;
                     Flash = false;
                     flashCount = 0;
                     respawnCount = 0;

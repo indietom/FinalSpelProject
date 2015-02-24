@@ -19,6 +19,7 @@ namespace FinalSpelProject
         float r;
         float g;
         float b;
+        float fallSpeed;
 
         Color color;
 
@@ -74,6 +75,13 @@ namespace FinalSpelProject
                     color = new Color(r, g, b);
                     r = Lerp(r, 255, 0.0001f);
                     g = Lerp(g, 255, 0.0001f);
+                    break;
+                case 2:
+                    if(lifeTime + 200 >= maxLifeTime)
+                    {
+                        fallSpeed += 0.3f;
+                        target += new Vector2(0, fallSpeed);
+                    }
                     break;
             }
         }

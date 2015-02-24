@@ -110,7 +110,7 @@ namespace FinalSpelProject
 
             foreach (Player p in player)
             {
-                p.Update(projectiles, enemies, explosions);
+                p.Update(projectiles, enemies, explosions, textEffects);
             }
 
             foreach(Projectile p in projectiles)

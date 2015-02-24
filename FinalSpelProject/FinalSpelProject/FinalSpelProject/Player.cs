@@ -408,9 +408,8 @@ namespace FinalSpelProject
             Random random = new Random();
             if(!spawnedGetReadyText && Dead)
             {
-                Console.WriteLine("LE");
-                textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Bisque, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount+200), 2, 1));
-                textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Bisque, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Red, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount+200), 2, 1));
+                textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
             }
             if(Dead && respawnCount <= 0)
             {

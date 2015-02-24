@@ -77,6 +77,7 @@ namespace FinalSpelProject
                     g = Lerp(g, 255, 0.0001f);
                     break;
                 case 2:
+                    color = new Color(255 - lifeTime, 216 - lifeTime, 0);
                     if(lifeTime + 200 >= maxLifeTime)
                     {
                         fallSpeed += 0.3f;

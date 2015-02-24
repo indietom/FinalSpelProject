@@ -9,30 +9,45 @@ namespace FinalSpelProject
     class SpawnManager
     {
         byte amountOfEnemySpawners;
+        byte lineHeight;
 
-        short[] spawnEnemyTimers;
-        short[] MaxSpawnEnemyTimers;
+        short[] spawnEnemyCounters;
+        short[] MaxSpawnEnemyCounters;
+
+        bool active;
 
         public SpawnManager()
         {
             amountOfEnemySpawners = 3;
-            spawnEnemyTimers = new short[amountOfEnemySpawners];
-            MaxSpawnEnemyTimers = new short[amountOfEnemySpawners];
+            spawnEnemyCounters = new short[amountOfEnemySpawners];
+            MaxSpawnEnemyCounters = new short[amountOfEnemySpawners];
+            active = true;
+            MaxSpawnEnemyCounters[0] = 128 * 3;
         }
 
-        public void Update()
+        public void Update(List<Enemy> enemies, List<PowerUp> powerUps)
+        {
+            if(active)
+            {
+                EnemySpawnUpdate(enemies);
+                PowerUpSpawnUpdate(powerUps);
+            }
+        }
+
+        public void PowerUpSpawnUpdate(List<PowerUp> powerUps)
         {
 
         }
 
-        public void PowerUpSpawnUpdate()
+        public void EnemySpawnUpdate(List<Enemy> enemies)
         {
-
-        }
-
-        public void EnemySpawnUpdate()
-        {
- 
+            Random random = new Random();
+            if(spawnEnemyCounters[0] >= MaxSpawnEnemyCounters[0])
+            {
+                SpawnEnemiesLine(new Vector2(random.Next(Globals.screenW - 32), random.Next(-640, -400)), (byte)random.Next(3, 6), 18, enemies);
+                spawnEnemyCounters[0] = 0;
+                MaxSpawnEnemyCounters[0] = (short)random.Next(128 * 5, 128 * 8);
+            }
         }
 
         public void SpawnEnemiesLine(Vector2 pos2, byte height, byte type, byte enemySize, List<Enemy> enemies)
@@ -40,7 +55,7 @@ namespace FinalSpelProject
             Random random = new Random();
             for(int i = 0; i < height; i++)
             {
-                if(i != 0) enemies.Add(new Enemy(new Vector2(pos2.X, pos2.Y+i*(enemySize+3)), type, random));
+                if (i != 0) enemies.Add(new Enemy(new Vector2(pos2.X, pos2.Y + i * (enemySize + 3)), type, random));
                 else enemies.Add(new Enemy(new Vector2(pos2.X, pos2.Y + i * (enemySize + 3)), type, random, true));
             }
         }

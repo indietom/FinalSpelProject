@@ -166,6 +166,16 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     Pos = new Vector2(Pos.X, -32);
                     break;
+                case 19:
+                    health = 2;
+                    SetSize(32);
+                    SetSpriteCoords(1, 249);
+                    MinFrame = 0;
+                    MaxFrame = 3;
+                    AnimationActive = true;
+                    worth = 500;
+                    scroll = true;
+                    break;
             }
         }
 
@@ -341,6 +351,9 @@ namespace FinalSpelProject
                              
                          }
                     }
+                    break;
+                case 18:
+
                     break;
                     
             }

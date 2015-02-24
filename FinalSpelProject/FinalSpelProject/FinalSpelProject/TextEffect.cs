@@ -72,6 +72,12 @@ namespace FinalSpelProject
             switch(tag)
             {
                 case 1:
+                    if (lifeTime + 100 >= maxLifeTime)
+                    {
+                        Rotation += fallSpeed / 1000;
+                        fallSpeed += 0.3f;
+                        target += new Vector2(0, fallSpeed);
+                    }
                     color = new Color(r, g, b);
                     r = Lerp(r, 255, 0.0001f);
                     g = Lerp(g, 255, 0.0001f);
@@ -80,6 +86,7 @@ namespace FinalSpelProject
                     color = new Color(255 - lifeTime, 216 - lifeTime, 0);
                     if(lifeTime + 200 >= maxLifeTime)
                     {
+                        Rotation += fallSpeed/1000;
                         fallSpeed += 0.3f;
                         target += new Vector2(0, fallSpeed);
                     }

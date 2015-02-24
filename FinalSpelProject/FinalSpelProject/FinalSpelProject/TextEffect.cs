@@ -39,6 +39,7 @@ namespace FinalSpelProject
             Speed = speed2;
             maxLifeTime = maxLifeTime2;
             tag = tag2;
+            OrginalColor = color;
         }
         public TextEffect(Vector2 pos2, string text2, float size2, Color color2, Vector2 target2, float speed2, short maxLifeTime2, byte tag2, byte type2)
         {
@@ -51,6 +52,7 @@ namespace FinalSpelProject
             Speed = speed2;
             maxLifeTime = maxLifeTime2;
             tag = tag2;
+            OrginalColor = color;
         }
         public void Update()
         {
@@ -93,9 +95,9 @@ namespace FinalSpelProject
                     break;
             }
         }
-        public void FlashColor(Color color2)
+        public void FlashColor(Color color2, int interval)
         {
-
+            
         }
         public void Flash()
         {

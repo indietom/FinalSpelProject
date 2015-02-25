@@ -39,7 +39,7 @@ namespace FinalSpelProject
                 gunType = p.GetGunType();
                 fireRate = p.GetFireRate();
                 lifeTime = (p.Dead) ? maxLifeTime : lifeTime;
-                if(gunType == 4)
+                if(gunType == 4 && lifeTime <= maxLifeTime)
                 {
                     for (int i = 0; i < p.GetCurrentLaserHeigt(); i++)
                     {

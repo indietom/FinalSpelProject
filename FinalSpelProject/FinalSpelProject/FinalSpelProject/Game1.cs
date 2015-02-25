@@ -24,6 +24,19 @@ namespace FinalSpelProject
         public static bool flashScreen;
         public static byte flashScreenCount;
 
+        enum Gamestates
+        {
+            Menu,
+            start,
+            options,
+            pause,
+            levels
+        }
+        Gamestates gamestate;
+
+        KeyboardState ks = Keyboard.GetState();
+        KeyboardState prevks;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -85,72 +98,86 @@ namespace FinalSpelProject
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            ui.Update(player);
+            switch(gamestate)
+            {               
+                    
+                case Gamestates.start:
+                    if (ks.IsKeyDown(Keys.Enter))
+                    {
+                        ui.Update(player);
 
-            foreach(Enemy e in enemies)
-            {
-                e.Update(player, projectiles, explosions, powerUps);
-            }
-            foreach (Player p in player)
-            {
-                p.Update(projectiles, enemies, explosions);
-            }
-            foreach(Projectile p in projectiles)
-            {
-                p.Update(particles, player[0]);
-            }
+                        foreach (Enemy e in enemies)
+                        {
+                            e.Update(player, projectiles, explosions, powerUps);
+                        }
+                        foreach (Player p in player)
+                        {
+                            p.Update(projectiles, enemies, explosions);
+                        }
+                        foreach (Projectile p in projectiles)
+                        {
+                            p.Update(particles, player[0]);
+                        }
 
-            foreach(Chunk c in chunks)
-            {
-                c.Update(enemies);
+                        foreach (Chunk c in chunks)
+                        {
+                            c.Update(enemies);
+                        }
+
+                        foreach (Particle p in particles)
+                        {
+                            p.Update();
+                        }
+
+                        foreach (Explosion e in explosions)
+                        {
+                            e.Update();
+                        }
+
+                        foreach (PowerUp p in powerUps)
+                        {
+                            p.Update(player);
+                        }
+
+                        if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 64));
+                        }
+
+                        for (int i = 0; i < enemies.Count(); i++)
+                        {
+                            if (enemies[i].Destroy) enemies.RemoveAt(i);
+                        }
+                        for (int i = 0; i < projectiles.Count(); i++)
+                        {
+                            if (projectiles[i].Destroy) projectiles.RemoveAt(i);
+                        }
+                        for (int i = 0; i < chunks.Count; i++)
+                        {
+                            if (chunks[i].Destroy) chunks.RemoveAt(i);
+                        }
+                        for (int i = 0; i < particles.Count; i++)
+                        {
+                            if (particles[i].Destroy) particles.RemoveAt(i);
+                        }
+                        for (int i = 0; i < explosions.Count; i++)
+                        {
+                            if (explosions[i].Destroy) explosions.RemoveAt(i);
+                        }
+                        for (int i = 0; i < powerUps.Count; i++)
+                        {
+                            if (powerUps[i].Destroy) powerUps.RemoveAt(i);
+                        }
+                    }
+                    break;
             }
+                
             
-            foreach(Particle p in particles)
-            {
-                p.Update();
-            }
-
-            foreach(Explosion e in explosions)
-            {
-                e.Update();
-            }
-
-            foreach(PowerUp p in powerUps)
-            {
-                p.Update(player);
-            }
-
-            if(Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 64));
-            }
-
-            for (int i = 0; i < enemies.Count();i++)
-            {
-                if (enemies[i].Destroy) enemies.RemoveAt(i);
-            }
-            for (int i = 0; i < projectiles.Count(); i++)
-            {
-                if (projectiles[i].Destroy) projectiles.RemoveAt(i);
-            }
-            for (int i = 0; i < chunks.Count; i++)
-            {
-                if (chunks[i].Destroy) chunks.RemoveAt(i);
-            }
-            for (int i = 0; i < particles.Count; i++)
-            {
-                if (particles[i].Destroy) particles.RemoveAt(i);
-            }
-            for (int i = 0; i < explosions.Count; i++)
-            {
-                if (explosions[i].Destroy) explosions.RemoveAt(i);
-            }
-            for (int i = 0; i < powerUps.Count; i++)
-            {
-                if (powerUps[i].Destroy) powerUps.RemoveAt(i);
-            }
+            
             base.Update(gameTime);
+            
         }
+        
 
         protected override void Draw(GameTime gameTime)
         {

@@ -135,7 +135,7 @@ namespace FinalSpelProject
 
             foreach(PowerUp p in powerUps)
             {
-                p.Update(player, textEffects);
+                p.Update(player, textEffects, alliedShips);
             }
 
             foreach(TextEffect te in textEffects)
@@ -155,7 +155,7 @@ namespace FinalSpelProject
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                 //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, false));
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0, true));
                 //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 

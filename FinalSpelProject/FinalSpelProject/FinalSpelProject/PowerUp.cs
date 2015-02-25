@@ -36,7 +36,7 @@ namespace FinalSpelProject
             name = GetName();
         }
 
-        public void Update(List<Player> players, List<TextEffect> textEffects)
+        public void Update(List<Player> players, List<TextEffect> textEffects, List<AlliedShip> alliedShips)
         {
             cosCount += 0.01f;
             switch (movmentPattern)
@@ -58,7 +58,10 @@ namespace FinalSpelProject
                     if (p.GetGunType() != type)
                     {
                         textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
-                        p.SetGunType(type, special);
+                        if (type == 1 && special)
+                            alliedShips.Add(new AlliedShip(new Vector2(Globals.screenW / 2 - 12, Globals.screenH / 2 - 12)));
+                        else
+                            p.SetGunType(type, special);
                     }
                     else
                     {
@@ -89,6 +92,7 @@ namespace FinalSpelProject
             else
             {
                 names[0] = "NUKE";
+                names[1] = "ALLIED SHIP";
             }
             return names[type];
         }

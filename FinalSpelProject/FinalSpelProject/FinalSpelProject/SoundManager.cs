@@ -20,7 +20,8 @@ namespace FinalSpelProject
 
         public static void Load(ContentManager content)
         {
-
+            NormalShot = content.Load<SoundEffect>("shoot");
+            Explosion = content.Load<SoundEffect>("explosion");
         }
     }
 }

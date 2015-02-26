@@ -14,6 +14,7 @@ namespace FinalSpelProject
         short startOffset;
 
         bool cinematic;
+	bool hasPlayedSound;
 
         public bool GetCinematic() { return cinematic; }
 
@@ -31,10 +32,16 @@ namespace FinalSpelProject
         {
             HitBox = (!cinematic) ? HitBox = FullHitBox : HitBox = HitBox;
             Imx = (short)(FrameX(CurrentFrame) + startOffset);
-            Destroy = (CurrentFrame >= MaxFrame-1) ? Destroy = true : Destroy = false;
+            Destroy = (CurrentFrame >= MaxFrame - 1) ? Destroy = true : Destroy = false;
+            if (!hasPlayedSound)
+            {
+                SoundManager.Explosion.Play();
+                hasPlayedSound = true;
+            }
             Animate();
             AnimationCount += 1;
         }
+
         public void AssignSprite()
         {
             switch (size)

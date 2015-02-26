@@ -43,7 +43,7 @@ namespace FinalSpelProject
         List<AlliedShip> alliedShips = new List<AlliedShip>();
 
         Level level;
-	SpawnManager spawnManager = new SpawnManager();
+        SpawnManager spawnManager = new SpawnManager();
 
         ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
 
@@ -95,7 +95,7 @@ namespace FinalSpelProject
 
             level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps);
 
-            foreach(Gib g in gibs)
+            foreach (Gib g in gibs)
             {
                 g.Update();
             }
@@ -105,7 +105,7 @@ namespace FinalSpelProject
                 a.Update(player, projectiles, explosions);
             }
 
-            foreach(Enemy e in enemies)
+            foreach (Enemy e in enemies)
             {
                 e.Update(player, projectiles, explosions, powerUps, gibs);
             }
@@ -115,44 +115,44 @@ namespace FinalSpelProject
                 p.Update(projectiles, enemies, explosions, textEffects);
             }
 
-            foreach(Projectile p in projectiles)
+            foreach (Projectile p in projectiles)
             {
                 p.Update(particles, player[0]);
             }
 
-            foreach(Chunk c in chunks)
+            foreach (Chunk c in chunks)
             {
                 c.Update(enemies);
             }
-            
-            foreach(Particle p in particles)
+
+            foreach (Particle p in particles)
             {
                 p.Update();
             }
 
-            foreach(Explosion e in explosions)
+            foreach (Explosion e in explosions)
             {
                 e.Update();
             }
 
-            foreach(PowerUp p in powerUps)
+            foreach (PowerUp p in powerUps)
             {
                 p.Update(player, textEffects, alliedShips);
             }
 
-            foreach(TextEffect te in textEffects)
+            foreach (TextEffect te in textEffects)
             {
                 te.Update();
             }
 
-            foreach(Tile t in tiles)
+            foreach (Tile t in tiles)
             {
                 t.Update();
             }
 
-            if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                if(alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                 //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
@@ -161,7 +161,7 @@ namespace FinalSpelProject
                 //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 
-            for (int i = 0; i < enemies.Count();i++)
+            for (int i = 0; i < enemies.Count(); i++)
             {
                 if (enemies[i].Destroy) enemies.RemoveAt(i);
             }

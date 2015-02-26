@@ -43,6 +43,7 @@ namespace FinalSpelProject
         List<AlliedShip> alliedShips = new List<AlliedShip>();
 
         Level level;
+	SpawnManager spawnManager = new SpawnManager();
 
         ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
 
@@ -63,6 +64,7 @@ namespace FinalSpelProject
         {
             spritesheet = Content.Load<Texture2D>("spritesheet");
             TilesheetManager.Load(Content);
+            SoundManager.Load(Content);
             font = Content.Load<SpriteFont>("font");
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
@@ -91,7 +93,7 @@ namespace FinalSpelProject
 
             ui.Update(player);
 
-            level.Update(tiles, chunks, proceduralGenerationManager);
+            level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps);
 
             foreach(Gib g in gibs)
             {

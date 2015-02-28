@@ -41,6 +41,7 @@ namespace FinalSpelProject
         List<Gib> gibs = new List<Gib>();
         List<Tile> tiles = new List<Tile>();
         List<AlliedShip> alliedShips = new List<AlliedShip>();
+        List<TextBox> textBoxes = new List<TextBox>();
 
         Level level;
         SpawnManager spawnManager = new SpawnManager();
@@ -150,9 +151,15 @@ namespace FinalSpelProject
                 t.Update();
             }
 
+            foreach(TextBox t in textBoxes)
+            {
+                t.Update();
+            }
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
+                //if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                 //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
@@ -231,8 +238,9 @@ namespace FinalSpelProject
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
             UpdateScreenFlash();
-            ui.Draw(spriteBatch, spritesheet, font);
             foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
+            ui.Draw(spriteBatch, spritesheet, font);
+            foreach (TextBox t in textBoxes) { t.Draw(spriteBatch, spritesheet, font); }
             spriteBatch.End();
 
             base.Draw(gameTime);

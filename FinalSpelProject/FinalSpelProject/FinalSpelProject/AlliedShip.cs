@@ -82,7 +82,7 @@ namespace FinalSpelProject
 
             if(lifeTime >= maxLifeTime)
             {
-                explosions.Add(new Explosion(Pos+new Vector2(random.Next(17), random.Next(17)), 16, false));
+                explosions.Add(new Explosion(Pos+new Vector2(random.Next(17), random.Next(17)), 16, false, false));
                 VelY += 0.2f;
                 Pos += Vel;
                 Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;

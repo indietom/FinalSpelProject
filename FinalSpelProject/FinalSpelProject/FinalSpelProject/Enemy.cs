@@ -166,10 +166,11 @@ namespace FinalSpelProject
                     MaxAnimationCount = 8;
                     Pos = new Vector2(Pos.X, -32);
                     break;
-                case 19:
+                case 18:
                     health = 2;
                     SetSize(32);
-                    SetSpriteCoords(1, 249);
+                    SetSpriteCoords(1, 294);
+                    MaxAnimationCount = 4;
                     MinFrame = 0;
                     MaxFrame = 3;
                     AnimationActive = true;
@@ -392,7 +393,7 @@ namespace FinalSpelProject
                         break;
                 }
                 chanceOfPowerUp = (byte)random.Next(1, 4);
-                if (chanceOfPowerUp == 2 && type == 14) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 5), 1, false));
+                if (chanceOfPowerUp == 2 && type == 14 || carryingPowerUp) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 5), 1, false));
                 if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
                 else explosions.Add(new Explosion(new Vector2(Pos.X - Width / 2, Pos.Y - Height / 2), (byte)Width, false));
                 Destroy = true;

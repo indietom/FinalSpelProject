@@ -61,6 +61,17 @@ namespace FinalSpelProject
             EnemyShot = true;
             AssignMovmentValues();
         }
+        public Projectile(Vector2 pos2, float ang, float spe, Point spriteCoords, Point size, byte movmentType2, bool rad2)
+        {
+            rad = rad2;
+            Pos = pos2;
+            Angle = ang;
+            Speed = spe;
+            movmentType = movmentType2;
+            SetSpriteCoords((short)spriteCoords.X, (short)spriteCoords.Y);
+            SetSize((short)size.X, (short)size.Y);
+            AssignMovmentValues();
+        }
         public void Update(List<Particle> particles, Player player)
         {
             HitBox = FullHitBox;

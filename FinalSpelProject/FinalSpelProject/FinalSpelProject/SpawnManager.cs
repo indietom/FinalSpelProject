@@ -42,9 +42,10 @@ namespace FinalSpelProject
         public void EnemySpawnUpdate(List<Enemy> enemies)
         {
             Random random = new Random();
+            spawnEnemyCounters[0] += 1;
             if(spawnEnemyCounters[0] >= MaxSpawnEnemyCounters[0])
             {
-                SpawnEnemiesLine(new Vector2(random.Next(Globals.screenW - 32), random.Next(-640, -400)), (byte)random.Next(3, 6), 18, enemies);
+                SpawnEnemiesLine(new Vector2(random.Next(Globals.screenW - 32), random.Next(-640, -400)), (byte)random.Next(3, 6), 18, 64, enemies);
                 spawnEnemyCounters[0] = 0;
                 MaxSpawnEnemyCounters[0] = (short)random.Next(128 * 5, 128 * 8);
             }

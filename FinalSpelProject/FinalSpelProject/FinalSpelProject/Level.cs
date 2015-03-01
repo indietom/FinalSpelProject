@@ -36,10 +36,7 @@ namespace FinalSpelProject
             {
                 pgm.SpawnLevelOne(tiles);
             }
-            if (looping)
-            {
-                spawnManager.Update(enemies, powerUps);
-            }
+            spawnManager.Update(enemies, powerUps);
         }
     }
 }

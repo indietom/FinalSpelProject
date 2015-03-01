@@ -231,7 +231,7 @@ namespace FinalSpelProject
             foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Projectile p in projectiles) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Projectile p in projectiles) { if (p.Rotated) p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); else p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.Draw(spriteBatch, spritesheet); }
             foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }

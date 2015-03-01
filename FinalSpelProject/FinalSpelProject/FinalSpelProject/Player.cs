@@ -104,7 +104,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 2;
+            gunType = 5;
             specialGunType = 1;
             specialAmmo = 2;
 
@@ -193,6 +193,11 @@ namespace FinalSpelProject
                     NukeDropped = true;
                     specialAmmo -= 1;
                     specialFireRate = 1;
+                }
+                if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 5 && fireRate <= 0)
+                {
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, 8, 3, 3, false));
+                    fireRate = 1;
                 }
             }
         }

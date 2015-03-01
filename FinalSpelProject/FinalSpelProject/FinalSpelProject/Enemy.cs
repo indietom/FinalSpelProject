@@ -23,6 +23,7 @@ namespace FinalSpelProject
         byte chanceOfPowerUp;
         byte hitFlashDelay;
 
+        bool splitEnemy;
         bool scroll;
         bool hurtByExplosion;
         bool carryingPowerUp;
@@ -392,6 +393,12 @@ namespace FinalSpelProject
                         }
                         break;
                 }
+                if(splitEnemy)
+                {
+                    projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                    projectile.Add(new Projectile(Pos+new Vector2(Width/2, 0), 0, 8, new Point(Imx+Width/2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                    splitEnemy = false;
+                }
                 chanceOfPowerUp = (byte)random.Next(1, 4);
                 if (chanceOfPowerUp == 2 && type == 14 || carryingPowerUp) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 5), 1, false));
                 if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
@@ -428,6 +435,10 @@ namespace FinalSpelProject
                     if (p.Explosive)
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     health -= p.Dm;
+                    if(health <= 0)
+                    {
+                        splitEnemy = true;
+                    }
                     hitFlashDelay = 1;
                     p.Destroy = true;
                 }

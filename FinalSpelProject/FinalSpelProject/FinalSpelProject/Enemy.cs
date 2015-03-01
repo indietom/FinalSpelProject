@@ -393,10 +393,18 @@ namespace FinalSpelProject
                         }
                         break;
                 }
-                if(splitEnemy)
+                if(splitEnemy && !OnGround)
                 {
-                    projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
-                    projectile.Add(new Projectile(Pos+new Vector2(Width/2, 0), 0, 8, new Point(Imx+Width/2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                    if (!Rotated)
+                    {
+                        projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), 0, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                    }
+                    else
+                    {
+                        projectile.Add(new Projectile(Pos, Rotation, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), Rotation+180, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                    }
                     splitEnemy = false;
                 }
                 chanceOfPowerUp = (byte)random.Next(1, 4);

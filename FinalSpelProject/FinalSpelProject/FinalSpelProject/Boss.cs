@@ -16,6 +16,8 @@ namespace FinalSpelProject
         short[] fireRates;
         short[] maxFireRates;
 
+        int Health;
+
         short invisibleCount;
         short maxInvisibleCount;
 
@@ -27,11 +29,29 @@ namespace FinalSpelProject
             type = type2;
             maxInvisibleCount = 8;
             OrginalColor = color;
+            switch (type)
+            {
+                case 1:
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
+                    AnimationActive = true;
+                    Speed = 5;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
+                    Health = 100;
+                    break;
+            }
+
         }
 
         public void Update(List<Player> player, List<Projectile> projectiles)
         {
-
+            switch (type)
+            {
+                case 1:
+                    
+                    break;
+            }
         }
 
         public void Attack(List<Projectile> projectiles)

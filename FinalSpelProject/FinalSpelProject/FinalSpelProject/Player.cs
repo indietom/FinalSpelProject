@@ -196,7 +196,7 @@ namespace FinalSpelProject
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 5 && fireRate <= 0)
                 {
-                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, 8, 3, 3, false));
+                    projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2), Pos.Y + (Height / 2)), -90, 8, 3, 3, false));
                     fireRate = 1;
                 }
             }
@@ -216,7 +216,7 @@ namespace FinalSpelProject
             switch(gunType)
             {
                 case 0:
-                    maxFireRate = 12;
+                    maxFireRate = 16;
                     break;
                 case 1:
                     maxFireRate = 64-16;
@@ -226,6 +226,9 @@ namespace FinalSpelProject
                     break;
                 case 3:
                     maxFireRate = 64;
+                    break;
+                case 5:
+                    maxFireRate = 24;
                     break;
             }
             switch(specialGunType)

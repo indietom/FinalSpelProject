@@ -443,9 +443,10 @@ namespace FinalSpelProject
                     if (p.Explosive)
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     health -= p.Dm;
-                    if(health <= 0)
+                    if(health <= 0 && p.GetMovmentType() == 3)
                     {
                         splitEnemy = true;
+                        Console.WriteLine(splitEnemy);
                     }
                     hitFlashDelay = 1;
                     p.Destroy = true;

@@ -121,6 +121,11 @@ namespace FinalSpelProject
             return x * 2;
         }
 
+        public float DegreeToBågsekund(float angle)
+        {
+            return angle * (1 / 3600);
+        }
+
         /*
          * Must set minFrame(the first frame in an animation) and maxFrame(lastFrame+1 of animation) 
          * Must set MaxAnimationCount is the amount of datacycels that has to pass for the animation to update 

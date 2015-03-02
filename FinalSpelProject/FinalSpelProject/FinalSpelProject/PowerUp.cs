@@ -79,7 +79,7 @@ namespace FinalSpelProject
         }
         public string GetName()
         {
-            string[] names = new string[5];
+            string[] names = new string[6];
 
             if (!special)
             {
@@ -88,6 +88,7 @@ namespace FinalSpelProject
                 names[2] = "SPREADGUN";
                 names[3] = "MISSILE";
                 names[4] = "LAZER BEAM";
+                names[5] = "LAZER-SHURIKEN";
             }
             else
             {

@@ -15,7 +15,7 @@ namespace FinalSpelProject
 
         bool verticalAnimation;
 
-        public Particle(Vector2 pos2, float ang, float spe, byte type2, byte spriteType2)
+        public Particle(Vector2 pos2, float ang, float spe, byte type2, byte spriteType2, Color color2)
         {
             Pos = pos2;
             Angle = ang;
@@ -24,8 +24,9 @@ namespace FinalSpelProject
             spriteType = spriteType2;
             AssignSprite();
         }
-        public Particle(Vector2 pos2, byte type2, byte spriteType2)
+        public Particle(Vector2 pos2, byte type2, byte spriteType2, Color color2)
         {
+            color = color2;
             Pos = pos2;
             type = type2;
             spriteType = spriteType2;

@@ -29,6 +29,8 @@ namespace FinalSpelProject
         bool carryingPowerUp;
         public bool OnGround { get; set; }
 
+        Color bloodColor { get; set; }
+
         public Enemy(Vector2 pos2, byte type2, Random r)
         {
             Pos = pos2;
@@ -100,13 +102,14 @@ namespace FinalSpelProject
                     worth = 1700;
                     SetSpriteCoords(1, 261);
                     SetSize(32);
-                    AnimationActive = true;
                     health = 2;
                     armor = 10;
                     fireRate = 50;
                     Rotated = true;
                     RoateOnRad = true;
                     OnGround = true;
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
                     break;
                 //Sideways Dude yo
                 case 15:
@@ -244,12 +247,25 @@ namespace FinalSpelProject
                     Rotation = AimAt(player[0].GetCenter);
                     //fires toward player(s)
           
+                    if(CurrentFrame >= MaxFrame-1)
+                    {
+                        AnimationActive = false;
+                        CurrentFrame = 0;
+                        AnimationCount = 0;
+                    }
+
+                    if(!AnimationActive)
+                    {
+                        Imx = 0;
+                    }
+
                     if (fireRate != 0)
                     {
                         fireRate -= 1;
                     }
                     if (fireRate == 0)
                     {
+                        AnimationActive = true;
                         fireRate = 50+random.Next(100);
                         projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
                     }
@@ -397,13 +413,13 @@ namespace FinalSpelProject
                 {
                     if (!Rotated)
                     {
-                        projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
-                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), 0, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), 0, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
                     }
                     else
                     {
-                        projectile.Add(new Projectile(Pos, Rotation, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
-                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), Rotation+180, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 0, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos, Rotation, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), Rotation+180, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
                     }
                     splitEnemy = false;
                 }

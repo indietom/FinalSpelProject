@@ -15,6 +15,7 @@ namespace FinalSpelProject
         byte spriteType;
         byte movmentType;
         byte stopFollowingCount;
+        byte bleedCount;
         public byte ExplosionSize { get; set; }
 
         public byte GetMovmentType() { return movmentType; }
@@ -79,10 +80,12 @@ namespace FinalSpelProject
         }
         public void Update(List<Particle> particles, Player player)
         {
+            Random random = new Random();
             if (!Rotated)
                 HitBox = FullHitBox;
             else HitBox = FullHitBoxMiddle;
             Destroy = (Pos.Y < -Height) ? true : Destroy;
+            Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
             if(maxLifeTime != 0)
             {
                 lifeTime += 1;
@@ -99,7 +102,7 @@ namespace FinalSpelProject
                     AngleMath(rad);
                     Pos += Vel;
                     Speed += 0.2f;
-                    if(Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
+                    if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0, Color.DarkGray));
                     break;
                 case 2:
                     if (stopFollowingCount <= 64*2)
@@ -113,7 +116,7 @@ namespace FinalSpelProject
                     AngleMath(rad);
                     Pos += Vel;
                     Rotation = Angle;
-                    if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0));
+                    if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0, Color.DarkGray));
                     break;
                 case 3:
                     AngleMath(rad);
@@ -124,6 +127,13 @@ namespace FinalSpelProject
                     AngleMath(rad);
                     Pos += Vel;
                     if (Speed > 0.5f) Speed -= 0.04f;
+                    Pos += new Vector2(0, Speed/10);
+                    bleedCount += 1;
+                    if(bleedCount >= 4)
+                    {
+                        particles.Add(new Particle(Pos+new Vector2(random.Next(Width/2), random.Next(Height)), 0, 0, Color.Green));
+                        bleedCount = 0;
+                    }
                     // TODO: add particels here
                     break;
             }

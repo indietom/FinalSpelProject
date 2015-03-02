@@ -32,6 +32,7 @@ namespace FinalSpelProject
 
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
+        List<Boss> bosses = new List<Boss>();
         List<Projectile> projectiles = new List<Projectile>();
         List<Chunk> chunks = new List<Chunk>();
         List<Particle> particles = new List<Particle>();
@@ -51,6 +52,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
+            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2, -200), 1));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -124,6 +126,11 @@ namespace FinalSpelProject
             foreach (Chunk c in chunks)
             {
                 c.Update(enemies);
+            }
+
+            foreach (Boss b in bosses)
+            {
+                b.Update(player, projectiles);
             }
 
             foreach (Particle p in particles)
@@ -228,6 +235,7 @@ namespace FinalSpelProject
                 if (t.GetType() != 1)
                     t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
             }
+
             foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
             foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
@@ -235,6 +243,10 @@ namespace FinalSpelProject
             foreach (Player p in player) { if(!p.Flash) p.Draw(spriteBatch, spritesheet); }
             foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }
             foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
+            foreach (Boss b in bosses)
+            {
+                b.Draw(spriteBatch, spritesheet);
+            }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
             UpdateScreenFlash();

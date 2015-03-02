@@ -17,6 +17,10 @@ namespace FinalSpelProject
         short[] maxFireRates;
 
         int Health;
+        int Firerate;
+        int AltFirerate;
+        Vector2 targetLine;
+        bool targeted;
 
         short invisibleCount;
         short maxInvisibleCount;
@@ -39,6 +43,9 @@ namespace FinalSpelProject
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
                     Health = 100;
+                    Firerate = 120;
+                    AltFirerate = 300;
+                    
                     break;
             }
 
@@ -49,7 +56,34 @@ namespace FinalSpelProject
             switch (type)
             {
                 case 1:
-                    
+                    if (Speed > 0)
+                    {
+                        if (Speed != 0)
+                        {
+                            Pos = new Vector2(Pos.X, Lerp(Pos.Y, 128, 0.02f));
+                        }
+                    }
+                         
+                    AltFirerate -= 1;
+                    if (AltFirerate <= 100 && AltFirerate > 0 && !player[0].Dead)
+                    {
+
+                        float tempAngle = AimAt(player[0].GetCenter);
+                        if (!targeted)
+                        {
+                            targeted = true;
+                        }
+                        if (targeted == true)
+                        {
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), tempAngle, 10, 0, 0, true, true));
+                        }
+                        
+                    }
+                    if (AltFirerate == 0)
+                    {
+                        AltFirerate = 300;
+                        targeted = false;
+                    }
                     break;
             }
         }
@@ -89,9 +123,6 @@ namespace FinalSpelProject
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
             DrawSprite(spriteBatch, spritesheet);
-            if (bossParts.Count() != 0)
-                for (int i = 0; i < bossParts.Count(); i++)
-                    bossParts[i].Draw(spriteBatch, spritesheet);
         }
 
         public void AssignnValues()

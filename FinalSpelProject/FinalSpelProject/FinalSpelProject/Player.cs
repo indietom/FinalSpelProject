@@ -203,7 +203,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            //HitBox = FullHitBox;
+            HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();
@@ -211,6 +211,11 @@ namespace FinalSpelProject
             if (specialAmmo <= 0)
             {
                 specialGunType = 0;
+            }
+            
+            if(fireRate == 1 && (gunType >= 0 && gunType <= 2))
+            {
+                SoundManager.NormalShot.Play();
             }
 
             switch(gunType)
@@ -241,6 +246,7 @@ namespace FinalSpelProject
             {
                 if (fireRate == 8 || fireRate == 16 || fireRate == 24)
                 {
+                    SoundManager.NormalShot.Play();
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90 + random.Next(-5 - (fireRate / 5), 5 + (fireRate / 5)), 9, 0, 0, false));
                     muzzleFlashCount = 1;
                 }
@@ -289,6 +295,7 @@ namespace FinalSpelProject
                     }
                     if (gunType >= 1)
                     {
+                        SoundManager.Hit.Play();
                         gunType = 0;
                         invisibleCount = 1;
                     }

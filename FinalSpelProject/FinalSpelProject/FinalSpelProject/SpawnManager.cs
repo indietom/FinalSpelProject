@@ -47,7 +47,7 @@ namespace FinalSpelProject
             {
                 SpawnEnemiesLine(new Vector2(random.Next(Globals.screenW - 32), random.Next(-640, -400)), (byte)random.Next(3, 6), 18, 64, enemies);
                 spawnEnemyCounters[0] = 0;
-                MaxSpawnEnemyCounters[0] = (short)random.Next(128 * 5, 128 * 8);
+                MaxSpawnEnemyCounters[0] = (short)random.Next(128 * 8, 128 * 12);
             }
         }
 

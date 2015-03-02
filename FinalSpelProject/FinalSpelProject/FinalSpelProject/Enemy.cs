@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
+// TODO: Add muffeld effects to not "confuse"/overwhelm the player, I think
+
 namespace FinalSpelProject
 {
     enum Material { None, OrganicAlien, Metal }

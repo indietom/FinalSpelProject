@@ -12,16 +12,18 @@ namespace FinalSpelProject
     {
         public static bool SoundOff;
 
-        public static float Volume;
-
         public static SoundEffect
             NormalShot,
-            Explosion;
+            Explosion,
+            Hit,
+            PowerUp;
 
         public static void Load(ContentManager content)
         {
             NormalShot = content.Load<SoundEffect>("shoot");
+            Hit = content.Load<SoundEffect>("hit");
             Explosion = content.Load<SoundEffect>("explosion");
+            PowerUp = content.Load<SoundEffect>("level-up"); 
         }
     }
 }

@@ -21,6 +21,7 @@ namespace FinalSpelProject
         int AltFirerate;
         Vector2 targetLine;
         bool targeted;
+        float tempAngle;
 
         short invisibleCount;
         short maxInvisibleCount;
@@ -65,13 +66,14 @@ namespace FinalSpelProject
                     }
                          
                     AltFirerate -= 1;
-                    if (AltFirerate <= 100 && AltFirerate > 0 && !player[0].Dead)
+                    if (AltFirerate <= 50 && AltFirerate > 0 && !player[0].Dead)
                     {
 
-                        float tempAngle = AimAt(player[0].GetCenter);
+                        
                         if (!targeted)
                         {
                             targeted = true;
+                            tempAngle = AimAt(player[0].GetCenter);
                         }
                         if (targeted == true)
                         {

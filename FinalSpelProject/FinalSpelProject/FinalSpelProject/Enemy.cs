@@ -422,7 +422,7 @@ namespace FinalSpelProject
                     case Material.Metal:
                         for (int i = 0; i < 20; i++)
                         {
-                            //gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));
+                            gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 157, random.Next(6, 12), random.Next(360)));
                         }
                         break;
                 }

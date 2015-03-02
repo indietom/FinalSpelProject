@@ -29,6 +29,8 @@ namespace FinalSpelProject
         float wantedAngle;
         float rotateSpeed;
 
+        Color bloodColor;
+
         public Projectile(Vector2 pos2, float ang, float spe, byte spriteType2, byte movmentType2, bool rad2)
         {
             rad = rad2;
@@ -64,8 +66,10 @@ namespace FinalSpelProject
             EnemyShot = true;
             AssignMovmentValues();
         }
-        public Projectile(Vector2 pos2, float ang, float spe, Point spriteCoords, Point size, byte movmentType2, bool rad2, bool rotated, float rotation, bool rotateOnRad)
+        // :^(
+        public Projectile(Vector2 pos2, float ang, float spe, Point spriteCoords, Point size, byte movmentType2, bool rad2, bool rotated, float rotation, bool rotateOnRad, Color bloodColor2)
         {
+            bloodColor = bloodColor2;
             Rotated = rotated;
             Rotation = rotation;
             RoateOnRad = rotateOnRad;
@@ -131,7 +135,7 @@ namespace FinalSpelProject
                     bleedCount += 1;
                     if(bleedCount >= 4)
                     {
-                        particles.Add(new Particle(Pos+new Vector2(random.Next(Width/2), random.Next(Height)), 0, 0, Color.Green));
+                        particles.Add(new Particle(Pos + new Vector2(random.Next(Width / 2), random.Next(Height)), 0, 0, bloodColor));
                         bleedCount = 0;
                     }
                     // TODO: add particels here

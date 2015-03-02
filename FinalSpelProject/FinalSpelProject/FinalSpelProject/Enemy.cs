@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace FinalSpelProject
 {
-    enum Material { None, OrganicAlien }
+    enum Material { None, OrganicAlien, Metal }
     class Enemy : GameObject
     {
         byte type; 
@@ -29,7 +29,7 @@ namespace FinalSpelProject
         bool carryingPowerUp;
         public bool OnGround { get; set; }
 
-        Color bloodColor { get; set; }
+        Color bloodColor = new Color(0, 0, 0);
 
         public Enemy(Vector2 pos2, byte type2, Random r)
         {
@@ -110,6 +110,7 @@ namespace FinalSpelProject
                     OnGround = true;
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
+                    material = Material.Metal;
                     break;
                 //Sideways Dude yo
                 case 15:
@@ -180,6 +181,16 @@ namespace FinalSpelProject
                     AnimationActive = true;
                     worth = 500;
                     scroll = true;
+                    material = Material.Metal;
+                    break;
+            }
+            switch(material)
+            {
+                case Material.OrganicAlien:
+                    bloodColor = Color.Green;
+                    break;
+                case Material.Metal:
+                    bloodColor = Color.DarkGray;
                     break;
             }
         }
@@ -408,18 +419,24 @@ namespace FinalSpelProject
                             gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
                         }
                         break;
+                    case Material.Metal:
+                        for (int i = 0; i < 20; i++)
+                        {
+                            //gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));
+                        }
+                        break;
                 }
                 if(splitEnemy && !OnGround)
                 {
                     if (!Rotated)
                     {
-                        projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
-                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), 0, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos, -180, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad, bloodColor));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), 0, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad, bloodColor));
                     }
                     else
                     {
-                        projectile.Add(new Projectile(Pos, Rotation, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
-                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), Rotation+180, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad));
+                        projectile.Add(new Projectile(Pos, Rotation, 8, new Point(Imx, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad, bloodColor));
+                        projectile.Add(new Projectile(Pos + new Vector2(Width / 2, 0), Rotation + 180, 8, new Point(Imx + Width / 2, Imy), new Point(Width / 2, Height), 4, false, Rotated, Rotation, RoateOnRad, bloodColor));
                     }
                     splitEnemy = false;
                 }

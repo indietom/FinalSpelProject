@@ -32,6 +32,8 @@ namespace FinalSpelProject
         public byte GetSpecialAmmo() { return specialAmmo; }
         public byte GetFireRate() { return fireRate; }
 
+        public void SetSpecialAmmo(byte specialAmmo2) { specialAmmo = specialAmmo2; }
+
         public void SetGunType(byte gunType2, bool special2)
         {
             if (!special2) gunType = gunType2;
@@ -117,6 +119,8 @@ namespace FinalSpelProject
 
             thumbStickMax = 0.1f;
 
+            specialGunType = 2;
+
             left = Keys.Left;
             right = Keys.Right;
             down = Keys.Down;
@@ -188,7 +192,7 @@ namespace FinalSpelProject
                 {
                     currentLaserHeigt -= 1;
                 }
-                if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 1 && specialFireRate <= 0)
+                if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 0 && specialFireRate <= 0)
                 {
                     NukeDropped = true;
                     specialAmmo -= 1;
@@ -199,18 +203,25 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2), Pos.Y + (Height / 2)), -90, 8, 3, 3, false));
                     fireRate = 1;
                 }
+                if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 2 && specialFireRate <= 0)
+                {
+                    for (int i = 0; i < 360; i += 20 )
+                        projectiles.Add(new Projectile(new Vector2((Pos.X + (Width / 2)-16) + (float)Math.Cos(i)*100, (Pos.Y + (Height / 2))+ (float)Math.Sin(i)*100), -90, 8, 4, 5, false));
+                    specialFireRate = 1;
+                    specialAmmo -= 1;
+                }
             }
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            HitBox = FullHitBox;
+            //HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();
 
             if (specialAmmo <= 0)
             {
-                specialGunType = 0;
+                specialGunType = 255;
             }
             
             if(fireRate == 1 && (gunType >= 0 && gunType <= 2))
@@ -238,8 +249,11 @@ namespace FinalSpelProject
             }
             switch(specialGunType)
             {
-                case 1:
+                case 0:
                     specialMaxFireRate = 64*2;
+                    break;
+                case 2:
+                    specialMaxFireRate = 64 * 3;
                     break;
             }
             if(gunType == 1 && fireRate >= 1)

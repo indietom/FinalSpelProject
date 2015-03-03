@@ -68,6 +68,10 @@ namespace FinalSpelProject
                         textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
                         p.Score += 5000;
                     }
+                    if(special)
+                    {
+                        p.SetSpecialAmmo((byte)(p.GetSpecialAmmo() + 3)); 
+                    }
                     SoundManager.PowerUp.Play();
                     Destroy = true;
                 }
@@ -95,6 +99,7 @@ namespace FinalSpelProject
             {
                 names[0] = "NUKE";
                 names[1] = "ALLIED SHIP";
+                names[2] = "FIREBALL-CIRCLE";
             }
             return names[type];
         }

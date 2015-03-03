@@ -11,6 +11,7 @@ namespace FinalSpelProject
     {
         short lifeTime;
         short maxLifeTime;
+        short animationOffset;
 
         byte spriteType;
         byte movmentType;
@@ -89,7 +90,13 @@ namespace FinalSpelProject
                 HitBox = FullHitBox;
             else HitBox = FullHitBoxMiddle;
             Destroy = (Pos.Y < -Height) ? true : Destroy;
-            Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
+            if(movmentType != 5) Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
+            if(MaxFrame > 0)
+            {
+                Animate();
+                AnimationCount += 1;
+                Imx = (short)(animationOffset+FrameX(CurrentFrame));
+            }
             if(maxLifeTime != 0)
             {
                 lifeTime += 1;
@@ -138,13 +145,18 @@ namespace FinalSpelProject
                         particles.Add(new Particle(Pos + new Vector2(random.Next(Width / 2), random.Next(Height)), 0, 0, bloodColor));
                         bleedCount = 0;
                     }
-                    // TODO: add particels here
+                    break;
+                case 5:
+                    Pos -= new Vector2(0, 7);
                     break;
             }
             switch(spriteType)
             {
                 case 3:
                     Rotation += Speed;
+                    break;
+                case 4:
+                    
                     break;
             }
         }
@@ -171,6 +183,9 @@ namespace FinalSpelProject
                     break;
                 case 4:
                     Dm = 1;
+                    break;
+                case 5:
+                    Dm = 3;
                     break;
             }
         }
@@ -204,6 +219,13 @@ namespace FinalSpelProject
                     SetSize(16);
                     SetSpriteCoords(261, 1);
                     Rotated = true;
+                    break;
+                case 4:
+                    MaxFrame = 6;
+                    MaxAnimationCount = 8;
+                    SetSize(32);
+                    animationOffset = 326;
+                    SetSpriteCoords((short)(326+FrameX(CurrentFrame)), 34);
                     break;
             }
         }

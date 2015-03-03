@@ -40,7 +40,7 @@ namespace FinalSpelProject
             {
                 amountOfLives = p.GetLives();
                 powerUpFrame = (short)(780 + Frame(p.GetGunType(), 16));
-                specialPowerUpFrame = (short)(780 + Frame((short)(p.GetSpecialGunType()-1), 16));
+                specialPowerUpFrame = (short)(779 + Frame((short)(p.GetSpecialGunType()), 16));
                 scoreText = "SCORE: " + p.Score.ToString().PadLeft(9, '0');
                 amountOfSpecialAmmo = p.GetSpecialAmmo();
                 specialGunType = p.GetSpecialGunType();
@@ -56,7 +56,7 @@ namespace FinalSpelProject
                 spriteBatch.Draw(spritesheet, new Vector2(47, 32), new Rectangle(781, 1, 32, 32), Color.White);
                 spriteBatch.Draw(spritesheet, new Vector2(10 + 8, 32 + 8), new Rectangle(powerUpFrame, 34, 16, 16), Color.White);
                 if (amountOfSpecialAmmo > 1) spriteBatch.DrawString(font, "x" + amountOfSpecialAmmo.ToString(), new Vector2(47 + 38, 32), Color.Yellow, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
-                if (specialGunType != 0) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 50, 16, 16), Color.White);
+                if (specialGunType != 255) spriteBatch.Draw(spritesheet, new Vector2(47 + 8, 32 + 8), new Rectangle(specialPowerUpFrame, 50, 16, 16), Color.White);
                 if (!printLives)
                 {
                     for (int i = 0; i < amountOfLives; i++)

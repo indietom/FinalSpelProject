@@ -87,6 +87,7 @@
     <Compile Include="Gib.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PowerUp.cs" />

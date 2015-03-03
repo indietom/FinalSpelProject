@@ -56,7 +56,7 @@ namespace FinalSpelProject
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
-            level = new Level(chunks, 0, 14);
+            level = new Level(chunks, LevelManager.currentLevel, 14);
             base.Initialize();
         }
 
@@ -224,7 +224,7 @@ namespace FinalSpelProject
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]); }
+            foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]); }
             foreach(Tile t in tiles)
             {
                 if (t.GetType() == 1)

@@ -106,8 +106,8 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 5;
-            specialGunType = 1;
+            gunType = 0;
+            specialGunType = 2;
             specialAmmo = 2;
 
             maxRespawnCount = 130;
@@ -118,8 +118,6 @@ namespace FinalSpelProject
             playerIndex = PlayerIndex.One;
 
             thumbStickMax = 0.1f;
-
-            specialGunType = 2;
 
             left = Keys.Left;
             right = Keys.Right;
@@ -214,7 +212,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            //HitBox = FullHitBox;
+            HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();
@@ -437,6 +435,7 @@ namespace FinalSpelProject
             Random random = new Random();
             if(!spawnedGetReadyText && Dead)
             {
+                SoundManager.PlayerDeath.Play();
                 textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Red, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount+200), 2, 1));
                 textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
             }

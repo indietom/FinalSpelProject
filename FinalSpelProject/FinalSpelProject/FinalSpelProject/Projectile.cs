@@ -194,7 +194,7 @@ namespace FinalSpelProject
             switch (spriteType)
             {
                 case 0:
-                    SetSize(7, 11);
+                    SetSize(9, 16);
                     SetSpriteCoords(326, 1);
                     break;
             }
@@ -204,7 +204,7 @@ namespace FinalSpelProject
             switch(spriteType)
             {
                 case 0:
-                    SetSize(7, 11);
+                    SetSize(9, 16);
                     SetSpriteCoords(326, 1);
                     break;
                 case 1:

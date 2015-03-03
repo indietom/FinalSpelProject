@@ -231,6 +231,11 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+    <Compile Include="playerDeath.wav">
+      <Name>playerDeath</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
     <Content Include="Test.txt">
       <Name>Test</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -26,6 +26,17 @@ namespace FinalSpelProject
             }
         }
 
+        public Level(List<Chunk> chunks, LevelProperty levelProperty)
+        {
+            amountOfChunks = levelProperty.GetHeight(); ;
+            CurrentLevel = LevelManager.currentLevel;
+            levelPath = "Content\\level" + CurrentLevel + "\\";
+            for (int i = 0; i < amountOfChunks; i++)
+            {
+                chunks.Add(new Chunk(new Vector2(0, -(40 * 16) * i), levelPath + "chunk" + i));
+            }
+        }
+
         public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm, SpawnManager spawnManager, List<Enemy> enemies, List<PowerUp> powerUps )
         {
             if(chunks.Count == 1)

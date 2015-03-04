@@ -40,29 +40,48 @@ namespace FinalSpelProject
 
             return map;
         }
-        public string LoadLine(int line, string path)
+
+        public void LoadPlayer(string path, List<Player> players)
         {
-            string returnValue = "";
+            byte[] byteData = new byte[4];
+
             StreamReader sr = new StreamReader(path);
-            for (int i = 0; i < File.ReadLines(path).Count(); i++)
-                if (i == line)
-                {
-                    returnValue = sr.ReadLine();
-                    break;
-                }
-            sr.Close();
-            return returnValue;
+            for (int i = 0; i < byteData.Count(); i++)
+            {
+                byteData[i] = byte.Parse(sr.ReadLine());
+            }
+            players[0].SetGunType(byteData[0], false);
+            players[1].SetGunType(byteData[1], true);
+            players[2].SetSpecialAmmo(byteData[2]);
+            players[3].SetLives(byteData[3]);           
+            sr.Dispose();
         }
-        public void SaveLine(int line, string path, string text, bool overwrite)
+
+        public void SavePlayer(string path, List<Player> players)
         {
-            StreamWriter sw = new StreamWriter(path, overwrite);
-            for (int i = 0; i < File.ReadLines(path).Count(); i++)
-                if (i == line)
-                {
-                    sw.WriteLine(text);
-                    break;
-                }
-            sw.Close();
+            byte[] byteData = new byte[4];
+            byteData[0] = players[0].GetGunType();
+            byteData[1] = players[0].GetSpecialGunType();
+            byteData[2] = players[0].GetSpecialAmmo();
+            byteData[3] = players[0].GetLives();
+
+            StreamWriter sw = new StreamWriter(path);
+            for (int i = 0; i < byteData.Count(); i++)
+            {
+                sw.WriteLine(byteData[i]);
+            }
+            sw.WriteLine(LevelManager.currentLevel);
+            sw.Dispose();
+        }
+
+        public void LoadConfig()
+        {
+            
+        }
+        
+        public void SaveConfig()
+        {
+
         }
     }
 }

@@ -34,6 +34,8 @@ namespace FinalSpelProject
 
         public void SetSpecialAmmo(byte specialAmmo2) { specialAmmo = specialAmmo2; }
 
+        public void SetLives(byte lives2) { lives = lives2; }
+
         public void SetGunType(byte gunType2, bool special2)
         {
             if (!special2) gunType = gunType2;
@@ -483,6 +485,10 @@ namespace FinalSpelProject
         public void UpdateSounds()
         {
 
+        }
+        public void RaiseScore(int additon)
+        {
+            Score += (additon + 150*currentCombo);
         }
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet)
         {

@@ -11,7 +11,7 @@ namespace FinalSpelProject
         // Don't run this code yet, it will crash
         public static byte currentLevel = 0;
 
-        LevelProperty[] levelProperties = new LevelProperty[4];
+        LevelProperty[] levelProperties = new LevelProperty[5];
 
         public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)
         {
@@ -25,11 +25,10 @@ namespace FinalSpelProject
             level = new Level(chunks, levelProperties[currentLevel]);
         }
 
-        public void StartLevel(byte currentLevel2)
+        public void StartLevel(byte currentLevel2, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)
         {
             currentLevel = currentLevel2;
-            // Call resetLevel function
-            // add level
+            ResetLevel(chunks, enemies, projectiles, players, level);
         }
     }
 

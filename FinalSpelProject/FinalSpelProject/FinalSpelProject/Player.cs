@@ -25,6 +25,7 @@ namespace FinalSpelProject
         byte specialGunType;
         byte explosionDelay;
         byte muzzleFlashCount;
+        byte currentBarrel;
 
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
@@ -191,6 +192,19 @@ namespace FinalSpelProject
                 if (!keyboard.IsKeyDown(fire) && gamePad.IsButtonUp(Buttons.X) && gunType == 4 && currentLaserHeigt > 10 && !reverseLaser)
                 {
                     currentLaserHeigt -= 1;
+                }
+                if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 6 && fireRate <= 0)
+                {
+                    if (currentBarrel == 0)
+                    {
+
+                        currentBarrel = 1;
+                    }
+                    else
+                    {
+                        currentBarrel = 0;
+                    }
+                    fireRate = 1;
                 }
                 if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 0 && specialFireRate <= 0)
                 {

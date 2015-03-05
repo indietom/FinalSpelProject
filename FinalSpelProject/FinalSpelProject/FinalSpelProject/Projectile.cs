@@ -201,6 +201,7 @@ namespace FinalSpelProject
         }
         public void AssignSprite()
         {
+            Random random = new Random();
             switch(spriteType)
             {
                 case 0:
@@ -226,6 +227,11 @@ namespace FinalSpelProject
                     SetSize(32);
                     animationOffset = 326;
                     SetSpriteCoords((short)(326+FrameX(CurrentFrame)), 34);
+                    break;
+                case 5:
+                    SetSpriteCoords(425, 1);
+                    SetSize(8, 8);
+                    color = new Color(random.Next(100, 256), random.Next(100, 256), random.Next(100, 256));
                     break;
             }
         }

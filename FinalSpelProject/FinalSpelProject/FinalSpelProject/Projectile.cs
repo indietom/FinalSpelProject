@@ -230,7 +230,7 @@ namespace FinalSpelProject
                     break;
                 case 5:
                     SetSpriteCoords(425, 1);
-                    SetSize(8, 8);
+                    SetSize(8, 13);
                     color = new Color(random.Next(100, 256), random.Next(100, 256), random.Next(100, 256));
                     break;
             }

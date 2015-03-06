@@ -131,6 +131,7 @@ namespace FinalSpelProject
         }
         public void Input(List<Projectile> projectiles)
         {
+            Random random = new Random();
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
 
@@ -197,11 +198,12 @@ namespace FinalSpelProject
                 {
                     if (currentBarrel == 0)
                     {
-
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 - 16, Pos.Y + (Height / 2) - 3), -90+random.Next(-8, 9), 10, 5, 0, false));
                         currentBarrel = 1;
                     }
                     else
                     {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 + 16, Pos.Y + (Height / 2) - 3), -90 + random.Next(-8, 9), 10, 5, 0, false));
                         currentBarrel = 0;
                     }
                     fireRate = 1;
@@ -259,6 +261,9 @@ namespace FinalSpelProject
                     break;
                 case 5:
                     maxFireRate = 24;
+                    break;
+                case 6:
+                    maxFireRate = 8;
                     break;
             }
             switch(specialGunType)

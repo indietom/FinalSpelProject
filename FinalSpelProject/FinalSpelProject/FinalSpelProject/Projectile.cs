@@ -20,6 +20,7 @@ namespace FinalSpelProject
         public byte ExplosionSize { get; set; }
 
         public byte GetMovmentType() { return movmentType; }
+        public byte GetSpriteType() { return spriteType; }
 
         public byte Dm { get; set; }
 
@@ -155,8 +156,13 @@ namespace FinalSpelProject
                 case 3:
                     Rotation += Speed;
                     break;
-                case 4:
-                    
+                case 6:
+                    bleedCount += 1;
+                    if(bleedCount >= 32)
+                    {
+                        particles.Add(new Particle(new Vector2(random.Next(Globals.screenW), random.Next(Globals.screenH)), GetCenter, 0.08f, 1, 1, Color.LightGray));
+                        bleedCount = 0;
+                    }
                     break;
             }
             if(Destroy && spriteType == 6)

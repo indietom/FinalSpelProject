@@ -401,6 +401,13 @@ namespace FinalSpelProject
                     hitFlashDelay = 0;
                 }
             }
+            foreach(Projectile p in projectile)
+            {
+                if(p.GetSpriteType() == 6)
+                {
+                    Pos = new Vector2(Lerp(Pos.X, p.Pos.X, 0.05f), Lerp(Pos.Y, p.GetCenter.Y, 0.05f));
+                }
+            }
             foreach (Player p in player)
             {
                 if(health <= 0)
@@ -484,7 +491,7 @@ namespace FinalSpelProject
                         Console.WriteLine(splitEnemy);
                     }
                     hitFlashDelay = 1;
-                    p.Destroy = true;
+                   if(p.GetSpriteType() != 6) p.Destroy = true;
                 }
             }
         }

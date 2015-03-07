@@ -135,7 +135,7 @@ namespace FinalSpelProject
 
             foreach (Particle p in particles)
             {
-                p.Update();
+                p.Update(projectiles);
             }
 
             foreach (Explosion e in explosions)
@@ -171,7 +171,9 @@ namespace FinalSpelProject
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                 //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0, true));
+                //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0, true));
+                if(projectiles.Count() <= 0) projectiles.Add(new Projectile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0, 0, 6, 0, false));
+                particles.Add(new Particle(new Vector2(800 / 2, 640 / 2), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0.05f, 1, 1, Color.White));
                 //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 
@@ -238,7 +240,7 @@ namespace FinalSpelProject
 
             foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
             foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
-            foreach (Particle p in particles) { p.DrawSprite(spriteBatch, spritesheet); }
+            foreach (Particle p in particles) { if (!p.Rotated) p.DrawSprite(spriteBatch, spritesheet); else p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); }
             foreach (Projectile p in projectiles) { if (p.Rotated) p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); else p.DrawSprite(spriteBatch, spritesheet); }
             foreach (Player p in player) { if(!p.Flash) p.Draw(spriteBatch, spritesheet); }
             foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }

@@ -159,6 +159,10 @@ namespace FinalSpelProject
                     
                     break;
             }
+            if(Destroy && spriteType == 6)
+            {
+                Globals.blackHoleExists = true;
+            }
         }
         public void AssignMovmentValues()
         {
@@ -232,6 +236,11 @@ namespace FinalSpelProject
                     SetSpriteCoords(425, 1);
                     SetSize(8, 13);
                     color = new Color(random.Next(100, 256), random.Next(100, 256), random.Next(100, 256));
+                    break;
+                case 6:
+                    SetSpriteCoords(196, 1);
+                    SetSize(64);
+                    Globals.blackHoleExists = true;
                     break;
             }
         }

@@ -36,13 +36,16 @@ namespace FinalSpelProject
     {
         byte tag;
         byte height;
+        byte powerUpRange;
 
-        public LevelProperty(byte tag2, byte height2)
+        public LevelProperty(byte tag2, byte height2, byte powerUpRange2)
         {
             tag = tag2;
             height = height2;
+            powerUpRange = powerUpRange2;
         }
 
+        public byte GetPowerUpRange() { return powerUpRange; }
         public byte GetTag() { return tag; }
         public byte GetHeight() { return height; }
     }

@@ -14,6 +14,8 @@ namespace FinalSpelProject
         public static int screenW;
         public static int screenH;
 
+        public static bool blackHoleExists;
+
         public static void Load()
         {
             screenW = 800;

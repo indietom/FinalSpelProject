@@ -163,11 +163,14 @@ namespace FinalSpelProject
                         particles.Add(new Particle(new Vector2(random.Next(Globals.screenW), random.Next(Globals.screenH)), GetCenter, 0.08f, 1, 1, Color.LightGray));
                         bleedCount = 0;
                     }
+                    lifeTime += 1;
+                    if(lifeTime < 128*3) Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, Globals.screenH / 2 - Width / 2, 0.05f));
+                    else Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, 800, 0.005f));
                     break;
             }
             if(Destroy && spriteType == 6)
             {
-                Globals.blackHoleExists = true;
+                Globals.blackHoleExists = false;
             }
         }
         public void AssignMovmentValues()

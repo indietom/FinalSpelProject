@@ -110,7 +110,7 @@ namespace FinalSpelProject
             deccelerate = 0.4f;
 
             gunType = 0;
-            specialGunType = 2;
+            specialGunType = 3;
             specialAmmo = 2;
 
             maxRespawnCount = 130;
@@ -142,9 +142,9 @@ namespace FinalSpelProject
             {
                 comboCount += 10;
             }
-            if(inputActive)
+            if (inputActive)
             {
-                if((keyboard.IsKeyDown(left) || gamePad.ThumbSticks.Left.X <= -thumbStickMax) && velLeft >= -maxVel)
+                if ((keyboard.IsKeyDown(left) || gamePad.ThumbSticks.Left.X <= -thumbStickMax) && velLeft >= -maxVel)
                 {
                     velLeft -= Speed;
                 }
@@ -172,7 +172,7 @@ namespace FinalSpelProject
                 }
                 if ((keyboard.IsKeyDown(fire) && prevKeyboard.IsKeyUp(fire) || gamePad.IsButtonDown(Buttons.X) && prevGamePad.IsButtonUp(Buttons.X)) && gunType == 2 && fireRate <= 0)
                 {
-                    for (int i = 0; i < 3; i++ )
+                    for (int i = 0; i < 3; i++)
                         projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -80 - i * 10, 9, 0, 0, false));
                     fireRate = 1;
                 }
@@ -181,10 +181,10 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, -2, 1, 1, false));
                     fireRate = 1;
                 }
-                if((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
+                if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
                 {
                     rasieLaserCount += 1;
-                    if(rasieLaserCount >= maxRaiseLaserCount)
+                    if (rasieLaserCount >= maxRaiseLaserCount)
                     {
                         currentLaserHeigt += 3;
                         rasieLaserCount = 0;
@@ -198,7 +198,7 @@ namespace FinalSpelProject
                 {
                     if (currentBarrel == 0)
                     {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 - 16, Pos.Y + (Height / 2) - 3), -90+random.Next(-8, 9), 10, 5, 0, false));
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 - 16, Pos.Y + (Height / 2) - 3), -90 + random.Next(-8, 9), 10, 5, 0, false));
                         currentBarrel = 1;
                     }
                     else
@@ -221,8 +221,14 @@ namespace FinalSpelProject
                 }
                 if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 2 && specialFireRate <= 0)
                 {
-                    for (int i = 0; i < 360; i += 20 )
-                        projectiles.Add(new Projectile(new Vector2((Pos.X + (Width / 2)-16) + (float)Math.Cos(i)*100, (Pos.Y + (Height / 2))+ (float)Math.Sin(i)*100), -90, 8, 4, 5, false));
+                    for (int i = 0; i < 360; i += 20)
+                        projectiles.Add(new Projectile(new Vector2((Pos.X + (Width / 2) - 16) + (float)Math.Cos(i) * 100, (Pos.Y + (Height / 2)) + (float)Math.Sin(i) * 100), -90, 8, 4, 5, false));
+                    specialFireRate = 1;
+                    specialAmmo -= 1;
+                }
+                if ((keyboard.IsKeyDown(specialFire) && prevKeyboard.IsKeyUp(specialFire) || gamePad.IsButtonDown(Buttons.B) && prevGamePad.IsButtonUp(Buttons.B)) && specialGunType == 3 && specialFireRate <= 0)
+                {
+                    projectiles.Add(new Projectile(Pos, 0, 0, 6, 0, false));
                     specialFireRate = 1;
                     specialAmmo -= 1;
                 }
@@ -272,6 +278,9 @@ namespace FinalSpelProject
                     specialMaxFireRate = 64*2;
                     break;
                 case 2:
+                    specialMaxFireRate = 64 * 3;
+                    break;
+                case 3:
                     specialMaxFireRate = 64 * 3;
                     break;
             }
@@ -409,6 +418,10 @@ namespace FinalSpelProject
         }
         public void UpdateInvisiblity()
         {
+            if(Globals.blackHoleExists)
+            {
+                invisibleCount = 1;
+            }
             if (invisibleCount >= 1)
             {
                 Invisible = true;

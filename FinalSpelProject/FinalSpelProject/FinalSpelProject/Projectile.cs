@@ -167,6 +167,10 @@ namespace FinalSpelProject
                     if(lifeTime < 128*3) Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, Globals.screenH / 2 - Width / 2, 0.05f));
                     else Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, 800, 0.005f));
                     break;
+                case 7:
+                    if (CurrentFrame == MaxFrame-1)
+                        Destroy = true;
+                    break;
             }
             if(Destroy && spriteType == 6)
             {
@@ -250,6 +254,13 @@ namespace FinalSpelProject
                     SetSpriteCoords(196, 1);
                     SetSize(64);
                     Globals.blackHoleExists = true;
+                    break;
+                case 7:
+                    CurrentFrame = 5;
+                    MaxFrame = 17;
+                    MaxAnimationCount = 4;
+                    SetSpriteCoords(Frame(5), 261);
+                    SetSize(64);
                     break;
             }
         }

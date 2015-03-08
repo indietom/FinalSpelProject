@@ -54,6 +54,11 @@ namespace FinalSpelProject
         short rasieLaserCount;
         short maxRaiseLaserCount;
         short muzzleFlashFrame;
+        short flameStamina;
+        short flameMaxStamina;
+        short flameDelay;
+        short maxFlameDelay;
+        short deccreseFlameStamina;
 
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
@@ -109,7 +114,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 0;
+            gunType = 7;
             specialGunType = 3;
             specialAmmo = 2;
 
@@ -117,6 +122,9 @@ namespace FinalSpelProject
 
             maxRaiseLaserCount = 1;
             maxLaserHeight = 200;
+
+            maxFlameDelay = 64;
+            flameMaxStamina = 32;
 
             playerIndex = PlayerIndex.One;
 
@@ -232,11 +240,22 @@ namespace FinalSpelProject
                     specialFireRate = 1;
                     specialAmmo -= 1;
                 }
+                if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X) ) && gunType == 7 && fireRate <= 0 && flameDelay <= 0)
+                {
+                    projectiles.Add(new Projectile(Pos, -90+random.Next(-8, 9), 8, 7, 0, false));
+                    fireRate = 1;
+                    flameStamina += 1;
+                    deccreseFlameStamina = 0;
+                }
+                else
+                {
+                    deccreseFlameStamina += 1;
+                }
             }
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            HitBox = FullHitBox;
+            //HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();
@@ -246,9 +265,28 @@ namespace FinalSpelProject
                 specialGunType = 255;
             }
             
+            if(deccreseFlameStamina >= 8)
+            {
+                flameStamina -= 4;
+                deccreseFlameStamina = 0;
+            }
+
             if(fireRate == 1 && (gunType >= 0 && gunType <= 2))
             {
                 SoundManager.NormalShot.Play();
+            }
+
+            if(flameStamina >= flameMaxStamina)
+            {
+                flameDelay = 1;
+                flameStamina = 0;
+            }
+
+            flameDelay = (flameDelay >= 1) ? (short)(flameDelay + 1) : flameDelay;
+
+            if(flameDelay >= maxFlameDelay)
+            {
+                flameDelay = 0;
             }
 
             switch(gunType)
@@ -270,6 +308,9 @@ namespace FinalSpelProject
                     break;
                 case 6:
                     maxFireRate = 8;
+                    break;
+                case 7:
+                    maxFireRate = 4;
                     break;
             }
             switch(specialGunType)

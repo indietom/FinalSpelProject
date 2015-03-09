@@ -13,6 +13,7 @@ namespace FinalSpelProject
 
         byte gunType;
         byte fireRate;
+        byte currentBarrel;
 
         float maxDistance;
 
@@ -69,6 +70,27 @@ namespace FinalSpelProject
                         break;
                     case 3:
                         projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, -2, 1, 1, false));
+                        break;
+                    case 4:
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2), Pos.Y + (Height / 2)), -90, 8, 3, 3, false));
+                        break;
+                    case 5:
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2), Pos.Y + (Height / 2)), -90, 8, 3, 3, false));
+                        break;
+                    case 6:
+                        if (currentBarrel == 0)
+                        {
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 - 16, Pos.Y + (Height / 2) - 3), -90 + random.Next(-8, 9), 10, 5, 0, false));
+                            currentBarrel = 1;
+                        }
+                        else
+                        {
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3 + 16, Pos.Y + (Height / 2) - 3), -90 + random.Next(-8, 9), 10, 5, 0, false));
+                            currentBarrel = 0;
+                        }
+                        break;
+                    case 7:
+                        projectiles.Add(new Projectile(Pos-new Vector2(32-12, 32), -90 + random.Next(-8, 9), 8, 7, 0, false));
                         break;
                 }
             }

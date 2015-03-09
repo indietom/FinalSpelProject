@@ -166,7 +166,7 @@ namespace FinalSpelProject
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
-                //if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                 //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
@@ -216,6 +216,10 @@ namespace FinalSpelProject
             for (int i = 0; i < alliedShips.Count; i++)
             {
                 if (alliedShips[i].Destroy) alliedShips.RemoveAt(i);
+            }
+            for (int i = 0; i < bosses.Count; i++)
+            {
+                if(bosses[i].Destroy) bosses.RemoveAt(i)
             }
 
             base.Update(gameTime);

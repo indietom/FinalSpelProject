@@ -10,7 +10,7 @@ namespace FinalSpelProject
 {
     class Boss : GameObject
     {
-        byte hp;
+        int hp;
         byte type;
 
         short[] fireRates;
@@ -43,7 +43,7 @@ namespace FinalSpelProject
                     Speed = 5;
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
-                    Health = 100;
+                    hp = 100;
                     Firerate = 120;
                     AltFirerate = 300;
                     
@@ -52,7 +52,7 @@ namespace FinalSpelProject
 
         }
 
-        public void Update(List<Player> player, List<Projectile> projectiles)
+        public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
         {
             switch (type)
             {
@@ -87,7 +87,45 @@ namespace FinalSpelProject
                         targeted = false;
                     }
                     break;
+                    
             }
+            Collision(player, projectiles, explosions);
+
+            if (hp <= 0)
+            {
+                Destroy = true;
+            }
+        }
+
+        public void Collision(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
+        {
+            if (!Rotated) HitBox = FullHitBox;
+                else HitBox = FullHitBoxMiddle;
+            foreach (Player p in player)
+            {
+                if (p.HitBox.Intersects(HitBox))
+                {
+                    hp -= 10;
+                    p.Dead = true;
+                }
+            }
+            foreach (Projectile p in projectiles)
+            {
+                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                {
+                    if (p.Explosive)
+                    {
+                        explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
+                    }
+                    hp -= p.Dm;
+                    Console.WriteLine(hp);
+                    if (p.GetSpriteType() != 6)
+                    {
+                        p.Destroy = true;
+                    }
+                }
+            }
+
         }
 
         public void Attack(List<Projectile> projectiles)

@@ -9,8 +9,6 @@ namespace FinalSpelProject
 {
     class Loot : GameObject
     {
-        short worth;
-
         byte movmentType;
         byte type;
 
@@ -21,9 +19,27 @@ namespace FinalSpelProject
             movmentType = movmentType2;
             SetSpriteCoords((short)(780 + FrameX(type)), 69);
             SetSize(16);
-            worth = GetWorth();
         }
         
+        public void Update(List<Player> players)
+        {
+            switch(movmentType)
+            {
+                case 0:
+                    Pos += new Vector2(0, Globals.worldSpeed);
+                    break;
+            }
+            foreach(Player p in players)
+            {
+                if(p.FullHitBox.Intersects(FullHitBox))
+                {
+                    p.RaiseScore(GetWorth());
+                    SoundManager.PowerUp.Play();
+                    Destroy = true;
+                }
+            }
+        }
+
         public short GetWorth()
         {
             short[] worths = new short[6];
@@ -33,7 +49,7 @@ namespace FinalSpelProject
             worths[2] = 1500;
             worths[3] = 1250;
             worths[4] = 900;
-            worths[5] = 2000;
+            worths[5] = 2000; 
 
             return worths[type];
         }

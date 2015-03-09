@@ -43,6 +43,7 @@ namespace FinalSpelProject
         List<Tile> tiles = new List<Tile>();
         List<AlliedShip> alliedShips = new List<AlliedShip>();
         List<TextBox> textBoxes = new List<TextBox>();
+        List<Loot> loots = new List<Loot>();
 
         Level level;
         SpawnManager spawnManager = new SpawnManager();
@@ -163,6 +164,11 @@ namespace FinalSpelProject
                 t.Update();
             }
 
+            foreach(Loot l in loots)
+            {
+                l.Update(player);
+            }
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
@@ -177,6 +183,10 @@ namespace FinalSpelProject
                 //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
             }
 
+            for (int i = 0; i < loots.Count(); i++)
+            {
+                if (loots[i].Destroy) loots.RemoveAt(i);
+            }
             for (int i = 0; i < enemies.Count(); i++)
             {
                 if (enemies[i].Destroy) enemies.RemoveAt(i);
@@ -255,6 +265,7 @@ namespace FinalSpelProject
             }
             foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
             foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
+            foreach (Loot l in loots) { l.DrawSprite(spriteBatch, spritesheet); }
             UpdateScreenFlash();
             foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
             ui.Draw(spriteBatch, spritesheet, font);

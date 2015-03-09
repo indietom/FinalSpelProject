@@ -279,8 +279,8 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         AnimationActive = true;
-                        fireRate = 50+random.Next(100);
-                        projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 10, 0, 0, true, true));
+                        fireRate = 160;
+                        projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 5, 0, 0, true, true));
                     }
                     break;
                 case 15:

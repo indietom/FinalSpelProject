@@ -219,7 +219,7 @@ namespace FinalSpelProject
             }
             for (int i = 0; i < bosses.Count; i++)
             {
-                if(bosses[i].Destroy) bosses.RemoveAt(i)
+                if (bosses[i].Destroy) bosses.RemoveAt(i);
             }
 
             base.Update(gameTime);

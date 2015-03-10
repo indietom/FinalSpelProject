@@ -11,7 +11,7 @@ namespace FinalSpelProject
     {
         byte movmentType;
         byte type;
-
+        
         public Loot(Vector2 pos2, byte type2, byte movmentType2)
         {
             Pos = pos2;

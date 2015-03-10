@@ -15,7 +15,7 @@ namespace FinalSpelProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         public static bool flashScreen;
         public static byte flashScreenCount;
 
@@ -171,7 +171,7 @@ namespace FinalSpelProject
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, 0));
+                loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
                 //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
                 //if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                 //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);

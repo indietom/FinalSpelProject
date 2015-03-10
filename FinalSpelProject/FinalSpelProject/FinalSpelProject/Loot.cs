@@ -17,8 +17,8 @@ namespace FinalSpelProject
             Pos = pos2;
             type = type2;
             movmentType = movmentType2;
-            SetSpriteCoords((short)(780 + FrameX(type)), 69);
             SetSize(16);
+            SetSpriteCoords((short)(780 + FrameX(type)), 69);
         }
         
         public void Update(List<Player> players, List<TextEffect> textEffects)

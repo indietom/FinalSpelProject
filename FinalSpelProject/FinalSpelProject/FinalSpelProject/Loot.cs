@@ -21,7 +21,7 @@ namespace FinalSpelProject
             SetSize(16);
         }
         
-        public void Update(List<Player> players)
+        public void Update(List<Player> players, List<TextEffect> textEffects)
         {
             switch(movmentType)
             {
@@ -33,6 +33,7 @@ namespace FinalSpelProject
             {
                 if(p.FullHitBox.Intersects(FullHitBox))
                 {
+                    textEffects.Add(new TextEffect(Pos, GetWorth().ToString() + "+", 0.7f, Color.White, Pos - new Vector2(0, 64), 0.1f, 100, 3, 1));
                     p.RaiseScore(GetWorth());
                     SoundManager.PowerUp.Play();
                     Destroy = true;

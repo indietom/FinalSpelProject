@@ -11,9 +11,10 @@ namespace FinalSpelProject
     class TextEffect:GameObject
     {
         Vector2 target;
-
+       
         short lifeTime;
         short maxLifeTime;
+        short flashCount;
 
         float size;
         float r;
@@ -68,7 +69,7 @@ namespace FinalSpelProject
                     Pos += Vel;
                     break;
                 case 1:
-                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
+                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));  
                     break;
             }
             switch(tag)
@@ -93,11 +94,19 @@ namespace FinalSpelProject
                         target += new Vector2(0, fallSpeed);
                     }
                     break;
+                case 3:
+                    FlashColor(8);
+                    break;
             }
         }
-        public void FlashColor(Color color2, int interval)
+        public void FlashColor(int interval)
         {
-            
+            Random random = new Random();
+            flashCount += 1;
+            if(flashCount % interval == 0)
+            {
+                color = new Color(random.Next(255), random.Next(255), random.Next(255));
+            }
         }
         public void Flash()
         {

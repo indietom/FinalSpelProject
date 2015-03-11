@@ -53,7 +53,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2, -200), 1));
+            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 1));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -84,6 +84,7 @@ namespace FinalSpelProject
             {
                 spriteBatch.Draw(spritesheet, new Rectangle(0, 0, Globals.screenW, Globals.screenH), new Rectangle(1, 1496, 64, 64), Color.White);
                 // lite kod > läslighet amrite
+                // nä
                 flashScreenCount = (flashScreenCount >= 32) ? flashScreenCount = 0 : flashScreenCount = (byte)(flashScreenCount + 1);
             }
         }

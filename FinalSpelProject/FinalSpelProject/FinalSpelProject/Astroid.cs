@@ -27,8 +27,9 @@ namespace FinalSpelProject
             SetSpriteCoords((short)GetSprite().X, (short)GetSprite().Y);
         }
 
-        public void Update(List<Player> players)
+        public void Update(List<Player> players, List<Projectile> projectiles, List<Particle> particles)
         {
+            Random random = new Random();
             Speed += acceleration;
             Pos += new Vector2(sway, Speed);
             Rotation += Speed;
@@ -37,6 +38,14 @@ namespace FinalSpelProject
                 if(p.FullHitBox.Intersects(FullHitBoxMiddle))
                 {
                     p.Dead = false;
+                }
+            }
+            foreach (Projectile p in projectiles)
+            {
+                if(p.HitBox.Intersects(FullHitBoxMiddle))
+                {
+                    particles.Add(new Particle(p.Pos, p.Angle*-1, ))
+                    p.Destroy = true;
                 }
             }
             Destroy = (Pos.Y >= Globals.screenH + Height) ? true : Destroy;

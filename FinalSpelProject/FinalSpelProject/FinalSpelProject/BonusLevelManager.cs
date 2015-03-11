@@ -9,7 +9,7 @@ namespace FinalSpelProject
     {
         /* Three types that we randomize between
          * 1 - Astroid field with a few enemies thrown in
-         * 2 - 
+         * 2 - Fly through hoops, catch loot and shoot a few enemies
          * 3 - 
          */
     }

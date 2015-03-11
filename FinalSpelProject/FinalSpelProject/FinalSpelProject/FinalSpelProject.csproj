@@ -76,7 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlliedShip.cs" />
+    <Compile Include="Astroid.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="BonusLevelManager.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Chunk.cs" />
     <Compile Include="ComboCount.cs" />

@@ -21,7 +21,13 @@ namespace FinalSpelProject
         int AltFirerate;
         Vector2 targetLine;
         bool targeted;
+        float altTempAngle;
         float tempAngle;
+        bool Invulnerable;
+        bool Spawned;
+        bool goLeft = false;
+        bool goRight = false;
+        Random rng = new Random();
 
         short invisibleCount;
         short maxInvisibleCount;
@@ -46,6 +52,8 @@ namespace FinalSpelProject
                     hp = 100;
                     Firerate = 120;
                     AltFirerate = 300;
+                    Invulnerable = true;
+                    Spawned = false;
                     
                     break;
             }
@@ -57,41 +65,105 @@ namespace FinalSpelProject
             switch (type)
             {
                 case 1:
-                    if (Speed > 0)
+                    if (Speed > 0 && Invulnerable == true)
                     {
                         if (Speed != 0)
                         {
                             Pos = new Vector2(Pos.X, Lerp(Pos.Y, 128, 0.02f));
                         }
+
+                    }
+                    if (Pos.Y >= 120 && Spawned == false)
+                    {
+                        Invulnerable = false;
+                        Speed = 5;
+                        Pos = new Vector2(Lerp(Pos.X, 0, 0.04f), Pos.Y);
+                        if (Pos.X <= 1)
+                        {
+                            Spawned = true;
+                        }
                     }
                          
                     AltFirerate -= 1;
-                    if (AltFirerate <= 50 && AltFirerate > 0 && !player[0].Dead)
+                    if (AltFirerate <= 35 && AltFirerate > 0)
                     {
 
                         
                         if (!targeted)
                         {
                             targeted = true;
-                            tempAngle = AimAt(player[0].GetCenter);
+                            altTempAngle = AimAt(player[0].GetCenter);
+                            Speed = 0;
                         }
                         if (targeted == true)
                         {
-                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), tempAngle, 10, 0, 0, true, true));
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), altTempAngle, 15, 0, 0, true, true));
                         }
                         
                     }
                     if (AltFirerate == 0)
                     {
-                        AltFirerate = 300;
+                        AltFirerate = 335;
                         targeted = false;
+                        Speed = 5;
                     }
+
+                    Firerate -= 1;
+                    if (Firerate <= 0)
+                    {
+                        tempAngle = AimAt(player[0].GetCenter);
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), tempAngle, 8, 0, 0, true, true));
+                        if (hp > hp / 4)
+                        {
+                            Firerate = 120;
+                        }
+                        if (hp < hp / 4)
+                        {
+                            Firerate = 60;
+                        }
+                        
+
+                    }
+
+                    //Boss_01 Movement
+                    if (Invulnerable == false)
+                    {
+                        if (Pos.X <= 1)
+                        {
+                            goLeft = false;
+                            goRight = true;
+                        }
+                        if (goRight == true)
+                        {
+                            if (hp > hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, Globals.screenW - Width, Speed / 200), Pos.Y);
+                            }
+                            if (hp < hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, Globals.screenW - Width, Speed / 100), Pos.Y);
+                            }
+                        }
+
+                        if (Pos.X >= Globals.screenW - Width - 1)
+                        {
+                            goRight = false;
+                            goLeft = true;
+                        }
+                        if (goLeft == true)
+                        {
+                            Pos = new Vector2(Lerp(Pos.X, 0, Speed / 200), Pos.Y);
+                        }
+
+                       
+                    }
+
                     break;
                     
             }
             Collision(player, projectiles, explosions);
 
-            if (hp <= 0)
+            if (Pos.Y > Globals.screenH + Height + 10)
             {
                 Destroy = true;
             }

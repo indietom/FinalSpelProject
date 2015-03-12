@@ -8,10 +8,15 @@ namespace FinalSpelProject
 {
     class LevelManager
     {
-        // Don't run this code yet, it works now but it's still mostly test stuff
+        //It works now but it's still mostly test stuff
         public static byte currentLevel = 0;
 
         LevelProperty[] levelProperties = new LevelProperty[5];
+
+        bool levelCompleted;
+
+        short changeLevelCount;
+        short maxChangeLevelCount;
 
         public LevelManager()
         {
@@ -19,6 +24,36 @@ namespace FinalSpelProject
             levelProperties[1] = new LevelProperty(0, 15, 7);
             levelProperties[2] = new LevelProperty(0, 15, 7);
             levelProperties[3] = new LevelProperty(0, 15, 7);
+            maxChangeLevelCount = 64 * 3;
+        }
+
+        public void Update(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<TextEffect> textEffects)
+        {
+            if (levelCompleted)
+            {
+                changeLevelCount += 1;
+                foreach(Player p in players)
+                {
+                    p.inputActive = false;
+                    if(changeLevelCount <= 64)
+                    {
+                        p.Pos = new Vector2(p.Lerp(p.Pos.X, Globals.screenW / 2 - p.Width / 2, 0.07f), p.Lerp(p.Pos.Y, Globals.screenH / 2 - p.Height / 2, 0.07f));
+                    }
+                    else
+                    {
+                        p.Pos = new Vector2(p.Pos.X, p.Lerp(p.Pos.Y, -p.Height, 0.07f));
+                    }
+                }
+            }
+            if(changeLevelCount >= maxChangeLevelCount)
+            {
+                currentLevel += 1;
+                StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
+            }
+            if(changeLevelCount == 2)
+            {
+                textEffects.Add(new TextEffect(new Vector2(0, -100), "", 1, Color.White, new Vector2(Globals.screenW/2-200, Globals.screenH/2), 0.05f, maxChangeLevelCount, 1, 4, "LEVEL COMPLETED"));
+            }
         }
 
         public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)

@@ -15,6 +15,7 @@ namespace FinalSpelProject
         short lifeTime;
         short maxLifeTime;
         short flashCount;
+        short textIndex;
 
         float size;
         float r;
@@ -26,8 +27,10 @@ namespace FinalSpelProject
 
         byte tag;
         byte type;
+        byte addLetterCount;
 
         string text;
+        string fullText;
 
         public TextEffect(Vector2 pos2, string text2, float size2, Color color2, float ang, float speed2, short maxLifeTime2, byte tag2, byte type2)
         {
@@ -47,6 +50,20 @@ namespace FinalSpelProject
             target = target2;
             type = type2;
             text = text2;
+            Pos = pos2;
+            color = color2;
+            size = size2;
+            Speed = speed2;
+            maxLifeTime = maxLifeTime2;
+            tag = tag2;
+            OrginalColor = color;
+        }
+        public TextEffect(Vector2 pos2, string text2, float size2, Color color2, Vector2 target2, float speed2, short maxLifeTime2, byte tag2, byte type2, string fullText2)
+        {
+            target = target2;
+            type = type2;
+            text = text2;
+            fullText = fullText;
             Pos = pos2;
             color = color2;
             size = size2;
@@ -97,6 +114,10 @@ namespace FinalSpelProject
                 case 3:
                     FlashColor(8);
                     break;
+                case 4:
+                    AddLetters(4);
+                    break;
+                    
             }
         }
         public void FlashColor(int interval)
@@ -115,6 +136,19 @@ namespace FinalSpelProject
         public void Bounce()
         {
 
+        }
+        public void AddLetters(byte maxCount)
+        {
+            if (fullText != text)
+            {
+                addLetterCount += 1;
+                if (addLetterCount >= maxCount)
+                {
+                    textIndex += 1;
+                    text += fullText[textIndex];
+                    addLetterCount = 0;
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {

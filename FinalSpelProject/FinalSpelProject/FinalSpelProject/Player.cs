@@ -66,7 +66,7 @@ namespace FinalSpelProject
         public short GetCurrentLaserHeigt() { return currentLaserHeigt; }
 
         public bool Dead {get; set;}
-        bool inputActive;
+        public bool inputActive;
         public bool Flash { get; set; }
         public bool Invisible { get; set; }
         public bool RasieCombo { get; set; }

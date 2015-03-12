@@ -12,5 +12,9 @@ namespace FinalSpelProject
          * 2 - Fly through hoops, catch loot and shoot a few enemies
          * 3 - 
          */
+        public void Update()
+        {
+
+        }
     }
 }

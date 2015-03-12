@@ -44,7 +44,7 @@ namespace FinalSpelProject
             {
                 if(p.HitBox.Intersects(FullHitBoxMiddle))
                 {
-                    particles.Add(new Particle(p.Pos, p.Angle*-1, ))
+                    particles.Add(new Particle(p.Pos, p.Angle * -1, random.Next(2, 8), 0, 0, Color.GhostWhite));
                     p.Destroy = true;
                 }
             }

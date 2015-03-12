@@ -46,8 +46,9 @@ namespace FinalSpelProject
         List<Loot> loots = new List<Loot>();
 
         Level level;
-        SpawnManager spawnManager = new SpawnManager();
 
+        SpawnManager spawnManager = new SpawnManager();
+        LevelManager levelManager = new LevelManager();
         ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
 
         protected override void Initialize()
@@ -172,7 +173,8 @@ namespace FinalSpelProject
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
+                //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);
+                //loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
                 //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
                 //if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                 //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);

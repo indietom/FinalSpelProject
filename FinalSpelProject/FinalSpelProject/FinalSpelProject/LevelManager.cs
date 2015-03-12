@@ -8,10 +8,18 @@ namespace FinalSpelProject
 {
     class LevelManager
     {
-        // Don't run this code yet, it will crash
+        // Don't run this code yet, it works now but it's still mostly test stuff
         public static byte currentLevel = 0;
 
         LevelProperty[] levelProperties = new LevelProperty[5];
+
+        public LevelManager()
+        {
+            levelProperties[0] = new LevelProperty(0, 15, 7);
+            levelProperties[1] = new LevelProperty(0, 15, 7);
+            levelProperties[2] = new LevelProperty(0, 15, 7);
+            levelProperties[3] = new LevelProperty(0, 15, 7);
+        }
 
         public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)
         {

@@ -11,7 +11,9 @@ namespace FinalSpelProject
     class Boss : GameObject
     {
         int hp;
+        
         byte type;
+        byte hurtCount;
 
         short[] fireRates;
         short[] maxFireRates;
@@ -167,6 +169,21 @@ namespace FinalSpelProject
             {
                 Destroy = true;
             }
+            HurtUpdate();
+        }
+
+        public void HurtUpdate()
+        {
+            if(hurtCount >= 1)
+            {
+                hurtCount += 1;
+                color = Color.Red;
+            }
+            if(hurtCount >= 8)
+            {
+                hurtCount = 0;
+                color = OrginalColor;
+            }
         }
 
         public void Collision(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
@@ -178,6 +195,7 @@ namespace FinalSpelProject
                 if (p.HitBox.Intersects(HitBox))
                 {
                     hp -= 10;
+                    hurtCount = 1;
                     p.Dead = true;
                 }
             }
@@ -190,6 +208,7 @@ namespace FinalSpelProject
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     }
                     hp -= p.Dm;
+                    hurtCount = 1;
                     Console.WriteLine(hp);
                     if (p.GetSpriteType() != 6)
                     {

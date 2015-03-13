@@ -63,7 +63,7 @@ namespace FinalSpelProject
             target = target2;
             type = type2;
             text = text2;
-            fullText = fullText;
+            fullText = fullText2;
             Pos = pos2;
             color = color2;
             size = size2;
@@ -145,7 +145,7 @@ namespace FinalSpelProject
                 if (addLetterCount >= maxCount)
                 {
                     textIndex += 1;
-                    text += fullText[textIndex];
+                    text += fullText[textIndex-1];
                     addLetterCount = 0;
                 }
             }

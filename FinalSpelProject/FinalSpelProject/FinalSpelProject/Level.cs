@@ -22,13 +22,13 @@ namespace FinalSpelProject
             levelPath = "Content\\level"+CurrentLevel + "\\";
             for(int i = 0; i < amountOfChunks; i++)
             {
-                chunks.Add(new Chunk(new Vector2(0, -(40*16)*i), levelPath+"chunk" + i));
+                chunks.Add(new Chunk(new Vector2(0, ((40*16)*i)-(40*16)*(amountOfChunks-1)), levelPath+"chunk" + i));
             }
         }
 
         public Level(List<Chunk> chunks, LevelProperty levelProperty)
         {
-            amountOfChunks = levelProperty.GetHeight(); ;
+            amountOfChunks = levelProperty.GetHeight(); 
             CurrentLevel = LevelManager.currentLevel;
             levelPath = "Content\\level" + CurrentLevel + "\\";
             for (int i = 0; i < amountOfChunks; i++)

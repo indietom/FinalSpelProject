@@ -114,7 +114,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 7;
+            gunType = 4;
             specialGunType = 3;
             specialAmmo = 2;
 
@@ -150,6 +150,7 @@ namespace FinalSpelProject
             {
                 comboCount += 10;
             }
+            
             if (inputActive)
             {
                 if ((keyboard.IsKeyDown(left) || gamePad.ThumbSticks.Left.X <= -thumbStickMax) && velLeft >= -maxVel)
@@ -251,6 +252,10 @@ namespace FinalSpelProject
                 {
                     deccreseFlameStamina += 1;
                 }
+            }
+            else
+            {
+                currentLaserHeigt = 0;
             }
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)

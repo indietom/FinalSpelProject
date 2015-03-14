@@ -71,7 +71,7 @@ namespace ChunckSeperator
             string orgMapPath = "";
             string[] chunksToSavePath;
             string[] chunksInfo;
-
+            //
             Console.Write("LEVEL TAG: ");
             levelTag = byte.Parse(Console.ReadLine());
 
@@ -98,14 +98,19 @@ namespace ChunckSeperator
                 {
                     for (int j = 0; j < chunkHeight; j++)
                     {
-                        chunksInfo[i] += LoadLine(i + (j * chunkHeight), orgMapPath) + Environment.NewLine;
+                        chunksInfo[i] += LoadLine(j + (i * chunkHeight), orgMapPath) + Environment.NewLine;
                     }
                 }
-                
+
+                for (int i = 0; i < amountOfChunks; i++)
+                {
+                    Console.WriteLine(chunksInfo[i]);
+                }
+
                 for (int i = 0; i < chunksInfo.Count(); i++)
                 {
                     Console.WriteLine("level" + levelTag + "\\chunk" + i + ".txt");
-                    if(!enemyLayer) SaveLine("level" + levelTag + "\\chunk" + i + ".txt", chunksInfo[i], true);
+                    if (!enemyLayer) SaveLine("level" + levelTag + "\\chunk" + i + ".txt", chunksInfo[i], true);
                     else SaveLine("level" + levelTag + "\\chunk" + i + "E.txt", chunksInfo[i], true);
                 }
 

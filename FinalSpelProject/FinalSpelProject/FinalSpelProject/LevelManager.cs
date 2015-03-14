@@ -13,7 +13,7 @@ namespace FinalSpelProject
 
         LevelProperty[] levelProperties = new LevelProperty[5];
 
-        bool levelCompleted;
+        public bool levelCompleted;
 
         short changeLevelCount;
         short maxChangeLevelCount;
@@ -27,8 +27,13 @@ namespace FinalSpelProject
             maxChangeLevelCount = 64 * 3;
         }
 
-        public void Update(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<TextEffect> textEffects)
+        public void Update(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, List<Boss> bosses, Level level, List<TextEffect> textEffects)
         {
+            foreach(Boss b in bosses)
+            {
+                if (b.levelCompleted)
+                    levelCompleted = true;
+            }
             if (levelCompleted)
             {
                 changeLevelCount += 1;
@@ -37,22 +42,22 @@ namespace FinalSpelProject
                     p.inputActive = false;
                     if(changeLevelCount <= 64)
                     {
-                        p.Pos = new Vector2(p.Lerp(p.Pos.X, Globals.screenW / 2 - p.Width / 2, 0.07f), p.Lerp(p.Pos.Y, Globals.screenH / 2 - p.Height / 2, 0.07f));
+                        p.Pos = new Vector2(p.Lerp(p.Pos.X, Globals.screenW / 2 - p.Width / 2, 0.07f), p.Lerp(p.Pos.Y, Globals.screenH / 2 - p.Height / 2, 0.01f));
                     }
                     else
                     {
-                        p.Pos = new Vector2(p.Pos.X, p.Lerp(p.Pos.Y, -p.Height, 0.07f));
+                        p.Pos = new Vector2(p.Pos.X, p.Lerp(p.Pos.Y, -p.Height*2, 0.07f));
                     }
                 }
             }
             if(changeLevelCount >= maxChangeLevelCount)
             {
-                currentLevel += 1;
-                StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
+                //currentLevel += 1;
+                //StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
             }
-            if(changeLevelCount == 2)
+            if(changeLevelCount == 3)
             {
-                textEffects.Add(new TextEffect(new Vector2(0, -100), "", 1, Color.White, new Vector2(Globals.screenW/2-200, Globals.screenH/2), 0.05f, maxChangeLevelCount, 1, 4, "LEVEL COMPLETED"));
+                textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64 * 3, 4, 1, "LEVEL COMPLETED"));
             }
         }
 

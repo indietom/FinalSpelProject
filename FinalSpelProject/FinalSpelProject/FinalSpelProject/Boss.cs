@@ -29,6 +29,7 @@ namespace FinalSpelProject
         bool Spawned;
         bool goLeft = false;
         bool goRight = false;
+        public bool levelCompleted;
         Random rng = new Random();
 
         short invisibleCount;
@@ -209,7 +210,7 @@ namespace FinalSpelProject
                     }
                     hp -= p.Dm;
                     hurtCount = 1;
-                    Console.WriteLine(hp);
+                    
                     if (p.GetSpriteType() != 6)
                     {
                         p.Destroy = true;

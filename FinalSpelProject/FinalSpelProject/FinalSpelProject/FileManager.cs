@@ -51,9 +51,9 @@ namespace FinalSpelProject
                 byteData[i] = byte.Parse(sr.ReadLine());
             }
             players[0].SetGunType(byteData[0], false);
-            players[1].SetGunType(byteData[1], true);
-            players[2].SetSpecialAmmo(byteData[2]);
-            players[3].SetLives(byteData[3]);           
+            players[0].SetGunType(byteData[1], true);
+            players[0].SetSpecialAmmo(byteData[2]);
+            players[0].SetLives(byteData[3]);           
             sr.Dispose();
         }
 

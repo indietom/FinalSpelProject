@@ -49,6 +49,7 @@ namespace FinalSpelProject
 
         SpawnManager spawnManager = new SpawnManager();
         LevelManager levelManager = new LevelManager();
+        FileManager fileManager = new FileManager();
         ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
 
         protected override void Initialize()
@@ -172,8 +173,13 @@ namespace FinalSpelProject
                 l.Update(player, textEffects);
             }
 
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            {
+                fileManager.LoadPlayer("save.sav", player);
+            }
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
+                fileManager.SavePlayer("save.sav", player);
                 //textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64*3, 4, 1, "LEVEL COMPLETED"));
 
                 //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);

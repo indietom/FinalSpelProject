@@ -489,18 +489,22 @@ namespace FinalSpelProject
         }
         public void UpdateCombo()
         {
-            maxComboCount = (short)(200 - currentCombo * 5);
+            maxComboCount = (short)((currentCombo * 2)+32);
+            Console.WriteLine(maxComboCount);
             if (comboCount > maxComboCount)
             {
                 currentCombo += 1;
-                comboCount = 8;
+                comboCount = 2;
             }
+            if (currentCombo == 1 && comboCount == 0)
+                currentCombo = 0;
             if (currentCombo >= 1)
             {
                 comboDecc += 1;
                 if (comboDecc >= 1)
                 {
-                    comboCount -= 1;
+                    if(currentCombo >= 10) comboCount -= (short)(2+(currentCombo/10));
+                    else comboCount -= 1;
                     comboDecc = 0;
                 }
                 if (comboCount <= -1)

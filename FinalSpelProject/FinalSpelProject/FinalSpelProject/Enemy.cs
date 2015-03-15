@@ -429,6 +429,14 @@ namespace FinalSpelProject
                     }
                     else
                     {
+                        fireRate += 1;
+                        if (Angle <= -260)
+                        {
+                            if (fireRate == 32 || fireRate == 48 || fireRate == 48 + 16)
+                                projectile.Add(new Projectile(new Vector2(Pos.X - 2, Pos.Y - 2), Angle + random.Next(-8, 9), 8, 0, 0, false, true));
+                            if (fireRate >= 48 + 16 * 2)
+                                fireRate = 0;
+                        }
                         if (Angle > -270)
                             Angle -= 1.5f;
                     }

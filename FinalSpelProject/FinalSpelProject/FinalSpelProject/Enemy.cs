@@ -33,6 +33,7 @@ namespace FinalSpelProject
         public bool OnGround { get; set; }
 
         short uTurnHeight;
+        short uTurnMinHeight;
         short turningCount;
         short maxTurningCount;
 
@@ -194,13 +195,14 @@ namespace FinalSpelProject
                 case 21:
                     maxTurningCount = (short)r.Next(64*3, 64*5);
                     uTurnHeight = (short)r.Next(Globals.screenH / 2, Globals.screenH / 2 + 64*3);
+                    uTurnMinHeight = (short)r.Next(64 * 2);
                     Speed = r.Next(3, 6);
                     Angle = -270;
                     SetSpriteCoords(1, 716);
                     Rotated = true;
                     Rotation = Angle;
                     SetSize(64);
-                    MaxFrame = 5;
+                    MaxFrame = 4;
                     MaxAnimationCount = 4;
                     health = 3;
                     worth = 1000;
@@ -411,6 +413,25 @@ namespace FinalSpelProject
                     AngleMath(false);
                     Pos += Vel;
                     Rotation = Angle;
+                    if(Pos.Y >= uTurnHeight)
+                    {
+                        chanceOfUTurn = 2;
+                    }
+                    if(chanceOfUTurn == 2)
+                    {
+                        if (Angle <= -450 && Pos.Y <= uTurnMinHeight)
+                        {
+                            Angle = -90;
+                            chanceOfUTurn = 0;
+                        }
+
+                        if (Angle > -450) Angle -= 1.5f;
+                    }
+                    else
+                    {
+                        if (Angle > -270)
+                            Angle -= 1.5f;
+                    }
                     break;
                     
             }

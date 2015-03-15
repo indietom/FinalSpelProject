@@ -24,12 +24,18 @@ namespace FinalSpelProject
 
         byte chanceOfPowerUp;
         byte hitFlashDelay;
+        byte chanceOfUTurn;
 
         bool splitEnemy;
         bool scroll;
         bool hurtByExplosion;
         bool carryingPowerUp;
         public bool OnGround { get; set; }
+
+        short uTurnHeight;
+        short turningCount;
+        short maxTurningCount;
+
 
         Color bloodColor = new Color(0, 0, 0);
 
@@ -183,6 +189,21 @@ namespace FinalSpelProject
                     AnimationActive = true;
                     worth = 500;
                     scroll = true;
+                    material = Material.Metal;
+                    break;
+                case 21:
+                    maxTurningCount = (short)r.Next(64*3, 64*5);
+                    uTurnHeight = (short)r.Next(Globals.screenH / 2, Globals.screenH / 2 + 64*3);
+                    Speed = r.Next(3, 6);
+                    Angle = -270;
+                    SetSpriteCoords(1, 716);
+                    Rotated = true;
+                    Rotation = Angle;
+                    SetSize(64);
+                    MaxFrame = 5;
+                    MaxAnimationCount = 4;
+                    health = 3;
+                    worth = 1000;
                     material = Material.Metal;
                     break;
             }
@@ -385,6 +406,11 @@ namespace FinalSpelProject
                     break;
                 case 18:
 
+                    break;
+                case 21:
+                    AngleMath(false);
+                    Pos += Vel;
+                    Rotation = Angle;
                     break;
                     
             }

@@ -208,7 +208,10 @@ namespace FinalSpelProject
                     {
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     }
-                    hp -= p.Dm;
+                    if (hurtCount <= 0)
+                    {
+                        hp -= p.Dm;
+                    }
                     hurtCount = 1;
                     
                     if (p.GetSpriteType() != 6)

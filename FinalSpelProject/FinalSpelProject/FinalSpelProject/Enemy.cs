@@ -22,6 +22,7 @@ namespace FinalSpelProject
 
         Material material;
 
+        byte direction;
         byte chanceOfPowerUp;
         byte hitFlashDelay;
         byte chanceOfUTurn;
@@ -208,6 +209,7 @@ namespace FinalSpelProject
                     health = 3;
                     worth = 1000;
                     material = Material.Metal;
+                    direction = (byte)r.Next(0, 2);
                     break;
             }
             switch(material)
@@ -421,13 +423,21 @@ namespace FinalSpelProject
                     }
                     if(chanceOfUTurn == 2)
                     {
-                        if (Angle <= -450 && Pos.Y <= uTurnMinHeight)
+                        if (Angle <= -450 && Pos.Y <= uTurnMinHeight && direction == 0 || Angle >= -90 && Pos.Y <= uTurnMinHeight && direction == 1)
                         {
                             Angle = -90;
                             chanceOfUTurn = 0;
                         }
 
-                        if (Angle > -450) Angle -= 1.5f;
+                        if (direction == 0)
+                        {
+                            if (Angle > -450) Angle -= 1.5f;
+                        }
+                        else
+                        {
+                            if (Angle < -90) Angle += 1.5f;
+                        }
+                        
                     }
                     else
                     {
@@ -439,6 +449,7 @@ namespace FinalSpelProject
                             if (fireRate >= 48 + 16 * 2)
                                 fireRate = 0;
                         }
+
                         if (Angle > -270)
                             Angle -= 1.5f;
                     }

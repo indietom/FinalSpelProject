@@ -174,7 +174,7 @@ namespace FinalSpelProject
             }
             if(Destroy && spriteType == 6)
             {
-                Globals.blackHoleExists = false;
+                Globals.blackHoleExists = true;
             }
         }
         public void AssignMovmentValues()

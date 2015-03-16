@@ -179,6 +179,8 @@ namespace FinalSpelProject
             }
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
+                if (!ui.hideGameHud) ui.hideGameHud = true;
+                else ui.hideGameHud = false;
                 //fileManager.SavePlayer("save.sav", player);
                 //textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64*3, 4, 1, "LEVEL COMPLETED"));
                 enemies.Add(new Enemy(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 21, random));

@@ -450,8 +450,10 @@ namespace FinalSpelProject
                                 fireRate = 0;
                         }
 
-                        if (Angle > -270)
+                        if (Angle > -270 && direction == 0)
                             Angle -= 1.5f;
+                        if (Angle < 90 && direction == 1 && uTurnChanceGiven)
+                            Angle += 1.5f;
                     }
                     break;
                     

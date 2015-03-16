@@ -76,60 +76,64 @@ namespace FinalSpelProject
                         }
 
                     }
-                    if (Pos.Y >= 120 && Spawned == false)
+                    if (Pos.Y >= 120 && Spawned == false && hp > 0)
                     {
-                        Invulnerable = false;
                         Speed = 5;
-                        Pos = new Vector2(Lerp(Pos.X, 0, 0.04f), Pos.Y);
+                        Pos = new Vector2(Lerp(Pos.X, 0, Speed / 200), Pos.Y);
                         if (Pos.X <= 1)
                         {
                             Spawned = true;
+                            Invulnerable = false;
                         }
                     }
-                         
-                    AltFirerate -= 1;
-                    if (AltFirerate <= 35 && AltFirerate > 0)
+                       
+                    //Boss Shooting
+                    if (hp > 0)
                     {
+                        AltFirerate -= 1;
+                        if (AltFirerate <= 35 && AltFirerate > 0)
+                        {
 
-                        
-                        if (!targeted)
-                        {
-                            targeted = true;
-                            altTempAngle = AimAt(player[0].GetCenter);
-                            Speed = 0;
-                        }
-                        if (targeted == true)
-                        {
-                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), altTempAngle, 15, 0, 0, true, true));
-                        }
-                        
-                    }
-                    if (AltFirerate == 0)
-                    {
-                        AltFirerate = 335;
-                        targeted = false;
-                        Speed = 5;
-                    }
 
-                    Firerate -= 1;
-                    if (Firerate <= 0)
-                    {
-                        tempAngle = AimAt(player[0].GetCenter);
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), tempAngle, 8, 0, 0, true, true));
-                        if (hp > hp / 4)
-                        {
-                            Firerate = 120;
-                        }
-                        if (hp < hp / 4)
-                        {
-                            Firerate = 60;
-                        }
-                        
+                            if (!targeted)
+                            {
+                                targeted = true;
+                                altTempAngle = AimAt(player[0].GetCenter);
+                                Speed = 0;
+                            }
+                            if (targeted == true)
+                            {
+                                projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), altTempAngle, 15, 0, 0, true, true));
+                            }
 
+                        }
+                        if (AltFirerate == 0)
+                        {
+                            AltFirerate = 335;
+                            targeted = false;
+                            Speed = 5;
+                        }
+
+                        Firerate -= 1;
+                        if (Firerate <= 0)
+                        {
+                            tempAngle = AimAt(player[0].GetCenter);
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), tempAngle, 8, 0, 0, true, true));
+                            if (hp > hp / 4)
+                            {
+                                Firerate = 120;
+                            }
+                            if (hp < hp / 4)
+                            {
+                                Firerate = 60;
+                            }
+
+
+                        }
                     }
 
                     //Boss_01 Movement
-                    if (Invulnerable == false)
+                    if (Invulnerable == false && hp > 0)
                     {
                         if (Pos.X <= 1)
                         {
@@ -155,14 +159,23 @@ namespace FinalSpelProject
                         }
                         if (goLeft == true)
                         {
-                            Pos = new Vector2(Lerp(Pos.X, 0, Speed / 200), Pos.Y);
+                            if (hp > hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, 0, Speed / 200), Pos.Y);
+                            }
+                            if (hp < hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, 0, Speed / 100), Pos.Y);
+                            }
+                            
                         }
 
-                       
+
                     }
                     if (hp < 0)
                     {
-                        Pos = new Vector2(Pos.X, Lerp(Pos.X, Globals.screenH + Height + 50, Speed / 200));
+                        Speed = 0;
+                        Pos += new Vector2(0, Globals.worldSpeed);
                     }
 
                     break;
@@ -199,9 +212,12 @@ namespace FinalSpelProject
             {
                 if (p.HitBox.Intersects(HitBox))
                 {
-                    hp -= 10;
-                    hurtCount = 1;
-                    p.Dead = true;
+                    if (Invulnerable == false)
+                    {
+                        hp -= 10;
+                        hurtCount = 1;
+                        p.Dead = true;
+                    }
                 }
             }
             Console.WriteLine(hp);

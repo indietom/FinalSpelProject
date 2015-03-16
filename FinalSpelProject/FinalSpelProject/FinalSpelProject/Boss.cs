@@ -200,6 +200,7 @@ namespace FinalSpelProject
                     p.Dead = true;
                 }
             }
+            Console.WriteLine(hp);
             foreach (Projectile p in projectiles)
             {
                 if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
@@ -208,10 +209,7 @@ namespace FinalSpelProject
                     {
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     }
-                    if (hurtCount <= 0)
-                    {
-                        hp -= p.Dm;
-                    }
+                    hp -= p.Dm;
                     hurtCount = 1;
                     
                     if (p.GetSpriteType() != 6)

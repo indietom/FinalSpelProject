@@ -29,6 +29,7 @@ namespace FinalSpelProject
         bool splitEnemy;
         bool scroll;
         bool hurtByExplosion;
+        bool uTurnChanceGiven;
         bool carryingPowerUp;
         public bool OnGround { get; set; }
 
@@ -413,9 +414,10 @@ namespace FinalSpelProject
                     AngleMath(false);
                     Pos += Vel;
                     Rotation = Angle;
-                    if(Pos.Y >= uTurnHeight)
+                    if (Pos.Y >= uTurnHeight && !uTurnChanceGiven)
                     {
-                        chanceOfUTurn = 2;
+                        chanceOfUTurn = (byte)random.Next(0, 3);
+                        uTurnChanceGiven = true;
                     }
                     if(chanceOfUTurn == 2)
                     {

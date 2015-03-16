@@ -160,6 +160,10 @@ namespace FinalSpelProject
 
                        
                     }
+                    if (hp < 0)
+                    {
+                        Pos = new Vector2(Pos.X, Lerp(Pos.X, Globals.screenH + Height + 50, Speed / 200));
+                    }
 
                     break;
                     

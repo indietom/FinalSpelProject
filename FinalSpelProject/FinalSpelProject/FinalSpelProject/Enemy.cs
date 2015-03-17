@@ -38,8 +38,12 @@ namespace FinalSpelProject
         short uTurnMinHeight;
         short turningCount;
         short maxTurningCount;
+        short changeTargetCount;
+        short maxChangeTargetCount;
 
         float waveCount;
+
+        Vector2 target;
 
         Color bloodColor = new Color(0, 0, 0);
 
@@ -223,6 +227,20 @@ namespace FinalSpelProject
                     health = 2;
                     material = Material.OrganicAlien;
                     break;
+                case 23:
+                    SetSpriteCoords(1, 716);
+                    Rotated = true;
+                    Rotation = Angle;
+                    RoateOnRad = true;
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    maxChangeTargetCount = (short)r.Next(64 * 3, 64 * 5);
+                    target = new Vector2(r.Next(Globals.screenW - Width), r.Next(Globals.screenH / 4));
+                    health = 2;
+                    Speed = 0.04f;
+                    worth = 2500;
+                    break;
             }
             switch(material)
             {
@@ -238,7 +256,9 @@ namespace FinalSpelProject
         public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps, List<Gib> gibs)
         {
             Random random = new Random();
-           
+
+            //Console.WriteLine(Globals.blackHoleExists);
+
             if (Pos.Y >= Globals.screenH + Height)
             {
                 Destroy = true;
@@ -480,6 +500,24 @@ namespace FinalSpelProject
                     }
                     if (fireRate >= 128)
                         fireRate = 0;
+                    break;
+                case 23:
+                    changeTargetCount += 1;
+                    if(changeTargetCount >= maxChangeTargetCount)
+                    {
+                        if(target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
+                        {
+                            target = new Vector2(random.Next(-Globals.screenW, Globals.screenW * 2), random.Next(-128-64, -100));
+                        }
+                        else
+                        {
+                            target = new Vector2(random.Next(Globals.screenW - Width), random.Next(Globals.screenH / 4));
+                        }
+                        changeTargetCount = 0;
+                    }
+                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
+                    Angle = AimAt(player[0].GetCenter);
+                    Rotation = Angle;
                     break;
             }
             if (Pos.Y < -Height)

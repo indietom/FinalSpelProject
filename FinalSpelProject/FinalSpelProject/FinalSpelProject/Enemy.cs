@@ -39,6 +39,7 @@ namespace FinalSpelProject
         short turningCount;
         short maxTurningCount;
 
+        float waveCount;
 
         Color bloodColor = new Color(0, 0, 0);
 
@@ -210,6 +211,17 @@ namespace FinalSpelProject
                     worth = 1000;
                     material = Material.Metal;
                     direction = (byte)r.Next(0, 2);
+                    break;
+                case 22:
+                    SetSpriteCoords(1, 521);
+                    SetSize(64);
+                    MaxAnimationCount = 4;
+                    MaxFrame = 3;
+                    Angle = -270;
+                    Speed = r.Next(4, 8);
+                    worth = 2000;
+                    health = 2;
+                    material = Material.OrganicAlien;
                     break;
             }
             switch(material)
@@ -437,7 +449,6 @@ namespace FinalSpelProject
                         {
                             if (Angle < -90) Angle += 1.5f;
                         }
-                        
                     }
                     else
                     {
@@ -456,7 +467,20 @@ namespace FinalSpelProject
                             Angle += 1.5f;
                     }
                     break;
-                    
+                case 22:
+                    Pos += new Vector2((float)Math.Sin(4 * waveCount + 0.5));
+                    waveCount += 0.01f;
+                    fireRate += 1;
+                    if(fireRate == 32 || fireRate == 48 || fireRate == 64)
+                    {
+                        if (random.Next(0, 2) == 0)
+                            projectile.Add(new Projectile(GetCenter-new Vector2(20, 0), -270 + random.Next(-8, 9), 0, 1, 1, false, true));
+                        else
+                            projectile.Add(new Projectile(GetCenter + new Vector2(20, 0), -270 + random.Next(-8, 9), 0, 1, 1, false, true));
+                    }
+                    if (fireRate >= 128)
+                        fireRate = 0;
+                    break;
             }
             if (Pos.Y < -Height)
                 fireRate = 30;
@@ -558,7 +582,7 @@ namespace FinalSpelProject
                     if(health <= 0 && p.GetMovmentType() == 3)
                     {
                         splitEnemy = true;
-                        Console.WriteLine(splitEnemy);
+                        //Console.WriteLine(splitEnemy);
                     }
                     hitFlashDelay = 1;
                    if(p.GetSpriteType() != 6) p.Destroy = true;

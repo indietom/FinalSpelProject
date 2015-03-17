@@ -490,7 +490,7 @@ namespace FinalSpelProject
         public void UpdateCombo()
         {
             maxComboCount = (short)((currentCombo * 2)+32);
-            Console.WriteLine(maxComboCount);
+            //Console.WriteLine(maxComboCount);
             if (comboCount > maxComboCount)
             {
                 currentCombo += 1;

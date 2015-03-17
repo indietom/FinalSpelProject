@@ -220,7 +220,7 @@ namespace FinalSpelProject
                     }
                 }
             }
-            Console.WriteLine(hp);
+           // Console.WriteLine(hp);
             foreach (Projectile p in projectiles)
             {
                 if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 // TODO: Add muffeld effects to not "confuse"/overwhelm the player, I think
+// Should I write a system for burst-fire since I use it so often? 
 
 namespace FinalSpelProject
 {
@@ -240,6 +241,8 @@ namespace FinalSpelProject
                     health = 2;
                     Speed = 0.04f;
                     worth = 2500;
+                    material = Material.Metal;
+                    fireRate = r.Next(32);
                     break;
             }
             switch(material)
@@ -518,6 +521,19 @@ namespace FinalSpelProject
                     Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
+
+                    Console.WriteLine(fireRate);
+
+                    if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
+                    {
+                        fireRate += 1;
+                        if(fireRate >= 64+32)
+                        {
+                            projectile.Add(new Projectile(Pos, Angle, 8, 2, 0, true, true));
+                            fireRate = random.Next(32);
+                        }
+                    }
+                    if (fireRate >= 64 + 32) fireRate = 0;
                     break;
             }
             if (Pos.Y < -Height)
@@ -548,7 +564,7 @@ namespace FinalSpelProject
                     p.RaiseCurrentCombo();
                 }
                 if (p.Dead)
-                    fireRate = 230;
+                    if(type <= 20) fireRate = 230;
             }
             if (health <= 0)
             {

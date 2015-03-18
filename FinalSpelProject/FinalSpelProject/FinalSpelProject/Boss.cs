@@ -63,12 +63,13 @@ namespace FinalSpelProject
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
                     AnimationActive = true;
-                    Speed = 5;
+                    Speed = 0.5f;
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
                     hp = 100;
                     Invulnerable = true;
                     Spawned = false;
+                    goLeft = true;
 
                     break;
             }
@@ -193,14 +194,32 @@ namespace FinalSpelProject
                     break;
 
                 case 2:
+                    //Boss2 movement
                     if (Spawned == false)
                     {
-                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 200, 0.005f));
+                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 150, 0.005f));
                     }
-                    if (Pos.Y >= 180)
+                    if (goRight == true)
                     {
-                        Spawned = true;
-                        Pos += new Vector2(1,1);
+                        Pos += new Vector2(Speed, 0);
+                    }
+                    if (goLeft == true)
+                    {
+                        Pos += new Vector2(-Speed, 0);
+                    }
+                    if (Pos.X <= 10 && hp > 0)
+                    {
+                        goLeft = false;
+                        goRight = true;
+                    }
+                    if (Pos.X >= Globals.screenW - Width - 10 && hp > 0)
+                    {
+                        goRight = false;
+                        goLeft = true;
+                    }
+                    if (hp <= 0)
+                    {
+                        Pos += new Vector2(0, Globals.worldSpeed + 1);
                     }
                     break;
                     

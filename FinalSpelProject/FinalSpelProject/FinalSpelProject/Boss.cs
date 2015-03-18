@@ -199,7 +199,8 @@ namespace FinalSpelProject
                     }
                     if (Pos.Y >= 180)
                     {
-
+                        Spawned = true;
+                        Pos += new Vector2(1,1);
                     }
                     break;
                     

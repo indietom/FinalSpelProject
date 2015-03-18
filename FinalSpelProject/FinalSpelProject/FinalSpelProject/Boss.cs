@@ -59,6 +59,18 @@ namespace FinalSpelProject
                     Spawned = false;
                     
                     break;
+                case 2:
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
+                    AnimationActive = true;
+                    Speed = 5;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
+                    hp = 100;
+                    Invulnerable = true;
+                    Spawned = false;
+
+                    break;
             }
 
         }
@@ -175,9 +187,20 @@ namespace FinalSpelProject
                     if (hp < 0)
                     {
                         Speed = 0;
-                        Pos += new Vector2(0, Globals.worldSpeed);
+                        Pos += new Vector2(0.05f, Globals.worldSpeed + 1);
                     }
 
+                    break;
+
+                case 2:
+                    if (Spawned == false)
+                    {
+                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 200, 0.005f));
+                    }
+                    if (Pos.Y >= 180)
+                    {
+
+                    }
                     break;
                     
             }

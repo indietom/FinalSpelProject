@@ -522,7 +522,7 @@ namespace FinalSpelProject
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
 
-                    Console.WriteLine(fireRate);
+                    //Console.WriteLine(fireRate);
 
                     if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
                     {

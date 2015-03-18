@@ -165,7 +165,7 @@ namespace FinalSpelProject
                     }
                     lifeTime += 1;
                     if(lifeTime < 128*3) Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, Globals.screenH / 2 - Width / 2, 0.05f));
-                    else Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, 800, 0.005f));
+                    else Pos = new Vector2(Lerp(Pos.X, Globals.screenW / 2 - Width / 2, 0.05f), Lerp(Pos.Y, 800, 0.05f));
                     break;
                 case 7:
                     if (CurrentFrame == MaxFrame-1)

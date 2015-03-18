@@ -518,11 +518,11 @@ namespace FinalSpelProject
                         }
                         changeTargetCount = 0;
                     }
-                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
+                    if(!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
 
-                    //Console.WriteLine(fireRate);
+                    Console.WriteLine(fireRate);
 
                     if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
                     {
@@ -535,7 +535,7 @@ namespace FinalSpelProject
                     }
                     if (fireRate >= 64 + 32) fireRate = 0;
                     break;
-            }
+            } 
             if (Pos.Y < -Height)
                 fireRate = 30;
             if(scroll) Pos += new Vector2(0, Globals.worldSpeed);
@@ -553,7 +553,7 @@ namespace FinalSpelProject
             {
                 if(p.GetSpriteType() == 6)
                 {
-                    Pos = new Vector2(Lerp(Pos.X, p.Pos.X, 0.05f), Lerp(Pos.Y, p.GetCenter.Y, 0.05f));
+                    Pos = new Vector2(Lerp(Pos.X, p.Pos.X, 0.1f), Lerp(Pos.Y, p.Pos.Y, 0.1f));
                 }
             }
             foreach (Player p in player)
@@ -568,21 +568,22 @@ namespace FinalSpelProject
             }
             if (health <= 0)
             {
-                switch(material)
-                {
-                    case Material.OrganicAlien:
-                        for (int i = 0; i < 20; i++ )
-                        {
-                            gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
-                        }
-                        break;
-                    case Material.Metal:
-                        for (int i = 0; i < 20; i++)
-                        {
-                            gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 157, random.Next(6, 12), random.Next(360)));
-                        }
-                        break;
-                }
+                if(!Globals.blackHoleExists)
+                    switch (material)
+                    {
+                        case Material.OrganicAlien:
+                            for (int i = 0; i < 20; i++)
+                            {
+                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));
+                            }
+                            break;
+                        case Material.Metal:
+                            for (int i = 0; i < 20; i++)
+                            {
+                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 157, random.Next(6, 12), random.Next(360)));
+                            }
+                            break;
+                    }
                 if(splitEnemy && !OnGround)
                 {
                     if (!Rotated)

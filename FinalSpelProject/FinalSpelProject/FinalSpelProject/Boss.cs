@@ -59,6 +59,17 @@ namespace FinalSpelProject
                     Spawned = false;
                     
                     break;
+                case 2:
+                    SetSpriteCoords(1, Frame(6));
+                    SetSize(64);
+                    AnimationActive = true;
+                    Speed = 5;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 8;
+                    hp = 100;
+                    Invulnerable = true;
+                    Spawned = false;
+                    break;
             }
 
         }
@@ -176,6 +187,58 @@ namespace FinalSpelProject
                     {
                         Speed = 0;
                         Pos += new Vector2(0, Globals.worldSpeed);
+                    }
+
+                    break;
+
+                case 2:
+                    //Boss 2 spawning sequence.
+                    if (Spawned == false)
+                    {
+                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 130, 0.05f));
+                    }
+                    if (Pos.Y >= 100)
+                    {
+                        Spawned = true;
+                        
+                        Invulnerable = false;
+                    }
+                    Console.WriteLine(Invulnerable);
+                    //Boss 2 General movement.
+                    if (Invulnerable == false && hp > 0)
+                    {
+                        if (Pos.X <= 1)
+                        {
+                            goLeft = false;
+                            goRight = true;
+                        }
+                        if (goRight == true)
+                        {
+                            if (hp > hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, Globals.screenW - Width, Speed / 200), Pos.Y);
+                            }
+                            if (hp < hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, Globals.screenW - Width, Speed / 100), Pos.Y);
+                            }
+                        }
+                        if (Pos.X >= Globals.screenW - Width - 1)
+                        {
+                            goRight = false;
+                            goLeft = true;
+                        }
+                        if (goLeft == true)
+                        {
+                            if (hp > hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, 0, Speed / 200), Pos.Y);
+                            }
+                            if (hp < hp / 4)
+                            {
+                                Pos = new Vector2(Lerp(Pos.X, 0, Speed / 100), Pos.Y);
+                            }
+                        }
                     }
 
                     break;

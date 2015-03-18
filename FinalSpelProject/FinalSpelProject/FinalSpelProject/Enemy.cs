@@ -20,7 +20,6 @@ namespace FinalSpelProject
         bool sideChosen;
         int rSide;
         byte explosionHurtDelay;
-        bool Invulnerable;
 
         Material material;
 
@@ -244,18 +243,6 @@ namespace FinalSpelProject
                     worth = 2500;
                     material = Material.Metal;
                     fireRate = r.Next(32);
-                    break;
-                case 24:
-                    SetSpriteCoords(1, 716);
-                    Rotated = true;
-                    Rotation = Angle;
-                    RoateOnRad = true;
-                    SetSize(64);
-                    MaxFrame = 4;
-                    MaxAnimationCount = 4;
-                    health = 1;
-                    Speed = 2;
-                    Invulnerable = true;
                     break;
             }
             switch(material)
@@ -535,7 +522,7 @@ namespace FinalSpelProject
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
 
-                    
+                    Console.WriteLine(fireRate);
 
                     if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
                     {
@@ -547,9 +534,6 @@ namespace FinalSpelProject
                         }
                     }
                     if (fireRate >= 64 + 32) fireRate = 0;
-                    break;
-                case 24:
-
                     break;
             }
             if (Pos.Y < -Height)

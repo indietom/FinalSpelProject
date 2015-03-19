@@ -57,7 +57,7 @@ namespace FinalSpelProject
                 }
             }
 
-            if (fireRate == 1)
+            if (fireRate == 1 && lifeTime < maxLifeTime)
             {
                 switch (gunType)
                 {
@@ -94,7 +94,7 @@ namespace FinalSpelProject
                         break;
                 }
             }
-            if (gunType == 1 && fireRate >= 1)
+            if (gunType == 1 && fireRate >= 1 && lifeTime < maxLifeTime)
             {
                 if (fireRate == 8 || fireRate == 16 || fireRate == 24)
                 {

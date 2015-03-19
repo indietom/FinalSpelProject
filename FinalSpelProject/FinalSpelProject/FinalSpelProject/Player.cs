@@ -114,7 +114,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 4;
+            gunType = 7;
             specialGunType = 3;
             specialAmmo = 2;
 

@@ -66,10 +66,11 @@ namespace FinalSpelProject
                     Speed = 0.5f;
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
-                    hp = 100;
+                    hp = 10;
                     Invulnerable = true;
                     Spawned = false;
                     goLeft = true;
+                    Firerate = 300;
 
                     break;
             }
@@ -197,7 +198,11 @@ namespace FinalSpelProject
                     //Boss2 movement
                     if (Spawned == false)
                     {
-                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 150, 0.005f));
+                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 160, 0.005f));
+                        if (Pos.Y >= 150)
+                        {
+                            Spawned = true;
+                        }
                     }
                     if (goRight == true)
                     {
@@ -219,8 +224,21 @@ namespace FinalSpelProject
                     }
                     if (hp <= 0)
                     {
-                        Pos += new Vector2(0, Globals.worldSpeed + 1);
+                        Pos += new Vector2(0, Globals.worldSpeed + 2);
                     }
+                    //Boss2 attack sequence.
+                    Firerate -= 1;
+                    if (Firerate <= 0)
+                    {
+                        for (int i = 0; i < 36; i++)
+                        {
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), 10 * i, 4, 0, 0, true, true));
+                        }
+
+
+                        Firerate = 300; 
+                    }
+
                     break;
                     
             }

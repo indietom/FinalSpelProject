@@ -222,6 +222,12 @@ namespace FinalSpelProject
                     SetSpriteCoords(383, 1);
                     SetSize(8, 8);
                     break;
+                case 3:
+                    SetSize(9, 16);
+                    SetSpriteCoords(326, 1);
+                    Rotated = true;
+                    Rotation = Angle;
+                    break;
             }
         }
         public void AssignSprite()

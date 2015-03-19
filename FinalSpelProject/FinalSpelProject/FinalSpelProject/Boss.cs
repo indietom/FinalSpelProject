@@ -228,11 +228,11 @@ namespace FinalSpelProject
                     }
                     //Boss2 attack sequence.
                     Firerate -= 1;
-                    if (Firerate <= 0)
+                    if (Firerate <= 0 && hp > 0)
                     {
-                        for (int i = 0; i < 36; i++)
+                        for (int i = 0; i < 360; i += 1)
                         {
-                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), 10 * i, 4, 0, 0, true, true));
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), i , 4, 3, 0, true, true));
                         }
 
 

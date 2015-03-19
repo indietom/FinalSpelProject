@@ -47,7 +47,7 @@ namespace FinalSpelProject
         short comboCount;
         short currentCombo;
         short maxComboCount;
-        short respawnCount;
+        short respawnCount;                             
         short maxRespawnCount;
         short currentLaserHeigt;
         short maxLaserHeight;

@@ -13,6 +13,11 @@ namespace FinalSpelProject
 
         LevelProperty[] levelProperties = new LevelProperty[5];
 
+        public LevelProperty GetLevelProperty(int index)
+        {
+            return levelProperties[index];
+        }
+
         public bool levelCompleted;
 
         short changeLevelCount;
@@ -57,7 +62,7 @@ namespace FinalSpelProject
             }
             if(changeLevelCount == 3)
             {
-                textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64 * 3, 4, 1, "LEVEL COMPLETED"));
+                textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64 * 3, 4, 1, "LEVEL COMPLETED!"));
             }
         }
 

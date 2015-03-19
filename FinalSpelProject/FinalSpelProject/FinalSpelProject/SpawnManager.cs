@@ -10,33 +10,51 @@ namespace FinalSpelProject
     {
         byte amountOfEnemySpawners;
         byte lineHeight;
+        byte chanceOfPowerUp;
 
         short[] spawnEnemyCounters;
         short[] MaxSpawnEnemyCounters;
+
+        // long variable names > abbreviations amrite 
+        short spawnPowerUpCount;
+        short maxSpawnPowerUpCount;
 
         bool active;
 
         public SpawnManager()
         {
             amountOfEnemySpawners = 3;
+            maxSpawnPowerUpCount = 128 * 10;
             spawnEnemyCounters = new short[amountOfEnemySpawners];
             MaxSpawnEnemyCounters = new short[amountOfEnemySpawners];
             active = true;
             MaxSpawnEnemyCounters[0] = 128 * 3;
         }
 
-        public void Update(List<Enemy> enemies, List<PowerUp> powerUps)
+        public void Update(List<Enemy> enemies, List<PowerUp> powerUps, LevelManager levelManager)
         {
             if(active)
             {
                 EnemySpawnUpdate(enemies);
-                PowerUpSpawnUpdate(powerUps);
+                PowerUpSpawnUpdate(powerUps, levelManager);
             }
         }
 
-        public void PowerUpSpawnUpdate(List<PowerUp> powerUps)
+        public void PowerUpSpawnUpdate(List<PowerUp> powerUps, LevelManager levelManager)
         {
-
+            Random random = new Random();
+            spawnPowerUpCount += 1;
+            if(spawnPowerUpCount >= maxSpawnPowerUpCount)
+            {
+                chanceOfPowerUp = (byte)random.Next(1, 9);
+                if(chanceOfPowerUp == 4)
+                {
+                    // ayy lmao
+                    powerUps.Add(new PowerUp(new Vector2(random.Next(Globals.screenW-32), random.Next(-128*2, -128)), (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 0, false));
+                    chanceOfPowerUp = 0;
+                }
+                spawnPowerUpCount = 0;
+            }
         }
 
         public void EnemySpawnUpdate(List<Enemy> enemies)

@@ -100,7 +100,7 @@ namespace FinalSpelProject
 
             ui.Update(player);
 
-            level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps);
+            level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, levelManager);
             levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects);
 
             foreach (Gib g in gibs)

@@ -37,7 +37,7 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm, SpawnManager spawnManager, List<Enemy> enemies, List<PowerUp> powerUps )
+        public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm, SpawnManager spawnManager, List<Enemy> enemies, List<PowerUp> powerUps, LevelManager levelManager)
         {
             if(chunks.Count == 1)
             {
@@ -47,7 +47,7 @@ namespace FinalSpelProject
             {
                 pgm.SpawnLevelOne(tiles);
             }
-            spawnManager.Update(enemies, powerUps);
+            spawnManager.Update(enemies, powerUps, levelManager);
         }
     }
 }

@@ -211,8 +211,16 @@ namespace FinalSpelProject
             switch (spriteType)
             {
                 case 0:
-                    SetSize(9, 16);
-                    SetSpriteCoords(326, 1);
+                    if (!Rotated)
+                    {
+                        SetSize(9, 16);
+                        SetSpriteCoords(340, 1);
+                    }
+                    else
+                    {
+                        SetSize(16, 8);
+                        SetSpriteCoords(326, 18);
+                    }
                     break;
                 case 1:
                     SetSpriteCoords(359, 16);
@@ -223,8 +231,8 @@ namespace FinalSpelProject
                     SetSize(8, 8);
                     break;
                 case 3:
-                    SetSize(9, 16);
-                    SetSpriteCoords(326, 1);
+                    SetSize(16, 8);
+                    SetSpriteCoords(326, 18);
                     Rotated = true;
                     Rotation = Angle;
                     break;

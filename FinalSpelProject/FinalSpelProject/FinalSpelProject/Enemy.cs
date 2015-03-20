@@ -244,6 +244,16 @@ namespace FinalSpelProject
                     material = Material.Metal;
                     fireRate = r.Next(32);
                     break;
+                case 24:
+                    SetSpriteCoords(1, 651);
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    Speed = r.Next(2, 5);
+                    health = (short)r.Next(1, 3);
+                    worth = 1000;
+                    material = Material.Metal;
+                    break;
             }
             switch(material)
             {
@@ -522,7 +532,7 @@ namespace FinalSpelProject
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
 
-                    Console.WriteLine(fireRate);
+                    //Console.WriteLine(fireRate);
 
                     if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
                     {
@@ -534,6 +544,16 @@ namespace FinalSpelProject
                         }
                     }
                     if (fireRate >= 64 + 32) fireRate = 0;
+                    break;
+                case 24:
+                    Pos += new Vector2(0, Speed);
+                    fireRate += 1;
+                    if(fireRate >= 48)
+                    {
+                        for (int i = 0; i < 3; i++ )
+                            projectile.Add(new Projectile(GetCenter, 80 + i * 10, 8, 0, 0, false, true));
+                        fireRate = 0;
+                    }
                     break;
             } 
             if (Pos.Y < -Height)

@@ -260,7 +260,7 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            HitBox = FullHitBox;
+            //HitBox = FullHitBox;
             Random random = new Random();
 
             UpdateMuzzeflash();

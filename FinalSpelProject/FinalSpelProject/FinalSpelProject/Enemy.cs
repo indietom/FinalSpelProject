@@ -27,6 +27,7 @@ namespace FinalSpelProject
         byte chanceOfPowerUp;
         byte hitFlashDelay;
         byte chanceOfUTurn;
+        byte lazerHeight;
 
         bool splitEnemy;
         bool scroll;
@@ -250,6 +251,16 @@ namespace FinalSpelProject
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
                     Speed = r.Next(2, 5);
+                    health = (short)r.Next(1, 3);
+                    worth = 1000;
+                    material = Material.Metal;
+                    break;
+                case 25:
+                    SetSpriteCoords(1, 651);
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    Speed = 1;
                     health = (short)r.Next(1, 3);
                     worth = 1000;
                     material = Material.Metal;
@@ -532,8 +543,6 @@ namespace FinalSpelProject
                     Angle = AimAt(player[0].GetCenter);
                     Rotation = Angle;
 
-                    //Console.WriteLine(fireRate);
-
                     if (target.X <= Globals.screenW && target.X >= 0 && target.Y <= Globals.screenH && target.Y >= 0)
                     {
                         fireRate += 1;
@@ -553,6 +562,22 @@ namespace FinalSpelProject
                         for (int i = 0; i < 3; i++ )
                             projectile.Add(new Projectile(GetCenter, 80 + i * 10, 8, 0, 0, false, true));
                         fireRate = 0;
+                    }
+                    break;
+                case 25:
+                    fireRate += 1;
+                    if (fireRate == 48 + 64)
+                    {
+                        lazerHeight = (byte)random.Next(16, 32);
+                    }
+                    if (fireRate >= 48 + 64)
+                    {
+                        if(fireRate % 2 == 0) projectile.Add(new Projectile(GetCenter + new Vector2(-8, -1), 90, 2, 4, 0, false, true));
+                        if (fireRate >= 48 + 64 + lazerHeight)
+                        {
+                            lazerHeight = 0;
+                            fireRate = 0;
+                        }
                     }
                     break;
             } 
@@ -641,27 +666,29 @@ namespace FinalSpelProject
             }
             foreach (Player p in player)
             {
-                if (p.HitBox.Intersects(HitBox) && !OnGround)
-                {
-                    health = 0;
-                    p.Dead = true;
-                }
+                if(Pos.Y > 0)
+                    if (p.HitBox.Intersects(HitBox) && !OnGround)
+                    {
+                        health = 0;
+                        p.Dead = true;
+                    }
             }
             foreach (Projectile p in projectiles)
             {
-                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
-                {
-                    if (p.Explosive)
-                        explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
-                    health -= p.Dm;
-                    if(health <= 0 && p.GetMovmentType() == 3)
+                if(Pos.Y > 0)
+                    if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
                     {
-                        splitEnemy = true;
-                        //Console.WriteLine(splitEnemy);
+                        if (p.Explosive)
+                            explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
+                        health -= p.Dm;
+                        if (health <= 0 && p.GetMovmentType() == 3)
+                        {
+                            splitEnemy = true;
+                            //Console.WriteLine(splitEnemy);
+                        }
+                        hitFlashDelay = 1;
+                        if (p.GetSpriteType() != 6) p.Destroy = true;
                     }
-                    hitFlashDelay = 1;
-                   if(p.GetSpriteType() != 6) p.Destroy = true;
-                }
             }
         }
     }

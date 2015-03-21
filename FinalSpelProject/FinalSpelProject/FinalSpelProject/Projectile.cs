@@ -91,6 +91,7 @@ namespace FinalSpelProject
                 HitBox = FullHitBox;
             else HitBox = FullHitBoxMiddle;
             Destroy = (Pos.Y < -Height) ? true : Destroy;
+            Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
             if(movmentType != 5) Destroy = (Pos.Y > Globals.screenH) ? true : Destroy;
             if(MaxFrame > 0)
             {
@@ -235,6 +236,10 @@ namespace FinalSpelProject
                     SetSpriteCoords(326, 18);
                     Rotated = true;
                     Rotation = Angle;
+                    break;
+                case 4:
+                    SetSize(16, 2);
+                    SetSpriteCoords(392, 4);
                     break;
             }
         }

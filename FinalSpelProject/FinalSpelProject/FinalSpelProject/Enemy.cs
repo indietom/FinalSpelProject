@@ -265,6 +265,20 @@ namespace FinalSpelProject
                     worth = 1000;
                     material = Material.Metal;
                     break;
+                case 26:
+                    worth = 1700;
+                    SetSpriteCoords(1, 261);
+                    SetSize(32);
+                    health = 2;
+                    armor = 10;
+                    fireRate = 50;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    OnGround = true;
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    material = Material.Metal;
+                    break;
             }
             switch(material)
             {
@@ -290,9 +304,11 @@ namespace FinalSpelProject
             if(MaxFrame > 0 && AnimationActive)
             {
                 Animate();
-                AnimationCount += 1;
+                if(type != 26) AnimationCount += 1;
                 Imx = FrameX(CurrentFrame);
             }
+
+            // Why you should never code while sleep deprived 
             explosionHurtDelay = (explosionHurtDelay >= 1) ? explosionHurtDelay = (byte)(explosionHurtDelay + 1) : explosionHurtDelay;
             explosionHurtDelay = (explosionHurtDelay >= 32) ? explosionHurtDelay = 0 : explosionHurtDelay;
             switch (type)
@@ -578,6 +594,23 @@ namespace FinalSpelProject
                             lazerHeight = 0;
                             fireRate = 0;
                         }
+                    }
+                    break;
+                case 26:
+                    fireRate += 1;
+                    Rotation = AimAt(player[0].GetCenter);
+                    if(fireRate == 64 || fireRate == 64 + 16 || fireRate == 64 + 32)
+                    {
+                        AnimationCount = 1;
+                        CurrentFrame = 1;
+                        projectile.Add(new Projectile(Pos+new Vector2(-4, -4), AimAt(player[0].GetCenter + new Vector2(random.Next(-32, 32), random.Next(-32, 32))), 8, 2, 0, true, true));
+                    }
+                    if (fireRate >= 64) AnimationCount += 1;
+                    if(fireRate >= 64 + MaxAnimationCount * MaxFrame)
+                    {
+                        CurrentFrame = 0;
+                        AnimationCount = 0;
+                        fireRate = 0;
                     }
                     break;
             } 

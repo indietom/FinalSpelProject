@@ -17,7 +17,8 @@ namespace FinalSpelProject
             Explosion,
             Hit,
             PowerUp,
-            PlayerDeath;
+            PlayerDeath,
+            muffeldShoot;
 
         public static void Load(ContentManager content)
         {
@@ -26,6 +27,7 @@ namespace FinalSpelProject
             Explosion = content.Load<SoundEffect>("explosion");
             PowerUp = content.Load<SoundEffect>("level-up");
             PlayerDeath = content.Load<SoundEffect>("playerDeath");
+            muffeldShoot = content.Load<SoundEffect>("muffeldShoot");
         }
     }
 }

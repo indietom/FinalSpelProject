@@ -236,6 +236,11 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+    <Compile Include="muffeldShoot.wav">
+      <Name>muffeldShoot</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
     <Content Include="Test.txt">
       <Name>Test</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

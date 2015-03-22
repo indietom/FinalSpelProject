@@ -378,7 +378,7 @@ namespace FinalSpelProject
                     {
                         AnimationActive = true;
                         fireRate = 160;
-                        projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 5, 0, 0, true, true));
+                        projectile.Add(new Projectile(Pos-new Vector2(3, 3), AimAt(player[0].GetCenter), 5, 3, 0, true, true));
                     }
                     break;
                 case 15:
@@ -615,7 +615,7 @@ namespace FinalSpelProject
                     break;
             } 
             if (Pos.Y < -Height)
-                fireRate = 30;
+                fireRate = 30;  
             if(scroll) Pos += new Vector2(0, Globals.worldSpeed);
             if(hitFlashDelay >= 1)
             {

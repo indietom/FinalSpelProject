@@ -114,7 +114,7 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 7;
+            gunType = 5;
             specialGunType = 3;
             specialAmmo = 2;
 
@@ -276,9 +276,14 @@ namespace FinalSpelProject
                 deccreseFlameStamina = 0;
             }
 
-            if(fireRate == 1 && (gunType >= 0 && gunType <= 2))
+            if(fireRate == 1 && (gunType >= 0 && gunType <= 3 || gunType == 6))
             {
                 SoundManager.NormalShot.Play();
+            }
+
+            if (fireRate == 1 && (gunType == 7  || gunType == 5))
+            {
+                SoundManager.muffeldShoot.Play();
             }
 
             if(flameStamina >= flameMaxStamina)

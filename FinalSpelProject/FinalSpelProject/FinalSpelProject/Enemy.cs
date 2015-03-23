@@ -279,6 +279,16 @@ namespace FinalSpelProject
                     MaxAnimationCount = 4;
                     material = Material.Metal;
                     break;
+                case 27:
+                    worth = 500;
+                    SetSpriteCoords(1, 228);
+                    SetSize(32);
+                    health = 1;
+                    target = new Vector2(r.Next(Globals.screenW - Width), 0);
+                    MaxFrame = 2;
+                    MaxAnimationCount = 4;
+                    material = Material.Metal;
+                    break;
             }
             switch(material)
             {
@@ -611,6 +621,22 @@ namespace FinalSpelProject
                         CurrentFrame = 0;
                         AnimationCount = 0;
                         fireRate = 0;
+                    }
+                    break;
+                case 27:
+                    // Is this enough enemies for this level? 
+                    fireRate += 1;
+                    if(fireRate >= 48)
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-4, -4), 90+random.Next(-4, 5), random.Next(8, 11), 2, 0, false, true));
+                    }
+                    if (fireRate >= 48 + 4) fireRate = 0;
+                    Pos = new Vector2(Lerp(Pos.X, target.X, 0.05f), Pos.Y);
+                    changeTargetCount += 1;
+                    if(changeTargetCount >= 128)
+                    {
+                        target = new Vector2(random.Next(Globals.screenW - Width), 0);
+                        changeTargetCount = 0;
                     }
                     break;
             } 

@@ -66,7 +66,7 @@ namespace FinalSpelProject
                     Speed = 0.5f;
                     MaxFrame = 3;
                     MaxAnimationCount = 8;
-                    hp = 10;
+                    hp = 100;
                     Invulnerable = true;
                     Spawned = false;
                     goLeft = true;
@@ -230,14 +230,16 @@ namespace FinalSpelProject
                     Firerate -= 1;
                     if (Firerate <= 0 && hp > 0)
                     {
-                        for (int i = 0; i < 360; i += 1)
+                        for (int i = 0; i < 360; i += 10)
                         {
-                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), i , 4, 3, 0, true, true));
+                            projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), i , 4, 3, 0, false, true));
                         }
 
 
                         Firerate = 300; 
                     }
+                    //Boss2 minion spawn.
+
 
                     break;
                     

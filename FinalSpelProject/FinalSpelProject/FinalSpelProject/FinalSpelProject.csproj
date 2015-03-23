@@ -80,6 +80,7 @@
     <Compile Include="Background.cs" />
     <Compile Include="BonusLevelManager.cs" />
     <Compile Include="Boss.cs" />
+    <Compile Include="Button.cs" />
     <Compile Include="Chunk.cs" />
     <Compile Include="ComboCount.cs" />
     <Compile Include="Enemy.cs" />

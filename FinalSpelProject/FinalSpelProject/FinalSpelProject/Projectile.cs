@@ -155,7 +155,14 @@ namespace FinalSpelProject
             switch(spriteType)
             {
                 case 3:
-                    Rotation += Speed;
+                    if (!EnemyShot)
+                        Rotation += Speed;
+                    else
+                    {
+                        Rotation = Angle;
+                    }
+                    Rotation = Angle * 180 / (float)Math.PI;
+                    Console.WriteLine(Rotation);
                     break;
                 case 6:
                     bleedCount += 1;
@@ -235,7 +242,6 @@ namespace FinalSpelProject
                     SetSize(16, 8);
                     SetSpriteCoords(326, 18);
                     Rotated = true;
-                    Rotation = Angle;
                     break;
                 case 4:
                     SetSize(16, 2);

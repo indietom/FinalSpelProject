@@ -50,7 +50,7 @@ namespace FinalSpelProject
 
         public bool Pressed(byte currentTag)
         {
-            return false;
+            return (keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) && currentTag == tag);
         }
     }
 }

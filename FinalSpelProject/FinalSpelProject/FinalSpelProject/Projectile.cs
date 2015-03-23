@@ -159,10 +159,8 @@ namespace FinalSpelProject
                         Rotation += Speed;
                     else
                     {
-                        Rotation = Angle;
+                        Rotation = Angle * 180 / (float)Math.PI;
                     }
-                    Rotation = Angle * 180 / (float)Math.PI;
-                    Console.WriteLine(Rotation);
                     break;
                 case 6:
                     bleedCount += 1;

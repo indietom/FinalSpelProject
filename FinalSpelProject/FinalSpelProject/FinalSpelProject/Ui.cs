@@ -16,12 +16,14 @@ namespace FinalSpelProject
 
         short powerUpFrame;
         short specialPowerUpFrame;
+        short bossHpBarHeight;
 
         byte amountOfLives;
         byte amountOfSpecialAmmo;
         byte specialGunType;
 
         bool printLives;
+        bool showBossHpBar;
 
         public bool hideGameHud;
 
@@ -33,9 +35,17 @@ namespace FinalSpelProject
             comboCounter = new ComboCounter(new Vector2(220, 10));
         }
 
-        public void Update(List<Player> player)
+        public void Update(List<Player> player, List<Boss> bosses)
         {
             comboCounter.Update(player);
+
+            showBossHpBar = (bosses.Count() >= 1) ? true : showBossHpBar;
+
+            foreach(Boss b in bosses)
+            {
+                bossHpBarHeight = (short)b.GetHp();
+            }
+
             foreach(Player p in player)
             {
                 amountOfLives = p.GetLives();

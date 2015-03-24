@@ -11,7 +11,9 @@ namespace FinalSpelProject
     class Boss : GameObject
     {
         int hp;
-        
+
+        public int GetHp() { return hp; }
+
         byte type;
         byte hurtCount;
 

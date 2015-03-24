@@ -98,7 +98,7 @@ namespace FinalSpelProject
 
             Random random = new Random();
 
-            ui.Update(player);
+            ui.Update(player, bosses);
 
             level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, levelManager);
             levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects);

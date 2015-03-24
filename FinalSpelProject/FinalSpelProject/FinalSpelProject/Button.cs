@@ -19,6 +19,8 @@ namespace FinalSpelProject
 
         bool unavalible;
 
+        float scale;
+
         Color selectedColor;
         Color unavalibeColor;
 
@@ -31,6 +33,7 @@ namespace FinalSpelProject
             OrginalColor = color;
             selectedColor = selectedColor2;
             unavalibeColor = unavalibeColor2;
+            scale = 1;
             Pos = pos2;
             text = text2;
             tag = tag2;
@@ -39,13 +42,18 @@ namespace FinalSpelProject
         public void Draw(SpriteBatch spriteBatch, SpriteFont font, byte currentTag)
         {
             if (unavalible) color = unavalibeColor;
-            if (currentTag == tag) color = selectedColor;
+            if (currentTag == tag)
+            {
+                color = selectedColor;
+                scale = 1.4f;
+            }
             if (!unavalible && currentTag != tag) color = OrginalColor;
+            if (currentTag != tag) scale = 1.0f;
 
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
 
-            spriteBatch.DrawString(font, text, Pos, color);
+            spriteBatch.DrawString(font, text, Pos, color, 0, new Vector2(0, 0), scale, SpriteEffects.None, 1.0f);
         }
 
         public bool Pressed(byte currentTag)

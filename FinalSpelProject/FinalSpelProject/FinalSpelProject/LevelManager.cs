@@ -37,7 +37,9 @@ namespace FinalSpelProject
             foreach(Boss b in bosses)
             {
                 if (b.levelCompleted)
+                {
                     levelCompleted = true;
+                }
             }
             if (levelCompleted)
             {
@@ -47,11 +49,11 @@ namespace FinalSpelProject
                     p.inputActive = false;
                     if(changeLevelCount <= 64)
                     {
-                        p.Pos = new Vector2(p.Lerp(p.Pos.X, Globals.screenW / 2 - p.Width / 2, 0.07f), p.Lerp(p.Pos.Y, Globals.screenH / 2 - p.Height / 2, 0.01f));
+                        p.Pos = new Vector2(p.Lerp(p.Pos.X, Globals.screenW / 2 - p.Width / 2, 0.07f), p.Lerp(p.Pos.Y, Globals.screenH / 2 - p.Height / 2, 0.001f));
                     }
                     else
                     {
-                        p.Pos = new Vector2(p.Pos.X, p.Lerp(p.Pos.Y, -p.Height*2, 0.07f));
+                        p.Pos = new Vector2(p.Pos.X, p.Lerp(p.Pos.Y, -p.Height*3, 0.07f));
                     }
                 }
             }
@@ -62,7 +64,7 @@ namespace FinalSpelProject
             }
             if(changeLevelCount == 3)
             {
-                textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64 * 3, 4, 1, "LEVEL COMPLETED!"));
+                textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2-100, Globals.screenH / 2), 0.05f, 64 * 3, 4, 1, "LEVEL COMPLETED!"));
             }
         }
 

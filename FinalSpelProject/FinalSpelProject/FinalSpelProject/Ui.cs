@@ -13,6 +13,7 @@ namespace FinalSpelProject
         ComboCounter comboCounter;
 
         string scoreText;
+        string bossHpText;
 
         short powerUpFrame;
         short specialPowerUpFrame;
@@ -39,11 +40,12 @@ namespace FinalSpelProject
         {
             comboCounter.Update(player);
 
-            showBossHpBar = (bosses.Count() >= 1) ? true : showBossHpBar;
+            showBossHpBar = (bosses.Count() >= 1) ? true : false;
 
             foreach(Boss b in bosses)
             {
                 bossHpBarHeight = (short)b.GetHp();
+                bossHpText = (b.GetHp() > 0) ? "Boss Health" : "";
             }
 
             foreach(Player p in player)
@@ -79,9 +81,10 @@ namespace FinalSpelProject
                 }
                 comboCounter.Draw(spriteBatch, font, spritesheet);
                 spriteBatch.DrawString(font, scoreText, new Vector2(10, 32 + 8 + 20), Color.White);
+                Console.WriteLine(showBossHpBar);
                 if (showBossHpBar)
                 {
-                    spriteBatch.DrawString(font, "Boss Health", new Vector2(Globals.screenW-128+20, 64-32), Color.Red, 0, Vector2.Zero, 0.8f, SpriteEffects.None, 1.0f);
+                    spriteBatch.DrawString(font, bossHpText, new Vector2(Globals.screenW-128+20, 64-32), Color.Red, 0, Vector2.Zero, 0.8f, SpriteEffects.None, 1.0f);
                     for (int i = 0; i < bossHpBarHeight; i++)
                     {
                         spriteBatch.Draw(spritesheet, new Vector2(Globals.screenW-32, 64 + i*2), new Rectangle(976, 1, 16, 2), Color.White);

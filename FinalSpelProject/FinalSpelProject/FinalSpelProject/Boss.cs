@@ -257,6 +257,7 @@ namespace FinalSpelProject
 
         public void HurtUpdate()
         {
+            CheckHealth();
             if(hurtCount >= 1)
             {
                 hurtCount += 1;
@@ -329,6 +330,7 @@ namespace FinalSpelProject
             }
             if(hp <= 0)
             {
+                if(Pos.Y >= Globals.screenH) levelCompleted = true;
                 switch(type)
                 {
                     case 0:

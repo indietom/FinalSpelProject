@@ -79,6 +79,14 @@ namespace FinalSpelProject
                 }
                 comboCounter.Draw(spriteBatch, font, spritesheet);
                 spriteBatch.DrawString(font, scoreText, new Vector2(10, 32 + 8 + 20), Color.White);
+                if (showBossHpBar)
+                {
+                    spriteBatch.DrawString(font, "Boss Health", new Vector2(Globals.screenW-128+20, 64-32), Color.Red, 0, Vector2.Zero, 0.8f, SpriteEffects.None, 1.0f);
+                    for (int i = 0; i < bossHpBarHeight; i++)
+                    {
+                        spriteBatch.Draw(spritesheet, new Vector2(Globals.screenW-32, 64 + i*2), new Rectangle(976, 1, 16, 2), Color.White);
+                    }
+                }
             }
             else
             {

@@ -289,6 +289,9 @@ namespace FinalSpelProject
                     MaxAnimationCount = 4;
                     material = Material.Metal;
                     break;
+                case 31:
+
+                    break;
             }
             switch(material)
             {
@@ -639,6 +642,9 @@ namespace FinalSpelProject
                         changeTargetCount = 0;
                     }
                     break;
+                case 31:
+
+                    break;
             } 
             if (Pos.Y < -Height)
                 fireRate = 30;  
@@ -743,7 +749,6 @@ namespace FinalSpelProject
                         if (health <= 0 && p.GetMovmentType() == 3)
                         {
                             splitEnemy = true;
-                            //Console.WriteLine(splitEnemy);
                         }
                         hitFlashDelay = 1;
                         if (p.GetSpriteType() != 6) p.Destroy = true;

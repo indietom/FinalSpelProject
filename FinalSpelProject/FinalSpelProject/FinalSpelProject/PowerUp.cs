@@ -46,6 +46,7 @@ namespace FinalSpelProject
                     break;
                 case 1:
                     Pos += new Vector2(0, Globals.worldSpeed);
+                    Pos += new Vector2(0, (float)Math.Sin(30 * cosCount + 30));
                     break;
             }
             AnimationCount += 1;

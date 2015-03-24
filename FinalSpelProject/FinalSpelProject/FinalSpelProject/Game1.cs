@@ -115,7 +115,7 @@ namespace FinalSpelProject
 
             foreach (Enemy e in enemies)
             {
-                e.Update(player, projectiles, explosions, powerUps, gibs);
+                e.Update(player, projectiles, explosions, powerUps, gibs, levelManager);
             }
 
             foreach (Player p in player)

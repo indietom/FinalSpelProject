@@ -304,7 +304,7 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps, List<Gib> gibs)
+        public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps, List<Gib> gibs, LevelManager levelManager)
         {
             Random random = new Random();
 
@@ -709,7 +709,7 @@ namespace FinalSpelProject
                     splitEnemy = false;
                 }
                 chanceOfPowerUp = (byte)random.Next(1, 4);
-                if (chanceOfPowerUp == 2 && type == 14 || carryingPowerUp) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, 6), 1, false));
+                if (chanceOfPowerUp == 2 && type == 14 || carryingPowerUp) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 1, false));
                 if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
                 else explosions.Add(new Explosion(new Vector2(Pos.X - Width / 2, Pos.Y - Height / 2), (byte)Width, false));
                 Destroy = true;

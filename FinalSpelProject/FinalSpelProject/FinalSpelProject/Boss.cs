@@ -19,6 +19,7 @@ namespace FinalSpelProject
 
         short[] fireRates;
         short[] maxFireRates;
+        short startOffset;
 
         int Health;
         int Firerate;
@@ -48,18 +49,18 @@ namespace FinalSpelProject
             switch (type)
             {
                 case 1:
-                    SetSpriteCoords(1, Frame(6));
-                    SetSize(64);
+                    SetSpriteCoords(846, 651);
+                    SetSize(154, 214); // ayy lmao
                     AnimationActive = true;
                     Speed = 5;
-                    MaxFrame = 3;
+                    MaxFrame = 6;
                     MaxAnimationCount = 8;
                     hp = 100;
                     Firerate = 120;
                     AltFirerate = 300;
                     Invulnerable = true;
                     Spawned = false;
-                    
+                    startOffset = 846;
                     break;
                 case 2:
                     SetSpriteCoords(1, Frame(6));
@@ -73,7 +74,6 @@ namespace FinalSpelProject
                     Spawned = false;
                     goLeft = true;
                     Firerate = 300;
-
                     break;
             }
 
@@ -81,6 +81,13 @@ namespace FinalSpelProject
 
         public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
         {
+            if (MaxFrame > 0)
+            {
+                AnimationCount += 1;
+                if(Width != 64)
+                    Imx = (short)(FrameX(CurrentFrame) + startOffset);
+                Animate();
+            }
             switch (type)
             {
                 case 1:
@@ -286,7 +293,7 @@ namespace FinalSpelProject
                     }
                 }
             }
-           // Console.WriteLine(hp);
+
             foreach (Projectile p in projectiles)
             {
                 if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)

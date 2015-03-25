@@ -110,7 +110,7 @@ namespace FinalSpelProject
 
             foreach (AlliedShip a in alliedShips)
             {
-                a.Update(player, projectiles, explosions);
+                a.Update(player, projectiles, explosions, levelManager);
             }
 
             foreach (Enemy e in enemies)

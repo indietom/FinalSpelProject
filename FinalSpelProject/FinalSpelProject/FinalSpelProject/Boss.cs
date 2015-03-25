@@ -76,7 +76,6 @@ namespace FinalSpelProject
                     Firerate = 300;
                     break;
             }
-
         }
 
         public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)

@@ -28,12 +28,14 @@ namespace FinalSpelProject
             Speed = 0.02f;
         }
 
-        public void Update(List<Player> players, List<Projectile> projectiles, List<Explosion> explosions)
+        public void Update(List<Player> players, List<Projectile> projectiles, List<Explosion> explosions, LevelManager levelManager)
         {
             // TODO: Should these ships emitt a sound effect when shooting? Might get too messy
             Random random = new Random();
 
             lifeTime += 1;
+
+            lifeTime = (levelManager.levelCompleted) ? maxLifeTime : lifeTime;
 
             foreach(Player p in players)
             {

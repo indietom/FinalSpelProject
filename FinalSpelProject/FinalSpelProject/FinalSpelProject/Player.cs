@@ -26,17 +26,18 @@ namespace FinalSpelProject
         byte explosionDelay;
         byte muzzleFlashCount;
         byte currentBarrel;
+        byte levelsCompleted;
 
+        public byte GetLevelsCompleted() { return levelsCompleted; }
         public byte GetLives() { return lives; }
         public byte GetGunType() { return gunType; }
         public byte GetSpecialGunType() { return specialGunType; }
         public byte GetSpecialAmmo() { return specialAmmo; }
         public byte GetFireRate() { return fireRate; }
 
+        public void SetLevelsCompleted(byte levelsCompleted2) { levelsCompleted = levelsCompleted2; }
         public void SetSpecialAmmo(byte specialAmmo2) { specialAmmo = specialAmmo2; }
-
         public void SetLives(byte lives2) { lives = lives2; }
-
         public void SetGunType(byte gunType2, bool special2)
         {
             if (!special2) gunType = gunType2;

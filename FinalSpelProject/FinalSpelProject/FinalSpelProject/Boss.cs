@@ -74,11 +74,12 @@ namespace FinalSpelProject
                     Spawned = false;
                     goLeft = true;
                     Firerate = 300;
+                    AltFirerate = 150;
                     break;
             }
         }
 
-        public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
+        public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions, List<Enemy> enemies)
         {
             if (MaxFrame > 0)
             {
@@ -247,7 +248,12 @@ namespace FinalSpelProject
                         Firerate = 300; 
                     }
                     //Boss2 minion spawn.
-
+                    AltFirerate -= 1;
+                    if (AltFirerate <= 0 && hp > 0)
+                    {
+                        enemies.Add(new Enemy(Pos, 28, rng, false));
+                        AltFirerate = 150;
+                    }
 
                     break;
                     

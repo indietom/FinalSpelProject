@@ -55,7 +55,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 1));
+            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -135,7 +135,7 @@ namespace FinalSpelProject
 
             foreach (Boss b in bosses)
             {
-                b.Update(player, projectiles, explosions);
+                b.Update(player, projectiles, explosions, enemies);
             }
 
             foreach (Particle p in particles)

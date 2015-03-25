@@ -34,6 +34,7 @@ namespace FinalSpelProject
         bool hurtByExplosion;
         bool uTurnChanceGiven;
         bool carryingPowerUp;
+        bool spawned;
         public bool OnGround { get; set; }
 
         short uTurnHeight;
@@ -286,6 +287,20 @@ namespace FinalSpelProject
                     health = 1;
                     target = new Vector2(r.Next(Globals.screenW - Width), 0);
                     MaxFrame = 2;
+                    MaxAnimationCount = 4;
+                    material = Material.Metal;
+                    break;
+                case 28:
+                    worth = 1700;
+                    SetSpriteCoords(1, 261);
+                    SetSize(32);
+                    health = 1;
+                    armor = 10;
+                    fireRate = 50;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    OnGround = true;
+                    MaxFrame = 4;
                     MaxAnimationCount = 4;
                     material = Material.Metal;
                     break;
@@ -641,6 +656,21 @@ namespace FinalSpelProject
                         target = new Vector2(random.Next(Globals.screenW - Width), 0);
                         changeTargetCount = 0;
                     }
+                    break;
+                case 28:
+                    //Boss 2 small deployed ships
+                    if (spawned == false)
+                    {
+                        for (int i = 0; i < 300; i++)
+                        {
+                            if (i == 299)
+                            {
+                                spawned = true;
+                            }
+                        }
+                        Pos += new Vector2(-1, 0);
+                    }
+
                     break;
                 case 31:
 

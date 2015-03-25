@@ -27,6 +27,9 @@ namespace FinalSpelProject
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
 
+        MouseState mouse;
+        MouseState prevMouse;
+
         public Button(Vector2 pos2, string text2, byte tag2, Color color2, Color selectedColor2, Color unavalibeColor2)
         {
             color = color2;
@@ -53,12 +56,14 @@ namespace FinalSpelProject
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
 
+            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, (int)font.MeasureString(text).X, (int)font.MeasureString(text).Y);
+
             spriteBatch.DrawString(font, text, Pos, color, 0, new Vector2(0, 0), scale, SpriteEffects.None, 1.0f);
         }
 
         public bool Pressed(byte currentTag)
         {
-            return (keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) && currentTag == tag);
+            return (keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) && currentTag == tag || HitBox.Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)));
         }
     }
 }

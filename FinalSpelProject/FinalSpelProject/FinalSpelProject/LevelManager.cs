@@ -8,7 +8,6 @@ namespace FinalSpelProject
 {
     class LevelManager
     {
-        //It works now but it's still mostly test stuff
         public static byte currentLevel = 0;
 
         LevelProperty[] levelProperties = new LevelProperty[5];

@@ -44,7 +44,7 @@ namespace FinalSpelProject
 
         public void LoadPlayer(string path, List<Player> players)
         {
-            byte[] byteData = new byte[4];
+            byte[] byteData = new byte[5];
 
             StreamReader sr = new StreamReader(path);
             for (int i = 0; i < byteData.Count(); i++)
@@ -54,7 +54,8 @@ namespace FinalSpelProject
             players[0].SetGunType(byteData[0], false);
             players[0].SetGunType(byteData[1], true);
             players[0].SetSpecialAmmo(byteData[2]);
-            players[0].SetLives(byteData[3]);           
+            players[0].SetLives(byteData[3]);
+            players[0].SetLevelsCompleted(byteData[4]);
             sr.Dispose();
         }
 
@@ -65,6 +66,7 @@ namespace FinalSpelProject
             byteData[1] = players[0].GetSpecialGunType();
             byteData[2] = players[0].GetSpecialAmmo();
             byteData[3] = players[0].GetLives();
+            byteData[4] = players[0].GetLevelsCompleted();
 
             StreamWriter sw = new StreamWriter(path);
             for (int i = 0; i < byteData.Count(); i++)

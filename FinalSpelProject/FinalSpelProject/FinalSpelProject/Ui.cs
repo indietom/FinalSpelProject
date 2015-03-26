@@ -81,7 +81,7 @@ namespace FinalSpelProject
                 }
                 comboCounter.Draw(spriteBatch, font, spritesheet);
                 spriteBatch.DrawString(font, scoreText, new Vector2(10, 32 + 8 + 20), Color.White);
-                Console.WriteLine(showBossHpBar);
+                //Console.WriteLine(showBossHpBar);
                 if (showBossHpBar)
                 {
                     spriteBatch.DrawString(font, bossHpText, new Vector2(Globals.screenW-128+20, 64-32), Color.Red, 0, Vector2.Zero, 0.8f, SpriteEffects.None, 1.0f);

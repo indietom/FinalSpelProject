@@ -781,8 +781,19 @@ namespace FinalSpelProject
                     }
                     splitEnemy = false;
                 }
-                chanceOfPowerUp = (byte)random.Next(1, 4);
-                if (chanceOfPowerUp == 2 && type == 14 || carryingPowerUp) powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 1, false));
+                chanceOfPowerUp = (byte)random.Next(1, 11);
+                if (carryingPowerUp)
+                {
+                    Console.WriteLine(chanceOfPowerUp);
+                    if (chanceOfPowerUp != 1)
+                    {
+                        powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 1, false));
+                    }
+                    else
+                    {
+                        powerUps.Add(new PowerUp(Pos, (byte)random.Next(0, 5), 1, true));
+                    }
+                }
                 if (!Rotated) explosions.Add(new Explosion(Pos, (byte)Width, false));
                 else explosions.Add(new Explosion(new Vector2(Pos.X - Width / 2, Pos.Y - Height / 2), (byte)Width, false));
                 Destroy = true;

@@ -33,7 +33,7 @@ namespace FinalSpelProject
             levelPath = "Content\\level" + CurrentLevel + "\\";
             for (int i = 0; i < amountOfChunks; i++)
             {
-                chunks.Add(new Chunk(new Vector2(0, -(40 * 16) * i), levelPath + "chunk" + i));
+                chunks.Add(new Chunk(new Vector2(0, ((40 * 16) * i) - (40 * 16) * (amountOfChunks - 1)), levelPath + "chunk" + i));
             }
         }
 

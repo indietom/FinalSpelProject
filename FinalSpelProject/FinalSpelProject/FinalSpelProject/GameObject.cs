@@ -22,8 +22,8 @@ namespace FinalSpelProject
 
         public Rectangle HitBox {get; set;}
 
-        public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, Width, Height); } }
-        public Rectangle FullHitBoxMiddle { get { return new Rectangle((int)Pos.X-Width/2, (int)Pos.Y-Height/2, Width, Height); } }
+        public Rectangle FullHitBox { get { return new Rectangle((int)Pos.X, (int)Pos.Y, (int)(Width * Scale), (int)(Height * Scale)); } }
+        public Rectangle FullHitBoxMiddle { get { return new Rectangle((int)Pos.X - Width / 2, (int)Pos.Y - Height / 2, (int)(Width * Scale), (int)(Height * Scale)); } }
 
         public Color color = Color.White;
         public Color OrginalColor { get; set; }
@@ -54,6 +54,8 @@ namespace FinalSpelProject
         public float ScaleX { get; set; }
         public float ScaleY { get; set; }
         public float Speed { get; set; }
+
+        public float Scale = 1f;
 
         public bool Destroy { get; set; }
 
@@ -159,14 +161,14 @@ namespace FinalSpelProject
         public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet)
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
-            spriteBatch.Draw(spritesheet, Pos, srcRect, color);
+            spriteBatch.Draw(spritesheet, Pos, srcRect, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 1.0f);
         }
 
         public void DrawSprite(SpriteBatch spriteBatch, Texture2D spritesheet, bool rad)
         {
             Rectangle srcRect = new Rectangle((short)Imx, (short)Imy, (short)Width, (short)Height);
-            if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, Rotation, new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
-            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, (Rotation*((float)Math.PI/180)), new Vector2(Width / 2, Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            if (rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, Rotation, new Vector2(Width / 2, Height / 2), Scale, SpriteEffects.None, 1.0f);
+            if (!rad) spriteBatch.Draw(spritesheet, Pos, srcRect, color, (Rotation * ((float)Math.PI / 180)), new Vector2(Width / 2, Height / 2), Scale, SpriteEffects.None, 1.0f);
         }
     }
 }

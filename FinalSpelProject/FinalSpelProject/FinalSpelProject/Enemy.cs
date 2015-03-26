@@ -803,8 +803,8 @@ namespace FinalSpelProject
         public void Collision(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions)
         {
             if (!Rotated) HitBox = FullHitBox;
-                  else HitBox = FullHitBoxMiddle;
-            foreach(Explosion ex in explosions)
+            else HitBox = FullHitBoxMiddle;
+            foreach (Explosion ex in explosions)
             {
                 if (!ex.GetCinematic() && ex.HitBox.Intersects(HitBox) && explosionHurtDelay <= 0)
                 {
@@ -815,16 +815,19 @@ namespace FinalSpelProject
             }
             foreach (Player p in player)
             {
-                if(Pos.Y > 0)
+                if (Pos.Y > 0)
+                {
                     if (p.HitBox.Intersects(HitBox) && !OnGround)
                     {
                         health = 0;
                         p.Dead = true;
                     }
+                }
             }
             foreach (Projectile p in projectiles)
             {
-                if(Pos.Y > 0)
+                if (Pos.Y > 0)
+                {
                     if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
                     {
                         if (p.Explosive)
@@ -837,6 +840,7 @@ namespace FinalSpelProject
                         hitFlashDelay = 1;
                         if (p.GetSpriteType() != 6) p.Destroy = true;
                     }
+                }
             }
         }
     }

@@ -317,7 +317,7 @@ namespace FinalSpelProject
                     material = Material.Metal;
                     break;
                 case 32:
-                    SetSpriteCoords(1, 651);
+                    SetSpriteCoords(1, 651); 
                     SetSize(64);
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
@@ -326,6 +326,24 @@ namespace FinalSpelProject
                     health = (short)r.Next(3, 6);
                     worth = 3000;
                     material = Material.Metal;
+                    break;
+                case 33:
+                    health = 2;
+                    SetSize(32);
+                    SetSpriteCoords(1, 327);
+                    MaxAnimationCount = 4;
+                    MinFrame = 0;
+                    MaxFrame = 3;
+                    AnimationActive = true;
+                    worth = 500;
+                    scroll = true;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    OnGround = true;
+                    material = Material.Metal;
+                    Scale = 0.7f;
+                    color = Color.DarkGray;
+                    OrginalColor = color;
                     break;
             }
             switch(material)
@@ -718,6 +736,16 @@ namespace FinalSpelProject
                     }
                     if(!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, 0.04f), Lerp(Pos.Y, target.Y, 0.04f));
                     break;
+                case 33:
+                    // spritetype 2 for projectile
+                    Rotation = AimAt(player[0].GetCenter);
+                    fireRate += 1;
+                    if(fireRate >= 48)
+                    {
+                        projectile.Add(new Projectile(Pos+new Vector2(-4, -4), Rotation, 5, 2, 0, true, true));
+                        fireRate = 0;
+                    }
+                    break;
             } 
             if (Pos.Y < -Height)
                 fireRate = 30;  
@@ -757,13 +785,13 @@ namespace FinalSpelProject
                         case Material.OrganicAlien:
                             for (int i = 0; i < 20; i++)
                             {
-                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));
+                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360), Scale));
                             }
                             break;
                         case Material.Metal:
                             for (int i = 0; i < 20; i++)
                             {
-                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 157, random.Next(6, 12), random.Next(360)));
+                                gibs.Add(new Gib(GetCenter + new Vector2(random.Next(-Width / 2, Width / 2), random.Next(-Height / 2, Height / 2)), (short)random.Next(5), 157, random.Next(6, 12), random.Next(360), Scale));
                             }
                             break;
                     }

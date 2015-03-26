@@ -8,8 +8,9 @@ namespace FinalSpelProject
 {
     class Gib : GameObject
     {
-        public Gib(Vector2 pos2, short frame2, short imy2, float spe, float ang)
+        public Gib(Vector2 pos2, short frame2, short imy2, float spe, float ang, float scale2)
         {
+            Scale = scale2;
             Pos = pos2;
             SetSize(16);
             SetSpriteCoords(Frame(frame2, 16), imy2);

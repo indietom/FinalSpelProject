@@ -14,6 +14,7 @@ namespace FinalSpelProject
         short startOffset;
 
         bool cinematic;
+        public bool enemy;
 	    bool hasPlayedSound;
 
         public bool GetCinematic() { return cinematic; }
@@ -26,6 +27,17 @@ namespace FinalSpelProject
             MaxAnimationCount = 2;
             AnimationActive = true;
             cinematic = true;
+            AssignSprite();
+        }
+        public Explosion(Vector2 pos2, byte size2, bool enemy2, bool cinematic2, short maxAnimationCount2)
+        {
+            enemy = enemy2;
+            Pos = pos2;
+            size = size2;
+            SetSize(size);
+            MaxAnimationCount = maxAnimationCount2;
+            AnimationActive = true;
+            cinematic = cinematic2;
             AssignSprite();
         }
         public Explosion(Vector2 pos2, byte size2, bool cinematic2, bool soundOff)

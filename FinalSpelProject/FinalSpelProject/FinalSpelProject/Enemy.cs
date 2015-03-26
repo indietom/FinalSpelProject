@@ -316,6 +316,17 @@ namespace FinalSpelProject
                     worth = 1000;
                     material = Material.Metal;
                     break;
+                case 32:
+                    SetSpriteCoords(1, 651);
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    target = new Vector2(r.Next(Globals.screenW - Width), r.Next(Globals.screenH - Height)); 
+                    Speed = 1;
+                    health = (short)r.Next(3, 6);
+                    worth = 3000;
+                    material = Material.Metal;
+                    break;
             }
             switch(material)
             {
@@ -658,7 +669,7 @@ namespace FinalSpelProject
                         projectile.Add(new Projectile(GetCenter + new Vector2(-4, -4), 90+random.Next(-4, 5), random.Next(8, 11), 2, 0, false, true));
                     }
                     if (fireRate >= 48 + 4) fireRate = 0;
-                    Pos = new Vector2(Lerp(Pos.X, target.X, 0.05f), Pos.Y);
+                    if (!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, 0.05f), Pos.Y);
                     changeTargetCount += 1;
                     if(changeTargetCount >= 128)
                     {
@@ -690,6 +701,22 @@ namespace FinalSpelProject
                         currentBarrel = (currentBarrel > 4) ? (byte)0 : currentBarrel;
                         fireRate = 0;
                     }
+                    break;
+                case 32:
+                    scroll = false;
+                    changeTargetCount += 1;
+                    if(changeTargetCount >= 128*2)
+                    {
+                        target = new Vector2(random.Next(Globals.screenW - Width), random.Next(Globals.screenH - Height));
+                        changeTargetCount = 0;
+                    }
+                    fireRate += 1;
+                    if(fireRate >= 64)
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-8, 8), player[0].Pos + new Vector2(-100, 101), 0.04f, 5, 6, false, true));
+                        fireRate = 0;
+                    }
+                    if(!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, 0.04f), Lerp(Pos.Y, target.Y, 0.04f));
                     break;
             } 
             if (Pos.Y < -Height)

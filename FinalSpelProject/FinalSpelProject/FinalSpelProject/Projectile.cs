@@ -9,6 +9,8 @@ namespace FinalSpelProject
 {
     class Projectile : GameObject
     {
+        Vector2 target;
+
         short lifeTime;
         short maxLifeTime;
         short animationOffset;
@@ -68,6 +70,19 @@ namespace FinalSpelProject
             EnemyShot = true;
             AssignMovmentValues();
         }
+        // You can't have to many constructers amrite :^)))))
+        public Projectile(Vector2 pos2, Vector2 target2, float spe, byte spriteType2, byte movmentType2, bool rad2, bool enemyShot2)
+        {
+            rad = rad2;
+            Pos = pos2;
+            target = target2;
+            Speed = spe;
+            movmentType = movmentType2;
+            spriteType = spriteType2;
+            AssignEnemySprite();
+            EnemyShot = true;
+            AssignMovmentValues();
+        }
         // :^(
         public Projectile(Vector2 pos2, float ang, float spe, Point spriteCoords, Point size, byte movmentType2, bool rad2, bool rotated, float rotation, bool rotateOnRad, Color bloodColor2)
         {
@@ -84,7 +99,7 @@ namespace FinalSpelProject
             SetSize((short)size.X, (short)size.Y);
             AssignMovmentValues();
         }
-        public void Update(List<Particle> particles, Player player)
+        public void Update(List<Particle> particles, List<Explosion> explosions, Player player)
         {
             Random random = new Random();
             if (!Rotated)
@@ -152,6 +167,15 @@ namespace FinalSpelProject
                     break;
                 case 5:
                     Pos -= new Vector2(0, 7);
+                    break;
+                case 6:
+                    // Because the game needs more lerping :^))))
+                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
+                    if(DistanceTo(target) <= 8)
+                    {
+                        explosions.Add(new Explosion(Pos + new Vector2(-32, -32), 64, true, false, 2));
+                        Destroy = true;
+                    }
                     break;
             }
             switch(spriteType)
@@ -247,6 +271,13 @@ namespace FinalSpelProject
                 case 4:
                     SetSize(16, 2);
                     SetSpriteCoords(392, 4);
+                    break;
+                case 5:
+                    MaxFrame = 12;
+                    MaxAnimationCount = 2;
+                    SetSpriteCoords(439, 17);
+                    SetSize(16);
+                    animationOffset = (short)(Imx - 1);
                     break;
             }
         }

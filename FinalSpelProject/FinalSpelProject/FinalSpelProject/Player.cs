@@ -261,8 +261,19 @@ namespace FinalSpelProject
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
         {
-            //HitBox = FullHitBox;
+            HitBox = FullHitBox;
             Random random = new Random();
+
+            foreach(Explosion e in explosions)
+            {
+                if(e.enemy)
+                {
+                    if(e.CurrentFrame <= e.MaxFrame/2 && HitBox.Intersects(e.HitBox))
+                    {
+                        Dead = true;
+                    }
+                }
+            }
 
             UpdateMuzzeflash();
 

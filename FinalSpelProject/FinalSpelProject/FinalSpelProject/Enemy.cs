@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 // TODO: Add muffeld effects to not "confuse"/overwhelm the player, I think
-// Should I write a system for burst-fire since I use it so often? 
+// Should I write a system for burst-fire since I use it so often?
 
 namespace FinalSpelProject
 {
@@ -28,6 +28,7 @@ namespace FinalSpelProject
         byte hitFlashDelay;
         byte chanceOfUTurn;
         byte lazerHeight;
+        byte currentBarrel;
 
         bool splitEnemy;
         bool scroll;
@@ -35,6 +36,7 @@ namespace FinalSpelProject
         bool uTurnChanceGiven;
         bool carryingPowerUp;
         bool spawned;
+        bool AttackingTarget;
         public bool OnGround { get; set; }
 
         short uTurnHeight;
@@ -305,7 +307,14 @@ namespace FinalSpelProject
                     material = Material.Metal;
                     break;
                 case 31:
-
+                    SetSpriteCoords(1, 651);
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    Speed = 1;
+                    health = (short)r.Next(1, 3);
+                    worth = 1000;
+                    material = Material.Metal;
                     break;
             }
             switch(material)
@@ -673,7 +682,14 @@ namespace FinalSpelProject
 
                     break;
                 case 31:
-
+                    fireRate += 1;
+                    if (fireRate == 16 + (4 * currentBarrel))
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-4, 0), -300 + (currentBarrel * 16), random.Next(5, 8), 0, 0, false, true));
+                        currentBarrel += 1;
+                        currentBarrel = (currentBarrel > 4) ? (byte)0 : currentBarrel;
+                        fireRate = 0;
+                    }
                     break;
             } 
             if (Pos.Y < -Height)

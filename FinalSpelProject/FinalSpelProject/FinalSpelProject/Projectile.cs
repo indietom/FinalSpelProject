@@ -97,6 +97,8 @@ namespace FinalSpelProject
             {
                 Animate();
                 AnimationCount += 1;
+                if (spriteType == 6 && CurrentFrame == MaxFrame-1)
+                    AnimationCount = 0;
                 Imx = (short)(animationOffset+FrameX(CurrentFrame));
             }
             if(maxLifeTime != 0)
@@ -163,6 +165,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 6:
+                    Rotation += 10f;
                     bleedCount += 1;
                     if(bleedCount >= 32)
                     {
@@ -282,8 +285,11 @@ namespace FinalSpelProject
                     color = new Color(random.Next(100, 256), random.Next(100, 256), random.Next(100, 256));
                     break;
                 case 6:
-                    SetSpriteCoords(196, 1);
+                    SetSpriteCoords(1, 976);
                     SetSize(64);
+                    MaxFrame = 8;
+                    MaxAnimationCount = 4;
+                    Rotated = true;
                     Globals.blackHoleExists = true;
                     break;
                 case 7:

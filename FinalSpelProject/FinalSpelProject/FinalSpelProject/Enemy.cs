@@ -345,6 +345,17 @@ namespace FinalSpelProject
                     color = Color.DarkGray;
                     OrginalColor = color;
                     break;
+                case 34:
+                    SetSpriteCoords(1, 651);
+                    SetSize(64);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    target = new Vector2(r.Next(Globals.screenW - Width), r.Next(Globals.screenH - Height));
+                    Speed = 1;
+                    health = (short)r.Next(3, 6);
+                    worth = 3000;
+                    material = Material.Metal;
+                    break;
             }
             switch(material)
             {
@@ -737,12 +748,20 @@ namespace FinalSpelProject
                     if(!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, 0.04f), Lerp(Pos.Y, target.Y, 0.04f));
                     break;
                 case 33:
-                    // spritetype 2 for projectile
                     Rotation = AimAt(player[0].GetCenter);
                     fireRate += 1;
                     if(fireRate >= 48)
                     {
                         projectile.Add(new Projectile(Pos+new Vector2(-4, -4), Rotation, 5, 2, 0, true, true));
+                        fireRate = 0;
+                    }
+                    break;
+                case 34:
+                    fireRate += 1;
+                    Pos += new Vector2((float)Math.Sin(Pos.Y/20), 0);
+                    if(fireRate >= 64)
+                    {
+                        projectile.Add(new Projectile(GetCenter, 0, 5, 8, 2, true, true));
                         fireRate = 0;
                     }
                     break;

@@ -135,18 +135,16 @@ namespace FinalSpelProject
                     if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0, Color.DarkGray));
                     break;
                 case 2:
-                    if (stopFollowingCount <= 64*2)
+                    if (stopFollowingCount <= 48)
                     {
                         if (EnemyShot) Angle = AimAt(player.GetCenter);
                     }
-                    else
-                    {
-                        stopFollowingCount += 1;
-                    }
+                    if(stopFollowingCount <= 100)
+                    stopFollowingCount += 1;
                     AngleMath(rad);
                     Pos += Vel;
-                    Rotation = Angle;
-                    if (Speed > 0.5) particles.Add(new Particle(new Vector2(Pos.X + Width / 2 - 4, Pos.Y + Width / 2 - 4), 90, 3, 0, 0, Color.DarkGray));
+                    Rotation = Angle * 180 / (float)Math.PI;
+                    if (Speed > 1) Speed -= 0.02f;
                     break;
                 case 3:
                     AngleMath(rad);
@@ -278,6 +276,10 @@ namespace FinalSpelProject
                     SetSpriteCoords(439, 17);
                     SetSize(16);
                     animationOffset = (short)(Imx - 1);
+                    break;
+                case 8:
+                    SetSize(14, 8);
+                    SetSpriteCoords(377, 25);
                     break;
             }
         }

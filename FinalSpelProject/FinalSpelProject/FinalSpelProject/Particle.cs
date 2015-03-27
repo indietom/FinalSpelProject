@@ -52,7 +52,7 @@ namespace FinalSpelProject
                     AngleMath(false);
                     if (CurrentFrame >= MaxFrame-1)
                         Destroy = true;
-                    Speed -= 0.4f;
+                    //Speed -= 0.4f;
                     Pos += new Vector2(VelX, VelY);
                     break;
                 case 1:

@@ -103,7 +103,7 @@ namespace FinalSpelProject
         public Player()
         {
             Pos = new Vector2(320-16, 240);
-            SetSpriteCoords(1, 1);
+            SetSpriteCoords(1, 1041);
             SetSize(64);
 
             inputActive = true;
@@ -126,6 +126,9 @@ namespace FinalSpelProject
 
             maxFlameDelay = 64;
             flameMaxStamina = 32;
+
+            MaxFrame = 7;
+            MaxAnimationCount = 4;
 
             playerIndex = PlayerIndex.One;
 
@@ -276,6 +279,11 @@ namespace FinalSpelProject
             }
 
             UpdateMuzzeflash();
+
+            Animate();
+            Imx = Frame(CurrentFrame);
+            if (AnimationActive)
+                AnimationCount += 1;
 
             if (specialAmmo <= 0)
             {

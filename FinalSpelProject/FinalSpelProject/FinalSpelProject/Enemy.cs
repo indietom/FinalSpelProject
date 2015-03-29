@@ -390,6 +390,15 @@ namespace FinalSpelProject
                     scroll = false;
                     Speed = r.Next(1, 4);
                     break;
+                case 41:
+                    // Small lava ship would be best here
+                    SetSize(32);
+                    SetSpriteCoords(1, 195);
+                    MaxFrame = 2;
+                    MaxAnimationCount = 2;
+                    health = 1;
+                    worth = 1000;
+                    break;
             }
             switch(material)
             {
@@ -850,6 +859,15 @@ namespace FinalSpelProject
                         projectile.Add(new Projectile(GetCenter+new Vector2(-4, 0), 90, 6, 0, 0, false, true));
                         fireRate = 0;
                     }
+                    break;
+                case 41:
+                    fireRate += 1;
+                    if(fireRate >= 2 && fireRate <= 32 && fireRate % 8 == 0)
+                    {
+                        Console.WriteLine(fireRate);
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-12, 0), 90 + random.Next(-8, 9), random.Next(5, 9), 10, 0, false, true));
+                    }
+                    if (fireRate >= 64) fireRate = 0;
                     break;
             } 
             if (Pos.Y < -Height)

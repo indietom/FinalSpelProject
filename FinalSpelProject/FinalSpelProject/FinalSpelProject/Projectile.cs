@@ -202,6 +202,11 @@ namespace FinalSpelProject
                     if (CurrentFrame == MaxFrame-1)
                         Destroy = true;
                     break;
+                case 10:
+                    if (CurrentFrame <= MaxFrame / 3) HitBox = new Rectangle(-1000, -1000, 0, 0);
+                    if (CurrentFrame == MaxFrame - 1)
+                        Destroy = true;
+                    break;
             }
             if(Destroy && spriteType == 6)
             {
@@ -284,6 +289,13 @@ namespace FinalSpelProject
                 case 9:
                     SetSize(4, 8);
                     SetSpriteCoords(420, 1);
+                    break;
+                case 10:
+                    MaxFrame = 10;
+                    SetSize(24);
+                    SetSpriteCoords(326, 326);
+                    MaxAnimationCount = 4;
+                    animationOffset = (short)(Imx - 1);
                     break;
             }
         }

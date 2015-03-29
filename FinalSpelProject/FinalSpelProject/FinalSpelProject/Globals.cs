@@ -16,6 +16,18 @@ namespace FinalSpelProject
 
         public static bool blackHoleExists;
 
+        public static bool PowerUpTextExists(List<TextEffect> textEffects)
+        {
+            foreach (TextEffect te in textEffects)
+            {
+                if (te.GetTag() == 1)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
         public static void Load()
         {
             screenW = 800;

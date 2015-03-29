@@ -356,6 +356,9 @@ namespace FinalSpelProject
                     worth = 3000;
                     material = Material.Metal;
                     break;
+                case 35:
+
+                    break;
             }
             switch(material)
             {

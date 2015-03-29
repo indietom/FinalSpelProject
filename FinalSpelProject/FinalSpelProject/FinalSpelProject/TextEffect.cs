@@ -29,6 +29,8 @@ namespace FinalSpelProject
         byte type;
         byte addLetterCount;
 
+        public byte GetTag() { return tag; }
+
         string text;
         string fullText;
 

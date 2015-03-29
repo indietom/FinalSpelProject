@@ -58,7 +58,7 @@ namespace FinalSpelProject
                 {
                     if (p.GetGunType() != type)
                     {
-                        textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                        if (!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
                         if (type == 1 && special)
                             alliedShips.Add(new AlliedShip(new Vector2(Globals.screenW / 2 - 12, Globals.screenH / 2 - 12)));
                         else if (type == 4 && special)
@@ -68,7 +68,7 @@ namespace FinalSpelProject
                     }
                     else
                     {
-                        textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                        if(!!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
                         p.Score += 5000;
                     }
                     if(special && type != 1 && type != 4)

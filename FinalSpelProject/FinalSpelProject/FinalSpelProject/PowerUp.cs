@@ -68,7 +68,7 @@ namespace FinalSpelProject
                     }
                     else
                     {
-                        if(!!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                        if(!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
                         p.Score += 5000;
                     }
                     if(special && type != 1 && type != 4)

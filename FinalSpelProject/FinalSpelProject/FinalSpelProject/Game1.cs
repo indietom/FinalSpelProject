@@ -190,7 +190,7 @@ namespace FinalSpelProject
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                 //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                 //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, true));
+                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, false));
                 //projectiles.Add(new Projectile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), new Vector2(100, 100), 0.01f, 5, 6, false, true));
                 //particles.Add(new Particle(new Vector2(800 / 2, 640 / 2), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0.05f, 1, 1, Color.White));
                 //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   

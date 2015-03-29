@@ -281,6 +281,10 @@ namespace FinalSpelProject
                     SetSize(14, 8);
                     SetSpriteCoords(377, 25);
                     break;
+                case 9:
+                    SetSize(4, 8);
+                    SetSpriteCoords(420, 1);
+                    break;
             }
         }
         public void AssignSprite()

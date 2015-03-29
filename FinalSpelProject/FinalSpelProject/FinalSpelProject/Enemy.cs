@@ -357,7 +357,16 @@ namespace FinalSpelProject
                     material = Material.Metal;
                     break;
                 case 35:
-
+                    SetSize(64);
+                    SetSpriteCoords(1, 521);
+                    health = 2;
+                    worth = 2000;
+                    material = Material.OrganicAlien;
+                    MaxFrame = 3;
+                    MaxAnimationCount = 4;
+                    break;
+                case 36:
+                    // Let's use the stealth-bomber for this one
                     break;
             }
             switch(material)
@@ -765,6 +774,20 @@ namespace FinalSpelProject
                     if(fireRate >= 64)
                     {
                         projectile.Add(new Projectile(GetCenter, 0, 5, 8, 2, true, true));
+                        fireRate = 0;
+                    }
+                    break;
+                case 35:
+                    fireRate += 1;
+                    Pos += new Vector2((float)Math.Sin(Pos.Y/50), 0);
+                    if(fireRate >= 48)
+                    {
+                        lazerHeight = (byte)random.Next(1, 7);
+                        for(int i = 0; i < lazerHeight; i++)
+                        {
+                            projectile.Add(new Projectile(new Vector2(Pos.X + 12, (Pos.Y + Height / 2)-i*8), 90, 5, 9, 0, false, true));
+                            projectile.Add(new Projectile(new Vector2(Pos.X + 48, (Pos.Y + Height / 2) - i * 8), 90, 5, 9, 0, false, true));
+                        }
                         fireRate = 0;
                     }
                     break;

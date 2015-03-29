@@ -378,6 +378,18 @@ namespace FinalSpelProject
                     target = new Vector2(0, Pos.Y);
                     maxChangeTargetCount = (short)r.Next(128, 128 * 2);
                     break;
+                case 37:
+                    // One more stealthbomber, is this the last enemy for this level?
+                    // It's going to be a little more passive
+                    SetSize(64);
+                    SetSpriteCoords(1, 1106);
+                    worth = 1000;
+                    health = (short)r.Next(1, 3);
+                    MaxFrame = 8;
+                    MaxAnimationCount = 4;
+                    scroll = false;
+                    Speed = r.Next(1, 4);
+                    break;
             }
             switch(material)
             {
@@ -828,6 +840,15 @@ namespace FinalSpelProject
                             target = new Vector2(0, Pos.Y);
                         direction = (direction == (byte)0) ? (byte)1 : (byte)0;
                         changeTargetCount = 0;
+                    }
+                    break;
+                case 37:
+                    if (!Globals.blackHoleExists) Pos += new Vector2(0, Speed);
+                    fireRate += 1;
+                    if(fireRate >= 48)
+                    {
+                        projectile.Add(new Projectile(GetCenter+new Vector2(-4, 0), 90, 6, 0, 0, false, true));
+                        fireRate = 0;
                     }
                     break;
             } 

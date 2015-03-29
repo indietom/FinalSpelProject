@@ -367,6 +367,16 @@ namespace FinalSpelProject
                     break;
                 case 36:
                     // Let's use the stealth-bomber for this one
+                    // I should have made a TextureManager class but instead of calling it a TextureManager it would be a SpriteManager and it would hold arrays(size and position) of Points
+                    SetSize(64);
+                    SetSpriteCoords(1, 1106);
+                    worth = 1000;
+                    health = 1;
+                    MaxFrame = 8;
+                    MaxAnimationCount = 4;
+                    direction = 0;
+                    target = new Vector2(0, Pos.Y);
+                    maxChangeTargetCount = (short)r.Next(128, 128 * 2);
                     break;
             }
             switch(material)
@@ -734,6 +744,7 @@ namespace FinalSpelProject
 
                     break;
                 case 31:
+                    // Shoot right to left
                     fireRate += 1;
                     if (fireRate == 16 + (4 * currentBarrel))
                     {
@@ -744,6 +755,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 32:
+                    // Timed-mine enemy
                     scroll = false;
                     changeTargetCount += 1;
                     if(changeTargetCount >= 128*2)
@@ -760,6 +772,7 @@ namespace FinalSpelProject
                     if(!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, target.X, 0.04f), Lerp(Pos.Y, target.Y, 0.04f));
                     break;
                 case 33:
+                    // Ground space-ship
                     Rotation = AimAt(player[0].GetCenter);
                     fireRate += 1;
                     if(fireRate >= 48)
@@ -769,6 +782,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 34:
+                    // Homing missile
                     fireRate += 1;
                     Pos += new Vector2((float)Math.Sin(Pos.Y/20), 0);
                     if(fireRate >= 64)
@@ -778,6 +792,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 35:
+                    // Lazer-ray 
                     fireRate += 1;
                     Pos += new Vector2((float)Math.Sin(Pos.Y/50), 0);
                     if(fireRate >= 48)
@@ -789,6 +804,30 @@ namespace FinalSpelProject
                             projectile.Add(new Projectile(new Vector2(Pos.X + 48, (Pos.Y + Height / 2) - i * 8), 90, 5, 9, 0, false, true));
                         }
                         fireRate = 0;
+                    }
+                    break;
+                case 36:
+                    fireRate += 1;
+                    if(fireRate == 48 || fireRate == 48+16)
+                    {
+                        // Reusing rotation because I like spagethi
+                        Rotation = (direction == 0) ? 0 + random.Next(-8, 9) : -180 + random.Next(-8, 9);
+                        projectile.Add(new Projectile(GetCenter, Rotation, random.Next(5, 8), 2, 0, false, true));
+                    }
+                    fireRate = (fireRate >= 48 + 32) ? 0 : fireRate;
+                    if(!Globals.blackHoleExists)
+                    {
+                        Pos = new Vector2(Lerp(Pos.X, target.X, 0.05f), Pos.Y);
+                    }
+                    changeTargetCount += 1;
+                    if(changeTargetCount >= maxChangeTargetCount)
+                    {
+                        if (direction == 0)
+                            target = new Vector2(Globals.screenW - Width, Pos.Y);
+                        if (direction == 1)
+                            target = new Vector2(0, Pos.Y);
+                        direction = (direction == (byte)0) ? (byte)1 : (byte)0;
+                        changeTargetCount = 0;
                     }
                     break;
             } 

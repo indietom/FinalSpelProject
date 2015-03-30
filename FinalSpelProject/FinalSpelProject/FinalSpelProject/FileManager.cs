@@ -8,7 +8,7 @@ namespace FinalSpelProject
 {
     class FileManager
     {
-        internal static List<int> HighScores = new List<int>();
+        internal static List<HighScore> HighScores = new List<HighScore>();
 
         public int[,] LoadLevel(string name)
         {
@@ -88,6 +88,43 @@ namespace FinalSpelProject
         {
 
         }
+
+        // NAME[space]SCORE should be the format for the file
+        public List<HighScore> LoadHighScores(string path)
+        {
+            const byte LIST_SIZE = 5;
+            
+            HighScore[] highScores = new HighScore[LIST_SIZE];
+
+            string[] currentLine = new string[2];
+
+            StreamReader sr = new StreamReader(path);
+
+            for (int i = 0; i < LIST_SIZE; i++)
+            {
+                currentLine = sr.ReadLine().Split(' ');
+                highScores[i] = new HighScore(currentLine[0], int.Parse(currentLine[1]));
+            }
+
+            sr.Dispose();
+
+            List<HighScore> tmpList = new List<HighScore>();
+            
+            for (int i = LIST_SIZE - 1; i > 0; i--)
+                tmpList.Add(highScores[i]);
+
+            return tmpList;
+        }
+
+        public void SaveHighScores(string path)
+        {
+
+        }
+
+        public void CheckHighScores(string path)
+        {
+            
+        }
     }
 
     class HighScore
@@ -103,6 +140,5 @@ namespace FinalSpelProject
             name = name2;
             score = score2;
         }
-
     }
 }

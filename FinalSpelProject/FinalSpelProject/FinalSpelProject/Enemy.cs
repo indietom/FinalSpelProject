@@ -399,6 +399,19 @@ namespace FinalSpelProject
                     health = 1;
                     worth = 1000;
                     break;
+                case 42:
+                    // Suicdal small ship?
+                    SetSize(32);
+                    SetSpriteCoords(1, 195);
+                    MaxFrame = 2;
+                    MaxAnimationCount = 2;
+                    health = 1;
+                    worth = 1000;
+                    Speed = 0.04f;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    scroll = false;
+                    break;
             }
             switch(material)
             {
@@ -414,7 +427,6 @@ namespace FinalSpelProject
         public void Update(List<Player> player, List<Projectile> projectile, List<Explosion> explosions, List<PowerUp> powerUps, List<Gib> gibs, LevelManager levelManager)
         {
             Random random = new Random();
-
             //Console.WriteLine(Globals.blackHoleExists);
 
             if (Pos.Y >= Globals.screenH + Height)
@@ -864,10 +876,30 @@ namespace FinalSpelProject
                     fireRate += 1;
                     if(fireRate >= 2 && fireRate <= 32 && fireRate % 8 == 0)
                     {
-                        Console.WriteLine(fireRate);
                         projectile.Add(new Projectile(GetCenter + new Vector2(-12, 0), 90 + random.Next(-8, 9), random.Next(5, 9), 10, 0, false, true));
                     }
                     if (fireRate >= 64) fireRate = 0;
+                    break;
+                case 42:
+                    if(health > 0)
+                    {
+                        Rotation = AimAt(player[0].GetCenter);
+                        if (!Globals.blackHoleExists) Pos = new Vector2(Lerp(Pos.X, player[0].GetCenter.X, Speed), Lerp(Pos.Y, player[0].GetCenter.Y, Speed));
+                    }
+                    else
+                    {
+                        Rotation += 0.3f;
+                        if(fireRate >= 48) projectile.Add(new Projectile(Pos + new Vector2(-12, 0), Rotation + random.Next(-8, 9)/10, random.Next(5, 9), 10, 0, true, true));
+                        fireRate += 1;
+                        if(fireRate >= 48*2)
+                        {
+                            for (int i = 0; i < 20; i++ )
+                            {
+                                explosions.Add(new Explosion(Pos + new Vector2(random.Next(-32, 33), random.Next(-32, 33)), 16, false));
+                            }
+                            Destroy = true;
+                        }
+                    }
                     break;
             } 
             if (Pos.Y < -Height)
@@ -892,7 +924,7 @@ namespace FinalSpelProject
             }
             foreach (Player p in player)
             {
-                if(health <= 0)
+                if(health <= 0 && type != 42)
                 {
                     p.RaiseScore(worth);
                     p.RaiseCurrentCombo();
@@ -900,7 +932,7 @@ namespace FinalSpelProject
                 if (p.Dead)
                     if(type <= 20) fireRate = 230;
             }
-            if (health <= 0)
+            if (health <= 0 && type != 42)
             {
                 if(!Globals.blackHoleExists)
                     switch (material)
@@ -971,7 +1003,7 @@ namespace FinalSpelProject
                     if (p.HitBox.Intersects(HitBox) && !OnGround)
                     {
                         health = 0;
-                        p.Dead = true;
+                        if(type != 42) p.Dead = true;
                     }
                 }
             }

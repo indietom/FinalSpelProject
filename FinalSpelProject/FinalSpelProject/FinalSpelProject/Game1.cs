@@ -181,7 +181,7 @@ namespace FinalSpelProject
             {
                 //fileManager.SavePlayer("save.sav", player);
                 //textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64*3, 4, 1, "LEVEL COMPLETED"));
-                enemies.Add(new Enemy(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 41, random));
+                enemies.Add(new Enemy(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 42, random));
                 //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);
                 //loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
                 //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));

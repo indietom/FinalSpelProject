@@ -89,4 +89,20 @@ namespace FinalSpelProject
 
         }
     }
+
+    class HighScore
+    {
+        string name;
+        public string GetName() { return name; }
+        
+        int score;
+        public int GetScore() { return score; }
+
+        public HighScore(string name2, int score2)
+        {
+            name = name2;
+            score = score2;
+        }
+
+    }
 }

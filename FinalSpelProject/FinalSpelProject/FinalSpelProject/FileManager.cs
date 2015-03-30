@@ -9,6 +9,7 @@ namespace FinalSpelProject
     class FileManager
     {
         internal static List<HighScore> HighScores = new List<HighScore>();
+        const byte LIST_SIZE = 5;
 
         public int[,] LoadLevel(string name)
         {
@@ -90,10 +91,9 @@ namespace FinalSpelProject
         }
 
         // NAME[space]SCORE should be the format for the file
+        // This is really unsafe, but as long as no one touches the files we should be fine
         public List<HighScore> LoadHighScores(string path)
         {
-            const byte LIST_SIZE = 5;
-            
             HighScore[] highScores = new HighScore[LIST_SIZE];
 
             string[] currentLine = new string[2];
@@ -118,7 +118,17 @@ namespace FinalSpelProject
 
         public void SaveHighScores(string path)
         {
+            HighScores.Sort();
+            StreamWriter sw = new StreamWriter(path);
 
+            for (int i = 0; i < LIST_SIZE; i++ )
+            {
+                HighScores.Sort();
+                sw.WriteLine(HighScores[i].ToString());
+            }
+
+            sw.Dispose();
+            
         }
 
         public void CheckHighScores(string path)
@@ -139,6 +149,11 @@ namespace FinalSpelProject
         {
             name = name2;
             score = score2;
+        }
+
+        public override string ToString()
+        {
+            return name + " " + score;
         }
     }
 }

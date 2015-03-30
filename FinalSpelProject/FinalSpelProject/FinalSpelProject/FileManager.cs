@@ -8,6 +8,8 @@ namespace FinalSpelProject
 {
     class FileManager
     {
+        internal static List<int> HighScores = new List<int>();
+
         public int[,] LoadLevel(string name)
         {
             int[,] map;

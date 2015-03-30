@@ -29,6 +29,7 @@ namespace FinalSpelProject
         byte chanceOfUTurn;
         byte lazerHeight;
         byte currentBarrel;
+        byte turnSpeed;
 
         bool splitEnemy;
         bool scroll;
@@ -400,7 +401,7 @@ namespace FinalSpelProject
                     worth = 1000;
                     break;
                 case 42:
-                    // Suicdal small ship?
+                    // small suicdal ship?
                     SetSize(32);
                     SetSpriteCoords(1, 195);
                     MaxFrame = 2;
@@ -411,6 +412,28 @@ namespace FinalSpelProject
                     Rotated = true;
                     RoateOnRad = true;
                     scroll = false;
+                    break;
+                case 43:
+                    // sine wave downwards fireing flames going left and right
+                    SetSize(64);
+                    SetSpriteCoords(1, 781);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    health = (short)r.Next(1, 3);
+                    Speed = r.Next(0, 3);
+                    worth = 1500;
+                    turnSpeed = (byte)r.Next(3, 7);
+                    Rotation = -270;
+                    fireRate = r.Next(-64, 0);
+                    break;
+                case 44:
+                    // tries to get next to the player to fire his flame thrower
+                    break;
+                case 45:
+                    break;
+                case 46:
+                    break;
+                case 47:
                     break;
             }
             switch(material)
@@ -873,6 +896,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 41:
+                    // flamethrower enemy
                     fireRate += 1;
                     if(fireRate >= 2 && fireRate <= 32 && fireRate % 8 == 0)
                     {
@@ -881,6 +905,7 @@ namespace FinalSpelProject
                     if (fireRate >= 64) fireRate = 0;
                     break;
                 case 42:
+                    // spiny flamethrower enemy
                     if(health > 0)
                     {
                         Rotation = AimAt(player[0].GetCenter);
@@ -900,6 +925,23 @@ namespace FinalSpelProject
                             Destroy = true;
                         }
                     }
+                    break;
+                case 43:
+                    // flamethrower left to right
+                    Pos += new Vector2((float)Math.Cos(Pos.Y / 20), Speed);
+                    if(direction == 0)
+                    {
+                        Rotation += turnSpeed/1;
+                        if (Rotation >= -270 + 45) direction = 1;
+                    }
+                    if(direction == 1)
+                    {
+                        Rotation -= turnSpeed/1;
+                        if (Rotation <= -270 - 45) direction = 0;
+                    }
+                    fireRate += 1;
+                    if(fireRate >= 48) projectile.Add(new Projectile(GetCenter + new Vector2(-12, 0), Rotation + random.Next(-8, 9), random.Next(5, 9), 10, 0, false, true));
+                    fireRate = (fireRate >= 48 + 48) ? random.Next(-32, 0) : fireRate;
                     break;
             } 
             if (Pos.Y < -Height)

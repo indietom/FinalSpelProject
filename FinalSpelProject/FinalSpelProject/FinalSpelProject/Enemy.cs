@@ -46,6 +46,8 @@ namespace FinalSpelProject
         short maxTurningCount;
         short changeTargetCount;
         short maxChangeTargetCount;
+        short dropBombCount;
+        short maxDropBombCount;
 
         float waveCount;
 
@@ -427,7 +429,7 @@ namespace FinalSpelProject
                     fireRate = r.Next(-64, 0);
                     break;
                 case 44:
-                    // Napalms shooting tower, genious!
+                    // Napalm shooting tower, genious!
                     OnGround = true;
                     Rotated = true;
                     RoateOnRad = true;
@@ -436,8 +438,17 @@ namespace FinalSpelProject
                     // Why is fireRate a float? 
                     fireRate = r.Next(-64, 0);
                     health = 1;
+                    worth = 1000;
                     break;
                 case 45:
+                    // flies foward shooting and drops bombs sometimes
+                    SetSize(64);
+                    SetSpriteCoords(1, 781);
+                    MaxFrame = 4;
+                    MaxAnimationCount = 4;
+                    health = 2;
+                    worth = 2000;
+                    maxDropBombCount = (short)r.Next(96, 128 + 32);
                     break;
                 case 46:
                     break;
@@ -959,9 +970,26 @@ namespace FinalSpelProject
                     {
                         projectile.Add(new Projectile(Pos + new Vector2(-12, -12), Rotation, random.Next(5, 11), 10, 0, true, true));
                     }
-                    fireRate = (fireRate >= 48 + 32) ? random.Next(-64, 0) : fireRate;
+                    fireRate = (fireRate >= 48 + 8) ? random.Next(-64, 0) : fireRate;
                     break;
-            } 
+                case 45:
+                    // Shoots downwards and fires timed-mines in both directions
+                    fireRate += 1;
+                    if(fireRate == 48 || fireRate == 48 + 8 || fireRate == 48 + 16)
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-4, 0), -270 + random.Next(-8, 9), random.Next(7, 10), 0, 0, false, true));
+                    }
+                    fireRate = (fireRate >= 48 + 24) ? 0 : fireRate;
+
+                    dropBombCount += 1;
+                    if(dropBombCount >= maxDropBombCount)
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-8, 0), GetCenter+new Vector2(-128, 0), 0.04f, 5, 6, false, true));
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-8, 0), GetCenter + new Vector2(128, 0), 0.04f, 5, 6, false, true));
+                        dropBombCount = -32;
+                    }
+                    break;
+            }                       
             if (Pos.Y < -Height)
                 fireRate = 30;  
             if(scroll) Pos += new Vector2(0, Globals.worldSpeed);

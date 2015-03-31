@@ -8,7 +8,7 @@ namespace FinalSpelProject
 {
     class FileManager
     {
-        internal static List<HighScore> HighScores = new List<HighScore>();
+        public List<HighScore> HighScores = new List<HighScore>();
         const byte LIST_SIZE = 5;
 
         public int[,] LoadLevel(string name)
@@ -128,12 +128,6 @@ namespace FinalSpelProject
             }
 
             sw.Dispose();
-            
-        }
-
-        public void CheckHighScores(string path)
-        {
-            
         }
     }
 

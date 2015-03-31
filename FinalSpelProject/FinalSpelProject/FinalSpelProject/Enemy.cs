@@ -427,7 +427,15 @@ namespace FinalSpelProject
                     fireRate = r.Next(-64, 0);
                     break;
                 case 44:
-                    // tries to get next to the player to fire his flame thrower
+                    // Napalms shooting tower, genious!
+                    OnGround = true;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    SetSize(32);
+                    SetSpriteCoords(67, 228);
+                    // Why is fireRate a float? 
+                    fireRate = r.Next(-64, 0);
+                    health = 1;
                     break;
                 case 45:
                     break;
@@ -942,6 +950,16 @@ namespace FinalSpelProject
                     fireRate += 1;
                     if(fireRate >= 48) projectile.Add(new Projectile(GetCenter + new Vector2(-12, 0), Rotation + random.Next(-8, 9), random.Next(5, 9), 10, 0, false, true));
                     fireRate = (fireRate >= 48 + 48) ? random.Next(-32, 0) : fireRate;
+                    break;
+                case 44:
+                    // Napalm tower
+                    Rotation = AimAt(player[0].GetCenter);
+                    fireRate += 1;
+                    if(fireRate >= 48)
+                    {
+                        projectile.Add(new Projectile(Pos + new Vector2(-12, -12), Rotation, random.Next(5, 11), 10, 0, true, true));
+                    }
+                    fireRate = (fireRate >= 48 + 32) ? random.Next(-64, 0) : fireRate;
                     break;
             } 
             if (Pos.Y < -Height)

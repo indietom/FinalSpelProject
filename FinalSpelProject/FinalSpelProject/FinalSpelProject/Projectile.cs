@@ -203,7 +203,10 @@ namespace FinalSpelProject
                         Destroy = true;
                     break;
                 case 10:
-                    if (CurrentFrame <= MaxFrame / 3) HitBox = new Rectangle(-1000, -1000, 0, 0);
+                    if (CurrentFrame < (MaxFrame / 3)-1 || CurrentFrame >= 6)
+                    {
+                        HitBox = new Rectangle(-1000, -1000, 0, 0);
+                    }
                     if (CurrentFrame == MaxFrame - 1)
                         Destroy = true;
                     break;

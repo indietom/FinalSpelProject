@@ -14,9 +14,12 @@ namespace FinalSpelProject
         string levelPath;
 
         bool looping;
+        bool spawnedBoss;
 
         public Level(List<Chunk> chunks, byte currentLevel2, byte amountOfChunks2)
         {
+            spawnedBoss = false;
+            looping = false;
             amountOfChunks = amountOfChunks2;
             CurrentLevel = currentLevel2;
             levelPath = "Content\\level"+CurrentLevel + "\\";
@@ -28,6 +31,8 @@ namespace FinalSpelProject
 
         public Level(List<Chunk> chunks, LevelProperty levelProperty)
         {
+            spawnedBoss = false;
+            looping = false;
             amountOfChunks = levelProperty.GetHeight(); 
             CurrentLevel = LevelManager.currentLevel;
             levelPath = "Content\\level" + CurrentLevel + "\\";
@@ -37,13 +42,22 @@ namespace FinalSpelProject
             }
         }
 
-        public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm, SpawnManager spawnManager, List<Enemy> enemies, List<PowerUp> powerUps, LevelManager levelManager)
+        public void Update(List<Tile> tiles, List<Chunk> chunks, ProceduralGenerationManager pgm, SpawnManager spawnManager, List<Enemy> enemies, List<PowerUp> powerUps, List<Boss> bosses, LevelManager levelManager)
         {
+            if(looping && !spawnedBoss)
+            {
+                bosses.Add(new Boss(new Vector2(Globals.screenW / 2, -200), (byte)(CurrentLevel + 1))); 
+                spawnedBoss = true;
+            }
             if(chunks.Count == 1)
             {
                 looping = true;
             }
             if(looping && CurrentLevel == 0)
+            {
+                pgm.SpawnLevelOne(tiles);
+            }
+            if (looping && CurrentLevel == 1)
             {
                 pgm.SpawnLevelOne(tiles);
             }

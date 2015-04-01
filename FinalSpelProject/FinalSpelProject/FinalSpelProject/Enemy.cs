@@ -451,6 +451,15 @@ namespace FinalSpelProject
                     maxDropBombCount = (short)r.Next(96, 128 + 32);
                     break;
                 case 46:
+                    // Flames to the side and lazer in the front? 
+                    SetSize(64);
+                    SetSpriteCoords(1, 1106);
+                    worth = 1000;
+                    health = (short)r.Next(1, 3);
+                    MaxFrame = 8;
+                    MaxAnimationCount = 4;
+                    Speed = r.Next(1, 4);
+                    maxDropBombCount = (short)r.Next(48, 64);
                     break;
                 case 47:
                     break;
@@ -988,6 +997,23 @@ namespace FinalSpelProject
                         projectile.Add(new Projectile(GetCenter + new Vector2(-8, 0), GetCenter + new Vector2(128, 0), 0.04f, 5, 6, false, true));
                         dropBombCount = -32;
                     }
+                    break;
+                case 46:
+                    // fire to the sides and lazer downwards
+                    fireRate += 1;
+                    if(fireRate >= 48+16)
+                    {
+                        for (int i = 0; i < 3; i++)
+                            projectile.Add(new Projectile(GetCenter + new Vector2(-4, 0), -262 - i * 8, 6, 0, 0, false, true));
+                        fireRate = 0;
+                    }
+                    dropBombCount += 1;
+                    if (dropBombCount >= maxDropBombCount && dropBombCount % 4 == 0)
+                    {
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-12, -12), -180 * 0, random.Next(5, 11), 10, 0, false, true));
+                        projectile.Add(new Projectile(GetCenter + new Vector2(-12, -12), -180 * 1, random.Next(5, 11), 10, 0, false, true));
+                    }
+                    dropBombCount = (dropBombCount >= (short)(maxDropBombCount + 8)) ? (short)0 : (short)dropBombCount;
                     break;
             }                       
             if (Pos.Y < -Height)

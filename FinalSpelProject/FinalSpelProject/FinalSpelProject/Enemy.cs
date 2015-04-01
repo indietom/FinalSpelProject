@@ -135,6 +135,8 @@ namespace FinalSpelProject
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
                     material = Material.Metal;
+                    // ayy lmao
+                    Pos += new Vector2(16, 16);
                     break;
                 //Sideways Dude yo
                 case 15:

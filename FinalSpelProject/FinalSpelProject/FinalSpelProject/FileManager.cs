@@ -37,7 +37,10 @@ namespace FinalSpelProject
                 for (int x = 0; x < width; x++)
                 {
                     if (tileNo[x] != "" || tileNo[x] != " ")
+                    {
+                        //Console.WriteLine(name);
                         map[y, x] = Convert.ToInt32(tileNo[x]);
+                    }
                 }
             }
             sReader.Close();

@@ -1005,7 +1005,7 @@ namespace FinalSpelProject
                     if(fireRate >= 48+16)
                     {
                         for (int i = 0; i < 3; i++)
-                            projectile.Add(new Projectile(GetCenter + new Vector2(-4, 0), -262 - i * 8, 6, 0, 0, false, true));
+                            projectile.Add(new Projectile(GetCenter + new Vector2(-4, 0), -262 - i * 8, 5, 0, 0, false, true));
                         fireRate = 0;
                     }
                     dropBombCount += 1;

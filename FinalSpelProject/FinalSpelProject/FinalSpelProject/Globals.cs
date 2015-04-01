@@ -5,8 +5,13 @@ using System.Text;
 
 namespace FinalSpelProject
 {
+    enum GameStates { Menu, Game, Credits, LevelTransition }
     class Globals
     {
+        public static GameStates gameState;
+
+        public static bool startedGame;
+
         public static short AmountOfEnemyTypes;
 
         public static float worldSpeed;

@@ -462,6 +462,7 @@ namespace FinalSpelProject
                     maxDropBombCount = (short)r.Next(48, 64);
                     break;
                 case 47:
+                    // that feel when sista, I think what we have is enough
                     break;
             }
             switch(material)

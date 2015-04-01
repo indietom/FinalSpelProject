@@ -15,8 +15,6 @@ namespace FinalSpelProject
         bool active;
         bool hasSpawnedEnemies;
 
-        byte currentLevel;
-
         int[,] map;
         int[,] mapE;
 
@@ -50,9 +48,9 @@ namespace FinalSpelProject
                 {
                     for (int y = 0; y < mapE.GetLength(0); y++)
                     {
-                        string enemyToSpawnString = (currentLevel+1) + mapE[y, x].ToString();
+                        string enemyToSpawnString = (LevelManager.currentLevel + 1) + mapE[y, x].ToString();
                         byte enemyTypeByte = byte.Parse(enemyToSpawnString);
-                        if (enemyTypeByte > 10) enemies.Add(new Enemy(new Vector2(Pos.X + (x * 16), Pos.Y + (y * 16)), enemyTypeByte, r));
+                        if (enemyTypeByte > 10 && enemyTypeByte != 20) enemies.Add(new Enemy(new Vector2(Pos.X + (x * 16), Pos.Y + (y * 16)), enemyTypeByte, r));
                     }
                 }
             }

@@ -60,8 +60,11 @@ namespace FinalSpelProject
             {
                 foreach (Player p in players)
                     if(p.GetLevelsCompleted() < currentLevel) p.SetLevelsCompleted(currentLevel);
-                //currentLevel += 1;
-                //StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
+                currentLevel += 1;
+                StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
+                players[0].inputActive = true;
+                levelCompleted = false;
+                changeLevelCount = 0;
             }
             if(changeLevelCount == 3)
             {

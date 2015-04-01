@@ -81,7 +81,7 @@ namespace FinalSpelProject
                 else maxLakeSpawnCount += (byte)random.Next(128, 128*2);
             }
 
-            treeSpawnCount += 1;
+            //treeSpawnCount += 1;
 
             if (treeSpawnCount >= maxTreeSpawnCount)
             {

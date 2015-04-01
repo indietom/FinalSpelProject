@@ -15,13 +15,20 @@ namespace FinalSpelProject
     enum MenuStates { Main, Options, LevelSelect, HighScoreScreen }
     class Menu
     {
-        List<Button> buttons = new List<Button>();
+        const byte start = 0,
+            levelSelect = 1,
+            highScoreScreen = 2,
+            quit = 3;
+
+        List<Button> mainButtons = new List<Button>();
+        List<Button> optionsButtons = new List<Button>();
+        List<Button> levelSelectButtons = new List<Button>();
 
         MenuStates menuState;
 
         string startButtonText()
         {
-            return "";
+            return (Globals.startedGame) ? "Resume" : "Start";
         }
 
         public Menu()

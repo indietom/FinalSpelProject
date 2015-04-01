@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinalSpelProject
 {
-    enum GameStates { Menu, Game, Credits, LevelTransition }
+    enum GameStates { StartScreen, Menu, Game, Credits, LevelTransition }
     class Globals
     {
         public static GameStates gameState;

@@ -42,6 +42,26 @@ namespace FinalSpelProject
             tag = tag2;
         }
 
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font, byte currentTag, string newText)
+        {
+            text = newText;
+            if (unavalible) color = unavalibeColor;
+            if (currentTag == tag)
+            {
+                color = selectedColor;
+                scale = 1.4f;
+            }
+            if (!unavalible && currentTag != tag) color = OrginalColor;
+            if (currentTag != tag) scale = 1.0f;
+
+            prevKeyboard = keyboard;
+            keyboard = Keyboard.GetState();
+
+            HitBox = new Rectangle((int)Pos.X, (int)Pos.Y, (int)font.MeasureString(text).X, (int)font.MeasureString(text).Y);
+
+            spriteBatch.DrawString(font, text, Pos, color, 0, new Vector2(0, 0), scale, SpriteEffects.None, 1.0f);
+        }
+
         public void Draw(SpriteBatch spriteBatch, SpriteFont font, byte currentTag)
         {
             if (unavalible) color = unavalibeColor;
@@ -63,7 +83,7 @@ namespace FinalSpelProject
 
         public bool Pressed(byte currentTag)
         {
-            return (keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) && currentTag == tag || HitBox.Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)));
+            return (keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) && currentTag == tag);
         }
     }
 }

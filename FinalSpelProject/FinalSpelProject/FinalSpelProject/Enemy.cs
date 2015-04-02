@@ -209,24 +209,8 @@ namespace FinalSpelProject
                     scroll = true;
                     material = Material.Metal;
                     break;
-                case 20:
-                    maxTurningCount = (short)r.Next(64*3, 64*5);
-                    uTurnHeight = (short)r.Next(Globals.screenH / 2, Globals.screenH / 2 + 64*3);
-                    uTurnMinHeight = (short)r.Next(64 * 2);
-                    Speed = r.Next(3, 6);
-                    Angle = -270;
-                    SetSpriteCoords(1, 716);
-                    Rotated = true;
-                    Rotation = Angle;
-                    SetSize(64);
-                    MaxFrame = 4;
-                    MaxAnimationCount = 4;
-                    health = 3;
-                    worth = 1000;
-                    material = Material.Metal;
-                    direction = (byte)r.Next(0, 2);
-                    break;
                 case 21:
+                    // u turn shooter
                     maxTurningCount = (short)r.Next(64*3, 64*5);
                     uTurnHeight = (short)r.Next(Globals.screenH / 2, Globals.screenH / 2 + 64*3);
                     uTurnMinHeight = (short)r.Next(64 * 2);
@@ -689,6 +673,7 @@ namespace FinalSpelProject
                     break;
 
                 case 21:
+                    // u turn guy
                     AngleMath(false);
                     Pos += Vel;
                     Rotation = Angle;
@@ -732,6 +717,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 22:
+                    // wavy space ray
                     Pos += new Vector2((float)Math.Sin(4 * waveCount + 0.5));
                     waveCount += 0.01f;
                     fireRate += 1;
@@ -746,6 +732,7 @@ namespace FinalSpelProject
                         fireRate = 0;
                     break;
                 case 23:
+                    // flies in and out of screen
                     changeTargetCount += 1;
                     if(changeTargetCount >= maxChangeTargetCount)
                     {
@@ -775,6 +762,7 @@ namespace FinalSpelProject
                     if (fireRate >= 64 + 32) fireRate = 0;
                     break;
                 case 24:
+                    // shotgun 
                     Pos += new Vector2(0, Speed);
                     fireRate += 1;
                     if(fireRate >= 48)
@@ -785,6 +773,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 25:
+                    // lazer
                     fireRate += 1;
                     if (fireRate == 48 + 64)
                     {
@@ -801,6 +790,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 26:
+                    // tower
                     fireRate += 1;
                     Rotation = AimAt(player[0].GetCenter);
                     if(fireRate == 64 || fireRate == 64 + 16 || fireRate == 64 + 32)
@@ -818,7 +808,8 @@ namespace FinalSpelProject
                     }
                     break;
                 case 27:
-                    // Is this enough enemies for this level? 
+                    // Is this enough enemies for this level?
+                    // lerps around the screen
                     fireRate += 1;
                     if(fireRate >= 48)
                     {

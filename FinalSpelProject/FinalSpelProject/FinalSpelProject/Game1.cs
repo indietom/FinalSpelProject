@@ -176,7 +176,7 @@ namespace FinalSpelProject
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 fileManager.LoadPlayer("save.sav", player);
-                //levelManager.StartLevel(1, chunks, enemies, projectiles, player, level);
+                levelManager.StartLevel(1, chunks, enemies, projectiles, player, level);
             }
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {

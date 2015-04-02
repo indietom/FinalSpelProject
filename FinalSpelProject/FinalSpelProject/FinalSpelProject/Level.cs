@@ -59,7 +59,7 @@ namespace FinalSpelProject
             }
             if (looping && LevelManager.currentLevel == 1)
             {
-                pgm.SpawnLevelOne(tiles);
+                //pgm.SpawnLevelOne(tiles);
             }
             spawnManager.Update(enemies, powerUps, levelManager);
         }

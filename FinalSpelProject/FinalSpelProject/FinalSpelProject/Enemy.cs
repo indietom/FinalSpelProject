@@ -903,6 +903,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 36:
+                    // lerp left and right
                     fireRate += 1;
                     if(fireRate == 48 || fireRate == 48+16)
                     {
@@ -927,6 +928,7 @@ namespace FinalSpelProject
                     }
                     break;
                 case 37:
+                    // fly straight down
                     if (!Globals.blackHoleExists) Pos += new Vector2(0, Speed);
                     fireRate += 1;
                     if(fireRate >= 48)

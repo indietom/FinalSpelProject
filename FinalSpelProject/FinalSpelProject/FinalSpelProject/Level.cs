@@ -46,18 +46,18 @@ namespace FinalSpelProject
         {
             if(looping && !spawnedBoss)
             {
-                bosses.Add(new Boss(new Vector2(Globals.screenW / 2, -200), (byte)(CurrentLevel + 1))); 
+                bosses.Add(new Boss(new Vector2(Globals.screenW / 2, -200), (byte)(LevelManager.currentLevel + 1))); 
                 spawnedBoss = true;
             }
             if(chunks.Count == 1)
             {
                 looping = true;
             }
-            if(looping && CurrentLevel == 0)
+            if (looping && LevelManager.currentLevel == 0)
             {
                 pgm.SpawnLevelOne(tiles);
             }
-            if (looping && CurrentLevel == 1)
+            if (looping && LevelManager.currentLevel == 1)
             {
                 pgm.SpawnLevelOne(tiles);
             }

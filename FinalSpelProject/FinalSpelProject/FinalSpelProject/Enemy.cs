@@ -1056,7 +1056,10 @@ namespace FinalSpelProject
                     p.RaiseCurrentCombo();
                 }
                 if (p.Dead)
-                    if(type <= 20) fireRate = 230;
+                {
+                    if (type <= 20) fireRate = 230;
+                    else fireRate = -230;
+                }
             }
             if (health <= 0 && type != 42)
             {

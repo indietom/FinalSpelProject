@@ -21,6 +21,18 @@ namespace FinalSpelProject
 
         public static bool blackHoleExists;
 
+        public static byte LevelHeight()
+        {
+            byte[] height = new byte[4];
+
+            height[0] = 14;
+            height[1] = 14;
+            height[2] = 14;
+            height[3] = 24;
+
+            return height[LevelManager.currentLevel];
+        }
+
         public static bool PowerUpTextExists(List<TextEffect> textEffects)
         {
             foreach (TextEffect te in textEffects)

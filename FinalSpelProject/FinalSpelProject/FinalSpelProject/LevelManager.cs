@@ -27,7 +27,7 @@ namespace FinalSpelProject
             levelProperties[0] = new LevelProperty(0, 15, 7);
             levelProperties[1] = new LevelProperty(0, 15, 7);
             levelProperties[2] = new LevelProperty(0, 15, 7);
-            levelProperties[3] = new LevelProperty(0, 15, 7);
+            levelProperties[3] = new LevelProperty(0, 24, 7);
             maxChangeLevelCount = 64 * 3;
         }
 

@@ -59,7 +59,7 @@ namespace FinalSpelProject
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
-            level = new Level(chunks, LevelManager.currentLevel, 14);
+            level = new Level(chunks, LevelManager.currentLevel, Globals.LevelHeight());
             base.Initialize();
         }
 
@@ -176,7 +176,7 @@ namespace FinalSpelProject
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 fileManager.LoadPlayer("save.sav", player);
-                levelManager.StartLevel(1, chunks, enemies, projectiles, player, level);
+                levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
             }
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {

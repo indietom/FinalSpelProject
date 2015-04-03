@@ -14,7 +14,7 @@ namespace FinalSpelProject
 
         public static void Load(ContentManager contet)
         {
-            TileSheets = new Texture2D[3];
+            TileSheets = new Texture2D[4];
             for(int i = 0; i < TileSheets.Count(); i++)
             {
                 TileSheets[i] = contet.Load<Texture2D>("tilesheet" + i);

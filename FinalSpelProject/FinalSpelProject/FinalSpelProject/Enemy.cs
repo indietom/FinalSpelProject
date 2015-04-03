@@ -514,7 +514,7 @@ namespace FinalSpelProject
                     if (fireRate == 0)
                     {
                         fireRate = 80;
-                        projectile.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), 90, 9, 3, 0, false, true));
+                        projectile.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), 90, 9, 0, 0, false, true));
                     }
                     break;
                 case 12:

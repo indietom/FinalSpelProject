@@ -101,8 +101,8 @@ namespace FinalSpelProject
                         target += new Vector2(0, fallSpeed);
                     }
                     color = new Color(r, g, b);
-                    r = Lerp(r, 255, 0.0001f);
-                    g = Lerp(g, 255, 0.0001f);
+                    r = Lerp(r, 178, 0.0001f);
+                    b = Lerp(b, 255, 0.0001f);
                     break;
                 case 2:
                     color = new Color(255 - lifeTime, 216 - lifeTime, 0);

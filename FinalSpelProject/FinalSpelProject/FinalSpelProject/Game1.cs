@@ -29,6 +29,7 @@ namespace FinalSpelProject
         }
 
         Ui ui = new Ui();
+        Menu menu = new Menu();
 
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
@@ -55,7 +56,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
+            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -98,105 +99,111 @@ namespace FinalSpelProject
 
             Random random = new Random();
 
-            ui.Update(player, bosses);
-
-            level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, bosses, levelManager);
-            levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects);
-
-            foreach (Gib g in gibs)
+            switch (Globals.gameState)
             {
-                g.Update();
-            }
+                case GameStates.Menu:
+                    break;
+                case GameStates.Game:
+                    ui.Update(player, bosses);
 
-            foreach (AlliedShip a in alliedShips)
-            {
-                a.Update(player, projectiles, explosions, levelManager);
-            }
+                    level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, bosses, levelManager);
+                    levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects);
 
-            foreach (Enemy e in enemies)
-            {
-                e.Update(player, projectiles, explosions, powerUps, gibs, levelManager);
-            }
+                    foreach (Gib g in gibs)
+                    {
+                        g.Update();
+                    }
 
-            foreach (Player p in player)
-            {
-                p.Update(projectiles, enemies, explosions, textEffects);
-            }
+                    foreach (AlliedShip a in alliedShips)
+                    {
+                        a.Update(player, projectiles, explosions, levelManager);
+                    }
 
-            foreach (Projectile p in projectiles)
-            {
-                p.Update(particles, explosions, player[0]);
-            }
+                    foreach (Enemy e in enemies)
+                    {
+                        e.Update(player, projectiles, explosions, powerUps, gibs, levelManager);
+                    }
 
-            foreach (Chunk c in chunks)
-            {
-                c.Update(enemies);
-            }
+                    foreach (Player p in player)
+                    {
+                        p.Update(projectiles, enemies, explosions, textEffects);
+                    }
 
-            foreach (Boss b in bosses)
-            {
-                b.Update(player, projectiles, explosions, enemies);
-            }
+                    foreach (Projectile p in projectiles)
+                    {
+                        p.Update(particles, explosions, player[0]);
+                    }
 
-            foreach (Particle p in particles)
-            {
-                p.Update(projectiles);
-            }
+                    foreach (Chunk c in chunks)
+                    {
+                        c.Update(enemies);
+                    }
 
-            foreach (Explosion e in explosions)
-            {
-                e.Update();
-            }
+                    foreach (Boss b in bosses)
+                    {
+                        b.Update(player, projectiles, explosions, enemies);
+                    }
 
-            foreach (PowerUp p in powerUps)
-            {
-                p.Update(player, textEffects, alliedShips);
-            }
+                    foreach (Particle p in particles)
+                    {
+                        p.Update(projectiles);
+                    }
 
-            foreach (TextEffect te in textEffects)
-            {
-                te.Update();
-            }
+                    foreach (Explosion e in explosions)
+                    {
+                        e.Update();
+                    }
 
-            foreach (Tile t in tiles)
-            {
-                t.Update();
-            }
+                    foreach (PowerUp p in powerUps)
+                    {
+                        p.Update(player, textEffects, alliedShips);
+                    }
 
-            foreach(TextBox t in textBoxes)
-            {
-                t.Update();
-            }
+                    foreach (TextEffect te in textEffects)
+                    {
+                        te.Update();
+                    }
 
-            foreach(Loot l in loots)
-            {
-                l.Update(player, textEffects);
-            }
+                    foreach (Tile t in tiles)
+                    {
+                        t.Update();
+                    }
 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
-            {
-                fileManager.LoadPlayer("save.sav", player);
-                levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
-            }
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                //fileManager.SavePlayer("save.sav", player);
-                //textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64*3, 4, 1, "LEVEL COMPLETED"));
-                //enemies.Add(new Enemy(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 12, random));
-                //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);
-                //loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
-                //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
-                if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
-                //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
-                //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
-                //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
-                //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, false));
-                //projectiles.Add(new Projectile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), -90+random.Next(-8, 9), 8, 10, 0, false, true));
-                //particles.Add(new Particle(new Vector2(800 / 2, 640 / 2), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0.05f, 1, 1, Color.White));
-                //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
-            }
+                    foreach (TextBox t in textBoxes)
+                    {
+                        t.Update();
+                    }
 
+                    foreach (Loot l in loots)
+                    {
+                        l.Update(player, textEffects);
+                    }
+
+                    if (Mouse.GetState().RightButton == ButtonState.Pressed)
+                    {
+                        fileManager.LoadPlayer("save.sav", player);
+                        levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
+                    }
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        //fileManager.SavePlayer("save.sav", player);
+                        //textEffects.Add(new TextEffect(new Vector2(0, 0), "", 1, Color.White, new Vector2(Globals.screenW / 2 - 200, Globals.screenH / 2), 0.05f, 64*3, 4, 1, "LEVEL COMPLETED"));
+                        //enemies.Add(new Enemy(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 12, random));
+                        //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);
+                        //loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
+                        //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
+                        if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                        //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
+                        //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
+                        //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
+                        //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
+                        powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, false));
+                        //projectiles.Add(new Projectile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), -90+random.Next(-8, 9), 8, 10, 0, false, true));
+                        //particles.Add(new Particle(new Vector2(800 / 2, 640 / 2), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0.05f, 1, 1, Color.White));
+                        //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   
+                    }
+                    break;
+            }
             for (int i = 0; i < loots.Count(); i++)
             {
                 if (loots[i].Destroy) loots.RemoveAt(i);
@@ -254,38 +261,45 @@ namespace FinalSpelProject
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]); }
-            foreach(Tile t in tiles)
+            switch (Globals.gameState)
             {
-                if (t.GetType() == 1)
-                    t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
-            }
-            foreach(Tile t in tiles)
-            {
-                if (t.GetType() != 1)
-                    t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
-            }
+                case GameStates.Menu:
+                    menu.Draw(spriteBatch, font);
+                    break;
+                case GameStates.Game:
+                    foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]); }
+                    foreach (Tile t in tiles)
+                    {
+                        if (t.GetType() == 1)
+                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+                    }
+                    foreach (Tile t in tiles)
+                    {
+                        if (t.GetType() != 1)
+                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+                    }
 
-            foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
-            foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
-            foreach (Particle p in particles) { if (!p.Rotated) p.DrawSprite(spriteBatch, spritesheet); else p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); }
-            foreach (Projectile p in projectiles) { if (p.Rotated) p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); else p.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Player p in player) { if(!p.Flash) p.Draw(spriteBatch, spritesheet); }
-            foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }
-            foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
-            foreach (Boss b in bosses)
-            {
-                b.Draw(spriteBatch, spritesheet);
+                    foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
+                    foreach (Gib g in gibs) { g.DrawSprite(spriteBatch, spritesheet, false); }
+                    foreach (Particle p in particles) { if (!p.Rotated) p.DrawSprite(spriteBatch, spritesheet); else p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); }
+                    foreach (Projectile p in projectiles) { if (p.Rotated) p.DrawSprite(spriteBatch, spritesheet, p.RoateOnRad); else p.DrawSprite(spriteBatch, spritesheet); }
+                    foreach (Player p in player) { if (!p.Flash) p.Draw(spriteBatch, spritesheet); }
+                    foreach (AlliedShip a in alliedShips) { a.DrawSprite(spriteBatch, spritesheet); }
+                    foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
+                    foreach (Boss b in bosses)
+                    {
+                        b.Draw(spriteBatch, spritesheet);
+                    }
+                    foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet); }
+                    foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
+                    foreach (Loot l in loots) { l.DrawSprite(spriteBatch, spritesheet); }
+                    UpdateScreenFlash();
+                    foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
+                    ui.Draw(spriteBatch, spritesheet, font);
+                    foreach (TextBox t in textBoxes) { t.Draw(spriteBatch, spritesheet, font); }
+                    break;
             }
-            foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet);  }
-            foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
-            foreach (Loot l in loots) { l.DrawSprite(spriteBatch, spritesheet); }
-            UpdateScreenFlash();
-            foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
-            ui.Draw(spriteBatch, spritesheet, font);
-            foreach (TextBox t in textBoxes) { t.Draw(spriteBatch, spritesheet, font); }
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

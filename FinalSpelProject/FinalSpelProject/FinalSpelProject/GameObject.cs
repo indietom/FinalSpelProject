@@ -15,7 +15,7 @@ namespace FinalSpelProject
     class GameObject
     {
         public Vector2 Pos { get; set; }
-
+        
         public Vector2 GetCenter { get { return new Vector2(Pos.X + Width / 2, Pos.Y + Height / 2); } }
 
         public Vector2 Vel { get { return new Vector2(VelX, VelY); } }

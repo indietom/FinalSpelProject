@@ -24,9 +24,9 @@ namespace FinalSpelProject
 
         public LevelManager()
         {
-            levelProperties[0] = new LevelProperty(0, 15, 7);
-            levelProperties[1] = new LevelProperty(0, 15, 7);
-            levelProperties[2] = new LevelProperty(0, 15, 7);
+            levelProperties[0] = new LevelProperty(0, 15, 4);
+            levelProperties[1] = new LevelProperty(0, 15, 5);
+            levelProperties[2] = new LevelProperty(0, 15, 5);
             levelProperties[3] = new LevelProperty(0, 24, 7);
             maxChangeLevelCount = 64 * 3;
         }

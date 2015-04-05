@@ -8,7 +8,7 @@ namespace FinalSpelProject
     enum GameStates { StartScreen, Menu, Game, Credits, LevelTransition }
     class Globals
     {
-        public static GameStates gameState;
+        public static GameStates gameState = GameStates.Menu;
 
         public static bool startedGame;
 

@@ -26,6 +26,8 @@ namespace FinalSpelProject
 
         MenuStates menuState;
 
+        byte currentOption;
+
         string startButtonText()
         {
             return (Globals.startedGame) ? "Resume" : "Start";
@@ -33,17 +35,25 @@ namespace FinalSpelProject
 
         public Menu()
         {
-            
+            mainButtons.Add(new Button(new Vector2(Globals.screenW / 2, Globals.screenH / 2), "", start, Color.White, Color.Green, Color.Gray));
         }
 
         public void Update()
         {
-            
+            switch(menuState)
+            {
+
+            }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {
-
+            switch(menuState)
+            {
+                case MenuStates.Main:
+                    mainButtons[start].Draw(spriteBatch, font, currentOption, startButtonText());
+                    break;
+            }
         }
     }
 }

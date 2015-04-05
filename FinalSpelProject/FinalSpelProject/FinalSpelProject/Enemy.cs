@@ -39,6 +39,7 @@ namespace FinalSpelProject
         bool spawned;
         bool AttackingTarget;
         public bool OnGround { get; set; }
+        Vector2 tempPos;
 
         short uTurnHeight;
         short uTurnMinHeight;
@@ -74,6 +75,7 @@ namespace FinalSpelProject
             OrginalColor = color;
             carryingPowerUp = true;
             AssignType(r);
+            Vector2 tempPos = pos2;
         }
 
         public void AssignType(Random r)
@@ -311,6 +313,8 @@ namespace FinalSpelProject
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
                     material = Material.Metal;
+                    spawned = false;
+                    
                     break;
                 case 31:
                     SetSpriteCoords(1, 651);
@@ -826,17 +830,17 @@ namespace FinalSpelProject
                     break;
                 case 28:
                     //Boss 2 small deployed ships
+
                     if (spawned == false)
                     {
-                        for (int i = 0; i < 300; i++)
-                        {
-                            if (i == 299)
-                            {
-                                spawned = true;
-                            }
-                        }
                         Pos += new Vector2(-1, 0);
+                        if (Pos.X == tempPos.X - 10)
+                        {
+                            spawned = true;  
+                        }
+                                          
                     }
+                    
 
                     break;
                 case 31:

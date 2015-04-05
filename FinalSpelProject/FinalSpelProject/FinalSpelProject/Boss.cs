@@ -35,6 +35,13 @@ namespace FinalSpelProject
         public bool levelCompleted;
         Random rng = new Random();
 
+        //dont judge me. (for boss 4)
+        Rectangle Eye1;
+        Rectangle Eye2;
+        Rectangle Eye3;
+
+        int Boss4Phase;
+
         short invisibleCount;
         short maxInvisibleCount;
 
@@ -75,6 +82,26 @@ namespace FinalSpelProject
                     goLeft = true;
                     Firerate = 300;
                     AltFirerate = 150;
+                    break;
+                case 3:
+                    //What the hell am I supposed to do here???
+                    break;
+                case 4:
+                    //Så tre rektanglar behövs och de ska bara "aktiveras" när bossen är i rätt fas.
+                    SetSpriteCoords(846, 651);
+                    SetSize(154, 214);
+                    AnimationActive = true;
+                    Speed = 5;
+                    MaxFrame = 6;
+                    MaxAnimationCount = 8;
+                    hp = 400;
+                    Firerate = 100;
+                    AltFirerate = 300;
+                    Invulnerable = true;
+                    Spawned = false;
+                    Boss4Phase = 1;
+                    //Rekt
+                    Eye1 = Eye2 = Eye3 = new Rectangle((int)Pos.X, (int)Pos.Y, 10, 10);
                     break;
             }
         }
@@ -256,6 +283,115 @@ namespace FinalSpelProject
                     }
 
                     break;
+                case 3:
+
+                    break;
+                case 4:
+                    //Spawning is FUN!
+                    if (Spawned == false)
+                    {
+                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 160, 0.005f));
+                        if (Pos.Y >= 150)
+                        {
+                            Spawned = true;
+                        }
+                    }
+                    //Change phase based on HP
+                    if (hp <= 400)
+                    {
+                        Boss4Phase = 1;
+                    }
+                    if (hp <= 300)
+                    {
+                        Boss4Phase = 2;
+                    }
+                    if (hp <= 200)
+                    {
+                        Boss4Phase = 3;
+                    }
+
+                    //Phase 1 bitches!
+                    if (Boss4Phase == 1)
+                    {
+                        foreach (Projectile p in projectiles)
+                        {
+                            if (p.HitBox.Intersects(Eye1) && p.EnemyShot == false)
+                            {
+                                if (p.Explosive)
+                                {
+                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
+                                }
+                                hp -= p.Dm;
+                                hurtCount = 1;
+
+                                if (p.GetSpriteType() != 6)
+                                {
+                                    p.Destroy = true;
+                                }
+                            }
+                        }
+                    }
+                    Firerate -= 1;
+                    if (Firerate <= 0)
+                    {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 12, 0, 0, true, true));
+                        Firerate = 90;
+                    }
+                    //Phase 2 bitches!
+                    if (Boss4Phase == 2)
+                    {
+                        foreach (Projectile p in projectiles)
+                        {
+                            if (p.HitBox.Intersects(Eye2) && p.EnemyShot == false)
+                            {
+                                if (p.Explosive)
+                                {
+                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
+                                }
+                                hp -= p.Dm;
+                                hurtCount = 1;
+
+                                if (p.GetSpriteType() != 6)
+                                {
+                                    p.Destroy = true;
+                                }
+                            }
+                        }
+                    }
+                    Firerate -= 1;
+                    if (Firerate <= 0)
+                    {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 14, 0, 0, true, true));
+                        Firerate = 60;
+                    }
+                    //Phase 3 bitches!
+                    if (Boss4Phase == 3)
+                    {
+                        foreach (Projectile p in projectiles)
+                        {
+                            if (p.HitBox.Intersects(Eye3) && p.EnemyShot == false)
+                            {
+                                if (p.Explosive)
+                                {
+                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
+                                }
+                                hp -= p.Dm;
+                                hurtCount = 1;
+
+                                if (p.GetSpriteType() != 6)
+                                {
+                                    p.Destroy = true;
+                                }
+                            }
+                        }
+                    }
+                    Firerate -= 1;
+                    if (Firerate <= 0)
+                    {
+                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 16, 0, 0, true, true));
+                        Firerate = 30;
+                    }
+                    break;
                     
             }
             Collision(player, projectiles, explosions);
@@ -301,7 +437,7 @@ namespace FinalSpelProject
 
             foreach (Projectile p in projectiles)
             {
-                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false)
+                if (p.HitBox.Intersects(HitBox) && p.EnemyShot == false && type != 4)
                 {
                     if (p.Explosive)
                     {

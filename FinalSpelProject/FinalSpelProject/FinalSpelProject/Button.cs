@@ -32,6 +32,7 @@ namespace FinalSpelProject
 
         public Button(Vector2 pos2, string text2, byte tag2, Color color2, Color selectedColor2, Color unavalibeColor2)
         {
+            Pos = pos2;
             color = color2;
             OrginalColor = color;
             selectedColor = selectedColor2;

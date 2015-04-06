@@ -18,7 +18,8 @@ namespace FinalSpelProject
         
         public static bool flashScreen;
         public static byte flashScreenCount;
-
+        byte pauseDelay;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -53,6 +54,9 @@ namespace FinalSpelProject
         LevelManager levelManager = new LevelManager();
         FileManager fileManager = new FileManager();
         ProceduralGenerationManager proceduralGenerationManager = new ProceduralGenerationManager();
+
+        KeyboardState keyboard;
+        KeyboardState prevKeyboard;
 
         protected override void Initialize()
         {
@@ -95,8 +99,8 @@ namespace FinalSpelProject
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
+            prevKeyboard = keyboard;
+            keyboard = Keyboard.GetState();
 
             Random random = new Random();
 
@@ -109,6 +113,14 @@ namespace FinalSpelProject
                     LevelTransitionScreen.Update();
                     break;
                 case GameStates.Game:
+                    if(pauseDelay >= 10 && keyboard.IsKeyDown(Keys.Escape) && prevKeyboard.IsKeyUp(Keys.Escape))
+                    {
+                        Globals.gameState = GameStates.Menu;
+                        pauseDelay = 0;
+                    }
+
+                    if (pauseDelay < 10) pauseDelay += 1;
+
                     ui.Update(player, bosses);
 
                     level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, bosses, levelManager);

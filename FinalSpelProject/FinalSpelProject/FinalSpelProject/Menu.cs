@@ -29,6 +29,8 @@ namespace FinalSpelProject
         byte maxOption;
         byte delay;
 
+        public byte GetDelay() { return delay; }
+
         string startButtonText()
         {
             return (Globals.startedGame) ? "RESUME" : "START";
@@ -70,6 +72,12 @@ namespace FinalSpelProject
             {
                 if(currentOption != 0) currentOption -= 1;
                 else currentOption = maxOption;   
+            }
+
+            if(delay <= 0 && keyboard.IsKeyDown(Keys.Escape) && Globals.startedGame)
+            {
+                Globals.gameState = GameStates.Game;
+                delay = 1;
             }
 
             if (delay >= 1) delay += 1;

@@ -31,7 +31,7 @@ namespace FinalSpelProject
             maxChangeLevelCount = 64 * 3;
         }
 
-        public void Update(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, List<Boss> bosses, Level level, List<TextEffect> textEffects)
+        public void Update(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, List<Boss> bosses, Level level, List<TextEffect> textEffects, List<Tile> tiles)
         {
             foreach(Boss b in bosses)
             {
@@ -61,7 +61,7 @@ namespace FinalSpelProject
                 foreach (Player p in players)
                     if(p.GetLevelsCompleted() <= currentLevel) p.SetLevelsCompleted((byte)(currentLevel+1));
                 currentLevel += 1;
-                StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
+                StartLevel(currentLevel, chunks, enemies, projectiles, players, level, tiles);
                 Globals.gameState = GameStates.LevelTransition;
                 players[0].inputActive = true;
                 levelCompleted = false;
@@ -73,8 +73,9 @@ namespace FinalSpelProject
             }
         }
 
-        public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)
+        public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<Tile> tiles)
         {
+            tiles.Clear();
             chunks.Clear();
             enemies.Clear();
             projectiles.Clear();
@@ -85,10 +86,10 @@ namespace FinalSpelProject
             level = new Level(chunks, levelProperties[currentLevel]);
         }
 
-        public void StartLevel(byte currentLevel2, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level)
+        public void StartLevel(byte currentLevel2, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<Tile> tiles)
         {
             currentLevel = currentLevel2;
-            ResetLevel(chunks, enemies, projectiles, players, level);
+            ResetLevel(chunks, enemies, projectiles, players, level, tiles);
         }
     }
 

@@ -115,10 +115,6 @@ namespace FinalSpelProject
             Speed = 1f;
             deccelerate = 0.4f;
 
-            gunType = 5;
-            specialGunType = 3;
-            specialAmmo = 2;
-
             maxRespawnCount = 130;
 
             maxRaiseLaserCount = 1;

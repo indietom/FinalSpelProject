@@ -61,7 +61,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
+           // bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -107,7 +107,7 @@ namespace FinalSpelProject
             switch (Globals.gameState)
             {
                 case GameStates.Menu:
-                    menu.Update(levelManager, chunks, enemies, projectiles, player, level);
+                    menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles);
                     break;
                 case GameStates.LevelTransition:
                     LevelTransitionScreen.Update();
@@ -124,7 +124,7 @@ namespace FinalSpelProject
                     ui.Update(player, bosses);
 
                     level.Update(tiles, chunks, proceduralGenerationManager, spawnManager, enemies, powerUps, bosses, levelManager);
-                    levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects);
+                    levelManager.Update(chunks, enemies, projectiles, player, bosses, level, textEffects, tiles);
 
                     foreach (Gib g in gibs)
                     {

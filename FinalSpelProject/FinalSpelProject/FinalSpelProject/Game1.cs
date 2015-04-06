@@ -47,6 +47,7 @@ namespace FinalSpelProject
         List<Loot> loots = new List<Loot>();
 
         Level level;
+        LevelTransitionScreen LevelTransitionScreen = new LevelTransitionScreen();
 
         SpawnManager spawnManager = new SpawnManager();
         LevelManager levelManager = new LevelManager();
@@ -56,7 +57,7 @@ namespace FinalSpelProject
         protected override void Initialize()
         {
             player.Add(new Player());
-            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
+            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -103,6 +104,9 @@ namespace FinalSpelProject
             {
                 case GameStates.Menu:
                     menu.Update(levelManager, chunks, enemies, projectiles, player, level);
+                    break;
+                case GameStates.LevelTransition:
+                    LevelTransitionScreen.Update();
                     break;
                 case GameStates.Game:
                     ui.Update(player, bosses);
@@ -183,7 +187,7 @@ namespace FinalSpelProject
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
                         fileManager.LoadPlayer("save.sav", player);
-                        levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
+                        //levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
@@ -266,6 +270,9 @@ namespace FinalSpelProject
             {
                 case GameStates.Menu:
                     menu.Draw(spriteBatch, font);
+                    break;
+                case GameStates.LevelTransition:
+                    LevelTransitionScreen.Draw(spriteBatch, font, spritesheet);
                     break;
                 case GameStates.Game:
                     foreach (Chunk c in chunks) { c.Draw(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]); }

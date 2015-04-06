@@ -26,7 +26,7 @@ namespace FinalSpelProject
         byte explosionDelay;
         byte muzzleFlashCount;
         byte currentBarrel;
-        byte levelsCompleted = 4;
+        byte levelsCompleted = 0;
 
         public byte GetLevelsCompleted() { return levelsCompleted; }
         public byte GetLives() { return lives; }
@@ -143,6 +143,7 @@ namespace FinalSpelProject
         }
         public void Input(List<Projectile> projectiles)
         {
+            Console.WriteLine(levelsCompleted);
             Random random = new Random();
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();

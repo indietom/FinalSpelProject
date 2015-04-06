@@ -74,8 +74,10 @@ namespace FinalSpelProject
                 else currentOption = maxOption;   
             }
 
-            if(delay <= 0 && keyboard.IsKeyDown(Keys.Escape) && Globals.startedGame)
+            if(delay <= 0 && keyboard.IsKeyDown(Keys.Escape) && prevKeyboard.IsKeyUp(Keys.Escape) && Globals.startedGame)
             {
+                menuState = MenuStates.Main;
+                currentOption = 0;
                 Globals.gameState = GameStates.Game;
                 delay = 1;
             }

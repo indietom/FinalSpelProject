@@ -59,7 +59,7 @@ namespace FinalSpelProject
             if(changeLevelCount >= maxChangeLevelCount)
             {
                 foreach (Player p in players)
-                    if(p.GetLevelsCompleted() < currentLevel) p.SetLevelsCompleted(currentLevel);
+                    if(p.GetLevelsCompleted() <= currentLevel) p.SetLevelsCompleted((byte)(currentLevel+1));
                 currentLevel += 1;
                 StartLevel(currentLevel, chunks, enemies, projectiles, players, level);
                 Globals.gameState = GameStates.LevelTransition;

@@ -17,7 +17,7 @@ namespace FinalSpelProject
 
         string text;
 
-        bool unavalible;
+        public bool unavalible;
 
         float scale;
 
@@ -68,7 +68,7 @@ namespace FinalSpelProject
             if (unavalible) color = unavalibeColor;
             if (currentTag == tag)
             {
-                color = selectedColor;
+                if (!unavalible) color = selectedColor;
                 scale = 1.4f;
             }
             if (!unavalible && currentTag != tag) color = OrginalColor;

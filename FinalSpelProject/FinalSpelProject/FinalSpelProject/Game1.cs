@@ -102,7 +102,7 @@ namespace FinalSpelProject
             switch (Globals.gameState)
             {
                 case GameStates.Menu:
-                    menu.Update();
+                    menu.Update(levelManager, chunks, enemies, projectiles, player, level);
                     break;
                 case GameStates.Game:
                     ui.Update(player, bosses);

@@ -23,7 +23,7 @@ namespace FinalSpelProject
         List<Button> optionsButtons = new List<Button>();
         List<Button> levelSelectButtons = new List<Button>();
 
-        MenuStates menuState;
+        MenuStates menuState = MenuStates.LevelSelect;
 
         byte currentOption;
         byte maxOption;
@@ -43,9 +43,15 @@ namespace FinalSpelProject
             mainButtons.Add(new Button(new Vector2(350, 260), "HIGHSCORES", highScoreScreen, Color.White, Color.Green, Color.Gray));
             mainButtons.Add(new Button(new Vector2(350, 290), "OPTIONS", options, Color.White, Color.Green, Color.Gray));
             mainButtons.Add(new Button(new Vector2(350, 320), "QUIT", quit, Color.White, Color.Green, Color.Gray));
+
+            for(int i = 0; i < 4; i++)
+            {
+                levelSelectButtons.Add(new Button(new Vector2(300, 200 + i * 30), Globals.GetLevelName((byte)i), (byte)i, Color.White, Color.Green, Color.Gray));
+            }
         }
 
-        public void Update()
+        // ayy lmao, I'm so sorry
+        public void Update(LevelManager levelManager, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> player, Level level)
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
@@ -67,6 +73,41 @@ namespace FinalSpelProject
             {
                 case MenuStates.Main:
                     maxOption = quit;
+                    foreach(Button mb in mainButtons)
+                    {
+                        if(mb.Pressed(currentOption))
+                        {
+                            switch(mb.GetTag())
+                            {
+                                case start:
+                                    Globals.gameState = GameStates.Game;
+                                    Globals.startedGame = true;
+                                    break;
+                                case quit:
+                                    Environment.Exit(0);
+                                    break;
+                            }
+                        }
+                    }
+                    break;
+                case MenuStates.LevelSelect:
+                    maxOption = 5;
+                    foreach(Button lb in levelSelectButtons)
+                    {
+                        if (lb.GetTag() <= 4)
+                        {
+                            if(!lb.unavalible && lb.Pressed(currentOption))
+                            {
+                                Globals.gameState = GameStates.Game;
+                                levelManager.StartLevel(lb.GetTag(), chunks, enemies, projectiles, player, level);
+                            }
+                            if (player[0].GetLevelsCompleted() <= lb.GetTag())
+                            {
+                                lb.unavalible = true;
+                            }
+                            else lb.unavalible = false;
+                        }
+                    }
                     break;
             }
         }
@@ -81,6 +122,12 @@ namespace FinalSpelProject
                     mainButtons[highScoreScreen].Draw(spriteBatch, font, currentOption);
                     mainButtons[options].Draw(spriteBatch, font, currentOption);
                     mainButtons[quit].Draw(spriteBatch, font, currentOption);
+                    break;
+                case MenuStates.LevelSelect:
+                    spriteBatch.DrawString(font, "LEVELS-", new Vector2(300, 150), Color.Violet, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1.0f);                    foreach(Button lb in levelSelectButtons)
+                    {
+                        lb.Draw(spriteBatch, font, currentOption);
+                    }
                     break;
             }
         }

@@ -12,8 +12,8 @@ namespace FinalSpelProject
     {
         ComboCounter comboCounter;
 
-        string scoreText;
-        string bossHpText;
+        string scoreText = "";
+        string bossHpText = "";
 
         short powerUpFrame;
         short specialPowerUpFrame;

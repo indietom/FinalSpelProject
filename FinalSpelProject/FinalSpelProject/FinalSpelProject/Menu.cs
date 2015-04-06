@@ -23,10 +23,11 @@ namespace FinalSpelProject
         List<Button> optionsButtons = new List<Button>();
         List<Button> levelSelectButtons = new List<Button>();
 
-        MenuStates menuState = MenuStates.LevelSelect;
+        MenuStates menuState = MenuStates.Main;
 
         byte currentOption;
         byte maxOption;
+        byte delay;
 
         string startButtonText()
         {
@@ -48,6 +49,8 @@ namespace FinalSpelProject
             {
                 levelSelectButtons.Add(new Button(new Vector2(300, 200 + i * 30), Globals.GetLevelName((byte)i), (byte)i, Color.White, Color.Green, Color.Gray));
             }
+            levelSelectButtons.Add(new Button(new Vector2(300, 200 + 5 * 30), "BACK", 4, Color.White, Color.Green, Color.Gray));
+
         }
 
         // ayy lmao, I'm so sorry
@@ -69,13 +72,16 @@ namespace FinalSpelProject
                 else currentOption = maxOption;   
             }
 
+            if (delay >= 1) delay += 1;
+            delay = (delay >= 8) ? (byte)0 : delay;
+
             switch(menuState)
             {
                 case MenuStates.Main:
                     maxOption = quit;
                     foreach(Button mb in mainButtons)
                     {
-                        if(mb.Pressed(currentOption))
+                        if(mb.Pressed(currentOption) && delay <= 0)
                         {
                             switch(mb.GetTag())
                             {
@@ -83,23 +89,35 @@ namespace FinalSpelProject
                                     Globals.gameState = GameStates.Game;
                                     Globals.startedGame = true;
                                     break;
+                                case levelSelect:
+                                    menuState = MenuStates.LevelSelect;
+                                    currentOption = 0;
+                                    break;
                                 case quit:
                                     Environment.Exit(0);
                                     break;
                             }
+                            delay = 1;
                         }
                     }
                     break;
                 case MenuStates.LevelSelect:
-                    maxOption = 5;
+                    maxOption = 4;
                     foreach(Button lb in levelSelectButtons)
                     {
-                        if (lb.GetTag() <= 4)
+                        if (lb.GetTag() == 4 && lb.Pressed(currentOption) && delay <= 0)
                         {
-                            if(!lb.unavalible && lb.Pressed(currentOption))
+                            menuState = MenuStates.Main;
+                            currentOption = levelSelect;
+                            delay = 1;
+                        }
+                        if (lb.GetTag() <= 3)
+                        {
+                            if (!lb.unavalible && lb.Pressed(currentOption) && delay <= 0)
                             {
                                 Globals.gameState = GameStates.Game;
                                 levelManager.StartLevel(lb.GetTag(), chunks, enemies, projectiles, player, level);
+                                delay = 1;
                             }
                             if (player[0].GetLevelsCompleted() <= lb.GetTag())
                             {

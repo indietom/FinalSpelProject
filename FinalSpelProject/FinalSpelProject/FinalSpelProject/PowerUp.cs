@@ -54,26 +54,40 @@ namespace FinalSpelProject
             HitBox = FullHitBox;
             foreach(Player p in players)
             {
-                if(HitBox.Intersects(p.HitBox))
+                if (HitBox.Intersects(p.HitBox))
                 {
-                    if (p.GetGunType() != type)
-                    {
-                        if (!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
-                        if (type == 1 && special)
-                            alliedShips.Add(new AlliedShip(new Vector2(Globals.screenW / 2 - 12, Globals.screenH / 2 - 12)));
-                        else if (type == 4 && special)
-                            p.SetLives((byte)(p.GetLives() + 1));
-                        else
-                            p.SetGunType(type, special);
-                    }
+                    if (type == 1 && special)
+                        alliedShips.Add(new AlliedShip(new Vector2(Globals.screenW / 2 - 12, Globals.screenH / 2 - 12)));
+                    else if (type == 4 && special)
+                        p.SetLives((byte)(p.GetLives() + 1));
                     else
                     {
-                        if(!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
-                        p.Score += 5000;
+                        if (special)
+                        {
+                            if (!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                            p.SetGunType(type, special);
+                        }
+                        else
+                        {
+                            if (!special && p.GetGunType() != type)
+                            {
+                                p.SetGunType(type, special);
+                                if (!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), name, 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                            }
+                            else
+                            {
+                                if (!Globals.PowerUpTextExists(textEffects)) textEffects.Add(new TextEffect(new Vector2(290, -100), "5000+ points", 1.0f, Color.Black, new Vector2(290, 240), 0.1f, 200, 1, 1));
+                                p.Score += 5000;
+                            }
+                        }
                     }
-                    if(special && type != 1 && type != 4)
+
+                    if (p.GetGunType() != type && !special)
                     {
-                        p.SetSpecialAmmo((byte)(p.GetSpecialAmmo() + 3)); 
+                    }
+                    if (special && type != 1 && type != 4)
+                    {
+                        p.SetSpecialAmmo((byte)(p.GetSpecialAmmo() + 3));
                     }
                     SoundManager.PowerUp.Play();
                     Destroy = true;

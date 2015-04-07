@@ -65,7 +65,7 @@ namespace FinalSpelProject
                 grassSpawnCount = 0;
             }
 
-            lakeSpawnCount += 1;
+            if(LevelManager.currentLevel == 0) lakeSpawnCount += 1;
 
             if (lakeSpawnCount >= maxLakeSpawnCount)
             {

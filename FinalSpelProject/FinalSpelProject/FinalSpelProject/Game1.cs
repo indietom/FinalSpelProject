@@ -297,12 +297,12 @@ namespace FinalSpelProject
                     foreach (Tile t in tiles)
                     {
                         if (t.GetType() == 1)
-                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]);
                     }
                     foreach (Tile t in tiles)
                     {
                         if (t.GetType() != 1)
-                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[level.CurrentLevel]);
+                            t.DrawSprite(spriteBatch, TilesheetManager.TileSheets[LevelManager.currentLevel]);
                     }
 
                     foreach (Enemy e in enemies) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }

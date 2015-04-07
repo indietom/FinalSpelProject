@@ -12,6 +12,8 @@ namespace FinalSpelProject
 
         LevelProperty[] levelProperties = new LevelProperty[5];
 
+        FileManager fileManager = new FileManager();
+
         public LevelProperty GetLevelProperty(int index)
         {
             return levelProperties[index];
@@ -60,6 +62,7 @@ namespace FinalSpelProject
             {
                 foreach (Player p in players)
                     if(p.GetLevelsCompleted() <= currentLevel) p.SetLevelsCompleted((byte)(currentLevel+1));
+                fileManager.SavePlayer("save.sav", players);
                 currentLevel += 1;
                 StartLevel(currentLevel, chunks, enemies, projectiles, players, level, tiles);
                 Globals.gameState = GameStates.LevelTransition;

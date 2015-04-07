@@ -65,6 +65,7 @@ namespace FinalSpelProject
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
+            fileManager.LoadPlayer("save.sav", player);
             level = new Level(chunks, LevelManager.currentLevel, Globals.LevelHeight());
             base.Initialize();
         }

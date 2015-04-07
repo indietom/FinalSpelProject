@@ -68,7 +68,7 @@ namespace FinalSpelProject
 
         public void SavePlayer(string path, List<Player> players)
         {
-            byte[] byteData = new byte[4];
+            byte[] byteData = new byte[5];
             byteData[0] = players[0].GetGunType();
             byteData[1] = players[0].GetSpecialGunType();
             byteData[2] = players[0].GetSpecialAmmo();

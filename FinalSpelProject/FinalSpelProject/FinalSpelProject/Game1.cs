@@ -111,7 +111,7 @@ namespace FinalSpelProject
                     menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles);
                     break;
                 case GameStates.LevelTransition:
-                    LevelTransitionScreen.Update();
+                    LevelTransitionScreen.Update(ref level);
                     break;
                 case GameStates.Game:
                     if(pauseDelay >= 10 && keyboard.IsKeyDown(Keys.Escape) && prevKeyboard.IsKeyUp(Keys.Escape))
@@ -199,8 +199,13 @@ namespace FinalSpelProject
 
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        fileManager.LoadPlayer("save.sav", player);
+                        Globals.worldSpeed = 32;
+                        // fileManager.LoadPlayer("save.sav", player);
                         //levelManager.StartLevel(3, chunks, enemies, projectiles, player, level);
+                    }
+                    else
+                    {
+                        Globals.worldSpeed = 1;
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {

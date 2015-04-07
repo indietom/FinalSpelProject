@@ -16,10 +16,14 @@ namespace FinalSpelProject
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
 
-        public void Update()
+        public void Update(ref Level level)
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
+
+            level.checkLoopingDelay = 0;
+            level.looping = false;
+            level.spawnedBoss = false;
 
             if(delay < 10) delay += 1;
 

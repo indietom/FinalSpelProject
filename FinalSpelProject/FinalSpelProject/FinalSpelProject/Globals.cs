@@ -21,6 +21,8 @@ namespace FinalSpelProject
 
         public static bool blackHoleExists;
 
+        public static bool startedNewLevel;
+
         public static string GetLevelName(byte number)
         {
             string[] name = new string[4];

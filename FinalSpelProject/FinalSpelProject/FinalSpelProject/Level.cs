@@ -13,13 +13,16 @@ namespace FinalSpelProject
 
         string levelPath;
 
-        bool looping;
-        bool spawnedBoss;
+        public bool looping;
+        public bool spawnedBoss;
+
+        public short checkLoopingDelay;
 
         public Level(List<Chunk> chunks, byte currentLevel2, byte amountOfChunks2)
         {
-            spawnedBoss = false;
+            checkLoopingDelay = 0;
             looping = false;
+            spawnedBoss = false;
             amountOfChunks = amountOfChunks2;
             CurrentLevel = currentLevel2;
             levelPath = "Content\\level"+CurrentLevel + "\\";
@@ -31,6 +34,7 @@ namespace FinalSpelProject
 
         public Level(List<Chunk> chunks, LevelProperty levelProperty)
         {
+            checkLoopingDelay = 0;
             spawnedBoss = false;
             looping = false;
             amountOfChunks = levelProperty.GetHeight(); 
@@ -49,11 +53,22 @@ namespace FinalSpelProject
                 bosses.Add(new Boss(new Vector2(Globals.screenW / 2, -200), (byte)(LevelManager.currentLevel + 1))); 
                 spawnedBoss = true;
             }
-            if(chunks.Count == 1)
+
+            Console.WriteLine("LOOPING: " + looping + "\nSpawned boss: " + spawnedBoss + "\nChecklooping: " + checkLoopingDelay);
+
+            if (checkLoopingDelay < 128 * 2)
+            {
+                checkLoopingDelay += 1;
+                looping = false;
+                spawnedBoss = false;
+            }
+            
+            if (chunks.Count == 1 && checkLoopingDelay >= 128 * 2) 
             {
                 looping = true;
             }
-            if (looping && LevelManager.currentLevel == 0)
+
+            if (looping)
             {
                 pgm.SpawnLevelOne(tiles);
             }

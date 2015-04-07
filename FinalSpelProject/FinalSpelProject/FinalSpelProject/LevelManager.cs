@@ -64,11 +64,14 @@ namespace FinalSpelProject
                     if(p.GetLevelsCompleted() <= currentLevel) p.SetLevelsCompleted((byte)(currentLevel+1));
                 fileManager.SavePlayer("save.sav", players);
                 currentLevel += 1;
-                StartLevel(currentLevel, chunks, enemies, projectiles, players, level, tiles);
+                StartLevel(currentLevel, chunks, enemies, projectiles, players, ref level, tiles);
                 Globals.gameState = GameStates.LevelTransition;
                 players[0].inputActive = true;
                 levelCompleted = false;
                 changeLevelCount = 0;
+                level.checkLoopingDelay = 0;
+                level.looping = false;
+                level.spawnedBoss = false;
             }
             if(changeLevelCount == 3)
             {
@@ -76,7 +79,7 @@ namespace FinalSpelProject
             }
         }
 
-        public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<Tile> tiles)
+        public void ResetLevel(List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, ref Level level, List<Tile> tiles)
         {
             tiles.Clear();
             chunks.Clear();
@@ -87,12 +90,18 @@ namespace FinalSpelProject
                 p.Pos = new Vector2(Globals.screenW / 2 - p.Width / 2, Globals.screenH / 2 - p.Height / 2);
             }
             level = new Level(chunks, levelProperties[currentLevel]);
+            level.checkLoopingDelay = 0;
+            level.looping = false;
+            level.spawnedBoss = false;
         }
 
-        public void StartLevel(byte currentLevel2, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, Level level, List<Tile> tiles)
+        public void StartLevel(byte currentLevel2, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> players, ref Level level, List<Tile> tiles)
         {
             currentLevel = currentLevel2;
-            ResetLevel(chunks, enemies, projectiles, players, level, tiles);
+            ResetLevel(chunks, enemies, projectiles, players, ref level, tiles);
+            level.checkLoopingDelay = 0;
+            level.looping = false;
+            level.spawnedBoss = false;
         }
     }
 

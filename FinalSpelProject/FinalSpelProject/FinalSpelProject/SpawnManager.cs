@@ -11,6 +11,7 @@ namespace FinalSpelProject
         byte amountOfEnemySpawners;
         byte lineHeight;
         byte chanceOfPowerUp;
+        byte chanceOfEnemy;
 
         short[] spawnEnemyCounters;
         short[] MaxSpawnEnemyCounters;
@@ -29,6 +30,7 @@ namespace FinalSpelProject
             MaxSpawnEnemyCounters = new short[amountOfEnemySpawners];
             active = true;
             MaxSpawnEnemyCounters[0] = 128 * 3;
+            MaxSpawnEnemyCounters[1] = 128 * 5;
         }
 
         public void Update(List<Enemy> enemies, List<PowerUp> powerUps, LevelManager levelManager)
@@ -66,6 +68,16 @@ namespace FinalSpelProject
                 SpawnEnemiesLine(new Vector2(random.Next(Globals.screenW - 32), random.Next(-640, -400)), (byte)random.Next(3, 6), 18, 64, enemies);
                 spawnEnemyCounters[0] = 0;
                 MaxSpawnEnemyCounters[0] = (short)random.Next(128 * 8, 128 * 12);
+            }
+            spawnEnemyCounters[1] += 1;
+            if(spawnEnemyCounters[1] >= MaxSpawnEnemyCounters[1])
+            {
+                chanceOfEnemy = (byte)random.Next(9);
+                if(chanceOfEnemy < 4)
+                {
+                    SpawnEnemiesTriangle(new Vector2(random.Next(Globals.screenW - 128), -300), (byte)random.Next(3, 6), 18, 32, enemies);
+                }
+                spawnEnemyCounters[1] = (byte)random.Next(-128*3, 128 * 2);
             }
         }
 

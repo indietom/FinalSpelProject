@@ -58,6 +58,22 @@ namespace FinalSpelProject
             return tmp;
         }
 
+        public static string OptionTextMovment()
+        {
+            if (currentMoveSet == 0)
+                return "<ARROW KEYS> - W, A, S, D";
+            else
+                return "ARROW KEYS - <W, A, S, D>";
+        }
+
+        public static string OptionTextShoot()
+        {
+            if (currentShootSet == 0)
+                return "<X TO SHOOT, Z FOR SPECIAL-ATTACK> - N TO SHOOT, M FOR SPECIAL-ATTACK";
+            else
+                return "X TO SHOOT, Z FOR SPECIAL-ATTACK - <N TO SHOOT, M FOR SPECIAL-ATTACK>";
+        }
+
         public static string GetLevelName(byte number)
         {
             string[] name = new string[4];

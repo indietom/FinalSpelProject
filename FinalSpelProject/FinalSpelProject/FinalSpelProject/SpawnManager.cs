@@ -45,14 +45,20 @@ namespace FinalSpelProject
         public void PowerUpSpawnUpdate(List<PowerUp> powerUps, LevelManager levelManager)
         {
             Random random = new Random();
-            spawnPowerUpCount += 1;
+            spawnPowerUpCount += 10;
             if(spawnPowerUpCount >= maxSpawnPowerUpCount)
             {
-                chanceOfPowerUp = (byte)random.Next(1, 9);
+                chanceOfPowerUp = (byte)random.Next(1, 16);
+                Console.WriteLine("LEL");
                 if(chanceOfPowerUp == 4)
                 {
                     // ayy lmao
-                    powerUps.Add(new PowerUp(new Vector2(random.Next(Globals.screenW-32), random.Next(-128*2, -128)), (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 0, false));
+                    powerUps.Add(new PowerUp(new Vector2(random.Next(Globals.screenW-32), random.Next(-128*2, -128)), (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()+1), 0, false));
+                    chanceOfPowerUp = 0;
+                }
+                if (chanceOfPowerUp == 5)
+                {
+                    powerUps.Add(new PowerUp(new Vector2(random.Next(Globals.screenW - 32), random.Next(-128 * 2, -128)), (byte)random.Next(0, 5), 0, true));
                     chanceOfPowerUp = 0;
                 }
                 spawnPowerUpCount = 0;

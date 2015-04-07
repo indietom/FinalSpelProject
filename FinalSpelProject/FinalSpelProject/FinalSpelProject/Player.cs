@@ -117,8 +117,8 @@ namespace FinalSpelProject
 
             maxRespawnCount = 130;
 
-            specialGunType = 0;
-            specialAmmo = 0;
+            specialGunType = 3;
+            specialAmmo = 3;
 
             maxRaiseLaserCount = 1;
             maxLaserHeight = 200;
@@ -133,16 +133,24 @@ namespace FinalSpelProject
 
             thumbStickMax = 0.1f;
 
-            left = Keys.Left;
-            right = Keys.Right;
-            down = Keys.Down;
-            up = Keys.Up;
-            fire = Keys.X;
-            specialFire = Keys.Z;
+            AssignKeys();
         }
+
+        public void AssignKeys()
+        {
+            //Globals.WASDSet
+            left = Globals.MoveSet()[1];
+            right = Globals.MoveSet()[3];
+            down = Globals.MoveSet()[2];
+            up = Globals.MoveSet()[0];
+
+            fire = Globals.ShootSet()[0];
+            specialFire = Globals.ShootSet()[1];
+        }
+
         public void Input(List<Projectile> projectiles)
         {
-            Console.WriteLine(levelsCompleted);
+            //Console.WriteLine(levelsCompleted);
             Random random = new Random();
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();

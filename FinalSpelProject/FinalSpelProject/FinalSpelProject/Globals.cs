@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace FinalSpelProject
 {
@@ -22,6 +23,40 @@ namespace FinalSpelProject
         public static bool blackHoleExists;
 
         public static bool startedNewLevel;
+
+        public static Keys left, right, down, up, fire, specialFire;
+
+        public static Keys[] WASDSet = new Keys[5];
+        public static Keys[] ArrowSet = new Keys[5];
+        public static Keys[] XZSet = new Keys[2];
+        public static Keys[] NMSet = new Keys[2];
+
+        public static byte currentMoveSet = 0;
+        public static byte currentShootSet = 0;
+
+        public static Keys[] MoveSet()
+        {
+            Keys[] tmp = new Keys[5];
+
+            if (currentMoveSet == 0)
+                tmp = ArrowSet;
+            if (currentMoveSet == 1)
+                tmp = WASDSet;
+
+            return tmp;
+        }
+
+        public static Keys[] ShootSet()
+        {
+            Keys[] tmp = new Keys[2];
+
+            if (currentShootSet == 0)
+                tmp = XZSet;
+            if (currentShootSet == 1)
+                tmp = NMSet;
+
+            return tmp;
+        }
 
         public static string GetLevelName(byte number)
         {
@@ -61,6 +96,22 @@ namespace FinalSpelProject
 
         public static void Load()
         {
+            WASDSet[0] = Keys.W;
+            WASDSet[1] = Keys.A;
+            WASDSet[2] = Keys.S;
+            WASDSet[3] = Keys.D;
+
+            ArrowSet[0] = Keys.Up;
+            ArrowSet[1] = Keys.Left;
+            ArrowSet[2] = Keys.Down;
+            ArrowSet[3] = Keys.Right;
+
+            XZSet[0] = Keys.X;
+            XZSet[1] = Keys.Z;
+
+            NMSet[0] = Keys.N;
+            NMSet[1] = Keys.M;
+
             screenW = 800;
             screenH = 640;
 

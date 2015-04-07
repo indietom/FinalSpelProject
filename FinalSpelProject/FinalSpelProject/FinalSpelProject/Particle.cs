@@ -65,7 +65,7 @@ namespace FinalSpelProject
                     Rotation += 10;
                     foreach(Projectile p in projectiles)
                     {
-                        if((p.FullHitBox.Intersects(FullHitBox) || p.Pos.Y >= Globals.screenH/2+100) && p.GetSpriteType() == 6)
+                        if ((p.FullHitBox.Intersects(FullHitBox) || p.Pos.Y >= Globals.screenH / 2 + 100) && p.GetSpriteType() == 6 || Lerp(Pos.X, target.X, Speed) <= 0.01f)
                         {
                             Destroy = true;
                         }

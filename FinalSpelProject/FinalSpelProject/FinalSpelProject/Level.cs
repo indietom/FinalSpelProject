@@ -54,7 +54,7 @@ namespace FinalSpelProject
                 spawnedBoss = true;
             }
 
-            Console.WriteLine("LOOPING: " + looping + "\nSpawned boss: " + spawnedBoss + "\nChecklooping: " + checkLoopingDelay);
+            //Console.WriteLine("LOOPING: " + looping + "\nSpawned boss: " + spawnedBoss + "\nChecklooping: " + checkLoopingDelay);
 
             if (checkLoopingDelay < 128 * 2)
             {

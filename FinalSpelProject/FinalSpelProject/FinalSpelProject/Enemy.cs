@@ -797,14 +797,14 @@ namespace FinalSpelProject
                     // tower
                     fireRate += 1;
                     Rotation = AimAt(player[0].GetCenter);
-                    if(fireRate == 64 || fireRate == 64 + 16 || fireRate == 64 + 32)
+                    if (fireRate == 96 || fireRate == 96 + 16 || fireRate == 96 + 32)
                     {
                         AnimationCount = 1;
                         CurrentFrame = 1;
                         projectile.Add(new Projectile(Pos+new Vector2(-4, -4), AimAt(player[0].GetCenter + new Vector2(random.Next(-32, 32), random.Next(-32, 32))), 8, 2, 0, true, true));
                     }
-                    if (fireRate >= 64) AnimationCount += 1;
-                    if(fireRate >= 64 + MaxAnimationCount * MaxFrame)
+                    if (fireRate >= 96) AnimationCount += 1;
+                    if(fireRate >= 96 + MaxAnimationCount * MaxFrame)
                     {
                         CurrentFrame = 0;
                         AnimationCount = 0;
@@ -1069,7 +1069,7 @@ namespace FinalSpelProject
             }
             if (health <= 0 && type != 42)
             {
-                Console.WriteLine(type);
+                //Console.WriteLine(type);
                 if(!Globals.blackHoleExists)
                     switch (material)
                     {
@@ -1103,10 +1103,10 @@ namespace FinalSpelProject
                 chanceOfPowerUp = (byte)random.Next(1, 11);
                 if (carryingPowerUp)
                 {
-                    Console.WriteLine(chanceOfPowerUp);
+                    //Console.WriteLine(chanceOfPowerUp);
                     if (chanceOfPowerUp != 1)
                     {
-                        powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()), 1, false));
+                        powerUps.Add(new PowerUp(Pos, (byte)random.Next(1, levelManager.GetLevelProperty(LevelManager.currentLevel).GetPowerUpRange()+1), 1, false));
                     }
                     else
                     {

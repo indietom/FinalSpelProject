@@ -19,6 +19,10 @@ namespace FinalSpelProject
             options = 3,
             quit = 4;
 
+        const byte move = 0,
+            shoot = 1,
+            back = 2;
+
         List<Button> mainButtons = new List<Button>();
         List<Button> optionsButtons = new List<Button>();
         List<Button> levelSelectButtons = new List<Button>();
@@ -53,6 +57,10 @@ namespace FinalSpelProject
             }
             levelSelectButtons.Add(new Button(new Vector2(300, 200 + 5 * 30), "BACK", 4, Color.White, Color.Green, Color.Gray));
 
+            optionsButtons.Add(new Button(new Vector2(100, 200), "", move, Color.White, Color.Green, Color.Gray, 0.7f));
+            optionsButtons.Add(new Button(new Vector2(100, 230), "", shoot, Color.White, Color.Green, Color.Gray, 0.7f));
+
+            optionsButtons.Add(new Button(new Vector2(100, 290), "BACK", back, Color.White, Color.Green, Color.Gray));
         }
 
         // ayy lmao, I'm so sorry
@@ -103,6 +111,10 @@ namespace FinalSpelProject
                                     menuState = MenuStates.LevelSelect;
                                     currentOption = 0;
                                     break;
+                                case options:
+                                    menuState = MenuStates.Options;
+                                    currentOption = 0;
+                                    break;
                                 case quit:
                                     Environment.Exit(0);
                                     break;
@@ -138,6 +150,36 @@ namespace FinalSpelProject
                         }
                     }
                     break;
+                case MenuStates.Options:
+                    maxOption = back;
+                    foreach(Button ob in optionsButtons)
+                    {
+                        if (ob.GetTag() == back && ob.Pressed(currentOption) && delay <= 0)
+                        {
+                            menuState = MenuStates.Main;
+                            currentOption = options;
+                            delay = 1;
+                        }
+                        if(ob.Pressed(currentOption) && ob.GetTag() == move && delay <= 0)
+                        {
+                            if (Globals.currentMoveSet == 0)
+                                Globals.currentMoveSet = 1;
+                            else
+                                Globals.currentMoveSet = 0;
+                            delay = 1;
+                            player[0].AssignKeys();
+                        }
+                        if (ob.Pressed(currentOption) && ob.GetTag() == shoot && delay <= 0)
+                        {
+                            if (Globals.currentShootSet == 0)
+                                Globals.currentShootSet = 1;
+                            else
+                                Globals.currentShootSet = 0;
+                            delay = 1;
+                            player[0].AssignKeys();
+                        }
+                    }
+                    break;
             }
         }
 
@@ -157,6 +199,11 @@ namespace FinalSpelProject
                     {
                         lb.Draw(spriteBatch, font, currentOption);
                     }
+                    break;
+                case MenuStates.Options:
+                    optionsButtons[move].Draw(spriteBatch, font, currentOption, Globals.OptionTextMovment());
+                    optionsButtons[shoot].Draw(spriteBatch, font, currentOption, Globals.OptionTextShoot());
+                    optionsButtons[back].Draw(spriteBatch, font, currentOption);
                     break;
             }
         }

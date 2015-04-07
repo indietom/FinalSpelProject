@@ -20,6 +20,7 @@ namespace FinalSpelProject
         public bool unavalible;
 
         float scale;
+        float orginalScale = 1;
 
         Color selectedColor;
         Color unavalibeColor;
@@ -43,6 +44,20 @@ namespace FinalSpelProject
             tag = tag2;
         }
 
+        public Button(Vector2 pos2, string text2, byte tag2, Color color2, Color selectedColor2, Color unavalibeColor2, float scale2)
+        {
+            scale = scale2;
+            orginalScale = scale;
+            Pos = pos2;
+            color = color2;
+            OrginalColor = color;
+            selectedColor = selectedColor2;
+            unavalibeColor = unavalibeColor2;
+            Pos = pos2;
+            text = text2;
+            tag = tag2;
+        }
+
         public void Draw(SpriteBatch spriteBatch, SpriteFont font, byte currentTag, string newText)
         {
             text = newText;
@@ -50,10 +65,11 @@ namespace FinalSpelProject
             if (currentTag == tag)
             {
                 color = selectedColor;
-                scale = 1.4f;
+                if(scale == 1.0f) scale = 1.4f;
+                
             }
             if (!unavalible && currentTag != tag) color = OrginalColor;
-            if (currentTag != tag) scale = 1.0f;
+            if (currentTag != tag) scale = orginalScale;
 
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();

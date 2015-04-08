@@ -302,19 +302,19 @@ namespace FinalSpelProject
                     break;
                 case 28:
                     worth = 1700;
-                    SetSpriteCoords(1, 261);
+                    SetSpriteCoords(1, 327);
                     SetSize(32);
                     health = 1;
                     armor = 10;
                     fireRate = 50;
                     Rotated = true;
-                    RoateOnRad = true;
-                    OnGround = true;
+                    RoateOnRad = false;
+                    Rotation = -180;
                     MaxFrame = 4;
                     MaxAnimationCount = 4;
                     material = Material.Metal;
                     spawned = false;
-                    
+                    target = new Vector2(r.Next(-200, -100), Pos.Y+r.Next(-32, 32));
                     break;
                 case 31:
                     SetSpriteCoords(1, 651);
@@ -830,18 +830,25 @@ namespace FinalSpelProject
                     break;
                 case 28:
                     //Boss 2 small deployed ships
-
-                    if (spawned == false)
+                    if(!Globals.blackHoleExists)
                     {
-                        Pos += new Vector2(-1, 0);
-                        if (Pos.X == tempPos.X - 10)
-                        {
-                            spawned = true;  
-                        }
-                                          
+                        Pos = new Vector2(Lerp(Pos.X, target.X, 0.01f), Lerp(Pos.Y, target.Y, 0.01f));
                     }
-                    
-
+                    if (Lerp(Pos.X, target.X, 0.03f) <= 0.04f && Pos.X <= -Width)
+                    {
+                        target = new Vector2(Globals.screenW+random.Next(100, 200), Pos.Y + random.Next(32, 128));
+                    }
+                    if(target.X >= 0)
+                    {
+                        Rotation = Lerp(Rotation, 0, 0.07f);
+                    }
+                    if (Pos.X >= Globals.screenW) Destroy = true;
+                    fireRate += 1;
+                    if (fireRate >= 64)
+                    {
+                        if(random.Next(5) == 3) projectile.Add(new Projectile(GetCenter, 0, 5, 8, 2, true, true));
+                        fireRate = 0;
+                    }
                     break;
                 case 31:
                     // Shoot right to left

@@ -69,7 +69,7 @@ namespace FinalSpelProject
                     Spawned = false;
                     startOffset = 846;
                     break;
-                case 2:
+                case 3:
                     SetSpriteCoords(1, Frame(6));
                     SetSize(64);
                     AnimationActive = true;
@@ -83,7 +83,7 @@ namespace FinalSpelProject
                     Firerate = 300;
                     AltFirerate = 150;
                     break;
-                case 3:
+                case 2:
                     //What the hell am I supposed to do here???
                     break;
                 case 4:
@@ -230,7 +230,7 @@ namespace FinalSpelProject
 
                     break;
 
-                case 2:
+                case 3:
                     //Boss2 movement
                     if (Spawned == false)
                     {
@@ -266,12 +266,10 @@ namespace FinalSpelProject
                     Firerate -= 1;
                     if (Firerate <= 0 && hp > 0)
                     {
-                        for (int i = 0; i < 360; i += 10)
+                        for (int i = 0; i < 360; i += 20)
                         {
                             projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), i , 4, 3, 0, false, true));
                         }
-
-
                         Firerate = 300; 
                     }
                     //Boss2 minion spawn.
@@ -283,7 +281,7 @@ namespace FinalSpelProject
                     }
 
                     break;
-                case 3:
+                case 2:
 
                     break;
                 case 4:

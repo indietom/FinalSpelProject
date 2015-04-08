@@ -10,6 +10,7 @@ namespace FinalSpelProject
     {
         public byte CurrentLevel { get; set; }
         byte amountOfChunks;
+        byte lineCount;
 
         string levelPath;
 
@@ -66,6 +67,19 @@ namespace FinalSpelProject
             if (chunks.Count == 1 && checkLoopingDelay >= 128 * 2) 
             {
                 looping = true;
+                if (lineCount >= 16)
+                {
+                    for (int i = 0; i < Globals.screenW / 16; i++)
+                    {
+                        tiles.Add(new Tile(new Vector2(i * 16, 0), 1));
+                    }
+                    lineCount = 0;
+                }
+                lineCount += 1;
+            }
+            else
+            {
+                lineCount = 16;
             }
 
             if (looping)

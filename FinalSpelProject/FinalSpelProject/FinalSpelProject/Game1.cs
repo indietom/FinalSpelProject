@@ -200,12 +200,12 @@ namespace FinalSpelProject
 
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
-                        levelManager.StartLevel(2, chunks, enemies, projectiles, player, ref level, tiles);
+                        levelManager.StartLevel(1, chunks, enemies, projectiles, player, ref level, tiles);
                     }
 
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        Globals.worldSpeed = 32;
+                        Globals.worldSpeed = 64;
                         // fileManager.LoadPlayer("save.sav", player);
                     }
                     else

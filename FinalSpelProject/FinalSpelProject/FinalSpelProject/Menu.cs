@@ -34,6 +34,7 @@ namespace FinalSpelProject
         byte delay = 1;
 
         public byte GetDelay() { return delay; }
+        public void SetDelay(byte delay2) { delay = delay2; }
 
         string startButtonText()
         {

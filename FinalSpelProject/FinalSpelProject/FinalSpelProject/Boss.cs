@@ -28,6 +28,7 @@ namespace FinalSpelProject
         bool targeted;
         float altTempAngle;
         float tempAngle;
+        float orginalSpeed;
         bool Invulnerable;
         bool Spawned;
         bool goLeft = false;
@@ -104,6 +105,7 @@ namespace FinalSpelProject
                     Eye1 = Eye2 = Eye3 = new Rectangle((int)Pos.X, (int)Pos.Y, 10, 10);
                     break;
             }
+            orginalSpeed = Speed;
         }
 
         public void Update(List<Player> player, List<Projectile> projectiles, List<Explosion> explosions, List<Enemy> enemies)
@@ -441,12 +443,24 @@ namespace FinalSpelProject
                     {
                         explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
                     }
-                    hp -= p.Dm;
+                    if (invisibleCount <= 0 && hurtCount <= 0)
+                    {
+                        if (p.GetSpriteType() == 2)
+                            hp -= p.Dm * 4;
+                        else
+                            hp -= p.Dm;
+                    }
                     hurtCount = 1;
                     
                     if (p.GetSpriteType() != 6)
                     {
                         p.Destroy = true;
+                    }
+                    if (p.GetSpriteType() == 2)
+                    {
+                        player[0].SetMaxLazerHeight(10);
+                        player[0].SetCurrentLazerHeight(0);
+
                     }
                 }
             }

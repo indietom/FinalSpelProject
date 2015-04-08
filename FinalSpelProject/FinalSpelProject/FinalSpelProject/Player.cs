@@ -50,7 +50,7 @@ namespace FinalSpelProject
         short maxComboCount;
         short respawnCount;                             
         short maxRespawnCount;
-        short currentLaserHeigt;
+        short currentLaserHeight;
         short maxLaserHeight;
         short rasieLaserCount;
         short maxRaiseLaserCount;
@@ -61,10 +61,13 @@ namespace FinalSpelProject
         short maxFlameDelay;
         short deccreseFlameStamina;
 
+        public void SetMaxLazerHeight(short maxLaserHeight2) { maxLaserHeight = maxLaserHeight2; }
+        public void SetCurrentLazerHeight(short currentLaserHeight2) { currentLaserHeight = currentLaserHeight2; }
+
         public short GetCurrentCombo() { return currentCombo; }
         public short GetComboCount() { return comboCount; }
         public short GetMaxComboCount() { return maxComboCount; }
-        public short GetCurrentLaserHeigt() { return currentLaserHeigt; }
+        public short GetCurrentLaserHeigt() { return currentLaserHeight; }
 
         public bool Dead {get; set;}
         public bool inputActive;
@@ -202,18 +205,18 @@ namespace FinalSpelProject
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), -90, -2, 1, 1, false));
                     fireRate = 1;
                 }
-                if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeigt < maxLaserHeight && !reverseLaser)
+                if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 4 && currentLaserHeight < maxLaserHeight && !reverseLaser)
                 {
                     rasieLaserCount += 1;
                     if (rasieLaserCount >= maxRaiseLaserCount)
                     {
-                        currentLaserHeigt += 3;
+                        currentLaserHeight += 3;
                         rasieLaserCount = 0;
                     }
                 }
-                if (!keyboard.IsKeyDown(fire) && gamePad.IsButtonUp(Buttons.X) && gunType == 4 && currentLaserHeigt > 10 && !reverseLaser)
+                if (!keyboard.IsKeyDown(fire) && gamePad.IsButtonUp(Buttons.X) && gunType == 4 && currentLaserHeight > 10 && !reverseLaser)
                 {
-                    currentLaserHeigt -= 1;
+                    currentLaserHeight -= 1;
                 }
                 if ((keyboard.IsKeyDown(fire) || gamePad.IsButtonDown(Buttons.X)) && gunType == 6 && fireRate <= 0)
                 {
@@ -267,7 +270,7 @@ namespace FinalSpelProject
             }
             else
             {
-                currentLaserHeigt = 0;
+                currentLaserHeight = 0;
             }
         }
         public void Update(List<Projectile> projectiles, List<Enemy> enemies, List<Explosion> explosions, List<TextEffect> textEffects)
@@ -374,17 +377,17 @@ namespace FinalSpelProject
             }
             if(gunType == 4)
             {
-                if(currentLaserHeigt >= maxLaserHeight)
+                if(currentLaserHeight >= maxLaserHeight)
                     reverseLaser = true;
-                if (currentLaserHeigt <= 100)
+                if (currentLaserHeight <= 100)
                     reverseLaser = false;
                 if (reverseLaser)
                 {
-                    currentLaserHeigt -= 1;
+                    currentLaserHeight -= 1;
                 }
                 
                 maxLaserHeight = (reverseLaser) ? (short)100 : (short)200;
-                for(int i = 0; i < currentLaserHeigt; i++)
+                for(int i = 0; i < currentLaserHeight; i++)
                 {
                     projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 8, Pos.Y - i), 0, 0, 2, 0, false, 1));
                 }

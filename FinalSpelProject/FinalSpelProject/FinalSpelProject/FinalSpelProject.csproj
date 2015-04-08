@@ -83,10 +83,12 @@
     <Compile Include="Button.cs" />
     <Compile Include="Chunk.cs" />
     <Compile Include="ComboCount.cs" />
+    <Compile Include="CreditsScreen.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameOverScreen.cs" />
     <Compile Include="Gib.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="HighscoreScreen.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="SpawnManager.cs" />
+    <Compile Include="StartScreen.cs" />
     <Compile Include="TextBox.cs" />
     <Compile Include="TextEffect.cs" />
     <Compile Include="Tile.cs" />

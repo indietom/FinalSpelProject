@@ -36,6 +36,7 @@ namespace FinalSpelProject
         public bool levelCompleted;
         Random rng = new Random();
 
+        // What are arrays?
         //dont judge me. (for boss 4)
         Rectangle Eye1;
         Rectangle Eye2;
@@ -219,10 +220,7 @@ namespace FinalSpelProject
                             {
                                 Pos = new Vector2(Lerp(Pos.X, 0, Speed / 100), Pos.Y);
                             }
-                            
                         }
-
-
                     }
                     if (hp < 0)
                     {
@@ -281,7 +279,6 @@ namespace FinalSpelProject
                         enemies.Add(new Enemy(Pos, 28, rng, false));
                         AltFirerate = 150;
                     }
-
                     break;
                 case 2:
 
@@ -428,7 +425,7 @@ namespace FinalSpelProject
                 {
                     if (Invulnerable == false)
                     {
-                        hp -= 10;
+                        //hp -= 10;
                         hurtCount = 1;
                         p.Dead = true;
                     }
@@ -460,11 +457,9 @@ namespace FinalSpelProject
                     {
                         player[0].SetMaxLazerHeight(10);
                         player[0].SetCurrentLazerHeight(0);
-
                     }
                 }
             }
-
         }
 
         public void Attack(List<Projectile> projectiles)

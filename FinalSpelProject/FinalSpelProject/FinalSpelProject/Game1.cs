@@ -31,6 +31,7 @@ namespace FinalSpelProject
 
         Ui ui = new Ui();
         Menu menu = new Menu();
+        StartScreen startScreen = new StartScreen();
 
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
@@ -62,7 +63,7 @@ namespace FinalSpelProject
         {
             fileManager.LoadConfig();
             player.Add(new Player());
-            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 3));
+            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 3));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -291,6 +292,9 @@ namespace FinalSpelProject
             spriteBatch.Begin();
             switch (Globals.gameState)
             {
+                case GameStates.StartScreen:
+                    startScreen.Draw(spriteBatch, spritesheet, font);
+                    break;
                 case GameStates.Menu:
                     menu.Draw(spriteBatch, font);
                     break;

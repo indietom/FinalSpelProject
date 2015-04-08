@@ -31,7 +31,7 @@ namespace FinalSpelProject
 
         byte currentOption;
         byte maxOption;
-        byte delay;
+        byte delay = 1;
 
         public byte GetDelay() { return delay; }
 

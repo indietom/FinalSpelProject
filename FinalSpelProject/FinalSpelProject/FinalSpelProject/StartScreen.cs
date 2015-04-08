@@ -15,6 +15,8 @@ namespace FinalSpelProject
 
         GamePadState gamePad;
 
+        string pressButtonToStart = "";
+
         public void Draw(SpriteBatch spriteBatch, Texture2D spritesheet, SpriteFont font)
         {
             // non-draw logic in the draw fuction; crazy
@@ -27,6 +29,16 @@ namespace FinalSpelProject
                 Globals.gameState = GameStates.Menu;
             }
 
+            if(gamePad.IsConnected)
+            {
+                pressButtonToStart = "PRESS A TO START";
+            }
+            else
+            {
+                pressButtonToStart = "PRESS X TO START";
+            }
+
+            spriteBatch.DrawString(font, pressButtonToStart, new Vector2(300, 550), Color.White);
             spriteBatch.Draw(spritesheet, new Vector2(89, 48), new Rectangle(196, 1496, 649, 64), Color.White);
         }
     }

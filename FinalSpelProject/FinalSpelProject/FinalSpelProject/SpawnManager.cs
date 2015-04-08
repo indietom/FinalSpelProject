@@ -49,7 +49,7 @@ namespace FinalSpelProject
             if(spawnPowerUpCount >= maxSpawnPowerUpCount)
             {
                 chanceOfPowerUp = (byte)random.Next(1, 16);
-                Console.WriteLine("LEL");
+                //Console.WriteLine("LEL");
                 if(chanceOfPowerUp == 4)
                 {
                     // ayy lmao

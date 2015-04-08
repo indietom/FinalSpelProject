@@ -43,6 +43,8 @@ namespace FinalSpelProject
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
 
+        FileManager fileManager = new FileManager();
+
         public Menu()
         {
             mainButtons.Add(new Button(new Vector2(350, 200), "", start, Color.White, Color.Green, Color.Gray));
@@ -68,7 +70,7 @@ namespace FinalSpelProject
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
-
+            
             if(keyboard.IsKeyDown(Keys.Down) && prevKeyboard.IsKeyUp(Keys.Down))
             {
                 currentOption += 1;
@@ -168,6 +170,7 @@ namespace FinalSpelProject
                                 Globals.currentMoveSet = 0;
                             delay = 1;
                             player[0].AssignKeys();
+                            fileManager.SaveConfig();
                         }
                         if (ob.Pressed(currentOption) && ob.GetTag() == shoot && delay <= 0)
                         {
@@ -177,6 +180,7 @@ namespace FinalSpelProject
                                 Globals.currentShootSet = 0;
                             delay = 1;
                             player[0].AssignKeys();
+                            fileManager.SaveConfig();
                         }
                     }
                     break;

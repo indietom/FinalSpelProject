@@ -86,12 +86,18 @@ namespace FinalSpelProject
 
         public void LoadConfig()
         {
-            
+            StreamReader sr = new StreamReader("config.cfg");
+            Globals.currentMoveSet = byte.Parse(sr.ReadLine());
+            Globals.currentShootSet = byte.Parse(sr.ReadLine());
+            sr.Dispose();
         }
         
         public void SaveConfig()
         {
-
+            StreamWriter sw = new StreamWriter("config.cfg");
+            sw.WriteLine(Globals.currentMoveSet);
+            sw.WriteLine(Globals.currentShootSet);
+            sw.Dispose();
         }
 
         // NAME[space]SCORE should be the format for the file

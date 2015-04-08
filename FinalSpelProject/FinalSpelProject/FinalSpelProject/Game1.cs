@@ -62,7 +62,7 @@ namespace FinalSpelProject
         {
             fileManager.LoadConfig();
             player.Add(new Player());
-           bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
+            // bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, -200), 2));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -73,7 +73,7 @@ namespace FinalSpelProject
 
         Texture2D spritesheet;
         SpriteFont font;
-
+        
         protected override void LoadContent()
         {
             spritesheet = Content.Load<Texture2D>("spritesheet");
@@ -200,7 +200,7 @@ namespace FinalSpelProject
 
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
-                        levelManager.StartLevel(3, chunks, enemies, projectiles, player, ref level, tiles);
+                        levelManager.StartLevel(2, chunks, enemies, projectiles, player, ref level, tiles);
                     }
 
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)

@@ -56,7 +56,7 @@ namespace FinalSpelProject
             Random random = new Random();
 
             grassSpawnCount += 1;
-            if(grassSpawnCount >= maxGrassSpawnCount)
+            if(grassSpawnCount >= maxGrassSpawnCount/Globals.worldSpeed)
             {
                 for(int i = 0; i < Globals.screenW/16; i++)
                 {

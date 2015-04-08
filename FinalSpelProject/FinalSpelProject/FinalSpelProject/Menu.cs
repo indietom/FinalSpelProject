@@ -142,6 +142,8 @@ namespace FinalSpelProject
                                 Globals.gameState = GameStates.Game;
                                 levelManager.StartLevel(lb.GetTag(), chunks, enemies, projectiles, player, ref level, tiles);
                                 player[0] = new Player();
+                                menuState = MenuStates.Main;
+                                currentOption = 0;
                                 delay = 1;
                             }
                             if (player[0].GetLevelsCompleted() <= lb.GetTag())

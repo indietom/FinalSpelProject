@@ -12,15 +12,20 @@ namespace FinalSpelProject
     {
         int hp;
 
+        int[] eyesHp = new int[3];
+
         public int GetHp() { return hp; }
 
         byte type;
         byte hurtCount;
+        byte currentEye;
 
         short[] fireRates;
         short[] maxFireRates;
         short startOffset;
         short changeTargetCount;
+        short eyeTransation;
+        short explosionCount;
 
         Vector2 barrelPos;
         Vector2 target;
@@ -43,9 +48,7 @@ namespace FinalSpelProject
 
         // What are arrays?
         //dont judge me. (for boss 4)
-        Rectangle Eye1;
-        Rectangle Eye2;
-        Rectangle Eye3;
+        Rectangle[] eyes = new Rectangle[3];
 
         int Boss4Phase;
 
@@ -104,13 +107,13 @@ namespace FinalSpelProject
                     break;
                 case 4:
                     //Så tre rektanglar behövs och de ska bara "aktiveras" när bossen är i rätt fas.
-                    SetSpriteCoords(846, 651);
-                    SetSize(154, 214);
+                    SetSpriteCoords(716, 911);
+                    SetSize(264, 368);
                     AnimationActive = true;
                     Speed = 5;
-                    MaxFrame = 6;
-                    MaxAnimationCount = 8;
-                    hp = 400;
+                    MaxFrame = 0;
+                    MaxAnimationCount = 0;
+                    hp = 200;
                     Firerate = 100;
                     AltFirerate = 300;
                     Invulnerable = true;
@@ -118,7 +121,13 @@ namespace FinalSpelProject
                     Boss4Phase = 1;
                     //Rekt
                     // This is a sin and should be treated as such
-                    Eye1 = Eye2 = Eye3 = new Rectangle((int)Pos.X, (int)Pos.Y, 10, 10);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        eyes[i] = new Rectangle(0, 0, 0, 0);
+                    }
+                    eyesHp[0] = 20;
+                    eyesHp[1] = 40;
+                    eyesHp[2] = 80;
                     break;
             }
             orginalSpeed = Speed;
@@ -359,109 +368,64 @@ namespace FinalSpelProject
                     }
                     break;
                 case 4:
-                    //Spawning is FUN!
-                    if (Spawned == false)
+                    if(hp >= 0) hp = eyesHp[0]+eyesHp[1]+eyesHp[2];
+                    else hp = 0;
+
+                    if(eyesHp[0] <= 0 && eyesHp[1] > 0 && eyesHp[2] > 0)
                     {
-                        Pos = new Vector2(Pos.X, Lerp(Pos.Y, 160, 0.005f));
-                        if (Pos.Y >= 150)
+                        currentEye = 1;
+                    }
+
+                    if (eyesHp[0] <= 0 && eyesHp[1] <= 0 && eyesHp[2] > 0)
+                    {
+                        currentEye = 2;
+                    }
+
+                    if(eyesHp[0] <= 0 && eyesHp[1] <= 0 && eyesHp[2] <= 0)
+                    {
+                        // DEAD OR WHATEVER 
+                    }
+
+                    eyes[0] = new Rectangle((int)Pos.X + 129, (int)Pos.Y + 285, 50, 44);
+                    eyes[1] = new Rectangle((int)Pos.X + 173, (int)Pos.Y + 229, 33, 31);
+                    eyes[2] = new Rectangle((int)Pos.X + 68, (int)Pos.Y + 115, 130, 71);
+
+                    if(eyeTransation >= 1)
+                    {
+                        eyeTransation += 1;
+                        Speed = 0;
+                        explosionCount += 1;
+
+                        if(explosionCount % 4 == 0)
                         {
-                            Spawned = true;
+                            explosions.Add(new Explosion(new Vector2(eyes[currentEye - 1].X + rng.Next(-48, 48), eyes[currentEye - 1].Y + rng.Next(-48, 48)), 32, false));
+                        }
+
+                        if(eyeTransation >= 32)
+                        {
+                            explosionCount = 0;
+                            Speed = orginalSpeed;
+                            eyeTransation = 0;
                         }
                     }
-                    //Change phase based on HP
-                    if (hp <= 400)
-                    {
-                        Boss4Phase = 1;
-                    }
-                    if (hp <= 300)
-                    {
-                        Boss4Phase = 2;
-                    }
-                    if (hp <= 200)
-                    {
-                        Boss4Phase = 3;
-                    }
 
-                    //Phase 1 bitches!
-                    if (Boss4Phase == 1)
+                    foreach (Projectile p in projectiles)
                     {
-                        foreach (Projectile p in projectiles)
+                        if (p.HitBox.Intersects(eyes[currentEye]) && p.EnemyShot == false && eyeTransation <= 0)
                         {
-                            if (p.HitBox.Intersects(Eye1) && p.EnemyShot == false)
-                            {
-                                if (p.Explosive)
-                                {
-                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
-                                }
-                                hp -= p.Dm;
-                                hurtCount = 1;
+                            hurtCount = 1;
 
-                                if (p.GetSpriteType() != 6)
-                                {
-                                    p.Destroy = true;
-                                }
+                            if (eyesHp[currentEye] - p.Dm <= 0)
+                            {
+                                eyeTransation = 1;
+                            }
+                            eyesHp[currentEye] -= p.Dm;
+
+                            if (p.GetSpriteType() != 6)
+                            {
+                                p.Destroy = true;
                             }
                         }
-                    }
-                    Firerate -= 1;
-                    if (Firerate <= 0)
-                    {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 12, 0, 0, true, true));
-                        Firerate = 90;
-                    }
-                    //Phase 2 bitches!
-                    if (Boss4Phase == 2)
-                    {
-                        foreach (Projectile p in projectiles)
-                        {
-                            if (p.HitBox.Intersects(Eye2) && p.EnemyShot == false)
-                            {
-                                if (p.Explosive)
-                                {
-                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
-                                }
-                                hp -= p.Dm;
-                                hurtCount = 1;
-
-                                if (p.GetSpriteType() != 6)
-                                {
-                                    p.Destroy = true;
-                                }
-                            }
-                        }
-                    }
-                    Firerate -= 1;
-                    if (Firerate <= 0)
-                    {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 14, 0, 0, true, true));
-                        Firerate = 60;
-                    }
-                    //Phase 3 bitches!
-                    if (Boss4Phase == 3)
-                    {
-                        foreach (Projectile p in projectiles)
-                        {
-                            if (p.HitBox.Intersects(Eye3) && p.EnemyShot == false)
-                            {
-                                if (p.Explosive)
-                                {
-                                    explosions.Add(new Explosion(Pos, p.ExplosionSize, false));
-                                }
-                                hp -= p.Dm;
-                                hurtCount = 1;
-
-                                if (p.GetSpriteType() != 6)
-                                {
-                                    p.Destroy = true;
-                                }
-                            }
-                        }
-                    }
-                    Firerate -= 1;
-                    if (Firerate <= 0)
-                    {
-                        projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), AimAt(player[0].GetCenter), 16, 0, 0, true, true));
-                        Firerate = 30;
                     }
                     break;
                     

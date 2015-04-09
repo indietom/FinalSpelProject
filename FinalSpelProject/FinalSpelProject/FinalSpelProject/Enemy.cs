@@ -1071,6 +1071,22 @@ namespace FinalSpelProject
                     {
                         Pos = new Vector2(Lerp(Pos.X, target.X, 0.01f), Lerp(Pos.Y, target.Y, 0.01f));
                     }
+                    Rotation = AimAt(player[0].GetCenter);
+                    changeTargetCount += 1;
+                    if(changeTargetCount >= 128*3+32)
+                    {
+                        target = new Vector2(random.Next(Globals.screenW), 740);
+                        changeTargetCount = 0;
+                    }
+                    fireRate += 1;
+                    if(fireRate >= 64+32)
+                    {
+                        if(random.Next(8) == 3)
+                        {
+                            projectile.Add(new Projectile(Pos - new Vector2(3, 3), AimAt(player[0].GetCenter), 3, 3, 0, true, true));
+                        }
+                        fireRate = 0;
+                    }
                     break;
             }                       
             if (Pos.Y < -Height)

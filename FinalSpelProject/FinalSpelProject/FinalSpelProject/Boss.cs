@@ -383,7 +383,15 @@ namespace FinalSpelProject
 
                     if(eyesHp[0] <= 0 && eyesHp[1] <= 0 && eyesHp[2] <= 0)
                     {
-                        // DEAD OR WHATEVER 
+                        explosionCount += 1;
+                        if(explosionCount % 8 == 0) explosions.Add(new Explosion(GetCenter + new Vector2(rng.Next(-164, 165), rng.Next(-268, 268)),32, false));
+                        if (!Spawned)
+                        {
+                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + Height * 2);
+                            Spawned = true;
+                        }
+                        Speed = 0;
+                        Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, 0.01f));
                     }
 
                     eyes[0] = new Rectangle((int)Pos.X + 129, (int)Pos.Y + 285, 50, 44);
@@ -403,7 +411,6 @@ namespace FinalSpelProject
 
                         if(eyeTransation >= 32)
                         {
-                            explosionCount = 0;
                             Speed = orginalSpeed;
                             eyeTransation = 0;
                         }
@@ -411,7 +418,7 @@ namespace FinalSpelProject
 
                     foreach (Projectile p in projectiles)
                     {
-                        if (p.HitBox.Intersects(eyes[currentEye]) && p.EnemyShot == false && eyeTransation <= 0)
+                        if (p.HitBox.Intersects(eyes[currentEye]) && p.EnemyShot == false && eyeTransation <= 0 && hp > 0)
                         {
                             hurtCount = 1;
 

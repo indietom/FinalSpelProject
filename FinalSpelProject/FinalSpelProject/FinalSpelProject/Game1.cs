@@ -64,7 +64,7 @@ namespace FinalSpelProject
         {
             fileManager.LoadConfig();
             player.Add(new Player());
-            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 4));
+            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 4));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -131,7 +131,7 @@ namespace FinalSpelProject
                     levelManager.StartLevel(0, chunks, enemies, projectiles, player, ref level, tiles);
                     break;
                 case GameStates.Menu:
-                    menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles);
+                    menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles, alliedShips);
                     break;
                 case GameStates.LevelTransition:
                     LevelTransitionScreen.Update(ref level, bosses);
@@ -363,6 +363,7 @@ namespace FinalSpelProject
                         if(b.GetType() != 4) b.Draw(spriteBatch, spritesheet);
                         else b.Draw(spriteBatch, finalBossSheet);
                     }
+                    foreach (Enemy e in enemies) { if (e.type == 47) { if (e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } } }
                     foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet); }
                     foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }
                     foreach (Loot l in loots) { l.DrawSprite(spriteBatch, spritesheet); }

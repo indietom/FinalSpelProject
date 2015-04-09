@@ -12,7 +12,8 @@ namespace FinalSpelProject
     enum Material { None, OrganicAlien, Metal }
     class Enemy : GameObject
     {
-        byte type; 
+        // yolo
+        public byte type; 
         short health;
         short armor;
         short worth;
@@ -51,6 +52,7 @@ namespace FinalSpelProject
         short maxDropBombCount;
 
         float waveCount;
+        float maxDistance;
 
         Vector2 target;
 
@@ -64,6 +66,17 @@ namespace FinalSpelProject
             AnimationActive = true;
             OrginalColor = color;
             AssignType(r);   
+        }
+
+        public Enemy(Vector2 pos2, Vector2 target2, byte type2, Random r)
+        {
+            target = target2;
+            Pos = pos2;
+            type = type2;
+            scroll = true;
+            AnimationActive = true;
+            OrginalColor = color;
+            AssignType(r);
         }
 
         public Enemy(Vector2 pos2, byte type2, Random r, bool carryingPowerUp2)
@@ -470,6 +483,19 @@ namespace FinalSpelProject
                     break;
                 case 47:
                     // that feel when sista, I think what we have is enough
+                    // Det blev ett till fiende
+                    SetSpriteCoords(326, 846);
+                    SetSize(64);
+                    health = 2;
+                    maxDistance = r.Next(128, 128 * 3);
+                    worth = 5000;
+                    MinFrame = 5;
+                    MaxFrame = (short)(MinFrame + 4);
+                    MaxAnimationCount = 4;
+                    material = Material.Metal;
+                    Rotated = true;
+                    RoateOnRad = true;
+                    scroll = false;
                     break;
             }
             switch(material)
@@ -967,9 +993,9 @@ namespace FinalSpelProject
                     else
                     {
                         Rotation += 0.3f;
-                        if(fireRate >= 48) projectile.Add(new Projectile(Pos + new Vector2(-12, 0), Rotation + random.Next(-8, 9)/10, random.Next(5, 9), 10, 0, true, true));
+                        if(fireRate >= 32) projectile.Add(new Projectile(Pos + new Vector2(-12, 0), Rotation + random.Next(-8, 9)/10, random.Next(5, 9), 10, 0, true, true));
                         fireRate += 1;
-                        if(fireRate >= 48*2)
+                        if(fireRate >= 48)
                         {
                             for (int i = 0; i < 20; i++ )
                             {
@@ -1039,6 +1065,12 @@ namespace FinalSpelProject
                         projectile.Add(new Projectile(GetCenter + new Vector2(-12, -12), -180 * 1, random.Next(5, 11), 10, 0, false, true));
                     }
                     dropBombCount = (dropBombCount >= (short)(maxDropBombCount + 8)) ? (short)0 : (short)dropBombCount;
+                    break;
+                case 47:
+                    if(!Globals.blackHoleExists)
+                    {
+                        Pos = new Vector2(Lerp(Pos.X, target.X, 0.01f), Lerp(Pos.Y, target.Y, 0.01f));
+                    }
                     break;
             }                       
             if (Pos.Y < -Height)

@@ -158,6 +158,8 @@ namespace FinalSpelProject
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
 
+            levelsCompleted = 4;
+
             prevGamePad = gamePad;
             gamePad = GamePad.GetState(playerIndex);
 

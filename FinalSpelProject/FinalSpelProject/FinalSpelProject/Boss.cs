@@ -28,6 +28,8 @@ namespace FinalSpelProject
         short changeTargetCount;
         short eyeTransation;
         short explosionCount;
+        short spawnEnemiesCount;
+        short maxSpawnEnemiesCount;
 
         Vector2 barrelPos;
         Vector2 target;
@@ -351,7 +353,7 @@ namespace FinalSpelProject
 
                     if(changeTargetCount >= 128 * 2 + 64 && hp > 0)
                     {
-                        target = new Vector2(rng.Next(Globals.screenW - Width), rng.Next(32, 128 * 2));
+                        target = new Vector2(rng.Next(Globals.screenW - Width), rng.Next(32, 128));
                         changeTargetCount = 0;
                     }
 
@@ -387,6 +389,13 @@ namespace FinalSpelProject
 
                     if(currentEye == 0)
                     {
+                        spawnEnemiesCount += 1;
+                        maxSpawnEnemiesCount = 128 + 128;
+                        if(spawnEnemiesCount >= maxSpawnEnemiesCount)
+                        {
+                            enemies.Add(new Enemy(new Vector2(rng.Next(Globals.screenW), -200), new Vector2(eyes[currentEye].X+rng.Next(-128, 128), eyes[currentEye].Y + rng.Next(Width-32, Width)), 47, rng));
+                            spawnEnemiesCount = 0;
+                        }
                         Firerate += 1;
                         if (Firerate >= 64)
                         {
@@ -397,6 +406,13 @@ namespace FinalSpelProject
 
                     if(currentEye == 1)
                     {
+                        spawnEnemiesCount += 1;
+                        maxSpawnEnemiesCount = 128 + 64;
+                        if (spawnEnemiesCount >= maxSpawnEnemiesCount)
+                        {
+                            enemies.Add(new Enemy(new Vector2(rng.Next(Globals.screenW), -200), new Vector2(eyes[currentEye].X + rng.Next(-128, 128), eyes[currentEye].Y + rng.Next(Width - 32, Width)), 47, rng));
+                            spawnEnemiesCount = 0;
+                        }
                         Imy = 370;
                         Firerate += 1;
                         if (Firerate == 64 || Firerate == 64 + 16 || Firerate == 64 + 32 || Firerate == 64 + 48)

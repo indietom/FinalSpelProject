@@ -20,6 +20,8 @@ namespace FinalSpelProject
         byte hurtCount;
         byte currentEye;
 
+        public byte GetType() { return type; }
+
         short[] fireRates;
         short[] maxFireRates;
         short startOffset;
@@ -107,12 +109,12 @@ namespace FinalSpelProject
                     break;
                 case 4:
                     //Så tre rektanglar behövs och de ska bara "aktiveras" när bossen är i rätt fas.
-                    SetSpriteCoords(716, 911);
+                    SetSpriteCoords(1, 1);
                     SetSize(264, 368);
                     AnimationActive = true;
                     Speed = 5;
-                    MaxFrame = 0;
-                    MaxAnimationCount = 0;
+                    MaxFrame = 4;
+                    MaxAnimationCount = 8;
                     hp = 200;
                     Firerate = 100;
                     AltFirerate = 300;
@@ -398,6 +400,7 @@ namespace FinalSpelProject
 
                     if(currentEye == 1)
                     {
+                        Imy = 370;
                         Firerate += 1;
                         if (Firerate == 64 || Firerate == 64 + 16 || Firerate == 64 + 32 || Firerate == 64 + 48)
                         {
@@ -408,6 +411,7 @@ namespace FinalSpelProject
 
                     if (currentEye == 2)
                     {
+                        Imy = 739;
                         changeTargetCount += 1;
                         if (changeTargetCount >= 64)
                         {

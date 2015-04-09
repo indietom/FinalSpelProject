@@ -73,11 +73,13 @@ namespace FinalSpelProject
         }
 
         Texture2D spritesheet;
+        Texture2D finalBossSheet;
         SpriteFont font;
         
         protected override void LoadContent()
         {
             spritesheet = Content.Load<Texture2D>("spritesheet");
+            finalBossSheet = Content.Load<Texture2D>("finalBossSheet");
             TilesheetManager.Load(Content);
             SoundManager.Load(Content);
             font = Content.Load<SpriteFont>("font");
@@ -323,7 +325,8 @@ namespace FinalSpelProject
                     foreach (Enemy e in enemies) { if (!e.OnGround) { if (!e.Rotated) e.DrawSprite(spriteBatch, spritesheet); else e.DrawSprite(spriteBatch, spritesheet, e.RoateOnRad); } }
                     foreach (Boss b in bosses)
                     {
-                        b.Draw(spriteBatch, spritesheet);
+                        if(b.GetType() != 4) b.Draw(spriteBatch, spritesheet);
+                        else b.Draw(spriteBatch, finalBossSheet);
                     }
                     foreach (Explosion e in explosions) { e.DrawSprite(spriteBatch, spritesheet); }
                     foreach (PowerUp p in powerUps) { p.Draw(spriteBatch, spritesheet); }

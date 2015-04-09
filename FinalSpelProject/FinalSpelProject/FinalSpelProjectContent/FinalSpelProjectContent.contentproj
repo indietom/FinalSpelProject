@@ -91,6 +91,11 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+    <Compile Include="finalBossSheet.png">
+      <Name>finalBossSheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="level0\chunk0.txt">
       <Name>chunk0</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

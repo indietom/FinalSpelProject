@@ -64,7 +64,7 @@ namespace FinalSpelProject
         {
             fileManager.LoadConfig();
             player.Add(new Player());
-            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 4));
+           // bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 3));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));

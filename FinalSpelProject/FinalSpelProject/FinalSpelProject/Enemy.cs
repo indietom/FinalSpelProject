@@ -315,15 +315,15 @@ namespace FinalSpelProject
                     break;
                 case 28:
                     worth = 1700;
-                    SetSpriteCoords(1, 327);
-                    SetSize(32);
+                    SetSpriteCoords(911, 911);
+                    SetSize(16);
                     health = 1;
                     armor = 10;
                     fireRate = 50;
                     Rotated = true;
                     RoateOnRad = false;
                     Rotation = -180;
-                    MaxFrame = 4;
+                    MaxFrame = 0;
                     MaxAnimationCount = 4;
                     material = Material.Metal;
                     spawned = false;

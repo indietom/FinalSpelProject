@@ -84,13 +84,13 @@ namespace FinalSpelProject
                     startOffset = 846;
                     break;
                 case 3:
-                    SetSpriteCoords(1, Frame(6));
-                    SetSize(64);
+                    SetSpriteCoords(911, 976);
+                    SetSize(128);
                     AnimationActive = true;
                     Speed = 0.5f;
-                    MaxFrame = 3;
+                    MaxFrame = 0;
                     MaxAnimationCount = 8;
-                    hp = 100;
+                    hp = 80;
                     Invulnerable = true;
                     Spawned = false;
                     goLeft = true;
@@ -299,7 +299,7 @@ namespace FinalSpelProject
                     AltFirerate -= 1;
                     if (AltFirerate <= 0 && hp > 0)
                     {
-                        enemies.Add(new Enemy(Pos, 28, rng, false));
+                        enemies.Add(new Enemy(Pos+new Vector2(64, 54), 28, rng, false));
                         AltFirerate = 150;
                     }
                     break;

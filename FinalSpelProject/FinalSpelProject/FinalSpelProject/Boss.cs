@@ -406,13 +406,38 @@ namespace FinalSpelProject
                         if (Firerate >= 128 + 32) Firerate = 0;
                     }
 
-                    if(currentEye == 2)
+                    if (currentEye == 2)
                     {
                         changeTargetCount += 1;
-                        if(changeTargetCount >= 64)
+                        if (changeTargetCount >= 64)
                         {
-                            target = new Vector2(rng.Next(Globals.screenW-Width), Pos.Y);
+                            if (hp > 0) target = new Vector2(rng.Next(Globals.screenW - Width), Pos.Y);
                             changeTargetCount = 0;
+                        }
+                        Firerate += 2;
+                        if (Firerate == 64 || Firerate == 64 + 16 || Firerate == 64 + 32 || Firerate == 64 + 48)
+                        {
+                            projectiles.Add(new Projectile(GetCenter - new Vector2(3, 3), AimAt(player[0].GetCenter) + rng.Next(-9, 10) / 15, 5, 3, 0, true, true));
+                        }
+                        if (Firerate >= 128 + 32) Firerate = 0;
+
+                        AltFirerate -= 1;
+                        if (AltFirerate <= 35 && AltFirerate > 0 && hp > 0)
+                        {
+                            if (!targeted)
+                            {
+                                targeted = true;
+                                altTempAngle = AimAt(player[0].GetCenter);
+                                Speed = 0;
+                            }
+                            if (targeted == true)
+                            {
+                                projectiles.Add(new Projectile(new Vector2(Pos.X + (Width / 2) - 3, Pos.Y + (Height / 2) - 3), altTempAngle, 15, 0, 0, true, true));
+                            }
+                        }
+                        if (AltFirerate == 0)
+                        {
+                            AltFirerate = 335;
                         }
                     }
 
@@ -426,8 +451,6 @@ namespace FinalSpelProject
                             target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + Height * 2);
                             Spawned = true;
                         }
-                        Speed = 0;
-                        
                     }
 
                     eyes[0] = new Rectangle((int)Pos.X + 129, (int)Pos.Y + 285, 50, 44);

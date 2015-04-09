@@ -115,7 +115,7 @@ namespace FinalSpelProject
                     menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles);
                     break;
                 case GameStates.LevelTransition:
-                    LevelTransitionScreen.Update(ref level);
+                    LevelTransitionScreen.Update(ref level, bosses);
                     break;
                 case GameStates.Game:
                     if(pauseDelay >= 10 && keyboard.IsKeyDown(Keys.Escape) && prevKeyboard.IsKeyUp(Keys.Escape))

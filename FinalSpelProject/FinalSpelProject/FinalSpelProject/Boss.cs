@@ -21,6 +21,9 @@ namespace FinalSpelProject
         short[] maxFireRates;
         short startOffset;
 
+        Vector2 barrelPos;
+
+        // Why is this captilized? 
         int Health;
         int Firerate;
         int AltFirerate;
@@ -87,6 +90,15 @@ namespace FinalSpelProject
                     break;
                 case 2:
                     //What the hell am I supposed to do here???
+                    // Pass it on to Tom apperently :^))))
+                    SetSpriteCoords(459, 552);
+                    SetSize(128);
+                    startOffset = (short)(Imx - 1);
+                    MaxFrame = 8;
+                    MaxAnimationCount = 16;
+                    hp = 20;
+                    Speed = 0.03f;
+                    barrelPos = new Vector2(0, 0);
                     break;
                 case 4:
                     //Så tre rektanglar behövs och de ska bara "aktiveras" när bossen är i rätt fas.
@@ -103,6 +115,7 @@ namespace FinalSpelProject
                     Spawned = false;
                     Boss4Phase = 1;
                     //Rekt
+                    // This is a sin and should be treated as such
                     Eye1 = Eye2 = Eye3 = new Rectangle((int)Pos.X, (int)Pos.Y, 10, 10);
                     break;
             }
@@ -180,8 +193,6 @@ namespace FinalSpelProject
                             {
                                 Firerate = 60;
                             }
-
-
                         }
                     }
 
@@ -281,7 +292,31 @@ namespace FinalSpelProject
                     }
                     break;
                 case 2:
-
+                    if (CurrentFrame == 0 || CurrentFrame == 4)
+                    {
+                        barrelPos = new Vector2(Pos.X + 62, Pos.Y + 105);
+                        Angle = -270;
+                    }
+                    if (CurrentFrame == 1 || CurrentFrame == 3)
+                    {
+                        barrelPos = new Vector2(Pos.X + 73, Pos.Y + 105);
+                        Angle = -290;
+                    }
+                    if(CurrentFrame == 2)
+                    {
+                        barrelPos = new Vector2(Pos.X + 89, Pos.Y + 100);
+                        Angle = -320;
+                    }
+                    if(CurrentFrame == 5 || CurrentFrame == 7)
+                    {
+                        barrelPos = new Vector2(Pos.X + 51, Pos.Y + 103);
+                        Angle = -240;
+                    }
+                    if(CurrentFrame == 6)
+                    {
+                        barrelPos = new Vector2(Pos.X + 40, Pos.Y + 100);
+                        Angle = -225;
+                    }
                     break;
                 case 4:
                     //Spawning is FUN!

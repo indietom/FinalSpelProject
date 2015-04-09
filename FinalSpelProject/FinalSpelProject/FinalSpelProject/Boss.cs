@@ -20,8 +20,10 @@ namespace FinalSpelProject
         short[] fireRates;
         short[] maxFireRates;
         short startOffset;
+        short changeTargetCount;
 
         Vector2 barrelPos;
+        Vector2 target;
 
         // Why is this captilized? 
         int Health;
@@ -96,7 +98,7 @@ namespace FinalSpelProject
                     startOffset = (short)(Imx - 1);
                     MaxFrame = 8;
                     MaxAnimationCount = 16;
-                    hp = 20;
+                    hp = 50;
                     Speed = 0.03f;
                     barrelPos = new Vector2(0, 0);
                     break;
@@ -325,6 +327,35 @@ namespace FinalSpelProject
                     if(AnimationCount >= 10 && Firerate >= 128)
                     {
                         projectiles.Add(new Projectile(barrelPos + new Vector2(-4, -4), Angle, 8, 2, 0, false, true));
+                    }
+
+                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, Speed));
+
+                    if (hp <= 16)
+                    {
+                        if(Firerate == 64 && rng.Next(7) == 3)
+                        {
+                            projectiles.Add(new Projectile(GetCenter, 0, 5, 8, 2, true, true));
+                        }
+                    }
+
+                    changeTargetCount += 1;
+
+                    if(changeTargetCount >= 128 * 2 + 64 && hp > 0)
+                    {
+                        target = new Vector2(rng.Next(Globals.screenW - Width), rng.Next(32, 128 * 2));
+                        changeTargetCount = 0;
+                    }
+
+                    if(hp <= 0)
+                    {
+                        Firerate = 0;
+                        AnimationCount = 0;
+                        if(!Spawned)
+                        {
+                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + rng.Next(100));
+                            Spawned = true;
+                        }
                     }
                     break;
                 case 4:

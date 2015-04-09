@@ -228,12 +228,12 @@ namespace FinalSpelProject
 
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        Globals.worldSpeed = 64;
+                        //Globals.worldSpeed = 64;
                         // fileManager.LoadPlayer("save.sav", player);
                     }
                     else
                     {
-                        Globals.worldSpeed = 1;
+                        //Globals.worldSpeed = 1;
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
@@ -243,12 +243,12 @@ namespace FinalSpelProject
                         //levelManager.ResetLevel(chunks, enemies, projectiles, player, level);
                         //loots.Add(new Loot(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 2, 0));
                         //if (textBoxes.Count == 0) textBoxes.Add(new TextBox(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), "The textbox works.\nThis is great news I think", Color.White, 4));
-                        if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
+                        //if (alliedShips.Count == 0) alliedShips.Add(new AlliedShip(new Vector2(Mouse.GetState().X, Mouse.GetState().Y)));
                         //proceduralGenerationManager.SpawnTree(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1, tiles);
                         //tiles.Add(new Tile(new Vector2(Mouse.GetState().X/16, Mouse.GetState().Y/16), 2));
                         //tiles.Add(new Tile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 1));
                         //if(true) explosions.Add(new Explosion(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 16, false));
-                        powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, false));
+                        //powerUps.Add(new PowerUp(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 4, 0, false));
                         //projectiles.Add(new Projectile(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), -90+random.Next(-8, 9), 8, 10, 0, false, true));
                         //particles.Add(new Particle(new Vector2(800 / 2, 640 / 2), new Vector2(Mouse.GetState().X, Mouse.GetState().Y), 0.05f, 1, 1, Color.White));
                         //gibs.Add(new Gib(new Vector2(Mouse.GetState().X, Mouse.GetState().Y), (short)random.Next(5), 140, random.Next(6, 12), random.Next(360)));   

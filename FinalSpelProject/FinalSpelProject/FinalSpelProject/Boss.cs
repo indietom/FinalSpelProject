@@ -479,17 +479,24 @@ namespace FinalSpelProject
                     {
                         if (p.HitBox.Intersects(eyes[currentEye]) && p.EnemyShot == false && eyeTransation <= 0 && hp > 0)
                         {
-                            hurtCount = 1;
-
-                            if (eyesHp[currentEye] - p.Dm <= 0)
+                            if (hurtCount <= 0)
                             {
-                                eyeTransation = 1;
+                                if (eyesHp[currentEye] - p.Dm <= 0)
+                                {
+                                    eyeTransation = 1;
+                                }
+                                eyesHp[currentEye] -= p.Dm;
                             }
-                            eyesHp[currentEye] -= p.Dm;
+                            hurtCount = 1;
 
                             if (p.GetSpriteType() != 6)
                             {
                                 p.Destroy = true;
+                            }
+                            if (p.GetSpriteType() == 2)
+                            {
+                                player[0].SetMaxLazerHeight(10);
+                                player[0].SetCurrentLazerHeight(0);
                             }
                         }
                     }

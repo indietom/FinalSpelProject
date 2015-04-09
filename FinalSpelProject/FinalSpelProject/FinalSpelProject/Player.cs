@@ -112,7 +112,7 @@ namespace FinalSpelProject
             inputActive = true;
             AnimationActive = true;
 
-            lives = 2;
+            lives = 100;
 
             maxVel = 5;
             Speed = 1f;

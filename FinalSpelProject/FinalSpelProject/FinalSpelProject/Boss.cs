@@ -371,6 +371,11 @@ namespace FinalSpelProject
                     if(hp >= 0) hp = eyesHp[0]+eyesHp[1]+eyesHp[2];
                     else hp = 0;
 
+                    if(target == Vector2.Zero)
+                    {
+                        target = new Vector2(400-Width/2, -100);
+                    }
+
                     if(eyesHp[0] <= 0 && eyesHp[1] > 0 && eyesHp[2] > 0)
                     {
                         currentEye = 1;
@@ -381,6 +386,37 @@ namespace FinalSpelProject
                         currentEye = 2;
                     }
 
+                    if(currentEye == 0)
+                    {
+                        Firerate += 1;
+                        if (Firerate >= 64)
+                        {
+                            projectiles.Add(new Projectile(GetCenter - new Vector2(3, 3), AimAt(player[0].GetCenter), 5, 3, 0, true, true));
+                            Firerate = 0;
+                        }
+                    }
+
+                    if(currentEye == 1)
+                    {
+                        Firerate += 1;
+                        if (Firerate == 64 || Firerate == 64 + 16 || Firerate == 64 + 32 || Firerate == 64 + 48)
+                        {
+                            projectiles.Add(new Projectile(GetCenter - new Vector2(3, 3), AimAt(player[0].GetCenter)+rng.Next(-9, 10)/15, 5, 3, 0, true, true));
+                        }
+                        if (Firerate >= 128 + 32) Firerate = 0;
+                    }
+
+                    if(currentEye == 2)
+                    {
+                        changeTargetCount += 1;
+                        if(changeTargetCount >= 64)
+                        {
+                            target = new Vector2(rng.Next(Globals.screenW-Width), Pos.Y);
+                            changeTargetCount = 0;
+                        }
+                    }
+
+                    Pos = new Vector2(Lerp(Pos.X, target.X, Speed/100), Lerp(Pos.Y, target.Y, Speed/100));
                     if(eyesHp[0] <= 0 && eyesHp[1] <= 0 && eyesHp[2] <= 0)
                     {
                         explosionCount += 1;
@@ -391,7 +427,7 @@ namespace FinalSpelProject
                             Spawned = true;
                         }
                         Speed = 0;
-                        Pos = new Vector2(Lerp(Pos.X, target.X, Speed), Lerp(Pos.Y, target.Y, 0.01f));
+                        
                     }
 
                     eyes[0] = new Rectangle((int)Pos.X + 129, (int)Pos.Y + 285, 50, 44);

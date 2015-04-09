@@ -112,7 +112,7 @@ namespace FinalSpelProject
             inputActive = true;
             AnimationActive = true;
 
-            lives = 5;
+            lives = 2;
 
             maxVel = 5;
             Speed = 1f;
@@ -277,6 +277,9 @@ namespace FinalSpelProject
         {
             HitBox = FullHitBox;
             Random random = new Random();
+
+            if (lives <= 0)
+                Globals.gameState = GameStates.GameOver;
 
             foreach(Explosion e in explosions)
             {
@@ -553,11 +556,19 @@ namespace FinalSpelProject
         public void LivesUpdate(List<Explosion> explosions, List<TextEffect> textEffects)
         {
             Random random = new Random();
-            if(!spawnedGetReadyText && Dead)
+            if (!spawnedGetReadyText && Dead)
             {
                 SoundManager.PlayerDeath.Play();
-                textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Red, new Vector2((Globals.screenW / 2)-50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount+200), 2, 1));
-                textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                if (lives - 1 <= 0)
+                {
+                    textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GAME", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                    textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "OVER", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                }
+                else
+                {
+                    textEffects.Add(new TextEffect(new Vector2(-200, Globals.screenH / 2), "GET", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                    textEffects.Add(new TextEffect(new Vector2(Globals.screenW + 200, Globals.screenH / 2 + 32), "READY", 1.0f, Color.Red, new Vector2((Globals.screenW / 2) - 50, Globals.screenH / 2 + 32), 0.03f, (short)(maxRespawnCount + 200), 2, 1));
+                }
             }
             if(Dead && respawnCount <= 0)
             {

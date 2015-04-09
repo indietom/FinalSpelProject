@@ -24,6 +24,8 @@ namespace FinalSpelProject
 
             gamePad = GamePad.GetState(PlayerIndex.One);
 
+            Globals.startedGame = false;
+
             if (gamePad.IsConnected)
             {
                 pressButtonToRestart = "PRESS A TO GO BACK TO THE MENU";
@@ -32,6 +34,10 @@ namespace FinalSpelProject
             {
                 pressButtonToRestart = "PRESS X TO GO BACK TO THE MENU";
             }
+
+            spriteBatch.DrawString(font, "GAME OVER", new Vector2(280, 100), Color.Yellow);
+
+            spriteBatch.DrawString(font, pressButtonToRestart, new Vector2(280, 400), Color.White, 0, new Vector2(0, 0), 0.9f, SpriteEffects.None, 1.0f);
 
             if (keyboard.IsKeyDown(Keys.X) || gamePad.IsButtonDown(Buttons.A))
             {

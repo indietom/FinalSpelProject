@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace FinalSpelProject
 {
-    enum GameStates { StartScreen, Menu, Game, Credits, LevelTransition }
+    enum GameStates { StartScreen, Menu, Game, Credits, LevelTransition, GameOver }
     class Globals
     {
         public static GameStates gameState;

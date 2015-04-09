@@ -108,6 +108,11 @@ namespace FinalSpelProject
                             {
                                 case start:
                                     Globals.gameState = GameStates.Game;
+                                    if(!Globals.startedGame)
+                                    {
+                                        levelManager.StartLevel(0, chunks, enemies, projectiles, player, ref level, tiles);
+                                        player[0] = new Player();
+                                    }
                                     Globals.startedGame = true;
                                     break;
                                 case levelSelect:

@@ -32,6 +32,7 @@ namespace FinalSpelProject
         Ui ui = new Ui();
         Menu menu = new Menu();
         StartScreen startScreen = new StartScreen();
+        GameOverScreen gameOverScreen = new GameOverScreen();
 
         List<Player> player = new List<Player>();
         List<Enemy> enemies = new List<Enemy>();
@@ -111,7 +112,11 @@ namespace FinalSpelProject
 
             switch (Globals.gameState)
             {
+                case GameStates.GameOver:
+                    textEffects.Clear();
+                    break;
                 case GameStates.Credits:
+                    textEffects.Clear();
                     // Logic in game1.cs because I can't bother with classes at this point, thursday 20:58
                     Globals.startedGame = false;
                     bosses.Clear();
@@ -130,6 +135,7 @@ namespace FinalSpelProject
                     break;
                 case GameStates.LevelTransition:
                     LevelTransitionScreen.Update(ref level, bosses);
+                    textEffects.Clear();
                     break;
                 case GameStates.Game:
                     if(pauseDelay >= 10 && keyboard.IsKeyDown(Keys.Escape) && prevKeyboard.IsKeyUp(Keys.Escape))
@@ -308,6 +314,9 @@ namespace FinalSpelProject
             spriteBatch.Begin();
             switch (Globals.gameState)
             {
+                case GameStates.GameOver:
+                    gameOverScreen.Draw(spriteBatch, spritesheet, font, menu);
+                    break;
                 case GameStates.Credits:
                     spriteBatch.DrawString(font, "THANKS FOR PLAYING!", new Vector2(300, 10), Color.Gold);
                     spriteBatch.DrawString(font, "TOM - PROGRAMMING", new Vector2(303, 10+30*4), Color.LightBlue);

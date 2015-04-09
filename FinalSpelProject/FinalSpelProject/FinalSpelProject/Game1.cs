@@ -63,7 +63,7 @@ namespace FinalSpelProject
         {
             fileManager.LoadConfig();
             player.Add(new Player());
-            bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 4));
+            //bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 4));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
@@ -111,6 +111,20 @@ namespace FinalSpelProject
 
             switch (Globals.gameState)
             {
+                case GameStates.Credits:
+                    // Logic in game1.cs because I can't bother with classes at this point, thursday 20:58
+                    Globals.startedGame = false;
+                    bosses.Clear();
+                    LevelManager.currentLevel = 0;
+                    if(keyboard.IsKeyDown(Keys.X) && prevKeyboard.IsKeyUp(Keys.X) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A))
+                    {
+                        LevelManager.currentLevel = 0;
+                        Globals.gameState = GameStates.Menu;
+                        menu.SetDelay(1);
+                        player[0] = new Player();
+                    }
+                    levelManager.StartLevel(0, chunks, enemies, projectiles, player, ref level, tiles);
+                    break;
                 case GameStates.Menu:
                     menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles);
                     break;
@@ -294,6 +308,18 @@ namespace FinalSpelProject
             spriteBatch.Begin();
             switch (Globals.gameState)
             {
+                case GameStates.Credits:
+                    spriteBatch.DrawString(font, "THANKS FOR PLAYING!", new Vector2(300, 10), Color.Gold);
+                    spriteBatch.DrawString(font, "TOM - PROGRAMMING", new Vector2(303, 10+30*4), Color.LightBlue);
+                    spriteBatch.DrawString(font, "HANNES - PROGRAMMING", new Vector2(303, 10 + 30 * 5), Color.LightBlue);
+                    spriteBatch.DrawString(font, "EMIL - PROGRAMMING", new Vector2(303, 10 + 30 * 6), Color.LightBlue);
+
+                    spriteBatch.DrawString(font, "ELINA - GRAPHICS", new Vector2(303, 10 + 30 * 8), Color.LightSalmon);
+                    spriteBatch.DrawString(font, "TYRA - GRAPHICS", new Vector2(303, 10 + 30 * 9), Color.LightSalmon);
+
+                    if(!GamePad.GetState(PlayerIndex.One).IsConnected) spriteBatch.DrawString(font, "PRESS X TO GO BACK TO THE MENU", new Vector2(303, 10 + 30 * 11), Color.LightGreen);
+                    else spriteBatch.DrawString(font, "PRESS A TO GO BACK TO THE MENU", new Vector2(303, 10 + 30 * 11), Color.LightGreen);
+                    break;
                 case GameStates.StartScreen:
                     startScreen.Draw(spriteBatch, spritesheet, font);
                     break;

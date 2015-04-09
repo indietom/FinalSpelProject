@@ -16,8 +16,14 @@ namespace FinalSpelProject
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
 
-        public void Update(ref Level level)
+        public void Update(ref Level level, List<Boss> bosses)
         {
+            if(LevelManager.currentLevel == 4)
+            {
+                Globals.gameState = GameStates.Credits;
+            }
+            bosses.Clear();
+
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
 

@@ -26,7 +26,7 @@ namespace FinalSpelProject
         byte explosionDelay;
         byte muzzleFlashCount;
         byte currentBarrel;
-        byte levelsCompleted = 0;
+        byte levelsCompleted;
 
         public byte GetLevelsCompleted() { return levelsCompleted; }
         public byte GetLives() { return lives; }

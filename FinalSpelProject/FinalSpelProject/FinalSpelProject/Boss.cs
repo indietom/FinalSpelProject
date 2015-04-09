@@ -127,9 +127,9 @@ namespace FinalSpelProject
                     {
                         eyes[i] = new Rectangle(0, 0, 0, 0);
                     }
-                    eyesHp[0] = 20;
-                    eyesHp[1] = 40;
-                    eyesHp[2] = 80;
+                    eyesHp[0] = 1;//20;
+                    eyesHp[1] = 1;//40;
+                    eyesHp[2] = 1;//80;
                     break;
             }
             orginalSpeed = Speed;
@@ -151,9 +151,8 @@ namespace FinalSpelProject
                     {
                         if (Speed != 0)
                         {
-                            Pos = new Vector2(Pos.X, Lerp(Pos.Y, 128, 0.02f));
+                            Pos = new Vector2(Pos.X, Lerp(Pos.Y, 32, 0.02f));
                         }
-
                     }
                     if (Pos.Y >= 120 && Spawned == false && hp > 0)
                     {
@@ -172,8 +171,6 @@ namespace FinalSpelProject
                         AltFirerate -= 1;
                         if (AltFirerate <= 35 && AltFirerate > 0)
                         {
-
-
                             if (!targeted)
                             {
                                 targeted = true;
@@ -364,7 +361,7 @@ namespace FinalSpelProject
                         AnimationCount = 0;
                         if(!Spawned)
                         {
-                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + rng.Next(100));
+                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + Width*3 + rng.Next(100));
                             Spawned = true;
                         }
                     }
@@ -373,7 +370,7 @@ namespace FinalSpelProject
                     if(hp >= 0) hp = eyesHp[0]+eyesHp[1]+eyesHp[2];
                     else hp = 0;
 
-                    if(target == Vector2.Zero)
+                    if(target.X == 0)
                     {
                         target = new Vector2(400-Width/2, -100);
                     }
@@ -409,15 +406,16 @@ namespace FinalSpelProject
                         if (Firerate >= 128 + 32) Firerate = 0;
                     }
 
-                    if (currentEye == 2)
+                    if (currentEye == 2 && hp > 0)
                     {
                         Imy = 739;
                         changeTargetCount += 1;
                         if (changeTargetCount >= 64)
                         {
-                            if (hp > 0) target = new Vector2(rng.Next(Globals.screenW - Width), Pos.Y);
+                            target = new Vector2(rng.Next(2, Globals.screenW - Width), Pos.Y);
                             changeTargetCount = 0;
                         }
+
                         Firerate += 2;
                         if (Firerate == 64 || Firerate == 64 + 16 || Firerate == 64 + 32 || Firerate == 64 + 48)
                         {
@@ -432,7 +430,6 @@ namespace FinalSpelProject
                             {
                                 targeted = true;
                                 altTempAngle = AimAt(player[0].GetCenter);
-                                Speed = 0;
                             }
                             if (targeted == true)
                             {
@@ -446,15 +443,19 @@ namespace FinalSpelProject
                     }
 
                     Pos = new Vector2(Lerp(Pos.X, target.X, Speed/100), Lerp(Pos.Y, target.Y, Speed/100));
+
                     if(eyesHp[0] <= 0 && eyesHp[1] <= 0 && eyesHp[2] <= 0)
                     {
                         explosionCount += 1;
                         if(explosionCount % 8 == 0) explosions.Add(new Explosion(GetCenter + new Vector2(rng.Next(-164, 165), rng.Next(-268, 268)),32, false));
                         if (!Spawned)
                         {
-                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + Height * 2);
+                            Speed = 0;
+                            target = new Vector2(rng.Next(Globals.screenW), Globals.screenH + Height * 4);
                             Spawned = true;
                         }
+                        Console.WriteLine(Speed);
+                        Pos = new Vector2(Lerp(Pos.X, target.X, Speed / 100), Lerp(Pos.Y, target.Y, 0.001f));
                     }
 
                     eyes[0] = new Rectangle((int)Pos.X + 129, (int)Pos.Y + 285, 50, 44);
@@ -474,7 +475,7 @@ namespace FinalSpelProject
 
                         if(eyeTransation >= 32)
                         {
-                            Speed = orginalSpeed;
+                            if (hp > 0) Speed = orginalSpeed;
                             eyeTransation = 0;
                         }
                     }
@@ -509,7 +510,7 @@ namespace FinalSpelProject
             }
             Collision(player, projectiles, explosions);
 
-            if (Pos.Y > Globals.screenH + Height + 10)
+            if (Pos.Y > Globals.screenH + Height)
             {
                 Destroy = true;
             }

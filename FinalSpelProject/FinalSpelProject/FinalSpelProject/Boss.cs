@@ -91,7 +91,7 @@ namespace FinalSpelProject
                 case 2:
                     //What the hell am I supposed to do here???
                     // Pass it on to Tom apperently :^))))
-                    SetSpriteCoords(459, 552);
+                    SetSpriteCoords(459, 522);
                     SetSize(128);
                     startOffset = (short)(Imx - 1);
                     MaxFrame = 8;
@@ -316,6 +316,15 @@ namespace FinalSpelProject
                     {
                         barrelPos = new Vector2(Pos.X + 40, Pos.Y + 100);
                         Angle = -225;
+                    }
+
+                    Firerate += 1;
+
+                    if (Firerate >= 128 * 2) Firerate = 0;
+
+                    if(AnimationCount >= 10 && Firerate >= 128)
+                    {
+                        projectiles.Add(new Projectile(barrelPos + new Vector2(-4, -4), Angle, 8, 2, 0, false, true));
                     }
                     break;
                 case 4:

@@ -67,7 +67,7 @@ namespace FinalSpelProject
         }
 
         // ayy lmao, I'm so sorry
-        public void Update(LevelManager levelManager, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> player, Level level, List<Tile> tiles, List<AlliedShip> alliedShips)
+        public void Update(LevelManager levelManager, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> player, Level level, List<Tile> tiles, List<AlliedShip> alliedShips, List<Boss> bosses)
         {
             prevKeyboard = keyboard;
             keyboard = Keyboard.GetState();
@@ -149,6 +149,8 @@ namespace FinalSpelProject
                                 Globals.gameState = GameStates.Game;
                                 levelManager.StartLevel(lb.GetTag(), chunks, enemies, projectiles, player, ref level, tiles);
                                 player[0] = new Player();
+                                tiles.Clear();
+                                bosses.Clear();
                                 alliedShips.Clear();
                                 menuState = MenuStates.Main;
                                 currentOption = 0;

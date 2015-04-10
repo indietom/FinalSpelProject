@@ -133,7 +133,7 @@ namespace FinalSpelProject
                     levelManager.StartLevel(0, chunks, enemies, projectiles, player, ref level, tiles);
                     break;
                 case GameStates.Menu:
-                    menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles, alliedShips);
+                    menu.Update(levelManager, chunks, enemies, projectiles, player, level, tiles, alliedShips, bosses);
                     break;
                 case GameStates.LevelTransition:
                     LevelTransitionScreen.Update(ref level, bosses);

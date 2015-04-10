@@ -120,6 +120,7 @@ namespace FinalSpelProject
 
             maxRespawnCount = 130;
 
+            gunType = 0;
             specialGunType = 0;
             specialAmmo = 0;
 

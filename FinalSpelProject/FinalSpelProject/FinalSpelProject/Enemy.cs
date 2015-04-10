@@ -400,6 +400,8 @@ namespace FinalSpelProject
                     direction = 0;
                     target = new Vector2(0, Pos.Y);
                     maxChangeTargetCount = (short)r.Next(128, 128 * 2);
+                    color = Color.Green;
+                    OrginalColor = color;
                     break;
                 case 37:
                     // One more stealthbomber, is this the last enemy for this level?
@@ -412,6 +414,8 @@ namespace FinalSpelProject
                     MaxAnimationCount = 4;
                     scroll = false;
                     Speed = r.Next(1, 4);
+                    color = Color.LightGreen;
+                    OrginalColor = color;
                     break;
                 case 41:
                     // Small lava ship would be best here
@@ -480,6 +484,8 @@ namespace FinalSpelProject
                     MaxAnimationCount = 4;
                     Speed = r.Next(1, 4);
                     maxDropBombCount = (short)r.Next(48, 64);
+                    color = Color.LightBlue;
+                    OrginalColor = color;
                     break;
                 case 47:
                     // that feel when sista, I think what we have is enough

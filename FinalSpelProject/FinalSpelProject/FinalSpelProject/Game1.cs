@@ -112,6 +112,11 @@ namespace FinalSpelProject
 
             Random random = new Random();
 
+            if(keyboard.IsKeyDown(Keys.F1) && prevKeyboard.IsKeyUp(Keys.F1))
+            {
+                graphics.ToggleFullScreen();    
+            }
+
             switch (Globals.gameState)
             {
                 case GameStates.GameOver:

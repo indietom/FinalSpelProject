@@ -60,6 +60,8 @@ namespace FinalSpelProject
         KeyboardState keyboard;
         KeyboardState prevKeyboard;
 
+        short tutorialText;
+
         protected override void Initialize()
         {
             fileManager.LoadConfig();
@@ -371,6 +373,11 @@ namespace FinalSpelProject
                     foreach (TextEffect te in textEffects) { te.Draw(spriteBatch, font); }
                     ui.Draw(spriteBatch, spritesheet, font);
                     foreach (TextBox t in textBoxes) { t.Draw(spriteBatch, spritesheet, font); }
+                    if (tutorialText <= 128*2)
+                    {
+                        tutorialText += 1;
+                        spriteBatch.DrawString(font, Globals.TutorialText(), new Vector2(10, 100), Color.White);
+                    }
                     break;
             }
             spriteBatch.End();

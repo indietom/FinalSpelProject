@@ -74,6 +74,32 @@ namespace FinalSpelProject
                 return "X TO SHOOT, Z FOR SPECIAL-ATTACK - <N TO SHOOT, M FOR SPECIAL-ATTACK>";
         }
 
+        public static string TutorialText()
+        {
+            string tmpMove = "";
+            string tmpShoot = ""; 
+
+            if(currentMoveSet == 0)
+            {
+                tmpMove = "USE THE ARROW KEYS TO MOVE\n";
+            }
+            else
+            {
+                tmpMove = "WASD TO MOVE\n";
+            }
+
+            if(currentShootSet == 0)
+            {
+                tmpShoot = "X FOR NORMAL SHOOT AND Z FOR SPECIAL";
+            }
+            else
+            {
+                tmpShoot = "N FOR NORMAL SHOOT AND M FOR SPECIAL";
+            }
+
+            return tmpMove + tmpShoot;
+        }
+
         public static string GetLevelName(byte number)
         {
             string[] name = new string[4];

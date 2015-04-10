@@ -102,6 +102,7 @@ namespace FinalSpelProject
                     maxOption = quit;
                     foreach(Button mb in mainButtons)
                     {
+                        if (mb.GetTag() == highScoreScreen) mb.unavalible = true;
                         if(mb.Pressed(currentOption) && delay <= 0)
                         {
                             switch(mb.GetTag())
@@ -206,6 +207,8 @@ namespace FinalSpelProject
                     mainButtons[highScoreScreen].Draw(spriteBatch, font, currentOption);
                     mainButtons[options].Draw(spriteBatch, font, currentOption);
                     mainButtons[quit].Draw(spriteBatch, font, currentOption);
+
+                    spriteBatch.DrawString(font, "Arrow keys to navigate menu and X to enter", new Vector2(10, 10), Color.White);
                     break;
                 case MenuStates.LevelSelect:
                     spriteBatch.DrawString(font, "LEVELS-", new Vector2(300, 150), Color.Violet, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1.0f);                    foreach(Button lb in levelSelectButtons)

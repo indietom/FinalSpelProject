@@ -129,9 +129,9 @@ namespace FinalSpelProject
                     {
                         eyes[i] = new Rectangle(0, 0, 0, 0);
                     }
-                    eyesHp[0] = 1;//20;
-                    eyesHp[1] = 1;//40;
-                    eyesHp[2] = 1;//80;
+                    eyesHp[0] = 20;
+                    eyesHp[1] = 40;
+                    eyesHp[2] = 80;
                     break;
             }
             orginalSpeed = Speed;

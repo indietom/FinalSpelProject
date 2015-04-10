@@ -120,8 +120,8 @@ namespace FinalSpelProject
 
             maxRespawnCount = 130;
 
-            specialGunType = 3;
-            specialAmmo = 3;
+            specialGunType = 0;
+            specialAmmo = 0;
 
             maxRaiseLaserCount = 1;
             maxLaserHeight = 200;

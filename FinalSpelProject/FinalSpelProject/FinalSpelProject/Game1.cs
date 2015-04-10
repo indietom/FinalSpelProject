@@ -64,13 +64,13 @@ namespace FinalSpelProject
 
         protected override void Initialize()
         {
-            fileManager.LoadConfig();
+            //fileManager.LoadConfig();
             player.Add(new Player());
            // bosses.Add(new Boss(new Vector2(GraphicsDevice.Viewport.Width / 2 - 32, 0), 3));
             Globals.screenH = graphics.PreferredBackBufferHeight;
             Globals.screenW = graphics.PreferredBackBufferWidth;
             //chunks.Add(new Chunk(new Vector2(0, 0), @"map1"));
-            fileManager.LoadPlayer("save.sav", player);
+            //fileManager.LoadPlayer("save.sav", player);
             level = new Level(chunks, LevelManager.currentLevel, Globals.LevelHeight());
             base.Initialize();
         }

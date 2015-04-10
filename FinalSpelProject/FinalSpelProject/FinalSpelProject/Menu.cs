@@ -65,7 +65,7 @@ namespace FinalSpelProject
 
             optionsButtons.Add(new Button(new Vector2(100, 290), "BACK", back, Color.White, Color.Green, Color.Gray));
         }
-
+        
         // ayy lmao, I'm so sorry
         public void Update(LevelManager levelManager, List<Chunk> chunks, List<Enemy> enemies, List<Projectile> projectiles, List<Player> player, Level level, List<Tile> tiles, List<AlliedShip> alliedShips, List<Boss> bosses)
         {
